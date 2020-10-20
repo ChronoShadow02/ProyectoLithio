@@ -1,0 +1,624 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="LithioBDModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Articulos">
+          <Key>
+            <PropertyRef Name="Id_Articulo" />
+          </Key>
+          <Property Name="Id_Articulo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Codigo_Articulo" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="Nombre_Articulo" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="Descripcion_Articulo" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="Costo_Anterior_Articulo" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="Id_Proveedor" Type="int" Nullable="false" />
+          <Property Name="Id_Presentacion" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Costos">
+          <Key>
+            <PropertyRef Name="Id_Costo" />
+          </Key>
+          <Property Name="Id_Costo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DUA" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="Numero_Costos" Type="int" Nullable="false" />
+          <Property Name="Id_Articulo" Type="int" Nullable="false" />
+          <Property Name="Codigo_Articulo" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="Nombre_Articulo" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="Descripcion_Articulo" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="Id_Presentacion" Type="int" Nullable="false" />
+          <Property Name="Unidades_Articulos" Type="int" Nullable="false" />
+          <Property Name="Tipo_De_Cambio" Type="float" Nullable="false" />
+          <Property Name="Costo_Por_Unidad_Dolares" Type="float" Nullable="false" />
+          <Property Name="Subtotal_Costo_Dolares" Type="float" Nullable="false" />
+          <Property Name="Porcentaje_Costo" Type="float" Nullable="false" />
+          <Property Name="Total_Costo_Dolares" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="Fecha_Creacion" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Paises">
+          <Key>
+            <PropertyRef Name="Id_Pais" />
+          </Key>
+          <Property Name="Id_Pais" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre_Pais" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="Sigla_Pais" Type="varchar" MaxLength="3" Nullable="false" />
+          <Property Name="Moneda_Pais" Type="varchar" MaxLength="200" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Presentaciones">
+          <Key>
+            <PropertyRef Name="Id_Presentacion" />
+          </Key>
+          <Property Name="Id_Presentacion" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre_Presentacion" Type="varchar" MaxLength="200" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Proveedores">
+          <Key>
+            <PropertyRef Name="Id_Proveedor" />
+          </Key>
+          <Property Name="Id_Proveedor" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Codigo_Proveedor" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="Nombre_Proveedor" Type="varbinary" MaxLength="200" Nullable="false" />
+          <Property Name="Id_Pais" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="Usuarios">
+          <Key>
+            <PropertyRef Name="Id_Administrador" />
+          </Key>
+          <Property Name="Id_Administrador" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre_Completo" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="Nombre_Usuario" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="Contrasena_Usuario" Type="varchar" MaxLength="200" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Articulos_Presentaciones">
+          <End Role="Presentaciones" Type="Self.Presentaciones" Multiplicity="1" />
+          <End Role="Articulos" Type="Self.Articulos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Presentaciones">
+              <PropertyRef Name="Id_Presentacion" />
+            </Principal>
+            <Dependent Role="Articulos">
+              <PropertyRef Name="Id_Presentacion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Articulos_Proveedores">
+          <End Role="Proveedores" Type="Self.Proveedores" Multiplicity="1" />
+          <End Role="Articulos" Type="Self.Articulos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Proveedores">
+              <PropertyRef Name="Id_Proveedor" />
+            </Principal>
+            <Dependent Role="Articulos">
+              <PropertyRef Name="Id_Proveedor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Costos_Articulos">
+          <End Role="Articulos" Type="Self.Articulos" Multiplicity="1" />
+          <End Role="Costos" Type="Self.Costos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Articulos">
+              <PropertyRef Name="Id_Articulo" />
+            </Principal>
+            <Dependent Role="Costos">
+              <PropertyRef Name="Id_Articulo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Costos_Presentaciones">
+          <End Role="Presentaciones" Type="Self.Presentaciones" Multiplicity="1" />
+          <End Role="Costos" Type="Self.Costos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Presentaciones">
+              <PropertyRef Name="Id_Presentacion" />
+            </Principal>
+            <Dependent Role="Costos">
+              <PropertyRef Name="Id_Presentacion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Proveedores_Paises">
+          <End Role="Paises" Type="Self.Paises" Multiplicity="1" />
+          <End Role="Proveedores" Type="Self.Proveedores" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Paises">
+              <PropertyRef Name="Id_Pais" />
+            </Principal>
+            <Dependent Role="Proveedores">
+              <PropertyRef Name="Id_Pais" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+        <Function Name="pa_Paises_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Nombre_Pais" Type="varchar" Mode="In" />
+          <Parameter Name="Sigla_Pais" Type="varchar" Mode="In" />
+          <Parameter Name="Moneda_Pais" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="pa_Paises_Select" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="pa_Paises_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id_Pais" Type="int" Mode="In" />
+          <Parameter Name="Nombre_Pais" Type="varchar" Mode="In" />
+          <Parameter Name="Sigla_Pais" Type="varchar" Mode="In" />
+          <Parameter Name="Moneda_Pais" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="pa_PaisesRetornaID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id_Pais" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <EntityContainer Name="LithioBDModelStoreContainer">
+          <EntitySet Name="Articulos" EntityType="Self.Articulos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Costos" EntityType="Self.Costos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Paises" EntityType="Self.Paises" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Presentaciones" EntityType="Self.Presentaciones" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Proveedores" EntityType="Self.Proveedores" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Usuarios" EntityType="Self.Usuarios" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Articulos_Presentaciones" Association="Self.FK_Articulos_Presentaciones">
+            <End Role="Presentaciones" EntitySet="Presentaciones" />
+            <End Role="Articulos" EntitySet="Articulos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Articulos_Proveedores" Association="Self.FK_Articulos_Proveedores">
+            <End Role="Proveedores" EntitySet="Proveedores" />
+            <End Role="Articulos" EntitySet="Articulos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Costos_Articulos" Association="Self.FK_Costos_Articulos">
+            <End Role="Articulos" EntitySet="Articulos" />
+            <End Role="Costos" EntitySet="Costos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Costos_Presentaciones" Association="Self.FK_Costos_Presentaciones">
+            <End Role="Presentaciones" EntitySet="Presentaciones" />
+            <End Role="Costos" EntitySet="Costos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Proveedores_Paises" Association="Self.FK_Proveedores_Paises">
+            <End Role="Paises" EntitySet="Paises" />
+            <End Role="Proveedores" EntitySet="Proveedores" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="LithioBDModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityContainer Name="LithioBDEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <FunctionImport Name="sp_alterdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_creatediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_dropdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(LithioBDModel.sp_helpdiagramdefinition_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(LithioBDModel.sp_helpdiagrams_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_renamediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="new_diagramname" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_upgraddiagrams" />
+          <FunctionImport Name="pa_Paises_Select" ReturnType="Collection(LithioBDModel.pa_Paises_Select_Result)" />
+          <FunctionImport Name="pa_Paises_Insert">
+            <Parameter Name="Nombre_Pais" Mode="In" Type="String" />
+            <Parameter Name="Sigla_Pais" Mode="In" Type="String" />
+            <Parameter Name="Moneda_Pais" Mode="In" Type="String" />
+          </FunctionImport>
+          <EntitySet Name="Articulos" EntityType="LithioBDModel.Articulos" />
+          <EntitySet Name="Costos" EntityType="LithioBDModel.Costos" />
+          <EntitySet Name="Paises" EntityType="LithioBDModel.Paises" />
+          <EntitySet Name="Presentaciones" EntityType="LithioBDModel.Presentaciones" />
+          <EntitySet Name="Proveedores" EntityType="LithioBDModel.Proveedores" />
+          <EntitySet Name="Usuarios" EntityType="LithioBDModel.Usuarios" />
+          <AssociationSet Name="FK_Articulos_Presentaciones" Association="LithioBDModel.FK_Articulos_Presentaciones">
+            <End Role="Presentaciones" EntitySet="Presentaciones" />
+            <End Role="Articulos" EntitySet="Articulos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Articulos_Proveedores" Association="LithioBDModel.FK_Articulos_Proveedores">
+            <End Role="Proveedores" EntitySet="Proveedores" />
+            <End Role="Articulos" EntitySet="Articulos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Costos_Articulos" Association="LithioBDModel.FK_Costos_Articulos">
+            <End Role="Articulos" EntitySet="Articulos" />
+            <End Role="Costos" EntitySet="Costos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Costos_Presentaciones" Association="LithioBDModel.FK_Costos_Presentaciones">
+            <End Role="Presentaciones" EntitySet="Presentaciones" />
+            <End Role="Costos" EntitySet="Costos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Proveedores_Paises" Association="LithioBDModel.FK_Proveedores_Paises">
+            <End Role="Paises" EntitySet="Paises" />
+            <End Role="Proveedores" EntitySet="Proveedores" />
+          </AssociationSet>
+          <FunctionImport Name="pa_Paises_Update">
+            <Parameter Name="Id_Pais" Mode="In" Type="Int32" />
+            <Parameter Name="Nombre_Pais" Mode="In" Type="String" />
+            <Parameter Name="Sigla_Pais" Mode="In" Type="String" />
+            <Parameter Name="Moneda_Pais" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="pa_PaisesRetornaID" ReturnType="Collection(LithioBDModel.pa_PaisesRetornaID_Result)">
+            <Parameter Name="Id_Pais" Mode="In" Type="Int32" />
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="sp_helpdiagramdefinition_Result">
+          <Property Type="Int32" Name="version" Nullable="true" />
+          <Property Type="Binary" Name="definition" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="sp_helpdiagrams_Result">
+          <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+          <Property Type="Int32" Name="OwnerID" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="pa_Paises_Select_Result">
+          <Property Type="Int32" Name="Id_Pais" Nullable="false" />
+          <Property Type="String" Name="Nombre_Pais" Nullable="false" MaxLength="200" />
+          <Property Type="String" Name="Sigla_Pais" Nullable="false" MaxLength="3" />
+          <Property Type="String" Name="Moneda_Pais" Nullable="false" MaxLength="200" />
+        </ComplexType>
+        <EntityType Name="Articulos">
+          <Key>
+            <PropertyRef Name="Id_Articulo" />
+          </Key>
+          <Property Name="Id_Articulo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Codigo_Articulo" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Nombre_Articulo" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Descripcion_Articulo" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Costo_Anterior_Articulo" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Id_Proveedor" Type="Int32" Nullable="false" />
+          <Property Name="Id_Presentacion" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Presentaciones" Relationship="LithioBDModel.FK_Articulos_Presentaciones" FromRole="Articulos" ToRole="Presentaciones" />
+          <NavigationProperty Name="Proveedores" Relationship="LithioBDModel.FK_Articulos_Proveedores" FromRole="Articulos" ToRole="Proveedores" />
+          <NavigationProperty Name="Costos" Relationship="LithioBDModel.FK_Costos_Articulos" FromRole="Articulos" ToRole="Costos" />
+        </EntityType>
+        <EntityType Name="Costos">
+          <Key>
+            <PropertyRef Name="Id_Costo" />
+          </Key>
+          <Property Name="Id_Costo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DUA" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Numero_Costos" Type="Int32" Nullable="false" />
+          <Property Name="Id_Articulo" Type="Int32" Nullable="false" />
+          <Property Name="Codigo_Articulo" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Nombre_Articulo" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Descripcion_Articulo" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Id_Presentacion" Type="Int32" Nullable="false" />
+          <Property Name="Unidades_Articulos" Type="Int32" Nullable="false" />
+          <Property Name="Tipo_De_Cambio" Type="Double" Nullable="false" />
+          <Property Name="Costo_Por_Unidad_Dolares" Type="Double" Nullable="false" />
+          <Property Name="Subtotal_Costo_Dolares" Type="Double" Nullable="false" />
+          <Property Name="Porcentaje_Costo" Type="Double" Nullable="false" />
+          <Property Name="Total_Costo_Dolares" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Fecha_Creacion" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="Articulos" Relationship="LithioBDModel.FK_Costos_Articulos" FromRole="Costos" ToRole="Articulos" />
+          <NavigationProperty Name="Presentaciones" Relationship="LithioBDModel.FK_Costos_Presentaciones" FromRole="Costos" ToRole="Presentaciones" />
+        </EntityType>
+        <EntityType Name="Paises">
+          <Key>
+            <PropertyRef Name="Id_Pais" />
+          </Key>
+          <Property Name="Id_Pais" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre_Pais" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Sigla_Pais" Type="String" Nullable="false" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="Moneda_Pais" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Proveedores" Relationship="LithioBDModel.FK_Proveedores_Paises" FromRole="Paises" ToRole="Proveedores" />
+        </EntityType>
+        <EntityType Name="Presentaciones">
+          <Key>
+            <PropertyRef Name="Id_Presentacion" />
+          </Key>
+          <Property Name="Id_Presentacion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre_Presentacion" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Articulos" Relationship="LithioBDModel.FK_Articulos_Presentaciones" FromRole="Presentaciones" ToRole="Articulos" />
+          <NavigationProperty Name="Costos" Relationship="LithioBDModel.FK_Costos_Presentaciones" FromRole="Presentaciones" ToRole="Costos" />
+        </EntityType>
+        <EntityType Name="Proveedores">
+          <Key>
+            <PropertyRef Name="Id_Proveedor" />
+          </Key>
+          <Property Name="Id_Proveedor" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Codigo_Proveedor" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Nombre_Proveedor" Type="Binary" Nullable="false" MaxLength="200" FixedLength="false" />
+          <Property Name="Id_Pais" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Articulos" Relationship="LithioBDModel.FK_Articulos_Proveedores" FromRole="Proveedores" ToRole="Articulos" />
+          <NavigationProperty Name="Paises" Relationship="LithioBDModel.FK_Proveedores_Paises" FromRole="Proveedores" ToRole="Paises" />
+        </EntityType>
+        <EntityType Name="Usuarios">
+          <Key>
+            <PropertyRef Name="Id_Administrador" />
+          </Key>
+          <Property Name="Id_Administrador" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre_Completo" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Nombre_Usuario" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Contrasena_Usuario" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <Association Name="FK_Articulos_Presentaciones">
+          <End Type="LithioBDModel.Presentaciones" Role="Presentaciones" Multiplicity="1" />
+          <End Type="LithioBDModel.Articulos" Role="Articulos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Presentaciones">
+              <PropertyRef Name="Id_Presentacion" />
+            </Principal>
+            <Dependent Role="Articulos">
+              <PropertyRef Name="Id_Presentacion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Articulos_Proveedores">
+          <End Type="LithioBDModel.Proveedores" Role="Proveedores" Multiplicity="1" />
+          <End Type="LithioBDModel.Articulos" Role="Articulos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Proveedores">
+              <PropertyRef Name="Id_Proveedor" />
+            </Principal>
+            <Dependent Role="Articulos">
+              <PropertyRef Name="Id_Proveedor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Costos_Articulos">
+          <End Type="LithioBDModel.Articulos" Role="Articulos" Multiplicity="1" />
+          <End Type="LithioBDModel.Costos" Role="Costos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Articulos">
+              <PropertyRef Name="Id_Articulo" />
+            </Principal>
+            <Dependent Role="Costos">
+              <PropertyRef Name="Id_Articulo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Costos_Presentaciones">
+          <End Type="LithioBDModel.Presentaciones" Role="Presentaciones" Multiplicity="1" />
+          <End Type="LithioBDModel.Costos" Role="Costos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Presentaciones">
+              <PropertyRef Name="Id_Presentacion" />
+            </Principal>
+            <Dependent Role="Costos">
+              <PropertyRef Name="Id_Presentacion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Proveedores_Paises">
+          <End Type="LithioBDModel.Paises" Role="Paises" Multiplicity="1" />
+          <End Type="LithioBDModel.Proveedores" Role="Proveedores" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Paises">
+              <PropertyRef Name="Id_Pais" />
+            </Principal>
+            <Dependent Role="Proveedores">
+              <PropertyRef Name="Id_Pais" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <ComplexType Name="pa_PaisesRetornaID_Result">
+          <Property Type="Int32" Name="Id_Pais" Nullable="false" />
+          <Property Type="String" Name="Nombre_Pais" Nullable="false" MaxLength="200" />
+          <Property Type="String" Name="Sigla_Pais" Nullable="false" MaxLength="3" />
+          <Property Type="String" Name="Moneda_Pais" Nullable="false" MaxLength="200" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="LithioBDModelStoreContainer" CdmEntityContainer="LithioBDEntities">
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="LithioBDModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="LithioBDModel.Store.sp_alterdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="LithioBDModel.Store.sp_creatediagram" />
+          <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="LithioBDModel.Store.sp_dropdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="LithioBDModel.Store.sp_helpdiagramdefinition">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="LithioBDModel.sp_helpdiagramdefinition_Result">
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="LithioBDModel.Store.sp_helpdiagrams">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="LithioBDModel.sp_helpdiagrams_Result">
+                <ScalarProperty Name="Database" ColumnName="Database" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Owner" ColumnName="Owner" />
+                <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="LithioBDModel.Store.sp_renamediagram" />
+          <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="LithioBDModel.Store.sp_upgraddiagrams" />
+          <FunctionImportMapping FunctionImportName="pa_Paises_Select" FunctionName="LithioBDModel.Store.pa_Paises_Select">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="LithioBDModel.pa_Paises_Select_Result">
+                <ScalarProperty Name="Id_Pais" ColumnName="Id_Pais" />
+                <ScalarProperty Name="Nombre_Pais" ColumnName="Nombre_Pais" />
+                <ScalarProperty Name="Sigla_Pais" ColumnName="Sigla_Pais" />
+                <ScalarProperty Name="Moneda_Pais" ColumnName="Moneda_Pais" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="pa_Paises_Insert" FunctionName="LithioBDModel.Store.pa_Paises_Insert" />
+          <EntitySetMapping Name="Articulos">
+            <EntityTypeMapping TypeName="LithioBDModel.Articulos">
+              <MappingFragment StoreEntitySet="Articulos">
+                <ScalarProperty Name="Id_Presentacion" ColumnName="Id_Presentacion" />
+                <ScalarProperty Name="Id_Proveedor" ColumnName="Id_Proveedor" />
+                <ScalarProperty Name="Costo_Anterior_Articulo" ColumnName="Costo_Anterior_Articulo" />
+                <ScalarProperty Name="Descripcion_Articulo" ColumnName="Descripcion_Articulo" />
+                <ScalarProperty Name="Nombre_Articulo" ColumnName="Nombre_Articulo" />
+                <ScalarProperty Name="Codigo_Articulo" ColumnName="Codigo_Articulo" />
+                <ScalarProperty Name="Id_Articulo" ColumnName="Id_Articulo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Costos">
+            <EntityTypeMapping TypeName="LithioBDModel.Costos">
+              <MappingFragment StoreEntitySet="Costos">
+                <ScalarProperty Name="Fecha_Creacion" ColumnName="Fecha_Creacion" />
+                <ScalarProperty Name="Total_Costo_Dolares" ColumnName="Total_Costo_Dolares" />
+                <ScalarProperty Name="Porcentaje_Costo" ColumnName="Porcentaje_Costo" />
+                <ScalarProperty Name="Subtotal_Costo_Dolares" ColumnName="Subtotal_Costo_Dolares" />
+                <ScalarProperty Name="Costo_Por_Unidad_Dolares" ColumnName="Costo_Por_Unidad_Dolares" />
+                <ScalarProperty Name="Tipo_De_Cambio" ColumnName="Tipo_De_Cambio" />
+                <ScalarProperty Name="Unidades_Articulos" ColumnName="Unidades_Articulos" />
+                <ScalarProperty Name="Id_Presentacion" ColumnName="Id_Presentacion" />
+                <ScalarProperty Name="Descripcion_Articulo" ColumnName="Descripcion_Articulo" />
+                <ScalarProperty Name="Nombre_Articulo" ColumnName="Nombre_Articulo" />
+                <ScalarProperty Name="Codigo_Articulo" ColumnName="Codigo_Articulo" />
+                <ScalarProperty Name="Id_Articulo" ColumnName="Id_Articulo" />
+                <ScalarProperty Name="Numero_Costos" ColumnName="Numero_Costos" />
+                <ScalarProperty Name="DUA" ColumnName="DUA" />
+                <ScalarProperty Name="Id_Costo" ColumnName="Id_Costo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Paises">
+            <EntityTypeMapping TypeName="LithioBDModel.Paises">
+              <MappingFragment StoreEntitySet="Paises">
+                <ScalarProperty Name="Moneda_Pais" ColumnName="Moneda_Pais" />
+                <ScalarProperty Name="Sigla_Pais" ColumnName="Sigla_Pais" />
+                <ScalarProperty Name="Nombre_Pais" ColumnName="Nombre_Pais" />
+                <ScalarProperty Name="Id_Pais" ColumnName="Id_Pais" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Presentaciones">
+            <EntityTypeMapping TypeName="LithioBDModel.Presentaciones">
+              <MappingFragment StoreEntitySet="Presentaciones">
+                <ScalarProperty Name="Nombre_Presentacion" ColumnName="Nombre_Presentacion" />
+                <ScalarProperty Name="Id_Presentacion" ColumnName="Id_Presentacion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Proveedores">
+            <EntityTypeMapping TypeName="LithioBDModel.Proveedores">
+              <MappingFragment StoreEntitySet="Proveedores">
+                <ScalarProperty Name="Id_Pais" ColumnName="Id_Pais" />
+                <ScalarProperty Name="Nombre_Proveedor" ColumnName="Nombre_Proveedor" />
+                <ScalarProperty Name="Codigo_Proveedor" ColumnName="Codigo_Proveedor" />
+                <ScalarProperty Name="Id_Proveedor" ColumnName="Id_Proveedor" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Usuarios">
+            <EntityTypeMapping TypeName="LithioBDModel.Usuarios">
+              <MappingFragment StoreEntitySet="Usuarios">
+                <ScalarProperty Name="Contrasena_Usuario" ColumnName="Contrasena_Usuario" />
+                <ScalarProperty Name="Nombre_Usuario" ColumnName="Nombre_Usuario" />
+                <ScalarProperty Name="Nombre_Completo" ColumnName="Nombre_Completo" />
+                <ScalarProperty Name="Id_Administrador" ColumnName="Id_Administrador" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="pa_Paises_Update" FunctionName="LithioBDModel.Store.pa_Paises_Update" />
+          <FunctionImportMapping FunctionImportName="pa_PaisesRetornaID" FunctionName="LithioBDModel.Store.pa_PaisesRetornaID">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="LithioBDModel.pa_PaisesRetornaID_Result">
+                <ScalarProperty Name="Id_Pais" ColumnName="Id_Pais" />
+                <ScalarProperty Name="Nombre_Pais" ColumnName="Nombre_Pais" />
+                <ScalarProperty Name="Sigla_Pais" ColumnName="Sigla_Pais" />
+                <ScalarProperty Name="Moneda_Pais" ColumnName="Moneda_Pais" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

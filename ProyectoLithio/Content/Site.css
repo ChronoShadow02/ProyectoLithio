@@ -1,0 +1,10 @@
+﻿.error{
+    font-weight:bold;
+    color:red;
+}
+label {
+    font-family: 'Roboto', sans-serif;
+}
+span.Obligatorio{
+    color :red;
+}

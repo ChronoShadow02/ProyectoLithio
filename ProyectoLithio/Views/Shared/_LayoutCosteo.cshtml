@@ -1,0 +1,56 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <script src="~/Scripts/modernizr-2.8.3.js"></script>
+    @Styles.Render("~/Content/css")
+    <!-- CSS Principal-->
+    <!-- Font-icon css-->
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    @RenderSection("Styles", false)
+    <link href="~/Content/Panel/style.css" rel="stylesheet" />
+</head>
+<body>
+    <aside class="app-sidebar">
+        <div class="app-sidebar__user">
+            <img src="~/img/LogoDashboard.jpg" style="width:200px;height:80px;" />
+        </div>
+        <ul class="app-menu">
+            <li><a class="app-menu__item active" href="~/Inicio/Bienvenida"><i class="app-menu__icon fa fa-home"></i><span class="app-menu__label">Inicio</span></a></li>
+            <li class="treeview">
+                <a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-laptop"></i><span class="app-menu__label">Mantenimientos</span><i class="treeview-indicator fa fa-angle-right"></i></a>
+                <ul class="treeview-menu">
+                    <li><a class="treeview-item" href="~/Paises/PaisesLista"><i class="icon fa fa-circle-o"></i> Países</a></li>
+                    <li><a class="treeview-item" href="#" target="_blank" rel="noopener"><i class="icon fa fa-circle-o"></i> Opcion 2</a></li>
+                </ul>
+            </li>
+            <li><a class="app-menu__item" href="#"><i class="app-menu__icon fa fa-bar-chart"></i><span class="app-menu__label">Reportes</span></a></li>
+
+            <li><a class="app-menu__item" href="#"><i class="app-menu__icon fa fa-sign-out"></i><span class="app-menu__label">Salir</span></a></li>
+        </ul>
+    </aside>
+    <div class="app-content">
+        <div class="pd-ltr-15 xs-pd-15-10">
+            @RenderBody()
+        </div>
+        <!-- Footer -->
+        <footer class="page-footer font-small bg-light">
+
+            <!-- Copyright -->
+            <div class="footer-copyright text-center py-3">
+                © 2020 Copyright
+            </div>
+            <!-- Copyright -->
+
+        </footer>
+    </div>
+
+    <!-- Footer -->
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    <script src="~/Scripts/Panel/expandir-menu.js"></script>
+    @RenderSection("scripts", required: false)
+</body>
+</html>

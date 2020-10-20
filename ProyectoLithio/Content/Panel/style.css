@@ -1,0 +1,141 @@
+﻿.app-sidebar {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    padding-top: 70px;
+    width: 230px;
+    overflow: auto;
+    z-index: 10;
+    background-color: #222d32;
+    -webkit-transition: left 0.3s ease, width 0.3s ease;
+    -o-transition: left 0.3s ease, width 0.3s ease;
+    transition: left 0.3s ease, width 0.3s ease;
+}
+
+.app-sidebar::-webkit-scrollbar {
+    width: 6px;
+}
+
+.app-sidebar::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.2);
+}
+.app-sidebar__user {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    padding: 10px;
+    margin-bottom: 20px;
+    color: #fff;
+}
+
+.app-menu {
+    margin-bottom: 0;
+    padding-bottom: 40px;
+    padding-left:0;
+}
+.app-menu, .treeview-menu {
+    padding-left: 0;
+    list-style: none;
+}
+.app-menu__item {
+    position: relative;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    padding: 12px 15px;
+    font-size: 1.08em;
+    border-left: 3px solid transparent;
+    -webkit-transition: border-left-color 0.3s ease, background-color 0.3s ease;
+    -o-transition: border-left-color 0.3s ease, background-color 0.3s ease;
+    transition: border-left-color 0.3s ease, background-color 0.3s ease;
+    color: #fff;
+}
+
+.app-menu__item.active, .app-menu__item:hover, .app-menu__item:focus {
+    background: #0d1214;
+    border-left-color: #009688;
+    text-decoration: none;
+    color: #fff;
+}
+
+.app-menu__icon {
+    -webkit-box-flex: 0;
+    -ms-flex: 0 0 auto;
+    flex: 0 0 auto;
+    width: 25px;
+}
+
+.app-menu__label {
+    white-space: nowrap;
+    -webkit-box-flex: 1;
+    -ms-flex: 1 1 auto;
+    flex: 1 1 auto;
+}
+.treeview.is-expanded [data-toggle='treeview'] {
+    border-left-color: #009688;
+    background: #0d1214;
+}
+
+.treeview.is-expanded .treeview-menu {
+    max-height: 100vh;
+}
+
+.treeview.is-expanded .treeview-indicator {
+    -webkit-transform: rotate(90deg);
+    -ms-transform: rotate(90deg);
+    transform: rotate(90deg);
+}
+
+.treeview-menu {
+    max-height: 0;
+    overflow: hidden;
+    -webkit-transition: max-height 0.3s ease;
+    -o-transition: max-height 0.3s ease;
+    transition: max-height 0.3s ease;
+    background: #2a383e;
+}
+
+.treeview-item {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    padding: 5px 5px 5px 20px;
+    font-size: 1em;
+    color: #fff;
+}
+
+    .treeview-item.active, .treeview-item:hover, .treeview-item:focus {
+        background: #0d1214;
+        text-decoration: none;
+        color: #fff;
+    }
+
+    .treeview-item .icon {
+        margin-right: 5px;
+    }
+
+.treeview-indicator {
+    -webkit-transform-origin: center;
+    -ms-transform-origin: center;
+    transform-origin: center;
+    -webkit-transition: -webkit-transform 0.3s ease;
+    transition: -webkit-transform 0.3s ease;
+    -o-transition: transform 0.3s ease;
+    transition: transform 0.3s ease;
+    transition: transform 0.3s ease, -webkit-transform 0.3s ease;
+}
+
+/*Contenido*/
+.app-content {
+    padding: 80px 20px 0 250px
+}

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="894d984e1d76483b8685d05c97d1cdee" Name="Diagram1">
+        <EntityTypeShape EntityType="LithioBDModel.sysdiagrams" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LithioBDModel.Articulos" Width="1.5" PointX="3" PointY="6.25" />
+        <EntityTypeShape EntityType="LithioBDModel.Costos" Width="1.5" PointX="5.25" PointY="5.625" />
+        <EntityTypeShape EntityType="LithioBDModel.Paises" Width="1.5" PointX="1.5" PointY="0.75" />
+        <EntityTypeShape EntityType="LithioBDModel.Presentaciones" Width="1.5" PointX="0.75" PointY="6.875" />
+        <EntityTypeShape EntityType="LithioBDModel.Proveedores" Width="1.5" PointX="0.75" PointY="3.625" />
+        <EntityTypeShape EntityType="LithioBDModel.Usuarios" Width="1.5" PointX="7.75" PointY="2.25" />
+        <AssociationConnector Association="LithioBDModel.FK_Articulos_Presentaciones" />
+        <AssociationConnector Association="LithioBDModel.FK_Articulos_Proveedores" />
+        <AssociationConnector Association="LithioBDModel.FK_Costos_Articulos" />
+        <AssociationConnector Association="LithioBDModel.FK_Costos_Presentaciones" />
+        <AssociationConnector Association="LithioBDModel.FK_Proveedores_Paises" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
