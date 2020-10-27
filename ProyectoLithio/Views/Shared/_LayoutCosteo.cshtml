@@ -1,6 +1,6 @@
 ﻿<!DOCTYPE html>
 
-<html>
+<html lang="es-mx">
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title</title>
@@ -18,12 +18,14 @@
             <img src="~/img/LogoDashboard.jpg" style="width:200px;height:80px;" />
         </div>
         <ul class="app-menu">
-            <li><a class="app-menu__item active" href="~/Inicio/Bienvenida"><i class="app-menu__icon fa fa-home"></i><span class="app-menu__label">Inicio</span></a></li>
+            <li><a class="app-menu__item" href="~/Inicio/Bienvenida"><i class="app-menu__icon fa fa-home"></i><span class="app-menu__label">Inicio</span></a></li>
             <li class="treeview">
-                <a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-laptop"></i><span class="app-menu__label">Mantenimientos</span><i class="treeview-indicator fa fa-angle-right"></i></a>
+                <a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-briefcase"></i><span class="app-menu__label">Mantenimientos</span><i class="treeview-indicator fa fa-angle-right"></i></a>
                 <ul class="treeview-menu">
                     <li><a class="treeview-item" href="~/Paises/PaisesLista"><i class="icon fa fa-circle-o"></i> Países</a></li>
-                    <li><a class="treeview-item" href="#" target="_blank" rel="noopener"><i class="icon fa fa-circle-o"></i> Opcion 2</a></li>
+                    <li><a class="treeview-item" href="#" target="_blank" rel="noopener"><i class="icon fa fa-circle-o"></i> Proveedores</a></li>
+                    <li><a class="treeview-item" href="#" target="_blank" rel="noopener"><i class="icon fa fa-circle-o"></i> Artículos</a></li>
+                    <li><a class="treeview-item" href="#" target="_blank" rel="noopener"><i class="icon fa fa-circle-o"></i> Presentaciones</a></li>
                 </ul>
             </li>
             <li><a class="app-menu__item" href="#"><i class="app-menu__icon fa fa-bar-chart"></i><span class="app-menu__label">Reportes</span></a></li>
@@ -52,5 +54,6 @@
     @Scripts.Render("~/bundles/bootstrap")
     <script src="~/Scripts/Panel/expandir-menu.js"></script>
     @RenderSection("scripts", required: false)
+    
 </body>
 </html>

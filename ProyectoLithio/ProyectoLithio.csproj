@@ -213,6 +213,9 @@
     <Content Include="Content\Site.css" />
     <Content Include="img\imgLogin.jpg" />
     <Content Include="img\LogoDashboard.jpg" />
+    <Content Include="img\slider-aceite1.jpg" />
+    <Content Include="img\slider-aceite2.jpg" />
+    <Content Include="img\slider-aceite3.jpeg" />
     <Content Include="Models\ModelBD.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>ModelBD.edmx</DependentUpon>
@@ -282,6 +285,7 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\MensajesAlert\AlertGenericos.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\Paises\AgregarPais.js" />
     <Content Include="Scripts\Paises\validaPais.js" />

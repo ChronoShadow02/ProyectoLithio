@@ -11,7 +11,8 @@ function validaPais() {
             },
             Sigla_Pais: {
                 required: true,
-                maxlength: 3
+                maxlength: 3,
+                minlength: 3
             },
             Moneda_Pais: {
                 required: true,
