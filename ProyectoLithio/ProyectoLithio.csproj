@@ -132,6 +132,7 @@
     <Compile Include="Controllers\InicioController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\PaisesController.cs" />
+    <Compile Include="Controllers\PresentacionesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -163,6 +164,12 @@
       <DependentUpon>ModelBD.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\pa_Paises_Select_Result.cs">
+      <DependentUpon>ModelBD.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\pa_PresentacionesRetornaID_Result.cs">
+      <DependentUpon>ModelBD.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\pa_Presentaciones_Select_Result.cs">
       <DependentUpon>ModelBD.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Presentaciones.cs">
@@ -294,6 +301,7 @@
     <Content Include="Scripts\popper-utils.min.js" />
     <Content Include="Scripts\popper.js" />
     <Content Include="Scripts\popper.min.js" />
+    <Content Include="Scripts\Presentaciones\validaPresentaciones.js" />
     <Content Include="Scripts\src\index.js" />
     <Content Include="Scripts\src\methods\defaults.js" />
     <Content Include="Scripts\src\methods\destroy.js" />
@@ -394,6 +402,9 @@
     <Content Include="Scripts\popper-utils.js.map" />
     <Content Include="Views\Paises\PaisesNuevo.cshtml" />
     <Content Include="Views\Paises\PaisModifica.cshtml" />
+    <Content Include="Views\Presentaciones\PresentacionesLista.cshtml" />
+    <Content Include="Views\Presentaciones\PresentacionesNuevo.cshtml" />
+    <Content Include="Views\Presentaciones\PresentacionesModifica.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

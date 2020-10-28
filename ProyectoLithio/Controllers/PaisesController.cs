@@ -8,7 +8,7 @@ namespace ProyectoLithio.Controllers
 {
     public class PaisesController : Controller
     {
-        private LithioBDEntities modeloBD = new LithioBDEntities();
+        LithioBDEntities modeloBD = new LithioBDEntities();
 
         #region PaisesLista
 

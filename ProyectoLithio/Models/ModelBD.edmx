@@ -157,6 +157,17 @@
         <Function Name="pa_PaisesRetornaID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Id_Pais" Type="int" Mode="In" />
         </Function>
+        <Function Name="pa_Presentaciones_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Nombre_Presentacion" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="pa_Presentaciones_Select" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="pa_Presentaciones_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id_Presentacion" Type="int" Mode="In" />
+          <Parameter Name="Nombre_Presentacion" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="pa_PresentacionesRetornaID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id_Presentacion" Type="int" Mode="In" />
+        </Function>
         <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
           <Parameter Name="owner_id" Type="int" Mode="In" />
@@ -301,7 +312,18 @@
             <Parameter Name="Moneda_Pais" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="pa_PaisesRetornaID" ReturnType="Collection(LithioBDModel.pa_PaisesRetornaID_Result)">
-            <Parameter Name="Id_Pais" Mode="In" Type="Int32" />
+          <Parameter Name="Id_Pais" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="pa_Presentaciones_Select" ReturnType="Collection(LithioBDModel.pa_Presentaciones_Select_Result)" />
+          <FunctionImport Name="pa_Presentaciones_Insert">
+          <Parameter Name="Nombre_Presentacion" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="pa_Presentaciones_Update">
+            <Parameter Name="Id_Presentacion" Mode="In" Type="Int32" />
+            <Parameter Name="Nombre_Presentacion" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="pa_PresentacionesRetornaID" ReturnType="Collection(LithioBDModel.pa_PresentacionesRetornaID_Result)">
+            <Parameter Name="Id_Presentacion" Mode="In" Type="Int32" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
@@ -463,6 +485,14 @@
           <Property Type="String" Name="Sigla_Pais" Nullable="false" MaxLength="3" />
           <Property Type="String" Name="Moneda_Pais" Nullable="false" MaxLength="200" />
         </ComplexType>
+        <ComplexType Name="pa_Presentaciones_Select_Result">
+          <Property Type="Int32" Name="Id_Presentacion" Nullable="false" />
+          <Property Type="String" Name="Nombre_Presentacion" Nullable="false" MaxLength="200" />
+        </ComplexType>
+        <ComplexType Name="pa_PresentacionesRetornaID_Result">
+          <Property Type="Int32" Name="Id_Presentacion" Nullable="false" />
+          <Property Type="String" Name="Nombre_Presentacion" Nullable="false" MaxLength="200" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -595,6 +625,24 @@
                 <ScalarProperty Name="Nombre_Pais" ColumnName="Nombre_Pais" />
                 <ScalarProperty Name="Sigla_Pais" ColumnName="Sigla_Pais" />
                 <ScalarProperty Name="Moneda_Pais" ColumnName="Moneda_Pais" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="pa_Presentaciones_Select" FunctionName="LithioBDModel.Store.pa_Presentaciones_Select">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="LithioBDModel.pa_Presentaciones_Select_Result">
+                <ScalarProperty Name="Id_Presentacion" ColumnName="Id_Presentacion" />
+                <ScalarProperty Name="Nombre_Presentacion" ColumnName="Nombre_Presentacion" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="pa_Presentaciones_Insert" FunctionName="LithioBDModel.Store.pa_Presentaciones_Insert" />
+          <FunctionImportMapping FunctionImportName="pa_Presentaciones_Update" FunctionName="LithioBDModel.Store.pa_Presentaciones_Update" />
+          <FunctionImportMapping FunctionImportName="pa_PresentacionesRetornaID" FunctionName="LithioBDModel.Store.pa_PresentacionesRetornaID">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="LithioBDModel.pa_PresentacionesRetornaID_Result">
+                <ScalarProperty Name="Id_Presentacion" ColumnName="Id_Presentacion" />
+                <ScalarProperty Name="Nombre_Presentacion" ColumnName="Nombre_Presentacion" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

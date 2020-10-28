@@ -1,0 +1,28 @@
+﻿@model ProyectoLithio.Models.pa_PresentacionesRetornaID_Result
+@{
+    ViewBag.Title = "PresentacionesModifica";
+    Layout = "~/Views/Shared/_LayoutCosteo.cshtml";
+}
+
+<h2>Modificar Presentación</h2>
+<br />
+<form method="post" id="frmPresentacion">
+    <label><span class="Obligatorio">* Obligatorio</span></label> <br />
+    <div class="form-group">
+        <label><span class="Obligatorio">*</span>Nombre de la presentación</label>
+        <input type="text" name="Nombre_Presentacion" class="form-control" placeholder="Ejemplo:Tubo" id="Nombre_Presentacion" value="@Model.Nombre_Presentacion"/>
+    </div>
+    <div class="form-group text-right">
+        <input type="submit" value="Modificar" class="btn-success btn" id="btnModificarPresentacion" />
+        <a href="~/Presentaciones/PresentacionesLista" class="btn btn-info">Regresar a la lista</a>
+    </div>
+</form>
+<br />
+@section scripts{
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/validacionesGenericas.js"></script>
+    <script src="~/Scripts/Presentaciones/validaPresentaciones.js"></script>
+}
+
+
+

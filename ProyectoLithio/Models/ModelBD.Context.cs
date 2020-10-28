@@ -190,5 +190,41 @@ namespace ProyectoLithio.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<pa_PaisesRetornaID_Result>("pa_PaisesRetornaID", id_PaisParameter);
         }
+    
+        public virtual ObjectResult<pa_Presentaciones_Select_Result> pa_Presentaciones_Select()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<pa_Presentaciones_Select_Result>("pa_Presentaciones_Select");
+        }
+    
+        public virtual int pa_Presentaciones_Insert(string nombre_Presentacion)
+        {
+            var nombre_PresentacionParameter = nombre_Presentacion != null ?
+                new ObjectParameter("Nombre_Presentacion", nombre_Presentacion) :
+                new ObjectParameter("Nombre_Presentacion", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("pa_Presentaciones_Insert", nombre_PresentacionParameter);
+        }
+    
+        public virtual int pa_Presentaciones_Update(Nullable<int> id_Presentacion, string nombre_Presentacion)
+        {
+            var id_PresentacionParameter = id_Presentacion.HasValue ?
+                new ObjectParameter("Id_Presentacion", id_Presentacion) :
+                new ObjectParameter("Id_Presentacion", typeof(int));
+    
+            var nombre_PresentacionParameter = nombre_Presentacion != null ?
+                new ObjectParameter("Nombre_Presentacion", nombre_Presentacion) :
+                new ObjectParameter("Nombre_Presentacion", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("pa_Presentaciones_Update", id_PresentacionParameter, nombre_PresentacionParameter);
+        }
+    
+        public virtual ObjectResult<pa_PresentacionesRetornaID_Result> pa_PresentacionesRetornaID(Nullable<int> id_Presentacion)
+        {
+            var id_PresentacionParameter = id_Presentacion.HasValue ?
+                new ObjectParameter("Id_Presentacion", id_Presentacion) :
+                new ObjectParameter("Id_Presentacion", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<pa_PresentacionesRetornaID_Result>("pa_PresentacionesRetornaID", id_PresentacionParameter);
+        }
     }
 }
