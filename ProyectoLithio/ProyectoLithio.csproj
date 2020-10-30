@@ -218,6 +218,7 @@
     <Content Include="fonts\fontawesome\fonts\themify.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="img\CostaRica.png" />
     <Content Include="img\imgLogin.jpg" />
     <Content Include="img\LogoDashboard.jpg" />
     <Content Include="img\slider-aceite1.jpg" />
