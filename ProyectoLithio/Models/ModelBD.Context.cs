@@ -34,6 +34,8 @@ namespace ProyectoLithio.Models
         public DbSet<Paises> Paises { get; set; }
         public DbSet<Presentaciones> Presentaciones { get; set; }
         public DbSet<Proveedores> Proveedores { get; set; }
+        public DbSet<Estado_Usuario> Estado_Usuario { get; set; }
+        public DbSet<Tipo_Usuario> Tipo_Usuario { get; set; }
         public DbSet<Usuarios> Usuarios { get; set; }
     
         public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
@@ -225,6 +227,19 @@ namespace ProyectoLithio.Models
                 new ObjectParameter("Id_Presentacion", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<pa_PresentacionesRetornaID_Result>("pa_PresentacionesRetornaID", id_PresentacionParameter);
+        }
+    
+        public virtual ObjectResult<pa_RetornaUsuarioPwd_Select_Result> pa_RetornaUsuarioPwd_Select(string nombre_Usuario, string contrasena)
+        {
+            var nombre_UsuarioParameter = nombre_Usuario != null ?
+                new ObjectParameter("Nombre_Usuario", nombre_Usuario) :
+                new ObjectParameter("Nombre_Usuario", typeof(string));
+    
+            var contrasenaParameter = contrasena != null ?
+                new ObjectParameter("Contrasena", contrasena) :
+                new ObjectParameter("Contrasena", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<pa_RetornaUsuarioPwd_Select_Result>("pa_RetornaUsuarioPwd_Select", nombre_UsuarioParameter, contrasenaParameter);
         }
     }
 }

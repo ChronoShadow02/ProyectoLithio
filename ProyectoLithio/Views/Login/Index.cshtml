@@ -1,6 +1,8 @@
 ﻿
 @{
     Layout = null;
+    ///Constriur de URL del método del controlador
+    string URLMetodoFormulario = Url.Action("VerificaLogin", "Login");
 }
 
 <!DOCTYPE html>
@@ -8,10 +10,10 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>Index</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" >
+    <title>Inicio de Sesión</title>
+    <script src="~/Scripts/modernizr-2.8.3.js"></script>
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css">
     <link href="~/Content/Login/styleLogin.css" rel="stylesheet" />
 </head>
 <body>
@@ -20,26 +22,30 @@
             <div class="user_card">
                 <div class="d-flex justify-content-center">
                     <div class="brand_logo_container">
-                        <img src="~/img/CostaRica.png" class="brand_logo" alt="Logo"/>
+                        <img src="~/img/CostaRica.png" class="brand_logo" alt="Logo" />
                     </div>
                 </div>
                 <div class="d-flex justify-content-center form_container">
-                    <form>
+                    <form method="post" action="@URLMetodoFormulario">
                         <div class="input-group mb-3">
                             <div class="input-group-append">
                                 <span class="input-group-text"><i class="fas fa-user"></i></span>
                             </div>
-                            <input type="text" name="" class="form-control input_user" value="" placeholder="Usuario">
+                            <input type="text" name="Nombre_Usuario" class="form-control input_user" value="" placeholder="Usuario">
                         </div>
                         <div class="input-group mb-2">
                             <div class="input-group-append">
                                 <span class="input-group-text"><i class="fas fa-key"></i></span>
                             </div>
-                            <input type="password" name="" class="form-control input_pass" value="" placeholder="Contraseña">
+                            <input type="password" name="Contrasena_Usuario" class="form-control input_pass" value="" placeholder="Contraseña">
                         </div>
                         <div class="d-flex justify-content-center mt-3 login_container">
-                            <button type="button" name="button" class="btn login_btn">Ingresar</button>
+                            <button type="submit" class="btn login_btn">Ingresar</button>
                         </div>
+                        @*
+                            Se muestran los mensjes que se envían desde el controlador(Usuario y contraseña no validos...)
+                        *@
+                        @Html.ValidationSummary("", "<script>Swal.fire({ icon: 'error',title: 'Oops...', text: 'Something went wrong!'})")
                     </form>
                 </div>
 
@@ -51,5 +57,7 @@
             </div>
         </div>
     </div>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
 </body>
 </html>

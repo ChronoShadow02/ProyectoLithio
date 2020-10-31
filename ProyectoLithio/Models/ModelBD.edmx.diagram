@@ -11,12 +11,16 @@
         <EntityTypeShape EntityType="LithioBDModel.Paises" Width="1.5" PointX="1.5" PointY="0.75" />
         <EntityTypeShape EntityType="LithioBDModel.Presentaciones" Width="1.5" PointX="0.75" PointY="6.875" />
         <EntityTypeShape EntityType="LithioBDModel.Proveedores" Width="1.5" PointX="0.75" PointY="3.625" />
-        <EntityTypeShape EntityType="LithioBDModel.Usuarios" Width="1.5" PointX="7.75" PointY="2.25" />
         <AssociationConnector Association="LithioBDModel.FK_Articulos_Presentaciones" />
         <AssociationConnector Association="LithioBDModel.FK_Articulos_Proveedores" />
         <AssociationConnector Association="LithioBDModel.FK_Costos_Articulos" />
         <AssociationConnector Association="LithioBDModel.FK_Costos_Presentaciones" />
         <AssociationConnector Association="LithioBDModel.FK_Proveedores_Paises" />
+        <EntityTypeShape EntityType="LithioBDModel.Estado_Usuario" Width="1.5" PointX="7.375" PointY="1.625" />
+        <EntityTypeShape EntityType="LithioBDModel.Tipo_Usuario" Width="1.5" PointX="9.625" PointY="4.75" />
+        <EntityTypeShape EntityType="LithioBDModel.Usuarios" Width="1.5" PointX="9.625" PointY="1" />
+        <AssociationConnector Association="LithioBDModel.FK_Usuarios_Estado_Usuario" />
+        <AssociationConnector Association="LithioBDModel.FK_Usuarios_Tipo_Usuario" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
