@@ -1,4 +1,20 @@
-﻿<!DOCTYPE html>
+﻿@{ 
+    ///Variable que posee los datos de la sesion del usuario
+    ProyectoLithio.Models.pa_RetornaUsuarioPwd_Select_Result modelo
+        = (ProyectoLithio.Models.pa_RetornaUsuarioPwd_Select_Result) this.Session["datosUsuario"];
+
+    ///Variable con la direccion de la vista del Login
+    string URLogin = this.Url.Action("Index", "Login");
+
+    string CerrarSesion = this.Url.Action("CerrarSesion","Login");
+
+    bool sesionIniciada = false;
+    if (this.Session["logueado"] != null)
+    {
+        sesionIniciada = Convert.ToBoolean(this.Session["logueado"]);
+    }
+}
+<!DOCTYPE html>
 
 <html lang="es-mx">
 <head>
@@ -19,23 +35,44 @@
         </div>
         <ul class="app-menu">
             <li><a class="app-menu__item" href="~/Inicio/Bienvenida"><i class="app-menu__icon fa fa-home"></i><span class="app-menu__label">Inicio</span></a></li>
-            <li class="treeview">
-                <a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-briefcase"></i><span class="app-menu__label">Mantenimientos</span><i class="treeview-indicator fa fa-angle-right"></i></a>
-                <ul class="treeview-menu">
-                    <li><a class="treeview-item" href="~/Paises/PaisesLista"><i class="icon fa fa-circle-o"></i> Países</a></li>
-                    <li><a class="treeview-item" href="#" rel="noopener"><i class="icon fa fa-circle-o"></i> Proveedores</a></li>
-                    <li><a class="treeview-item" href="#" rel="noopener"><i class="icon fa fa-circle-o"></i> Artículos</a></li>
-                    <li><a class="treeview-item" href="~/Presentaciones/PresentacionesLista" rel="noopener"><i class="icon fa fa-circle-o"></i> Presentaciones</a></li>
-                </ul>
-            </li>
-            <li><a class="app-menu__item" href="#"><i class="app-menu__icon fa fa-bar-chart"></i><span class="app-menu__label">Reportes</span></a></li>
+            @{
+                if (modelo.Desc_Tipo_Usuario == "ADM" && modelo.Desc_Estado_Usuario == "A")
+                {
+                    /// Se muestran las opciones si la sesión es iniciada por un administrador
+                    if (sesionIniciada)
+                    {
+                        <li class="treeview">
+                            <a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-briefcase"></i><span class="app-menu__label">Mantenimientos</span><i class="treeview-indicator fa fa-angle-right"></i></a>
+                            <ul class="treeview-menu">
+                                <li><a class="treeview-item" href="~/Paises/PaisesLista"><i class="icon fa fa-circle-o"></i> Países</a></li>
+                                <li><a class="treeview-item" href="#" rel="noopener"><i class="icon fa fa-circle-o"></i> Proveedores</a></li>
+                                <li><a class="treeview-item" href="#" rel="noopener"><i class="icon fa fa-circle-o"></i> Artículos</a></li>
+                                <li><a class="treeview-item" href="~/Presentaciones/PresentacionesLista" rel="noopener"><i class="icon fa fa-circle-o"></i> Presentaciones</a></li>
+                            </ul>
+                        </li>
+                        <li><a class="app-menu__item" href="#"><i class="app-menu__icon fa fa-bar-chart"></i><span class="app-menu__label">Reportes</span></a></li>
 
-            <li><a class="app-menu__item" href="#"><i class="app-menu__icon fa fa-sign-out"></i><span class="app-menu__label">Salir</span></a></li>
+                    }
+                }
+            }
+            <li><a class="app-menu__item" href="#" id="linkCerrarSesion"><i class="app-menu__icon fa fa-sign-out"></i><span class="app-menu__label">Salir</span></a></li>
         </ul>
     </aside>
     <div class="app-content">
         <div class="pd-ltr-15 xs-pd-15-10">
-            @RenderBody()
+            @{ 
+                ///Si es verdadero, carga el contenido de la pagina hija
+                if (sesionIniciada)
+                {
+                    @RenderBody()
+                }
+                else
+                {
+                    ///de lo contrario redireccionar el controlador del
+                    ///login y a su metodo index para que solicite los 
+                    ///datos de inicio de sesion
+                }
+            }
         </div>
         <!-- Footer -->
         <footer class="page-footer font-small bg-light">

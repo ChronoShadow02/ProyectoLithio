@@ -3,6 +3,8 @@
     Layout = null;
     ///Constriur de URL del método del controlador
     string URLMetodoFormulario = Url.Action("VerificaLogin", "Login");
+
+    var UsuarioLogueado = this.ViewBag.UsuarioLogueado;
 }
 
 <!DOCTYPE html>
@@ -15,6 +17,7 @@
     <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css">
     <link href="~/Content/Login/styleLogin.css" rel="stylesheet" />
+    <script src='https://cdn.jsdelivr.net/npm/sweetalert2@10'></script>
 </head>
 <body>
     <div class="container h-100">
@@ -40,12 +43,21 @@
                             <input type="password" name="Contrasena_Usuario" class="form-control input_pass" value="" placeholder="Contraseña">
                         </div>
                         <div class="d-flex justify-content-center mt-3 login_container">
-                            <button type="submit" class="btn login_btn">Ingresar</button>
+                            <button type="submit" class="btn login_btn"><i class="fa fa-sign-in"></i> Ingresar</button>
                         </div>
+                        <br />
                         @*
-                            Se muestran los mensjes que se envían desde el controlador(Usuario y contraseña no validos...)
+        Se muestran los mensjes que se envían desde el controlador(Usuario y contraseña no validos...)
+        @Html.ValidationSummary("<script>Swal.fire({ icon: 'error',title: 'Oops...', text: 'Something went wrong!'})")
                         *@
-                        @Html.ValidationSummary("", "<script>Swal.fire({ icon: 'error',title: 'Oops...', text: 'Something went wrong!'})")
+                        @{
+                            if (UsuarioLogueado == false)
+                            {
+                                <div class="alert alert-danger text-center" role="alert">
+                                    @Html.ValidationSummary(true)
+                                </div>
+                            }
+                        }
                     </form>
                 </div>
 
@@ -59,5 +71,6 @@
     </div>
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
+
 </body>
 </html>

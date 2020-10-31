@@ -1,10 +1,13 @@
-﻿
+﻿@model ProyectoLithio.Models.pa_RetornaUsuarioPwd_Select_Result
 @{
     ViewBag.Title = "Bienvenida";
     Layout = "~/Views/Shared/_LayoutCosteo.cshtml";
+    
 }
 
-<h2>Bienvenida</h2>
+<div class="alert alert-success text-center" role="alert">
+    <h5>Bienvendo @Html.DisplayFor(model => model.Nombre_Usuario)</h5> 
+</div>
 
 <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
     <ol class="carousel-indicators">

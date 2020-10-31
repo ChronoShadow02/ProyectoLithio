@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ProyectoLithio.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -15,7 +16,23 @@ namespace ProyectoLithio.Controllers
         }
         public ActionResult Bienvenida()
         {
-            return View();
+            bool sesionIniciada = false;
+            if (this.Session["logueado"] != null)
+            {
+                sesionIniciada = Convert.ToBoolean(this.Session["logueado"]);
+            }
+            if (sesionIniciada == true)
+            {
+                /// se "reconstruye " los datos del modelo accediendo al objeto Session
+                pa_RetornaUsuarioPwd_Select_Result modelo = (pa_RetornaUsuarioPwd_Select_Result) this.Session["datosUsuario"];
+
+                return View(modelo);
+            }
+            else
+            {
+                return RedirectToAction("Index", "Login");
+            }
+            
         }
     }
 }

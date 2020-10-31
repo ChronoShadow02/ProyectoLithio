@@ -122,7 +122,7 @@ namespace ProyectoLithio.Controllers
             }
             finally
             {
-                Response.Write("<script src='https://cdn.jsdelivr.net/npm/sweetalert2@10'></script> <br>");
+                Response.Write("<script src='https://cdn.jsdelivr.net/npm/sweetalert2@10'></script>");
                 if (RegistrosAfectados > 0)
                 {
                     mensaje = "País Modificado";

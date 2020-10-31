@@ -32,6 +32,7 @@ namespace ProyectoLithio.Controllers
         [HttpPost]
         public ActionResult VerificaLogin(pa_RetornaUsuarioPwd_Select_Result pModelo)
         {
+            
             ///Busca el usuario tomando en cuenta el usuario y contraseña
             pa_RetornaUsuarioPwd_Select_Result usuarioBuscar = 
                 this.modeloBD.pa_RetornaUsuarioPwd_Select(pModelo.Nombre_Usuario, pModelo.Contrasena_Usuario).FirstOrDefault();
@@ -40,8 +41,8 @@ namespace ProyectoLithio.Controllers
             {
                 //Permanece en index del controlador Login
                 //Muestra un mensaje de error
-                this.ModelState.AddModelError("", "Usuario o contraseña inválidos.Por favor verifique.");
-
+                this.ModelState.AddModelError("", "Usuario o contraseña inválidos.");
+                this.ViewBag.UsuarioLogueado = false;
                 return View("Index");
             }
             else
@@ -53,9 +54,26 @@ namespace ProyectoLithio.Controllers
                 this.Session.Add("datosUsuario",usuarioBuscar);
                 return RedirectToAction("Bienvenida","Inicio");
             }
-            return View();
         }
 
         #endregion IndexPost
+
+        #region CerrarSesion
+        /// <summary>
+        /// Cierra la sesion y establece los valores de la sesion en null
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult CerrarSesion()
+        {
+            ///establecer los datos de sesion 
+            ///que cuando el layout consulte por dichos datos
+            ///re-direccione al login
+            this.Session["logueado"] = null;
+
+            this.Session["datosUsuario"] = null;
+            
+            return RedirectToAction("Index", "Login");
+        }
+        #endregion
     }
 }

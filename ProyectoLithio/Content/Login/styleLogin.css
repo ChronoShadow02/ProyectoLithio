@@ -9,7 +9,7 @@ html {
 }
 
 .user_card {
-    height: 400px;
+    height: 450px;
     width: 350px;
     margin-top: auto;
     margin-bottom: auto;
@@ -45,6 +45,8 @@ html {
 
 .form_container {
     margin-top: 100px;
+    margin-left:20px;
+    margin-right:20px;
 }
 
 .login_btn {
@@ -77,4 +79,12 @@ html {
 
 .custom-checkbox .custom-control-input:checked ~ .custom-control-label::before {
     background-color: #c0392b !important;
+}
+/*Alert de errores*/
+.alert{
+    margin:0;
+}
+.alert ul{
+    margin:0;
+    padding:5px;
 }
