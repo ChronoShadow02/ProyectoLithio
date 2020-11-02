@@ -10,7 +10,8 @@ namespace ProyectoLithio.Controllers
     public class UsuariosController : Controller
     {
         LithioBDEntities modeloBD = new LithioBDEntities();
-        #region MyRegion
+
+        #region UsuariosLista
         /// <summary>
         /// Metodo que trae la lista de usuarios
         /// </summary>
@@ -26,5 +27,29 @@ namespace ProyectoLithio.Controllers
         }
         #endregion
 
+        #region UsuarioNuevo
+        /// <summary>
+        /// Metodo que muestra el formulario para ingresar un nuevo usuario
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult UsuariosNuevo()
+        {
+            return View();
+        }
+        #endregion
+
+
+        #region UsuarioNuevoPost
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        [HttpPost]
+        public ActionResult UsuarioNuevo()
+        {
+            return View();
+        }
+        #endregion
     }
 }

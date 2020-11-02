@@ -385,6 +385,7 @@
     <Content Include="Scripts\umd\popper-utils.min.js" />
     <Content Include="Scripts\umd\popper.js" />
     <Content Include="Scripts\umd\popper.min.js" />
+    <Content Include="Scripts\Usuarios\validarUsuarios.js" />
     <Content Include="Scripts\validacionesGenericas.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -420,6 +421,7 @@
     <Content Include="Views\Presentaciones\PresentacionesNuevo.cshtml" />
     <Content Include="Views\Presentaciones\PresentacionesModifica.cshtml" />
     <Content Include="Views\Usuarios\UsuariosLista.cshtml" />
+    <Content Include="Views\Usuarios\UsuariosNuevo.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
