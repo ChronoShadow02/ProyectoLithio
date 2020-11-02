@@ -133,6 +133,7 @@
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\PaisesController.cs" />
     <Compile Include="Controllers\PresentacionesController.cs" />
+    <Compile Include="Controllers\UsuariosController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -176,6 +177,9 @@
       <DependentUpon>ModelBD.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\pa_RetornaUsuarioPwd_Select_Result.cs">
+      <DependentUpon>ModelBD.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\pa_Usuarios_Select_Result.cs">
       <DependentUpon>ModelBD.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Presentaciones.cs">
@@ -233,16 +237,6 @@
     <Content Include="img\slider-aceite1.jpg" />
     <Content Include="img\slider-aceite2.jpg" />
     <Content Include="img\slider-aceite3.jpeg" />
-    <Content Include="Models\ModelBD.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>ModelBD.edmx</DependentUpon>
-      <LastGenOutput>ModelBD.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Models\ModelBD.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>ModelBD.edmx</DependentUpon>
-      <LastGenOutput>ModelBD.cs</LastGenOutput>
-    </Content>
     <Content Include="fonts\fontawesome\fonts\dropways.eot" />
     <Content Include="fonts\fontawesome\fonts\dropways.ttf" />
     <Content Include="fonts\fontawesome\fonts\dropways.woff" />
@@ -260,12 +254,15 @@
     <Content Include="fonts\fontawesome\fonts\themify.eot" />
     <Content Include="fonts\fontawesome\fonts\themify.ttf" />
     <Content Include="fonts\fontawesome\fonts\themify.woff" />
-    <EntityDeploy Include="Models\ModelBD.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>ModelBD.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\ModelBD.edmx.diagram">
+    <Content Include="Models\ModelBD.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>ModelBD.edmx</DependentUpon>
+      <LastGenOutput>ModelBD.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\ModelBD.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ModelBD.edmx</DependentUpon>
+      <LastGenOutput>ModelBD.cs</LastGenOutput>
     </Content>
     <Content Include="Scripts\AjaxGenerico.js" />
     <Content Include="Scripts\bootstrap.bundle.js" />
@@ -297,6 +294,13 @@
     <Content Include="Scripts\jquery-3.5.1.slim.min.js" />
     <Content Include="Scripts\jquery-3.5.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.5.1.min.map" />
+    <EntityDeploy Include="Models\ModelBD.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>ModelBD.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\ModelBD.edmx.diagram">
+      <DependentUpon>ModelBD.edmx</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
@@ -306,6 +310,7 @@
     <Content Include="Scripts\Paises\AgregarPais.js" />
     <Content Include="Scripts\Paises\validaPais.js" />
     <Content Include="Scripts\Panel\expandir-menu.js" />
+    <Content Include="Scripts\Panel\relojRigital.js" />
     <Content Include="Scripts\popper-utils.js" />
     <Content Include="Scripts\popper-utils.min.js" />
     <Content Include="Scripts\popper.js" />
@@ -414,6 +419,7 @@
     <Content Include="Views\Presentaciones\PresentacionesLista.cshtml" />
     <Content Include="Views\Presentaciones\PresentacionesNuevo.cshtml" />
     <Content Include="Views\Presentaciones\PresentacionesModifica.cshtml" />
+    <Content Include="Views\Usuarios\UsuariosLista.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

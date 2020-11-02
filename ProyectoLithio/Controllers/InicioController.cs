@@ -10,10 +10,10 @@ namespace ProyectoLithio.Controllers
     public class InicioController : Controller
     {
         // GET: Inicio
-        public ActionResult Index()
-        {
-            return View();
-        }
+        //public ActionResult Index()
+        //{
+        //    return View();
+        //}
         public ActionResult Bienvenida()
         {
             bool sesionIniciada = false;

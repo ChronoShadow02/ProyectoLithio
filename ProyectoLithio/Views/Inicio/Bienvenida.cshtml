@@ -4,34 +4,43 @@
     Layout = "~/Views/Shared/_LayoutCosteo.cshtml";
     
 }
-
-<div class="alert alert-success text-center" role="alert">
-    <h5>Bienvendo @Html.DisplayFor(model => model.Nombre_Usuario)</h5> 
-</div>
-
-<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-    <ol class="carousel-indicators">
-        <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-        <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-        <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-    </ol>
-    <div class="carousel-inner">
-        <div class="carousel-item active">
-            <img class="w-100" src="~/img/slider-aceite1.jpg" alt="Primera Imagen">
-        </div>
-        <div class="carousel-item">
-            <img class="w-100" src="~/img/slider-aceite2.jpg" alt="Secunda Imagen">
-        </div>
-        <div class="carousel-item">
-            <img class="w-100" src="~/img/slider-aceite3.jpeg" alt="Tercera Imagen">
+    <div class="alert alert-success text-center" role="alert">
+        <h4>Bienvenido @Html.DisplayFor(model => model.Primer_Nombre)</h4>
+    </div>
+    <div>
+        <div id="clockdate">
+            <div class="clockdate-wrapper">
+                <div id="clock"></div>
+                <div id="date"></div>
+            </div>
         </div>
     </div>
-    <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="sr-only">Previous</span>
-    </a>
-    <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="sr-only">Next</span>
-    </a>
-</div>
+    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+        <ol class="carousel-indicators">
+            <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+        </ol>
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img class="w-100" src="~/img/slider-aceite1.jpg" alt="Primera Imagen">
+            </div>
+            <div class="carousel-item">
+                <img class="w-100" src="~/img/slider-aceite2.jpg" alt="Secunda Imagen">
+            </div>
+            <div class="carousel-item">
+                <img class="w-100" src="~/img/slider-aceite3.jpeg" alt="Tercera Imagen">
+            </div>
+        </div>
+        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
+    </div>
+@section scripts {
+    <script src="~/Scripts/Panel/relojRigital.js"></script>
+}

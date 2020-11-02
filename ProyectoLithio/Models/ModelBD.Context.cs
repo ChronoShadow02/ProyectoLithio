@@ -28,15 +28,121 @@ namespace ProyectoLithio.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public DbSet<sysdiagrams> sysdiagrams { get; set; }
         public DbSet<Articulos> Articulos { get; set; }
         public DbSet<Costos> Costos { get; set; }
+        public DbSet<Estado_Usuario> Estado_Usuario { get; set; }
         public DbSet<Paises> Paises { get; set; }
         public DbSet<Presentaciones> Presentaciones { get; set; }
         public DbSet<Proveedores> Proveedores { get; set; }
-        public DbSet<Estado_Usuario> Estado_Usuario { get; set; }
+        public DbSet<sysdiagrams> sysdiagrams { get; set; }
         public DbSet<Tipo_Usuario> Tipo_Usuario { get; set; }
         public DbSet<Usuarios> Usuarios { get; set; }
+    
+        public virtual int pa_Paises_Insert(string nombre_Pais, string sigla_Pais, string moneda_Pais)
+        {
+            var nombre_PaisParameter = nombre_Pais != null ?
+                new ObjectParameter("Nombre_Pais", nombre_Pais) :
+                new ObjectParameter("Nombre_Pais", typeof(string));
+    
+            var sigla_PaisParameter = sigla_Pais != null ?
+                new ObjectParameter("Sigla_Pais", sigla_Pais) :
+                new ObjectParameter("Sigla_Pais", typeof(string));
+    
+            var moneda_PaisParameter = moneda_Pais != null ?
+                new ObjectParameter("Moneda_Pais", moneda_Pais) :
+                new ObjectParameter("Moneda_Pais", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("pa_Paises_Insert", nombre_PaisParameter, sigla_PaisParameter, moneda_PaisParameter);
+        }
+    
+        public virtual ObjectResult<pa_Paises_Select_Result> pa_Paises_Select()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<pa_Paises_Select_Result>("pa_Paises_Select");
+        }
+    
+        public virtual int pa_Paises_Update(Nullable<int> id_Pais, string nombre_Pais, string sigla_Pais, string moneda_Pais)
+        {
+            var id_PaisParameter = id_Pais.HasValue ?
+                new ObjectParameter("Id_Pais", id_Pais) :
+                new ObjectParameter("Id_Pais", typeof(int));
+    
+            var nombre_PaisParameter = nombre_Pais != null ?
+                new ObjectParameter("Nombre_Pais", nombre_Pais) :
+                new ObjectParameter("Nombre_Pais", typeof(string));
+    
+            var sigla_PaisParameter = sigla_Pais != null ?
+                new ObjectParameter("Sigla_Pais", sigla_Pais) :
+                new ObjectParameter("Sigla_Pais", typeof(string));
+    
+            var moneda_PaisParameter = moneda_Pais != null ?
+                new ObjectParameter("Moneda_Pais", moneda_Pais) :
+                new ObjectParameter("Moneda_Pais", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("pa_Paises_Update", id_PaisParameter, nombre_PaisParameter, sigla_PaisParameter, moneda_PaisParameter);
+        }
+    
+        public virtual ObjectResult<pa_PaisesRetornaID_Result> pa_PaisesRetornaID(Nullable<int> id_Pais)
+        {
+            var id_PaisParameter = id_Pais.HasValue ?
+                new ObjectParameter("Id_Pais", id_Pais) :
+                new ObjectParameter("Id_Pais", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<pa_PaisesRetornaID_Result>("pa_PaisesRetornaID", id_PaisParameter);
+        }
+    
+        public virtual int pa_Presentaciones_Insert(string nombre_Presentacion)
+        {
+            var nombre_PresentacionParameter = nombre_Presentacion != null ?
+                new ObjectParameter("Nombre_Presentacion", nombre_Presentacion) :
+                new ObjectParameter("Nombre_Presentacion", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("pa_Presentaciones_Insert", nombre_PresentacionParameter);
+        }
+    
+        public virtual ObjectResult<pa_Presentaciones_Select_Result> pa_Presentaciones_Select()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<pa_Presentaciones_Select_Result>("pa_Presentaciones_Select");
+        }
+    
+        public virtual int pa_Presentaciones_Update(Nullable<int> id_Presentacion, string nombre_Presentacion)
+        {
+            var id_PresentacionParameter = id_Presentacion.HasValue ?
+                new ObjectParameter("Id_Presentacion", id_Presentacion) :
+                new ObjectParameter("Id_Presentacion", typeof(int));
+    
+            var nombre_PresentacionParameter = nombre_Presentacion != null ?
+                new ObjectParameter("Nombre_Presentacion", nombre_Presentacion) :
+                new ObjectParameter("Nombre_Presentacion", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("pa_Presentaciones_Update", id_PresentacionParameter, nombre_PresentacionParameter);
+        }
+    
+        public virtual ObjectResult<pa_PresentacionesRetornaID_Result> pa_PresentacionesRetornaID(Nullable<int> id_Presentacion)
+        {
+            var id_PresentacionParameter = id_Presentacion.HasValue ?
+                new ObjectParameter("Id_Presentacion", id_Presentacion) :
+                new ObjectParameter("Id_Presentacion", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<pa_PresentacionesRetornaID_Result>("pa_PresentacionesRetornaID", id_PresentacionParameter);
+        }
+    
+        public virtual ObjectResult<pa_RetornaUsuarioPwd_Select_Result> pa_RetornaUsuarioPwd_Select(string nombre_Usuario, string contrasena)
+        {
+            var nombre_UsuarioParameter = nombre_Usuario != null ?
+                new ObjectParameter("Nombre_Usuario", nombre_Usuario) :
+                new ObjectParameter("Nombre_Usuario", typeof(string));
+    
+            var contrasenaParameter = contrasena != null ?
+                new ObjectParameter("Contrasena", contrasena) :
+                new ObjectParameter("Contrasena", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<pa_RetornaUsuarioPwd_Select_Result>("pa_RetornaUsuarioPwd_Select", nombre_UsuarioParameter, contrasenaParameter);
+        }
+    
+        public virtual ObjectResult<pa_Usuarios_Select_Result> pa_Usuarios_Select()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<pa_Usuarios_Select_Result>("pa_Usuarios_Select");
+        }
     
         public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
         {
@@ -139,107 +245,6 @@ namespace ProyectoLithio.Models
         public virtual int sp_upgraddiagrams()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_upgraddiagrams");
-        }
-    
-        public virtual ObjectResult<pa_Paises_Select_Result> pa_Paises_Select()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<pa_Paises_Select_Result>("pa_Paises_Select");
-        }
-    
-        public virtual int pa_Paises_Insert(string nombre_Pais, string sigla_Pais, string moneda_Pais)
-        {
-            var nombre_PaisParameter = nombre_Pais != null ?
-                new ObjectParameter("Nombre_Pais", nombre_Pais) :
-                new ObjectParameter("Nombre_Pais", typeof(string));
-    
-            var sigla_PaisParameter = sigla_Pais != null ?
-                new ObjectParameter("Sigla_Pais", sigla_Pais) :
-                new ObjectParameter("Sigla_Pais", typeof(string));
-    
-            var moneda_PaisParameter = moneda_Pais != null ?
-                new ObjectParameter("Moneda_Pais", moneda_Pais) :
-                new ObjectParameter("Moneda_Pais", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("pa_Paises_Insert", nombre_PaisParameter, sigla_PaisParameter, moneda_PaisParameter);
-        }
-    
-        public virtual int pa_Paises_Update(Nullable<int> id_Pais, string nombre_Pais, string sigla_Pais, string moneda_Pais)
-        {
-            var id_PaisParameter = id_Pais.HasValue ?
-                new ObjectParameter("Id_Pais", id_Pais) :
-                new ObjectParameter("Id_Pais", typeof(int));
-    
-            var nombre_PaisParameter = nombre_Pais != null ?
-                new ObjectParameter("Nombre_Pais", nombre_Pais) :
-                new ObjectParameter("Nombre_Pais", typeof(string));
-    
-            var sigla_PaisParameter = sigla_Pais != null ?
-                new ObjectParameter("Sigla_Pais", sigla_Pais) :
-                new ObjectParameter("Sigla_Pais", typeof(string));
-    
-            var moneda_PaisParameter = moneda_Pais != null ?
-                new ObjectParameter("Moneda_Pais", moneda_Pais) :
-                new ObjectParameter("Moneda_Pais", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("pa_Paises_Update", id_PaisParameter, nombre_PaisParameter, sigla_PaisParameter, moneda_PaisParameter);
-        }
-    
-        public virtual ObjectResult<pa_PaisesRetornaID_Result> pa_PaisesRetornaID(Nullable<int> id_Pais)
-        {
-            var id_PaisParameter = id_Pais.HasValue ?
-                new ObjectParameter("Id_Pais", id_Pais) :
-                new ObjectParameter("Id_Pais", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<pa_PaisesRetornaID_Result>("pa_PaisesRetornaID", id_PaisParameter);
-        }
-    
-        public virtual ObjectResult<pa_Presentaciones_Select_Result> pa_Presentaciones_Select()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<pa_Presentaciones_Select_Result>("pa_Presentaciones_Select");
-        }
-    
-        public virtual int pa_Presentaciones_Insert(string nombre_Presentacion)
-        {
-            var nombre_PresentacionParameter = nombre_Presentacion != null ?
-                new ObjectParameter("Nombre_Presentacion", nombre_Presentacion) :
-                new ObjectParameter("Nombre_Presentacion", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("pa_Presentaciones_Insert", nombre_PresentacionParameter);
-        }
-    
-        public virtual int pa_Presentaciones_Update(Nullable<int> id_Presentacion, string nombre_Presentacion)
-        {
-            var id_PresentacionParameter = id_Presentacion.HasValue ?
-                new ObjectParameter("Id_Presentacion", id_Presentacion) :
-                new ObjectParameter("Id_Presentacion", typeof(int));
-    
-            var nombre_PresentacionParameter = nombre_Presentacion != null ?
-                new ObjectParameter("Nombre_Presentacion", nombre_Presentacion) :
-                new ObjectParameter("Nombre_Presentacion", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("pa_Presentaciones_Update", id_PresentacionParameter, nombre_PresentacionParameter);
-        }
-    
-        public virtual ObjectResult<pa_PresentacionesRetornaID_Result> pa_PresentacionesRetornaID(Nullable<int> id_Presentacion)
-        {
-            var id_PresentacionParameter = id_Presentacion.HasValue ?
-                new ObjectParameter("Id_Presentacion", id_Presentacion) :
-                new ObjectParameter("Id_Presentacion", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<pa_PresentacionesRetornaID_Result>("pa_PresentacionesRetornaID", id_PresentacionParameter);
-        }
-    
-        public virtual ObjectResult<pa_RetornaUsuarioPwd_Select_Result> pa_RetornaUsuarioPwd_Select(string nombre_Usuario, string contrasena)
-        {
-            var nombre_UsuarioParameter = nombre_Usuario != null ?
-                new ObjectParameter("Nombre_Usuario", nombre_Usuario) :
-                new ObjectParameter("Nombre_Usuario", typeof(string));
-    
-            var contrasenaParameter = contrasena != null ?
-                new ObjectParameter("Contrasena", contrasena) :
-                new ObjectParameter("Contrasena", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<pa_RetornaUsuarioPwd_Select_Result>("pa_RetornaUsuarioPwd_Select", nombre_UsuarioParameter, contrasenaParameter);
         }
     }
 }

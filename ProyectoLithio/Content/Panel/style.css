@@ -139,3 +139,38 @@
 .app-content {
     padding: 80px 20px 0 250px
 }
+/*Reloj digital*/
+.clockdate-wrapper {
+    background-color: #333;
+    padding: 25px;
+    max-width: 100%;
+    width: 100%;
+    text-align: center;
+    border-radius: 5px;
+    margin: 10px auto;
+    
+}
+
+#clock {
+    background-color: #333;
+    font-family: sans-serif;
+    font-size: 60px;
+    text-shadow: 0px 0px 1px #fff;
+    color: #fff;
+}
+
+    #clock span {
+        color: #888;
+        text-shadow: 0px 0px 1px #333;
+        font-size: 30px;
+        position: relative;
+        top: -27px;
+        left: -10px;
+    }
+
+#date {
+    letter-spacing: 10px;
+    font-size: 14px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    color: #fff;
+}

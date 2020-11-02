@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="LithioBDModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="LithioBDModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Articulos">
           <Key>
             <PropertyRef Name="Id_Articulo" />
@@ -214,6 +214,7 @@
           <Parameter Name="Nombre_Usuario" Type="varchar" Mode="In" />
           <Parameter Name="Contrasena" Type="varchar" Mode="In" />
         </Function>
+        <Function Name="pa_Usuarios_Select" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
           <Parameter Name="owner_id" Type="int" Mode="In" />
@@ -283,10 +284,86 @@
             <End Role="Usuarios" EntitySet="Usuarios" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="LithioBDModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Articulos">
+          <Key>
+            <PropertyRef Name="Id_Articulo" />
+          </Key>
+          <Property Name="Id_Articulo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Codigo_Articulo" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Nombre_Articulo" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Descripcion_Articulo" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Costo_Anterior_Articulo" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Id_Proveedor" Type="Int32" Nullable="false" />
+          <Property Name="Id_Presentacion" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Presentaciones" Relationship="Self.FK_Articulos_Presentaciones" FromRole="Articulos" ToRole="Presentaciones" />
+          <NavigationProperty Name="Proveedores" Relationship="Self.FK_Articulos_Proveedores" FromRole="Articulos" ToRole="Proveedores" />
+          <NavigationProperty Name="Costos" Relationship="Self.FK_Costos_Articulos" FromRole="Articulos" ToRole="Costos" />
+        </EntityType>
+        <EntityType Name="Costos">
+          <Key>
+            <PropertyRef Name="Id_Costo" />
+          </Key>
+          <Property Name="Id_Costo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DUA" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Numero_Costos" Type="Int32" Nullable="false" />
+          <Property Name="Id_Articulo" Type="Int32" Nullable="false" />
+          <Property Name="Codigo_Articulo" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Nombre_Articulo" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Descripcion_Articulo" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Id_Presentacion" Type="Int32" Nullable="false" />
+          <Property Name="Unidades_Articulos" Type="Int32" Nullable="false" />
+          <Property Name="Tipo_De_Cambio" Type="Double" Nullable="false" />
+          <Property Name="Costo_Por_Unidad_Dolares" Type="Double" Nullable="false" />
+          <Property Name="Subtotal_Costo_Dolares" Type="Double" Nullable="false" />
+          <Property Name="Porcentaje_Costo" Type="Double" Nullable="false" />
+          <Property Name="Total_Costo_Dolares" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Fecha_Creacion" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="Articulos" Relationship="Self.FK_Costos_Articulos" FromRole="Costos" ToRole="Articulos" />
+          <NavigationProperty Name="Presentaciones" Relationship="Self.FK_Costos_Presentaciones" FromRole="Costos" ToRole="Presentaciones" />
+        </EntityType>
+        <EntityType Name="Estado_Usuario">
+          <Key>
+            <PropertyRef Name="Id_Estado_Usuario" />
+          </Key>
+          <Property Name="Id_Estado_Usuario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Desc_Estado_Usuario" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Usuarios" Relationship="Self.FK_Usuarios_Estado_Usuario" FromRole="Estado_Usuario" ToRole="Usuarios" />
+        </EntityType>
+        <EntityType Name="Paises">
+          <Key>
+            <PropertyRef Name="Id_Pais" />
+          </Key>
+          <Property Name="Id_Pais" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre_Pais" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Sigla_Pais" Type="String" MaxLength="3" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Moneda_Pais" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Proveedores" Relationship="Self.FK_Proveedores_Paises" FromRole="Paises" ToRole="Proveedores" />
+        </EntityType>
+        <EntityType Name="Presentaciones">
+          <Key>
+            <PropertyRef Name="Id_Presentacion" />
+          </Key>
+          <Property Name="Id_Presentacion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre_Presentacion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Articulos" Relationship="Self.FK_Articulos_Presentaciones" FromRole="Presentaciones" ToRole="Articulos" />
+          <NavigationProperty Name="Costos" Relationship="Self.FK_Costos_Presentaciones" FromRole="Presentaciones" ToRole="Costos" />
+        </EntityType>
+        <EntityType Name="Proveedores">
+          <Key>
+            <PropertyRef Name="Id_Proveedor" />
+          </Key>
+          <Property Name="Id_Proveedor" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Codigo_Proveedor" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Nombre_Proveedor" Type="Binary" MaxLength="200" FixedLength="false" Nullable="false" />
+          <Property Name="Id_Pais" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Articulos" Relationship="Self.FK_Articulos_Proveedores" FromRole="Proveedores" ToRole="Articulos" />
+          <NavigationProperty Name="Paises" Relationship="Self.FK_Proveedores_Paises" FromRole="Proveedores" ToRole="Paises" />
+        </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
             <PropertyRef Name="diagram_id" />
@@ -297,8 +374,182 @@
           <Property Name="version" Type="Int32" />
           <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
+        <EntityType Name="Tipo_Usuario">
+          <Key>
+            <PropertyRef Name="Id_Tipo_Usuario" />
+          </Key>
+          <Property Name="Id_Tipo_Usuario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Desc_Tipo_Usuario" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Usuarios" Relationship="Self.FK_Usuarios_Tipo_Usuario" FromRole="Tipo_Usuario" ToRole="Usuarios" />
+        </EntityType>
+        <EntityType Name="Usuarios">
+          <Key>
+            <PropertyRef Name="Id_Usuario" />
+          </Key>
+          <Property Name="Id_Usuario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Primer_Nombre" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Primer_Apellido" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Segundo_Apellido" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Nombre_Usuario" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Contrasena_Usuario" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Id_Tipo_Usuario" Type="Int32" Nullable="false" />
+          <Property Name="Id_Estado_Usuario" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Estado_Usuario" Relationship="Self.FK_Usuarios_Estado_Usuario" FromRole="Usuarios" ToRole="Estado_Usuario" />
+          <NavigationProperty Name="Tipo_Usuario" Relationship="Self.FK_Usuarios_Tipo_Usuario" FromRole="Usuarios" ToRole="Tipo_Usuario" />
+        </EntityType>
+        <Association Name="FK_Articulos_Presentaciones">
+          <End Role="Presentaciones" Type="Self.Presentaciones" Multiplicity="1" />
+          <End Role="Articulos" Type="Self.Articulos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Presentaciones">
+              <PropertyRef Name="Id_Presentacion" />
+            </Principal>
+            <Dependent Role="Articulos">
+              <PropertyRef Name="Id_Presentacion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Articulos_Proveedores">
+          <End Role="Proveedores" Type="Self.Proveedores" Multiplicity="1" />
+          <End Role="Articulos" Type="Self.Articulos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Proveedores">
+              <PropertyRef Name="Id_Proveedor" />
+            </Principal>
+            <Dependent Role="Articulos">
+              <PropertyRef Name="Id_Proveedor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Costos_Articulos">
+          <End Role="Articulos" Type="Self.Articulos" Multiplicity="1" />
+          <End Role="Costos" Type="Self.Costos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Articulos">
+              <PropertyRef Name="Id_Articulo" />
+            </Principal>
+            <Dependent Role="Costos">
+              <PropertyRef Name="Id_Articulo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Costos_Presentaciones">
+          <End Role="Presentaciones" Type="Self.Presentaciones" Multiplicity="1" />
+          <End Role="Costos" Type="Self.Costos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Presentaciones">
+              <PropertyRef Name="Id_Presentacion" />
+            </Principal>
+            <Dependent Role="Costos">
+              <PropertyRef Name="Id_Presentacion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Usuarios_Estado_Usuario">
+          <End Role="Estado_Usuario" Type="Self.Estado_Usuario" Multiplicity="1" />
+          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Estado_Usuario">
+              <PropertyRef Name="Id_Estado_Usuario" />
+            </Principal>
+            <Dependent Role="Usuarios">
+              <PropertyRef Name="Id_Estado_Usuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Proveedores_Paises">
+          <End Role="Paises" Type="Self.Paises" Multiplicity="1" />
+          <End Role="Proveedores" Type="Self.Proveedores" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Paises">
+              <PropertyRef Name="Id_Pais" />
+            </Principal>
+            <Dependent Role="Proveedores">
+              <PropertyRef Name="Id_Pais" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Usuarios_Tipo_Usuario">
+          <End Role="Tipo_Usuario" Type="Self.Tipo_Usuario" Multiplicity="1" />
+          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tipo_Usuario">
+              <PropertyRef Name="Id_Tipo_Usuario" />
+            </Principal>
+            <Dependent Role="Usuarios">
+              <PropertyRef Name="Id_Tipo_Usuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="LithioBDEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Articulos" EntityType="Self.Articulos" />
+          <EntitySet Name="Costos" EntityType="Self.Costos" />
+          <EntitySet Name="Estado_Usuario" EntityType="Self.Estado_Usuario" />
+          <EntitySet Name="Paises" EntityType="Self.Paises" />
+          <EntitySet Name="Presentaciones" EntityType="Self.Presentaciones" />
+          <EntitySet Name="Proveedores" EntityType="Self.Proveedores" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="Tipo_Usuario" EntityType="Self.Tipo_Usuario" />
+          <EntitySet Name="Usuarios" EntityType="Self.Usuarios" />
+          <AssociationSet Name="FK_Articulos_Presentaciones" Association="Self.FK_Articulos_Presentaciones">
+            <End Role="Presentaciones" EntitySet="Presentaciones" />
+            <End Role="Articulos" EntitySet="Articulos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Articulos_Proveedores" Association="Self.FK_Articulos_Proveedores">
+            <End Role="Proveedores" EntitySet="Proveedores" />
+            <End Role="Articulos" EntitySet="Articulos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Costos_Articulos" Association="Self.FK_Costos_Articulos">
+            <End Role="Articulos" EntitySet="Articulos" />
+            <End Role="Costos" EntitySet="Costos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Costos_Presentaciones" Association="Self.FK_Costos_Presentaciones">
+            <End Role="Presentaciones" EntitySet="Presentaciones" />
+            <End Role="Costos" EntitySet="Costos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Usuarios_Estado_Usuario" Association="Self.FK_Usuarios_Estado_Usuario">
+            <End Role="Estado_Usuario" EntitySet="Estado_Usuario" />
+            <End Role="Usuarios" EntitySet="Usuarios" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Proveedores_Paises" Association="Self.FK_Proveedores_Paises">
+            <End Role="Paises" EntitySet="Paises" />
+            <End Role="Proveedores" EntitySet="Proveedores" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Usuarios_Tipo_Usuario" Association="Self.FK_Usuarios_Tipo_Usuario">
+            <End Role="Tipo_Usuario" EntitySet="Tipo_Usuario" />
+            <End Role="Usuarios" EntitySet="Usuarios" />
+          </AssociationSet>
+          <FunctionImport Name="pa_Paises_Insert">
+            <Parameter Name="Nombre_Pais" Mode="In" Type="String" />
+            <Parameter Name="Sigla_Pais" Mode="In" Type="String" />
+            <Parameter Name="Moneda_Pais" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="pa_Paises_Select" ReturnType="Collection(LithioBDModel.pa_Paises_Select_Result)" />
+          <FunctionImport Name="pa_Paises_Update">
+            <Parameter Name="Id_Pais" Mode="In" Type="Int32" />
+            <Parameter Name="Nombre_Pais" Mode="In" Type="String" />
+            <Parameter Name="Sigla_Pais" Mode="In" Type="String" />
+            <Parameter Name="Moneda_Pais" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="pa_PaisesRetornaID" ReturnType="Collection(LithioBDModel.pa_PaisesRetornaID_Result)">
+            <Parameter Name="Id_Pais" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="pa_Presentaciones_Insert">
+            <Parameter Name="Nombre_Presentacion" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="pa_Presentaciones_Select" ReturnType="Collection(LithioBDModel.pa_Presentaciones_Select_Result)" />
+          <FunctionImport Name="pa_Presentaciones_Update">
+            <Parameter Name="Id_Presentacion" Mode="In" Type="Int32" />
+            <Parameter Name="Nombre_Presentacion" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="pa_PresentacionesRetornaID" ReturnType="Collection(LithioBDModel.pa_PresentacionesRetornaID_Result)">
+            <Parameter Name="Id_Presentacion" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="pa_RetornaUsuarioPwd_Select" ReturnType="Collection(LithioBDModel.pa_RetornaUsuarioPwd_Select_Result)">
+            <Parameter Name="Nombre_Usuario" Mode="In" Type="String" />
+            <Parameter Name="Contrasena" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="pa_Usuarios_Select" ReturnType="Collection(LithioBDModel.pa_Usuarios_Select_Result)" />
           <FunctionImport Name="sp_alterdiagram">
             <Parameter Name="diagramname" Mode="In" Type="String" />
             <Parameter Name="owner_id" Mode="In" Type="Int32" />
@@ -329,217 +580,13 @@
             <Parameter Name="new_diagramname" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="sp_upgraddiagrams" />
-          <FunctionImport Name="pa_Paises_Select" ReturnType="Collection(LithioBDModel.pa_Paises_Select_Result)" />
-          <FunctionImport Name="pa_Paises_Insert">
-            <Parameter Name="Nombre_Pais" Mode="In" Type="String" />
-            <Parameter Name="Sigla_Pais" Mode="In" Type="String" />
-            <Parameter Name="Moneda_Pais" Mode="In" Type="String" />
-          </FunctionImport>
-          <EntitySet Name="Articulos" EntityType="LithioBDModel.Articulos" />
-          <EntitySet Name="Costos" EntityType="LithioBDModel.Costos" />
-          <EntitySet Name="Paises" EntityType="LithioBDModel.Paises" />
-          <EntitySet Name="Presentaciones" EntityType="LithioBDModel.Presentaciones" />
-          <EntitySet Name="Proveedores" EntityType="LithioBDModel.Proveedores" />
-          <AssociationSet Name="FK_Articulos_Presentaciones" Association="LithioBDModel.FK_Articulos_Presentaciones">
-            <End Role="Presentaciones" EntitySet="Presentaciones" />
-            <End Role="Articulos" EntitySet="Articulos" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Articulos_Proveedores" Association="LithioBDModel.FK_Articulos_Proveedores">
-            <End Role="Proveedores" EntitySet="Proveedores" />
-            <End Role="Articulos" EntitySet="Articulos" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Costos_Articulos" Association="LithioBDModel.FK_Costos_Articulos">
-            <End Role="Articulos" EntitySet="Articulos" />
-            <End Role="Costos" EntitySet="Costos" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Costos_Presentaciones" Association="LithioBDModel.FK_Costos_Presentaciones">
-            <End Role="Presentaciones" EntitySet="Presentaciones" />
-            <End Role="Costos" EntitySet="Costos" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Proveedores_Paises" Association="LithioBDModel.FK_Proveedores_Paises">
-            <End Role="Paises" EntitySet="Paises" />
-            <End Role="Proveedores" EntitySet="Proveedores" />
-          </AssociationSet>
-          <FunctionImport Name="pa_Paises_Update">
-            <Parameter Name="Id_Pais" Mode="In" Type="Int32" />
-            <Parameter Name="Nombre_Pais" Mode="In" Type="String" />
-            <Parameter Name="Sigla_Pais" Mode="In" Type="String" />
-            <Parameter Name="Moneda_Pais" Mode="In" Type="String" />
-          </FunctionImport>
-          <FunctionImport Name="pa_PaisesRetornaID" ReturnType="Collection(LithioBDModel.pa_PaisesRetornaID_Result)">
-          <Parameter Name="Id_Pais" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="pa_Presentaciones_Select" ReturnType="Collection(LithioBDModel.pa_Presentaciones_Select_Result)" />
-          <FunctionImport Name="pa_Presentaciones_Insert">
-          <Parameter Name="Nombre_Presentacion" Mode="In" Type="String" />
-          </FunctionImport>
-          <FunctionImport Name="pa_Presentaciones_Update">
-            <Parameter Name="Id_Presentacion" Mode="In" Type="Int32" />
-            <Parameter Name="Nombre_Presentacion" Mode="In" Type="String" />
-          </FunctionImport>
-          <FunctionImport Name="pa_PresentacionesRetornaID" ReturnType="Collection(LithioBDModel.pa_PresentacionesRetornaID_Result)">
-          <Parameter Name="Id_Presentacion" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <EntitySet Name="Estado_Usuario" EntityType="LithioBDModel.Estado_Usuario" />
-          <EntitySet Name="Tipo_Usuario" EntityType="LithioBDModel.Tipo_Usuario" />
-          <EntitySet Name="Usuarios" EntityType="LithioBDModel.Usuarios" />
-          <AssociationSet Name="FK_Usuarios_Estado_Usuario" Association="LithioBDModel.FK_Usuarios_Estado_Usuario">
-            <End Role="Estado_Usuario" EntitySet="Estado_Usuario" />
-            <End Role="Usuarios" EntitySet="Usuarios" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Usuarios_Tipo_Usuario" Association="LithioBDModel.FK_Usuarios_Tipo_Usuario">
-            <End Role="Tipo_Usuario" EntitySet="Tipo_Usuario" />
-            <End Role="Usuarios" EntitySet="Usuarios" />
-          </AssociationSet>
-          <FunctionImport Name="pa_RetornaUsuarioPwd_Select" ReturnType="Collection(LithioBDModel.pa_RetornaUsuarioPwd_Select_Result)">
-            <Parameter Name="Nombre_Usuario" Mode="In" Type="String" />
-            <Parameter Name="Contrasena" Mode="In" Type="String" />
-          </FunctionImport>
         </EntityContainer>
-        <ComplexType Name="sp_helpdiagramdefinition_Result">
-          <Property Type="Int32" Name="version" Nullable="true" />
-          <Property Type="Binary" Name="definition" Nullable="true" />
-        </ComplexType>
-        <ComplexType Name="sp_helpdiagrams_Result">
-          <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
-          <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
-          <Property Type="Int32" Name="ID" Nullable="false" />
-          <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
-          <Property Type="Int32" Name="OwnerID" Nullable="false" />
-        </ComplexType>
         <ComplexType Name="pa_Paises_Select_Result">
           <Property Type="Int32" Name="Id_Pais" Nullable="false" />
           <Property Type="String" Name="Nombre_Pais" Nullable="false" MaxLength="200" />
           <Property Type="String" Name="Sigla_Pais" Nullable="false" MaxLength="3" />
           <Property Type="String" Name="Moneda_Pais" Nullable="false" MaxLength="200" />
         </ComplexType>
-        <EntityType Name="Articulos">
-          <Key>
-            <PropertyRef Name="Id_Articulo" />
-          </Key>
-          <Property Name="Id_Articulo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Codigo_Articulo" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="Nombre_Articulo" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="Descripcion_Articulo" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="Costo_Anterior_Articulo" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="Id_Proveedor" Type="Int32" Nullable="false" />
-          <Property Name="Id_Presentacion" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Presentaciones" Relationship="LithioBDModel.FK_Articulos_Presentaciones" FromRole="Articulos" ToRole="Presentaciones" />
-          <NavigationProperty Name="Proveedores" Relationship="LithioBDModel.FK_Articulos_Proveedores" FromRole="Articulos" ToRole="Proveedores" />
-          <NavigationProperty Name="Costos" Relationship="LithioBDModel.FK_Costos_Articulos" FromRole="Articulos" ToRole="Costos" />
-        </EntityType>
-        <EntityType Name="Costos">
-          <Key>
-            <PropertyRef Name="Id_Costo" />
-          </Key>
-          <Property Name="Id_Costo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="DUA" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="Numero_Costos" Type="Int32" Nullable="false" />
-          <Property Name="Id_Articulo" Type="Int32" Nullable="false" />
-          <Property Name="Codigo_Articulo" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="Nombre_Articulo" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="Descripcion_Articulo" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="Id_Presentacion" Type="Int32" Nullable="false" />
-          <Property Name="Unidades_Articulos" Type="Int32" Nullable="false" />
-          <Property Name="Tipo_De_Cambio" Type="Double" Nullable="false" />
-          <Property Name="Costo_Por_Unidad_Dolares" Type="Double" Nullable="false" />
-          <Property Name="Subtotal_Costo_Dolares" Type="Double" Nullable="false" />
-          <Property Name="Porcentaje_Costo" Type="Double" Nullable="false" />
-          <Property Name="Total_Costo_Dolares" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Name="Fecha_Creacion" Type="DateTime" Nullable="false" Precision="0" />
-          <NavigationProperty Name="Articulos" Relationship="LithioBDModel.FK_Costos_Articulos" FromRole="Costos" ToRole="Articulos" />
-          <NavigationProperty Name="Presentaciones" Relationship="LithioBDModel.FK_Costos_Presentaciones" FromRole="Costos" ToRole="Presentaciones" />
-        </EntityType>
-        <EntityType Name="Paises">
-          <Key>
-            <PropertyRef Name="Id_Pais" />
-          </Key>
-          <Property Name="Id_Pais" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Nombre_Pais" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="Sigla_Pais" Type="String" Nullable="false" MaxLength="3" FixedLength="false" Unicode="false" />
-          <Property Name="Moneda_Pais" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Proveedores" Relationship="LithioBDModel.FK_Proveedores_Paises" FromRole="Paises" ToRole="Proveedores" />
-        </EntityType>
-        <EntityType Name="Presentaciones">
-          <Key>
-            <PropertyRef Name="Id_Presentacion" />
-          </Key>
-          <Property Name="Id_Presentacion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Nombre_Presentacion" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Articulos" Relationship="LithioBDModel.FK_Articulos_Presentaciones" FromRole="Presentaciones" ToRole="Articulos" />
-          <NavigationProperty Name="Costos" Relationship="LithioBDModel.FK_Costos_Presentaciones" FromRole="Presentaciones" ToRole="Costos" />
-        </EntityType>
-        <EntityType Name="Proveedores">
-          <Key>
-            <PropertyRef Name="Id_Proveedor" />
-          </Key>
-          <Property Name="Id_Proveedor" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Codigo_Proveedor" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="Nombre_Proveedor" Type="Binary" Nullable="false" MaxLength="200" FixedLength="false" />
-          <Property Name="Id_Pais" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Articulos" Relationship="LithioBDModel.FK_Articulos_Proveedores" FromRole="Proveedores" ToRole="Articulos" />
-          <NavigationProperty Name="Paises" Relationship="LithioBDModel.FK_Proveedores_Paises" FromRole="Proveedores" ToRole="Paises" />
-        </EntityType>
-        <Association Name="FK_Articulos_Presentaciones">
-          <End Type="LithioBDModel.Presentaciones" Role="Presentaciones" Multiplicity="1" />
-          <End Type="LithioBDModel.Articulos" Role="Articulos" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Presentaciones">
-              <PropertyRef Name="Id_Presentacion" />
-            </Principal>
-            <Dependent Role="Articulos">
-              <PropertyRef Name="Id_Presentacion" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Articulos_Proveedores">
-          <End Type="LithioBDModel.Proveedores" Role="Proveedores" Multiplicity="1" />
-          <End Type="LithioBDModel.Articulos" Role="Articulos" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Proveedores">
-              <PropertyRef Name="Id_Proveedor" />
-            </Principal>
-            <Dependent Role="Articulos">
-              <PropertyRef Name="Id_Proveedor" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Costos_Articulos">
-          <End Type="LithioBDModel.Articulos" Role="Articulos" Multiplicity="1" />
-          <End Type="LithioBDModel.Costos" Role="Costos" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Articulos">
-              <PropertyRef Name="Id_Articulo" />
-            </Principal>
-            <Dependent Role="Costos">
-              <PropertyRef Name="Id_Articulo" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Costos_Presentaciones">
-          <End Type="LithioBDModel.Presentaciones" Role="Presentaciones" Multiplicity="1" />
-          <End Type="LithioBDModel.Costos" Role="Costos" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Presentaciones">
-              <PropertyRef Name="Id_Presentacion" />
-            </Principal>
-            <Dependent Role="Costos">
-              <PropertyRef Name="Id_Presentacion" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Proveedores_Paises">
-          <End Type="LithioBDModel.Paises" Role="Paises" Multiplicity="1" />
-          <End Type="LithioBDModel.Proveedores" Role="Proveedores" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Paises">
-              <PropertyRef Name="Id_Pais" />
-            </Principal>
-            <Dependent Role="Proveedores">
-              <PropertyRef Name="Id_Pais" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <ComplexType Name="pa_PaisesRetornaID_Result">
           <Property Type="Int32" Name="Id_Pais" Nullable="false" />
           <Property Type="String" Name="Nombre_Pais" Nullable="false" MaxLength="200" />
@@ -554,61 +601,6 @@
           <Property Type="Int32" Name="Id_Presentacion" Nullable="false" />
           <Property Type="String" Name="Nombre_Presentacion" Nullable="false" MaxLength="200" />
         </ComplexType>
-        <EntityType Name="Estado_Usuario">
-          <Key>
-            <PropertyRef Name="Id_Estado_Usuario" />
-          </Key>
-          <Property Name="Id_Estado_Usuario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Desc_Estado_Usuario" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Usuarios" Relationship="LithioBDModel.FK_Usuarios_Estado_Usuario" FromRole="Estado_Usuario" ToRole="Usuarios" />
-        </EntityType>
-        <EntityType Name="Tipo_Usuario">
-          <Key>
-            <PropertyRef Name="Id_Tipo_Usuario" />
-          </Key>
-          <Property Name="Id_Tipo_Usuario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Desc_Tipo_Usuario" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Usuarios" Relationship="LithioBDModel.FK_Usuarios_Tipo_Usuario" FromRole="Tipo_Usuario" ToRole="Usuarios" />
-        </EntityType>
-        <EntityType Name="Usuarios">
-          <Key>
-            <PropertyRef Name="Id_Usuario" />
-          </Key>
-          <Property Name="Id_Usuario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Primer_Nombre" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="Primer_Apellido" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="Segundo_Apellido" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="Nombre_Usuario" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="Contrasena_Usuario" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
-          <Property Name="Id_Tipo_Usuario" Type="Int32" Nullable="false" />
-          <Property Name="Id_Estado_Usuario" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Estado_Usuario" Relationship="LithioBDModel.FK_Usuarios_Estado_Usuario" FromRole="Usuarios" ToRole="Estado_Usuario" />
-          <NavigationProperty Name="Tipo_Usuario" Relationship="LithioBDModel.FK_Usuarios_Tipo_Usuario" FromRole="Usuarios" ToRole="Tipo_Usuario" />
-        </EntityType>
-        <Association Name="FK_Usuarios_Estado_Usuario">
-          <End Type="LithioBDModel.Estado_Usuario" Role="Estado_Usuario" Multiplicity="1" />
-          <End Type="LithioBDModel.Usuarios" Role="Usuarios" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Estado_Usuario">
-              <PropertyRef Name="Id_Estado_Usuario" />
-            </Principal>
-            <Dependent Role="Usuarios">
-              <PropertyRef Name="Id_Estado_Usuario" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Usuarios_Tipo_Usuario">
-          <End Type="LithioBDModel.Tipo_Usuario" Role="Tipo_Usuario" Multiplicity="1" />
-          <End Type="LithioBDModel.Usuarios" Role="Usuarios" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Tipo_Usuario">
-              <PropertyRef Name="Id_Tipo_Usuario" />
-            </Principal>
-            <Dependent Role="Usuarios">
-              <PropertyRef Name="Id_Tipo_Usuario" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <ComplexType Name="pa_RetornaUsuarioPwd_Select_Result">
           <Property Type="Int32" Name="Id_Usuario" Nullable="false" />
           <Property Type="String" Name="Primer_Nombre" Nullable="false" MaxLength="200" />
@@ -621,12 +613,101 @@
           <Property Type="Int32" Name="Id_Estado_Usuario" Nullable="false" />
           <Property Type="String" Name="Desc_Estado_Usuario" Nullable="false" MaxLength="200" />
         </ComplexType>
+        <ComplexType Name="pa_Usuarios_Select_Result">
+          <Property Type="Int32" Name="Id_Usuario" Nullable="false" />
+          <Property Type="String" Name="Primer_Nombre" Nullable="false" MaxLength="200" />
+          <Property Type="String" Name="Primer_Apellido" Nullable="false" MaxLength="200" />
+          <Property Type="String" Name="Segundo_Apellido" Nullable="false" MaxLength="200" />
+          <Property Type="String" Name="Nombre_Usuario" Nullable="false" MaxLength="200" />
+          <Property Type="String" Name="Desc_Tipo_Usuario" Nullable="false" MaxLength="200" />
+        </ComplexType>
+        <ComplexType Name="sp_helpdiagramdefinition_Result">
+          <Property Type="Int32" Name="version" Nullable="true" />
+          <Property Type="Binary" Name="definition" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="sp_helpdiagrams_Result">
+          <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+          <Property Type="Int32" Name="OwnerID" Nullable="false" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="LithioBDModelStoreContainer" CdmEntityContainer="LithioBDEntities">
+          <EntitySetMapping Name="Articulos">
+            <EntityTypeMapping TypeName="LithioBDModel.Articulos">
+              <MappingFragment StoreEntitySet="Articulos">
+                <ScalarProperty Name="Id_Articulo" ColumnName="Id_Articulo" />
+                <ScalarProperty Name="Codigo_Articulo" ColumnName="Codigo_Articulo" />
+                <ScalarProperty Name="Nombre_Articulo" ColumnName="Nombre_Articulo" />
+                <ScalarProperty Name="Descripcion_Articulo" ColumnName="Descripcion_Articulo" />
+                <ScalarProperty Name="Costo_Anterior_Articulo" ColumnName="Costo_Anterior_Articulo" />
+                <ScalarProperty Name="Id_Proveedor" ColumnName="Id_Proveedor" />
+                <ScalarProperty Name="Id_Presentacion" ColumnName="Id_Presentacion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Costos">
+            <EntityTypeMapping TypeName="LithioBDModel.Costos">
+              <MappingFragment StoreEntitySet="Costos">
+                <ScalarProperty Name="Id_Costo" ColumnName="Id_Costo" />
+                <ScalarProperty Name="DUA" ColumnName="DUA" />
+                <ScalarProperty Name="Numero_Costos" ColumnName="Numero_Costos" />
+                <ScalarProperty Name="Id_Articulo" ColumnName="Id_Articulo" />
+                <ScalarProperty Name="Codigo_Articulo" ColumnName="Codigo_Articulo" />
+                <ScalarProperty Name="Nombre_Articulo" ColumnName="Nombre_Articulo" />
+                <ScalarProperty Name="Descripcion_Articulo" ColumnName="Descripcion_Articulo" />
+                <ScalarProperty Name="Id_Presentacion" ColumnName="Id_Presentacion" />
+                <ScalarProperty Name="Unidades_Articulos" ColumnName="Unidades_Articulos" />
+                <ScalarProperty Name="Tipo_De_Cambio" ColumnName="Tipo_De_Cambio" />
+                <ScalarProperty Name="Costo_Por_Unidad_Dolares" ColumnName="Costo_Por_Unidad_Dolares" />
+                <ScalarProperty Name="Subtotal_Costo_Dolares" ColumnName="Subtotal_Costo_Dolares" />
+                <ScalarProperty Name="Porcentaje_Costo" ColumnName="Porcentaje_Costo" />
+                <ScalarProperty Name="Total_Costo_Dolares" ColumnName="Total_Costo_Dolares" />
+                <ScalarProperty Name="Fecha_Creacion" ColumnName="Fecha_Creacion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Estado_Usuario">
+            <EntityTypeMapping TypeName="LithioBDModel.Estado_Usuario">
+              <MappingFragment StoreEntitySet="Estado_Usuario">
+                <ScalarProperty Name="Id_Estado_Usuario" ColumnName="Id_Estado_Usuario" />
+                <ScalarProperty Name="Desc_Estado_Usuario" ColumnName="Desc_Estado_Usuario" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Paises">
+            <EntityTypeMapping TypeName="LithioBDModel.Paises">
+              <MappingFragment StoreEntitySet="Paises">
+                <ScalarProperty Name="Id_Pais" ColumnName="Id_Pais" />
+                <ScalarProperty Name="Nombre_Pais" ColumnName="Nombre_Pais" />
+                <ScalarProperty Name="Sigla_Pais" ColumnName="Sigla_Pais" />
+                <ScalarProperty Name="Moneda_Pais" ColumnName="Moneda_Pais" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Presentaciones">
+            <EntityTypeMapping TypeName="LithioBDModel.Presentaciones">
+              <MappingFragment StoreEntitySet="Presentaciones">
+                <ScalarProperty Name="Id_Presentacion" ColumnName="Id_Presentacion" />
+                <ScalarProperty Name="Nombre_Presentacion" ColumnName="Nombre_Presentacion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Proveedores">
+            <EntityTypeMapping TypeName="LithioBDModel.Proveedores">
+              <MappingFragment StoreEntitySet="Proveedores">
+                <ScalarProperty Name="Id_Proveedor" ColumnName="Id_Proveedor" />
+                <ScalarProperty Name="Codigo_Proveedor" ColumnName="Codigo_Proveedor" />
+                <ScalarProperty Name="Nombre_Proveedor" ColumnName="Nombre_Proveedor" />
+                <ScalarProperty Name="Id_Pais" ColumnName="Id_Pais" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="sysdiagrams">
             <EntityTypeMapping TypeName="LithioBDModel.sysdiagrams">
               <MappingFragment StoreEntitySet="sysdiagrams">
@@ -638,6 +719,96 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Tipo_Usuario">
+            <EntityTypeMapping TypeName="LithioBDModel.Tipo_Usuario">
+              <MappingFragment StoreEntitySet="Tipo_Usuario">
+                <ScalarProperty Name="Id_Tipo_Usuario" ColumnName="Id_Tipo_Usuario" />
+                <ScalarProperty Name="Desc_Tipo_Usuario" ColumnName="Desc_Tipo_Usuario" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Usuarios">
+            <EntityTypeMapping TypeName="LithioBDModel.Usuarios">
+              <MappingFragment StoreEntitySet="Usuarios">
+                <ScalarProperty Name="Id_Usuario" ColumnName="Id_Usuario" />
+                <ScalarProperty Name="Primer_Nombre" ColumnName="Primer_Nombre" />
+                <ScalarProperty Name="Primer_Apellido" ColumnName="Primer_Apellido" />
+                <ScalarProperty Name="Segundo_Apellido" ColumnName="Segundo_Apellido" />
+                <ScalarProperty Name="Nombre_Usuario" ColumnName="Nombre_Usuario" />
+                <ScalarProperty Name="Contrasena_Usuario" ColumnName="Contrasena_Usuario" />
+                <ScalarProperty Name="Id_Tipo_Usuario" ColumnName="Id_Tipo_Usuario" />
+                <ScalarProperty Name="Id_Estado_Usuario" ColumnName="Id_Estado_Usuario" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="pa_Paises_Insert" FunctionName="LithioBDModel.Store.pa_Paises_Insert" />
+          <FunctionImportMapping FunctionImportName="pa_Paises_Select" FunctionName="LithioBDModel.Store.pa_Paises_Select">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="LithioBDModel.pa_Paises_Select_Result">
+                <ScalarProperty Name="Id_Pais" ColumnName="Id_Pais" />
+                <ScalarProperty Name="Nombre_Pais" ColumnName="Nombre_Pais" />
+                <ScalarProperty Name="Sigla_Pais" ColumnName="Sigla_Pais" />
+                <ScalarProperty Name="Moneda_Pais" ColumnName="Moneda_Pais" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="pa_Paises_Update" FunctionName="LithioBDModel.Store.pa_Paises_Update" />
+          <FunctionImportMapping FunctionImportName="pa_PaisesRetornaID" FunctionName="LithioBDModel.Store.pa_PaisesRetornaID">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="LithioBDModel.pa_PaisesRetornaID_Result">
+                <ScalarProperty Name="Id_Pais" ColumnName="Id_Pais" />
+                <ScalarProperty Name="Nombre_Pais" ColumnName="Nombre_Pais" />
+                <ScalarProperty Name="Sigla_Pais" ColumnName="Sigla_Pais" />
+                <ScalarProperty Name="Moneda_Pais" ColumnName="Moneda_Pais" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="pa_Presentaciones_Insert" FunctionName="LithioBDModel.Store.pa_Presentaciones_Insert" />
+          <FunctionImportMapping FunctionImportName="pa_Presentaciones_Select" FunctionName="LithioBDModel.Store.pa_Presentaciones_Select">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="LithioBDModel.pa_Presentaciones_Select_Result">
+                <ScalarProperty Name="Id_Presentacion" ColumnName="Id_Presentacion" />
+                <ScalarProperty Name="Nombre_Presentacion" ColumnName="Nombre_Presentacion" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="pa_Presentaciones_Update" FunctionName="LithioBDModel.Store.pa_Presentaciones_Update" />
+          <FunctionImportMapping FunctionImportName="pa_PresentacionesRetornaID" FunctionName="LithioBDModel.Store.pa_PresentacionesRetornaID">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="LithioBDModel.pa_PresentacionesRetornaID_Result">
+                <ScalarProperty Name="Id_Presentacion" ColumnName="Id_Presentacion" />
+                <ScalarProperty Name="Nombre_Presentacion" ColumnName="Nombre_Presentacion" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="pa_RetornaUsuarioPwd_Select" FunctionName="LithioBDModel.Store.pa_RetornaUsuarioPwd_Select">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="LithioBDModel.pa_RetornaUsuarioPwd_Select_Result">
+                <ScalarProperty Name="Id_Usuario" ColumnName="Id_Usuario" />
+                <ScalarProperty Name="Primer_Nombre" ColumnName="Primer_Nombre" />
+                <ScalarProperty Name="Primer_Apellido" ColumnName="Primer_Apellido" />
+                <ScalarProperty Name="Segundo_Apellido" ColumnName="Segundo_Apellido" />
+                <ScalarProperty Name="Nombre_Usuario" ColumnName="Nombre_Usuario" />
+                <ScalarProperty Name="Contrasena_Usuario" ColumnName="Contrasena_Usuario" />
+                <ScalarProperty Name="Id_Tipo_Usuario" ColumnName="Id_Tipo_Usuario" />
+                <ScalarProperty Name="Desc_Tipo_Usuario" ColumnName="Desc_Tipo_Usuario" />
+                <ScalarProperty Name="Id_Estado_Usuario" ColumnName="Id_Estado_Usuario" />
+                <ScalarProperty Name="Desc_Estado_Usuario" ColumnName="Desc_Estado_Usuario" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="pa_Usuarios_Select" FunctionName="LithioBDModel.Store.pa_Usuarios_Select">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="LithioBDModel.pa_Usuarios_Select_Result">
+                <ScalarProperty Name="Id_Usuario" ColumnName="Id_Usuario" />
+                <ScalarProperty Name="Primer_Nombre" ColumnName="Primer_Nombre" />
+                <ScalarProperty Name="Primer_Apellido" ColumnName="Primer_Apellido" />
+                <ScalarProperty Name="Segundo_Apellido" ColumnName="Segundo_Apellido" />
+                <ScalarProperty Name="Nombre_Usuario" ColumnName="Nombre_Usuario" />
+                <ScalarProperty Name="Desc_Tipo_Usuario" ColumnName="Desc_Tipo_Usuario" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="LithioBDModel.Store.sp_alterdiagram" />
           <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="LithioBDModel.Store.sp_creatediagram" />
           <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="LithioBDModel.Store.sp_dropdiagram" />
@@ -662,154 +833,6 @@
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="LithioBDModel.Store.sp_renamediagram" />
           <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="LithioBDModel.Store.sp_upgraddiagrams" />
-          <FunctionImportMapping FunctionImportName="pa_Paises_Select" FunctionName="LithioBDModel.Store.pa_Paises_Select">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="LithioBDModel.pa_Paises_Select_Result">
-                <ScalarProperty Name="Id_Pais" ColumnName="Id_Pais" />
-                <ScalarProperty Name="Nombre_Pais" ColumnName="Nombre_Pais" />
-                <ScalarProperty Name="Sigla_Pais" ColumnName="Sigla_Pais" />
-                <ScalarProperty Name="Moneda_Pais" ColumnName="Moneda_Pais" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="pa_Paises_Insert" FunctionName="LithioBDModel.Store.pa_Paises_Insert" />
-          <EntitySetMapping Name="Articulos">
-            <EntityTypeMapping TypeName="LithioBDModel.Articulos">
-              <MappingFragment StoreEntitySet="Articulos">
-                <ScalarProperty Name="Id_Presentacion" ColumnName="Id_Presentacion" />
-                <ScalarProperty Name="Id_Proveedor" ColumnName="Id_Proveedor" />
-                <ScalarProperty Name="Costo_Anterior_Articulo" ColumnName="Costo_Anterior_Articulo" />
-                <ScalarProperty Name="Descripcion_Articulo" ColumnName="Descripcion_Articulo" />
-                <ScalarProperty Name="Nombre_Articulo" ColumnName="Nombre_Articulo" />
-                <ScalarProperty Name="Codigo_Articulo" ColumnName="Codigo_Articulo" />
-                <ScalarProperty Name="Id_Articulo" ColumnName="Id_Articulo" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Costos">
-            <EntityTypeMapping TypeName="LithioBDModel.Costos">
-              <MappingFragment StoreEntitySet="Costos">
-                <ScalarProperty Name="Fecha_Creacion" ColumnName="Fecha_Creacion" />
-                <ScalarProperty Name="Total_Costo_Dolares" ColumnName="Total_Costo_Dolares" />
-                <ScalarProperty Name="Porcentaje_Costo" ColumnName="Porcentaje_Costo" />
-                <ScalarProperty Name="Subtotal_Costo_Dolares" ColumnName="Subtotal_Costo_Dolares" />
-                <ScalarProperty Name="Costo_Por_Unidad_Dolares" ColumnName="Costo_Por_Unidad_Dolares" />
-                <ScalarProperty Name="Tipo_De_Cambio" ColumnName="Tipo_De_Cambio" />
-                <ScalarProperty Name="Unidades_Articulos" ColumnName="Unidades_Articulos" />
-                <ScalarProperty Name="Id_Presentacion" ColumnName="Id_Presentacion" />
-                <ScalarProperty Name="Descripcion_Articulo" ColumnName="Descripcion_Articulo" />
-                <ScalarProperty Name="Nombre_Articulo" ColumnName="Nombre_Articulo" />
-                <ScalarProperty Name="Codigo_Articulo" ColumnName="Codigo_Articulo" />
-                <ScalarProperty Name="Id_Articulo" ColumnName="Id_Articulo" />
-                <ScalarProperty Name="Numero_Costos" ColumnName="Numero_Costos" />
-                <ScalarProperty Name="DUA" ColumnName="DUA" />
-                <ScalarProperty Name="Id_Costo" ColumnName="Id_Costo" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Paises">
-            <EntityTypeMapping TypeName="LithioBDModel.Paises">
-              <MappingFragment StoreEntitySet="Paises">
-                <ScalarProperty Name="Moneda_Pais" ColumnName="Moneda_Pais" />
-                <ScalarProperty Name="Sigla_Pais" ColumnName="Sigla_Pais" />
-                <ScalarProperty Name="Nombre_Pais" ColumnName="Nombre_Pais" />
-                <ScalarProperty Name="Id_Pais" ColumnName="Id_Pais" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Presentaciones">
-            <EntityTypeMapping TypeName="LithioBDModel.Presentaciones">
-              <MappingFragment StoreEntitySet="Presentaciones">
-                <ScalarProperty Name="Nombre_Presentacion" ColumnName="Nombre_Presentacion" />
-                <ScalarProperty Name="Id_Presentacion" ColumnName="Id_Presentacion" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Proveedores">
-            <EntityTypeMapping TypeName="LithioBDModel.Proveedores">
-              <MappingFragment StoreEntitySet="Proveedores">
-                <ScalarProperty Name="Id_Pais" ColumnName="Id_Pais" />
-                <ScalarProperty Name="Nombre_Proveedor" ColumnName="Nombre_Proveedor" />
-                <ScalarProperty Name="Codigo_Proveedor" ColumnName="Codigo_Proveedor" />
-                <ScalarProperty Name="Id_Proveedor" ColumnName="Id_Proveedor" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="pa_Paises_Update" FunctionName="LithioBDModel.Store.pa_Paises_Update" />
-          <FunctionImportMapping FunctionImportName="pa_PaisesRetornaID" FunctionName="LithioBDModel.Store.pa_PaisesRetornaID">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="LithioBDModel.pa_PaisesRetornaID_Result">
-                <ScalarProperty Name="Id_Pais" ColumnName="Id_Pais" />
-                <ScalarProperty Name="Nombre_Pais" ColumnName="Nombre_Pais" />
-                <ScalarProperty Name="Sigla_Pais" ColumnName="Sigla_Pais" />
-                <ScalarProperty Name="Moneda_Pais" ColumnName="Moneda_Pais" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="pa_Presentaciones_Select" FunctionName="LithioBDModel.Store.pa_Presentaciones_Select">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="LithioBDModel.pa_Presentaciones_Select_Result">
-                <ScalarProperty Name="Id_Presentacion" ColumnName="Id_Presentacion" />
-                <ScalarProperty Name="Nombre_Presentacion" ColumnName="Nombre_Presentacion" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="pa_Presentaciones_Insert" FunctionName="LithioBDModel.Store.pa_Presentaciones_Insert" />
-          <FunctionImportMapping FunctionImportName="pa_Presentaciones_Update" FunctionName="LithioBDModel.Store.pa_Presentaciones_Update" />
-          <FunctionImportMapping FunctionImportName="pa_PresentacionesRetornaID" FunctionName="LithioBDModel.Store.pa_PresentacionesRetornaID">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="LithioBDModel.pa_PresentacionesRetornaID_Result">
-                <ScalarProperty Name="Id_Presentacion" ColumnName="Id_Presentacion" />
-                <ScalarProperty Name="Nombre_Presentacion" ColumnName="Nombre_Presentacion" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
-          <EntitySetMapping Name="Estado_Usuario">
-            <EntityTypeMapping TypeName="LithioBDModel.Estado_Usuario">
-              <MappingFragment StoreEntitySet="Estado_Usuario">
-                <ScalarProperty Name="Desc_Estado_Usuario" ColumnName="Desc_Estado_Usuario" />
-                <ScalarProperty Name="Id_Estado_Usuario" ColumnName="Id_Estado_Usuario" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Tipo_Usuario">
-            <EntityTypeMapping TypeName="LithioBDModel.Tipo_Usuario">
-              <MappingFragment StoreEntitySet="Tipo_Usuario">
-                <ScalarProperty Name="Desc_Tipo_Usuario" ColumnName="Desc_Tipo_Usuario" />
-                <ScalarProperty Name="Id_Tipo_Usuario" ColumnName="Id_Tipo_Usuario" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Usuarios">
-            <EntityTypeMapping TypeName="LithioBDModel.Usuarios">
-              <MappingFragment StoreEntitySet="Usuarios">
-                <ScalarProperty Name="Id_Estado_Usuario" ColumnName="Id_Estado_Usuario" />
-                <ScalarProperty Name="Id_Tipo_Usuario" ColumnName="Id_Tipo_Usuario" />
-                <ScalarProperty Name="Contrasena_Usuario" ColumnName="Contrasena_Usuario" />
-                <ScalarProperty Name="Nombre_Usuario" ColumnName="Nombre_Usuario" />
-                <ScalarProperty Name="Segundo_Apellido" ColumnName="Segundo_Apellido" />
-                <ScalarProperty Name="Primer_Apellido" ColumnName="Primer_Apellido" />
-                <ScalarProperty Name="Primer_Nombre" ColumnName="Primer_Nombre" />
-                <ScalarProperty Name="Id_Usuario" ColumnName="Id_Usuario" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="pa_RetornaUsuarioPwd_Select" FunctionName="LithioBDModel.Store.pa_RetornaUsuarioPwd_Select">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="LithioBDModel.pa_RetornaUsuarioPwd_Select_Result">
-                <ScalarProperty Name="Id_Usuario" ColumnName="Id_Usuario" />
-                <ScalarProperty Name="Primer_Nombre" ColumnName="Primer_Nombre" />
-                <ScalarProperty Name="Primer_Apellido" ColumnName="Primer_Apellido" />
-                <ScalarProperty Name="Segundo_Apellido" ColumnName="Segundo_Apellido" />
-                <ScalarProperty Name="Nombre_Usuario" ColumnName="Nombre_Usuario" />
-                <ScalarProperty Name="Contrasena_Usuario" ColumnName="Contrasena_Usuario" />
-                <ScalarProperty Name="Id_Tipo_Usuario" ColumnName="Id_Tipo_Usuario" />
-                <ScalarProperty Name="Desc_Tipo_Usuario" ColumnName="Desc_Tipo_Usuario" />
-                <ScalarProperty Name="Id_Estado_Usuario" ColumnName="Id_Estado_Usuario" />
-                <ScalarProperty Name="Desc_Estado_Usuario" ColumnName="Desc_Estado_Usuario" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
