@@ -126,6 +126,58 @@ namespace ProyectoLithio.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<pa_PresentacionesRetornaID_Result>("pa_PresentacionesRetornaID", id_PresentacionParameter);
         }
     
+        public virtual int pa_Proveedores_Insert(string nombre_Proveedor, string codigo_Proveedor, Nullable<int> id_Pais)
+        {
+            var nombre_ProveedorParameter = nombre_Proveedor != null ?
+                new ObjectParameter("Nombre_Proveedor", nombre_Proveedor) :
+                new ObjectParameter("Nombre_Proveedor", typeof(string));
+    
+            var codigo_ProveedorParameter = codigo_Proveedor != null ?
+                new ObjectParameter("Codigo_Proveedor", codigo_Proveedor) :
+                new ObjectParameter("Codigo_Proveedor", typeof(string));
+    
+            var id_PaisParameter = id_Pais.HasValue ?
+                new ObjectParameter("Id_Pais", id_Pais) :
+                new ObjectParameter("Id_Pais", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("pa_Proveedores_Insert", nombre_ProveedorParameter, codigo_ProveedorParameter, id_PaisParameter);
+        }
+    
+        public virtual ObjectResult<pa_Proveedores_Select_Result> pa_Proveedores_Select()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<pa_Proveedores_Select_Result>("pa_Proveedores_Select");
+        }
+    
+        public virtual int pa_Proveedores_Update(Nullable<int> id_Proveedor, string codigo_Proveedor, string nombre_Proveedor, Nullable<int> id_Pais)
+        {
+            var id_ProveedorParameter = id_Proveedor.HasValue ?
+                new ObjectParameter("Id_Proveedor", id_Proveedor) :
+                new ObjectParameter("Id_Proveedor", typeof(int));
+    
+            var codigo_ProveedorParameter = codigo_Proveedor != null ?
+                new ObjectParameter("Codigo_Proveedor", codigo_Proveedor) :
+                new ObjectParameter("Codigo_Proveedor", typeof(string));
+    
+            var nombre_ProveedorParameter = nombre_Proveedor != null ?
+                new ObjectParameter("Nombre_Proveedor", nombre_Proveedor) :
+                new ObjectParameter("Nombre_Proveedor", typeof(string));
+    
+            var id_PaisParameter = id_Pais.HasValue ?
+                new ObjectParameter("Id_Pais", id_Pais) :
+                new ObjectParameter("Id_Pais", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("pa_Proveedores_Update", id_ProveedorParameter, codigo_ProveedorParameter, nombre_ProveedorParameter, id_PaisParameter);
+        }
+    
+        public virtual ObjectResult<pa_ProveedoresRetornaID_Result> pa_ProveedoresRetornaID(Nullable<int> id_Proveedor)
+        {
+            var id_ProveedorParameter = id_Proveedor.HasValue ?
+                new ObjectParameter("Id_Proveedor", id_Proveedor) :
+                new ObjectParameter("Id_Proveedor", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<pa_ProveedoresRetornaID_Result>("pa_ProveedoresRetornaID", id_ProveedorParameter);
+        }
+    
         public virtual ObjectResult<pa_RetornaUsuarioPwd_Select_Result> pa_RetornaUsuarioPwd_Select(string nombre_Usuario, string contrasena)
         {
             var nombre_UsuarioParameter = nombre_Usuario != null ?
@@ -137,6 +189,31 @@ namespace ProyectoLithio.Models
                 new ObjectParameter("Contrasena", typeof(string));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<pa_RetornaUsuarioPwd_Select_Result>("pa_RetornaUsuarioPwd_Select", nombre_UsuarioParameter, contrasenaParameter);
+        }
+    
+        public virtual int pa_Usuarios_Insert(string primer_Nombre, string primer_Apellido, string segundo_Apellido, string nombre_Usuario, string contrasena_Usuario)
+        {
+            var primer_NombreParameter = primer_Nombre != null ?
+                new ObjectParameter("Primer_Nombre", primer_Nombre) :
+                new ObjectParameter("Primer_Nombre", typeof(string));
+    
+            var primer_ApellidoParameter = primer_Apellido != null ?
+                new ObjectParameter("Primer_Apellido", primer_Apellido) :
+                new ObjectParameter("Primer_Apellido", typeof(string));
+    
+            var segundo_ApellidoParameter = segundo_Apellido != null ?
+                new ObjectParameter("Segundo_Apellido", segundo_Apellido) :
+                new ObjectParameter("Segundo_Apellido", typeof(string));
+    
+            var nombre_UsuarioParameter = nombre_Usuario != null ?
+                new ObjectParameter("Nombre_Usuario", nombre_Usuario) :
+                new ObjectParameter("Nombre_Usuario", typeof(string));
+    
+            var contrasena_UsuarioParameter = contrasena_Usuario != null ?
+                new ObjectParameter("Contrasena_Usuario", contrasena_Usuario) :
+                new ObjectParameter("Contrasena_Usuario", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("pa_Usuarios_Insert", primer_NombreParameter, primer_ApellidoParameter, segundo_ApellidoParameter, nombre_UsuarioParameter, contrasena_UsuarioParameter);
         }
     
         public virtual ObjectResult<pa_Usuarios_Select_Result> pa_Usuarios_Select()

@@ -22,3 +22,7 @@ body::-webkit-scrollbar-thumb {
     background-color: #dfdfdf;
     border-radius: 10px;
 }
+select#ddlPais{
+    color:#000 !important;
+    font-weight:normal;
+}

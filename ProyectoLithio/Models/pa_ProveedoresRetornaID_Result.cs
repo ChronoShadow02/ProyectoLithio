@@ -10,21 +10,12 @@
 namespace ProyectoLithio.Models
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class Proveedores
+    public partial class pa_ProveedoresRetornaID_Result
     {
-        public Proveedores()
-        {
-            this.Articulos = new HashSet<Articulos>();
-        }
-    
         public int Id_Proveedor { get; set; }
         public string Codigo_Proveedor { get; set; }
         public string Nombre_Proveedor { get; set; }
         public int Id_Pais { get; set; }
-    
-        public virtual ICollection<Articulos> Articulos { get; set; }
-        public virtual Paises Paises { get; set; }
     }
 }

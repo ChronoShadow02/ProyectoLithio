@@ -133,6 +133,7 @@
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\PaisesController.cs" />
     <Compile Include="Controllers\PresentacionesController.cs" />
+    <Compile Include="Controllers\ProveedoresController.cs" />
     <Compile Include="Controllers\UsuariosController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -174,6 +175,12 @@
       <DependentUpon>ModelBD.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\pa_Presentaciones_Select_Result.cs">
+      <DependentUpon>ModelBD.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\pa_ProveedoresRetornaID_Result.cs">
+      <DependentUpon>ModelBD.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\pa_Proveedores_Select_Result.cs">
       <DependentUpon>ModelBD.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\pa_RetornaUsuarioPwd_Select_Result.cs">
@@ -307,7 +314,6 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
-    <Content Include="Scripts\Paises\AgregarPais.js" />
     <Content Include="Scripts\Paises\validaPais.js" />
     <Content Include="Scripts\Panel\expandir-menu.js" />
     <Content Include="Scripts\Panel\relojRigital.js" />
@@ -316,6 +322,7 @@
     <Content Include="Scripts\popper.js" />
     <Content Include="Scripts\popper.min.js" />
     <Content Include="Scripts\Presentaciones\validaPresentaciones.js" />
+    <Content Include="Scripts\Proveedores\validarProveedores.js" />
     <Content Include="Scripts\src\index.js" />
     <Content Include="Scripts\src\methods\defaults.js" />
     <Content Include="Scripts\src\methods\destroy.js" />
@@ -422,6 +429,9 @@
     <Content Include="Views\Presentaciones\PresentacionesModifica.cshtml" />
     <Content Include="Views\Usuarios\UsuariosLista.cshtml" />
     <Content Include="Views\Usuarios\UsuariosNuevo.cshtml" />
+    <Content Include="Views\Proveedores\ProveedoresLista.cshtml" />
+    <Content Include="Views\Proveedores\ProveedoresNuevo.cshtml" />
+    <Content Include="Views\Proveedores\ProveedoresModifica.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

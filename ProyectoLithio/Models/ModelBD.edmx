@@ -66,7 +66,7 @@
           </Key>
           <Property Name="Id_Proveedor" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Codigo_Proveedor" Type="varchar" MaxLength="200" Nullable="false" />
-          <Property Name="Nombre_Proveedor" Type="varbinary" MaxLength="200" Nullable="false" />
+          <Property Name="Nombre_Proveedor" Type="varchar" MaxLength="200" Nullable="false" />
           <Property Name="Id_Pais" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="sysdiagrams">
@@ -210,9 +210,31 @@
         <Function Name="pa_PresentacionesRetornaID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Id_Presentacion" Type="int" Mode="In" />
         </Function>
+        <Function Name="pa_Proveedores_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Nombre_Proveedor" Type="varchar" Mode="In" />
+          <Parameter Name="Codigo_Proveedor" Type="varchar" Mode="In" />
+          <Parameter Name="Id_Pais" Type="int" Mode="In" />
+        </Function>
+        <Function Name="pa_Proveedores_Select" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="pa_Proveedores_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id_Proveedor" Type="int" Mode="In" />
+          <Parameter Name="Codigo_Proveedor" Type="varchar" Mode="In" />
+          <Parameter Name="Nombre_Proveedor" Type="varchar" Mode="In" />
+          <Parameter Name="Id_Pais" Type="int" Mode="In" />
+        </Function>
+        <Function Name="pa_ProveedoresRetornaID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id_Proveedor" Type="int" Mode="In" />
+        </Function>
         <Function Name="pa_RetornaUsuarioPwd_Select" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Nombre_Usuario" Type="varchar" Mode="In" />
           <Parameter Name="Contrasena" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="pa_Usuarios_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Primer_Nombre" Type="varchar" Mode="In" />
+          <Parameter Name="Primer_Apellido" Type="varchar" Mode="In" />
+          <Parameter Name="Segundo_Apellido" Type="varchar" Mode="In" />
+          <Parameter Name="Nombre_Usuario" Type="varchar" Mode="In" />
+          <Parameter Name="Contrasena_Usuario" Type="varchar" Mode="In" />
         </Function>
         <Function Name="pa_Usuarios_Select" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
@@ -359,7 +381,7 @@
           </Key>
           <Property Name="Id_Proveedor" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Codigo_Proveedor" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Nombre_Proveedor" Type="Binary" MaxLength="200" FixedLength="false" Nullable="false" />
+          <Property Name="Nombre_Proveedor" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Id_Pais" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Articulos" Relationship="Self.FK_Articulos_Proveedores" FromRole="Proveedores" ToRole="Articulos" />
           <NavigationProperty Name="Paises" Relationship="Self.FK_Proveedores_Paises" FromRole="Proveedores" ToRole="Paises" />
@@ -545,9 +567,31 @@
           <FunctionImport Name="pa_PresentacionesRetornaID" ReturnType="Collection(LithioBDModel.pa_PresentacionesRetornaID_Result)">
             <Parameter Name="Id_Presentacion" Mode="In" Type="Int32" />
           </FunctionImport>
+          <FunctionImport Name="pa_Proveedores_Insert">
+            <Parameter Name="Nombre_Proveedor" Mode="In" Type="String" />
+            <Parameter Name="Codigo_Proveedor" Mode="In" Type="String" />
+            <Parameter Name="Id_Pais" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="pa_Proveedores_Select" ReturnType="Collection(LithioBDModel.pa_Proveedores_Select_Result)" />
+          <FunctionImport Name="pa_Proveedores_Update">
+            <Parameter Name="Id_Proveedor" Mode="In" Type="Int32" />
+            <Parameter Name="Codigo_Proveedor" Mode="In" Type="String" />
+            <Parameter Name="Nombre_Proveedor" Mode="In" Type="String" />
+            <Parameter Name="Id_Pais" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="pa_ProveedoresRetornaID" ReturnType="Collection(LithioBDModel.pa_ProveedoresRetornaID_Result)">
+            <Parameter Name="Id_Proveedor" Mode="In" Type="Int32" />
+          </FunctionImport>
           <FunctionImport Name="pa_RetornaUsuarioPwd_Select" ReturnType="Collection(LithioBDModel.pa_RetornaUsuarioPwd_Select_Result)">
             <Parameter Name="Nombre_Usuario" Mode="In" Type="String" />
             <Parameter Name="Contrasena" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="pa_Usuarios_Insert">
+            <Parameter Name="Primer_Nombre" Mode="In" Type="String" />
+            <Parameter Name="Primer_Apellido" Mode="In" Type="String" />
+            <Parameter Name="Segundo_Apellido" Mode="In" Type="String" />
+            <Parameter Name="Nombre_Usuario" Mode="In" Type="String" />
+            <Parameter Name="Contrasena_Usuario" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="pa_Usuarios_Select" ReturnType="Collection(LithioBDModel.pa_Usuarios_Select_Result)" />
           <FunctionImport Name="sp_alterdiagram">
@@ -600,6 +644,19 @@
         <ComplexType Name="pa_PresentacionesRetornaID_Result">
           <Property Type="Int32" Name="Id_Presentacion" Nullable="false" />
           <Property Type="String" Name="Nombre_Presentacion" Nullable="false" MaxLength="200" />
+        </ComplexType>
+        <ComplexType Name="pa_Proveedores_Select_Result">
+          <Property Type="Int32" Name="Id_Proveedor" Nullable="false" />
+          <Property Type="String" Name="Codigo_Proveedor" Nullable="false" MaxLength="200" />
+          <Property Type="String" Name="Nombre_Proveedor" Nullable="false" MaxLength="200" />
+          <Property Type="Int32" Name="Id_Pais" Nullable="false" />
+          <Property Type="String" Name="Nombre_Pais" Nullable="false" MaxLength="200" />
+        </ComplexType>
+        <ComplexType Name="pa_ProveedoresRetornaID_Result">
+          <Property Type="Int32" Name="Id_Proveedor" Nullable="false" />
+          <Property Type="String" Name="Codigo_Proveedor" Nullable="false" MaxLength="200" />
+          <Property Type="String" Name="Nombre_Proveedor" Nullable="false" MaxLength="200" />
+          <Property Type="Int32" Name="Id_Pais" Nullable="false" />
         </ComplexType>
         <ComplexType Name="pa_RetornaUsuarioPwd_Select_Result">
           <Property Type="Int32" Name="Id_Usuario" Nullable="false" />
@@ -781,6 +838,29 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="pa_Proveedores_Insert" FunctionName="LithioBDModel.Store.pa_Proveedores_Insert" />
+          <FunctionImportMapping FunctionImportName="pa_Proveedores_Select" FunctionName="LithioBDModel.Store.pa_Proveedores_Select">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="LithioBDModel.pa_Proveedores_Select_Result">
+                <ScalarProperty Name="Id_Proveedor" ColumnName="Id_Proveedor" />
+                <ScalarProperty Name="Codigo_Proveedor" ColumnName="Codigo_Proveedor" />
+                <ScalarProperty Name="Nombre_Proveedor" ColumnName="Nombre_Proveedor" />
+                <ScalarProperty Name="Id_Pais" ColumnName="Id_Pais" />
+                <ScalarProperty Name="Nombre_Pais" ColumnName="Nombre_Pais" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="pa_Proveedores_Update" FunctionName="LithioBDModel.Store.pa_Proveedores_Update" />
+          <FunctionImportMapping FunctionImportName="pa_ProveedoresRetornaID" FunctionName="LithioBDModel.Store.pa_ProveedoresRetornaID">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="LithioBDModel.pa_ProveedoresRetornaID_Result">
+                <ScalarProperty Name="Id_Proveedor" ColumnName="Id_Proveedor" />
+                <ScalarProperty Name="Codigo_Proveedor" ColumnName="Codigo_Proveedor" />
+                <ScalarProperty Name="Nombre_Proveedor" ColumnName="Nombre_Proveedor" />
+                <ScalarProperty Name="Id_Pais" ColumnName="Id_Pais" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="pa_RetornaUsuarioPwd_Select" FunctionName="LithioBDModel.Store.pa_RetornaUsuarioPwd_Select">
             <ResultMapping>
               <ComplexTypeMapping TypeName="LithioBDModel.pa_RetornaUsuarioPwd_Select_Result">
@@ -797,6 +877,7 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="pa_Usuarios_Insert" FunctionName="LithioBDModel.Store.pa_Usuarios_Insert" />
           <FunctionImportMapping FunctionImportName="pa_Usuarios_Select" FunctionName="LithioBDModel.Store.pa_Usuarios_Select">
             <ResultMapping>
               <ComplexTypeMapping TypeName="LithioBDModel.pa_Usuarios_Select_Result">
