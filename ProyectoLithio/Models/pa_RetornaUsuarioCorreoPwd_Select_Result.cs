@@ -10,9 +10,8 @@
 namespace ProyectoLithio.Models
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class Usuarios
+    public partial class pa_RetornaUsuarioCorreoPwd_Select_Result
     {
         public int Id_Usuario { get; set; }
         public string Primer_Nombre { get; set; }
@@ -21,9 +20,8 @@ namespace ProyectoLithio.Models
         public string Correo_Electronico { get; set; }
         public string Contrasena_Usuario { get; set; }
         public int Id_Tipo_Usuario { get; set; }
+        public string Desc_Tipo_Usuario { get; set; }
         public int Id_Estado_Usuario { get; set; }
-    
-        public virtual Estado_Usuario Estado_Usuario { get; set; }
-        public virtual Tipo_Usuario Tipo_Usuario { get; set; }
+        public string Desc_Estado_Usuario { get; set; }
     }
 }

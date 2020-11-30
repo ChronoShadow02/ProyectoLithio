@@ -42,12 +42,51 @@ namespace ProyectoLithio.Controllers
 
         #region UsuarioNuevoPost
         /// <summary>
-        /// 
+        /// Metodo que ingresa el  registro de usuarios
         /// </summary>
         /// <returns></returns>
         [HttpPost]
-        public ActionResult UsuarioNuevo()
+        public ActionResult UsuariosNuevo(pa_Usuarios_SelectTodo_Result modeloVista)
         {
+            int RegistrosAfectados = 0;
+            string mensaje = "";
+            try
+            {
+                RegistrosAfectados = this.modeloBD.pa_Usuarios_Insert(modeloVista.Primer_Nombre,
+                                                                      modeloVista.Primer_Apellido,
+                                                                      modeloVista.Segundo_Apellido,
+                                                                      modeloVista.Correo_Electronico,
+                                                                      modeloVista.Contrasena_Usuario,
+                                                                      2,
+                                                                      2);
+            }
+            catch (Exception ex)
+            {
+                mensaje = "Hubo un error " + ex.Message;
+            }
+            finally
+            {
+                Response.Write("<script src='https://cdn.jsdelivr.net/npm/sweetalert2@10'></script> <br>");
+                if (RegistrosAfectados > 0)
+                {
+                    mensaje = "Usuario Registrado";
+                    Response.Write("<script language = javascript > Swal.fire({title: 'Exito!',text:'" + mensaje + "',icon: 'success',showConfirmButton: true})</script>");
+                }
+                else
+                {
+                    mensaje += "No se pudo ingresar";
+                    Response.Write("<script language = javascript > Swal.fire({title: 'Falló!',text:'" + mensaje + "',icon: 'error',showConfirmButton: true})</script>");
+                }
+            }
+                return View();
+        }
+        #endregion
+
+        #region UsuarioModifica
+        [HttpGet]
+        public ActionResult UsuarioModifica()
+        {
+            
             return View();
         }
         #endregion

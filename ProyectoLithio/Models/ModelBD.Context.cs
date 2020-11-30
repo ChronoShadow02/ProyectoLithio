@@ -90,6 +90,11 @@ namespace ProyectoLithio.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<pa_PaisesRetornaID_Result>("pa_PaisesRetornaID", id_PaisParameter);
         }
     
+        public virtual ObjectResult<pa_Permisos_Select_Result> pa_Permisos_Select()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<pa_Permisos_Select_Result>("pa_Permisos_Select");
+        }
+    
         public virtual int pa_Presentaciones_Insert(string nombre_Presentacion)
         {
             var nombre_PresentacionParameter = nombre_Presentacion != null ?
@@ -178,20 +183,20 @@ namespace ProyectoLithio.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<pa_ProveedoresRetornaID_Result>("pa_ProveedoresRetornaID", id_ProveedorParameter);
         }
     
-        public virtual ObjectResult<pa_RetornaUsuarioPwd_Select_Result> pa_RetornaUsuarioPwd_Select(string nombre_Usuario, string contrasena)
+        public virtual ObjectResult<pa_RetornaUsuarioCorreoPwd_Select_Result> pa_RetornaUsuarioCorreoPwd_Select(string correo, string contrasena)
         {
-            var nombre_UsuarioParameter = nombre_Usuario != null ?
-                new ObjectParameter("Nombre_Usuario", nombre_Usuario) :
-                new ObjectParameter("Nombre_Usuario", typeof(string));
+            var correoParameter = correo != null ?
+                new ObjectParameter("Correo", correo) :
+                new ObjectParameter("Correo", typeof(string));
     
             var contrasenaParameter = contrasena != null ?
                 new ObjectParameter("Contrasena", contrasena) :
                 new ObjectParameter("Contrasena", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<pa_RetornaUsuarioPwd_Select_Result>("pa_RetornaUsuarioPwd_Select", nombre_UsuarioParameter, contrasenaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<pa_RetornaUsuarioCorreoPwd_Select_Result>("pa_RetornaUsuarioCorreoPwd_Select", correoParameter, contrasenaParameter);
         }
     
-        public virtual int pa_Usuarios_Insert(string primer_Nombre, string primer_Apellido, string segundo_Apellido, string nombre_Usuario, string contrasena_Usuario)
+        public virtual int pa_Usuarios_Insert(string primer_Nombre, string primer_Apellido, string segundo_Apellido, string correo_Electronico, string contrasena_Usuario, Nullable<int> id_Tipo_Usuario, Nullable<int> id_Estado_Usuario)
         {
             var primer_NombreParameter = primer_Nombre != null ?
                 new ObjectParameter("Primer_Nombre", primer_Nombre) :
@@ -205,20 +210,33 @@ namespace ProyectoLithio.Models
                 new ObjectParameter("Segundo_Apellido", segundo_Apellido) :
                 new ObjectParameter("Segundo_Apellido", typeof(string));
     
-            var nombre_UsuarioParameter = nombre_Usuario != null ?
-                new ObjectParameter("Nombre_Usuario", nombre_Usuario) :
-                new ObjectParameter("Nombre_Usuario", typeof(string));
+            var correo_ElectronicoParameter = correo_Electronico != null ?
+                new ObjectParameter("Correo_Electronico", correo_Electronico) :
+                new ObjectParameter("Correo_Electronico", typeof(string));
     
             var contrasena_UsuarioParameter = contrasena_Usuario != null ?
                 new ObjectParameter("Contrasena_Usuario", contrasena_Usuario) :
                 new ObjectParameter("Contrasena_Usuario", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("pa_Usuarios_Insert", primer_NombreParameter, primer_ApellidoParameter, segundo_ApellidoParameter, nombre_UsuarioParameter, contrasena_UsuarioParameter);
+            var id_Tipo_UsuarioParameter = id_Tipo_Usuario.HasValue ?
+                new ObjectParameter("Id_Tipo_Usuario", id_Tipo_Usuario) :
+                new ObjectParameter("Id_Tipo_Usuario", typeof(int));
+    
+            var id_Estado_UsuarioParameter = id_Estado_Usuario.HasValue ?
+                new ObjectParameter("Id_Estado_Usuario", id_Estado_Usuario) :
+                new ObjectParameter("Id_Estado_Usuario", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("pa_Usuarios_Insert", primer_NombreParameter, primer_ApellidoParameter, segundo_ApellidoParameter, correo_ElectronicoParameter, contrasena_UsuarioParameter, id_Tipo_UsuarioParameter, id_Estado_UsuarioParameter);
         }
     
         public virtual ObjectResult<pa_Usuarios_Select_Result> pa_Usuarios_Select()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<pa_Usuarios_Select_Result>("pa_Usuarios_Select");
+        }
+    
+        public virtual ObjectResult<pa_Usuarios_SelectTodo_Result> pa_Usuarios_SelectTodo()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<pa_Usuarios_SelectTodo_Result>("pa_Usuarios_SelectTodo");
         }
     
         public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)

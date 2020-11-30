@@ -94,7 +94,7 @@
           <Property Name="Primer_Nombre" Type="varchar" MaxLength="200" Nullable="false" />
           <Property Name="Primer_Apellido" Type="varchar" MaxLength="200" Nullable="false" />
           <Property Name="Segundo_Apellido" Type="varchar" MaxLength="200" Nullable="false" />
-          <Property Name="Nombre_Usuario" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="Correo_Electronico" Type="varchar" MaxLength="200" Nullable="false" />
           <Property Name="Contrasena_Usuario" Type="varchar" MaxLength="200" Nullable="false" />
           <Property Name="Id_Tipo_Usuario" Type="int" Nullable="false" />
           <Property Name="Id_Estado_Usuario" Type="int" Nullable="false" />
@@ -199,6 +199,7 @@
         <Function Name="pa_PaisesRetornaID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Id_Pais" Type="int" Mode="In" />
         </Function>
+        <Function Name="pa_Permisos_Select" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="pa_Presentaciones_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Nombre_Presentacion" Type="varchar" Mode="In" />
         </Function>
@@ -225,18 +226,21 @@
         <Function Name="pa_ProveedoresRetornaID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Id_Proveedor" Type="int" Mode="In" />
         </Function>
-        <Function Name="pa_RetornaUsuarioPwd_Select" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="Nombre_Usuario" Type="varchar" Mode="In" />
+        <Function Name="pa_RetornaUsuarioCorreoPwd_Select" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Correo" Type="varchar" Mode="In" />
           <Parameter Name="Contrasena" Type="varchar" Mode="In" />
         </Function>
         <Function Name="pa_Usuarios_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Primer_Nombre" Type="varchar" Mode="In" />
           <Parameter Name="Primer_Apellido" Type="varchar" Mode="In" />
           <Parameter Name="Segundo_Apellido" Type="varchar" Mode="In" />
-          <Parameter Name="Nombre_Usuario" Type="varchar" Mode="In" />
+          <Parameter Name="Correo_Electronico" Type="varchar" Mode="In" />
           <Parameter Name="Contrasena_Usuario" Type="varchar" Mode="In" />
+          <Parameter Name="Id_Tipo_Usuario" Type="int" Mode="In" />
+          <Parameter Name="Id_Estado_Usuario" Type="int" Mode="In" />
         </Function>
         <Function Name="pa_Usuarios_Select" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="pa_Usuarios_SelectTodo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
           <Parameter Name="owner_id" Type="int" Mode="In" />
@@ -412,7 +416,7 @@
           <Property Name="Primer_Nombre" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Primer_Apellido" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Segundo_Apellido" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Nombre_Usuario" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Correo_Electronico" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Contrasena_Usuario" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Id_Tipo_Usuario" Type="Int32" Nullable="false" />
           <Property Name="Id_Estado_Usuario" Type="Int32" Nullable="false" />
@@ -556,6 +560,7 @@
           <FunctionImport Name="pa_PaisesRetornaID" ReturnType="Collection(LithioBDModel.pa_PaisesRetornaID_Result)">
             <Parameter Name="Id_Pais" Mode="In" Type="Int32" />
           </FunctionImport>
+          <FunctionImport Name="pa_Permisos_Select" ReturnType="Collection(LithioBDModel.pa_Permisos_Select_Result)" />
           <FunctionImport Name="pa_Presentaciones_Insert">
             <Parameter Name="Nombre_Presentacion" Mode="In" Type="String" />
           </FunctionImport>
@@ -582,18 +587,21 @@
           <FunctionImport Name="pa_ProveedoresRetornaID" ReturnType="Collection(LithioBDModel.pa_ProveedoresRetornaID_Result)">
             <Parameter Name="Id_Proveedor" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="pa_RetornaUsuarioPwd_Select" ReturnType="Collection(LithioBDModel.pa_RetornaUsuarioPwd_Select_Result)">
-            <Parameter Name="Nombre_Usuario" Mode="In" Type="String" />
+          <FunctionImport Name="pa_RetornaUsuarioCorreoPwd_Select" ReturnType="Collection(LithioBDModel.pa_RetornaUsuarioCorreoPwd_Select_Result)">
+            <Parameter Name="Correo" Mode="In" Type="String" />
             <Parameter Name="Contrasena" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="pa_Usuarios_Insert">
             <Parameter Name="Primer_Nombre" Mode="In" Type="String" />
             <Parameter Name="Primer_Apellido" Mode="In" Type="String" />
             <Parameter Name="Segundo_Apellido" Mode="In" Type="String" />
-            <Parameter Name="Nombre_Usuario" Mode="In" Type="String" />
+            <Parameter Name="Correo_Electronico" Mode="In" Type="String" />
             <Parameter Name="Contrasena_Usuario" Mode="In" Type="String" />
+            <Parameter Name="Id_Tipo_Usuario" Mode="In" Type="Int32" />
+            <Parameter Name="Id_Estado_Usuario" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="pa_Usuarios_Select" ReturnType="Collection(LithioBDModel.pa_Usuarios_Select_Result)" />
+          <FunctionImport Name="pa_Usuarios_SelectTodo" ReturnType="Collection(LithioBDModel.pa_Usuarios_SelectTodo_Result)" />
           <FunctionImport Name="sp_alterdiagram">
             <Parameter Name="diagramname" Mode="In" Type="String" />
             <Parameter Name="owner_id" Mode="In" Type="Int32" />
@@ -637,6 +645,16 @@
           <Property Type="String" Name="Sigla_Pais" Nullable="false" MaxLength="3" />
           <Property Type="String" Name="Moneda_Pais" Nullable="false" MaxLength="200" />
         </ComplexType>
+        <ComplexType Name="pa_Permisos_Select_Result">
+          <Property Type="Int32" Name="Id_Usuario" Nullable="false" />
+          <Property Type="String" Name="Primer_Nombre" Nullable="false" MaxLength="200" />
+          <Property Type="String" Name="Primer_Apellido" Nullable="false" MaxLength="200" />
+          <Property Type="String" Name="Segundo_Apellido" Nullable="false" MaxLength="200" />
+          <Property Type="Int32" Name="Id_Tipo_Usuario" Nullable="false" />
+          <Property Type="String" Name="Desc_Tipo_Usuario" Nullable="false" MaxLength="200" />
+          <Property Type="Int32" Name="Id_Estado_Usuario" Nullable="false" />
+          <Property Type="String" Name="Desc_Estado_Usuario" Nullable="false" MaxLength="200" />
+        </ComplexType>
         <ComplexType Name="pa_Presentaciones_Select_Result">
           <Property Type="Int32" Name="Id_Presentacion" Nullable="false" />
           <Property Type="String" Name="Nombre_Presentacion" Nullable="false" MaxLength="200" />
@@ -658,12 +676,12 @@
           <Property Type="String" Name="Nombre_Proveedor" Nullable="false" MaxLength="200" />
           <Property Type="Int32" Name="Id_Pais" Nullable="false" />
         </ComplexType>
-        <ComplexType Name="pa_RetornaUsuarioPwd_Select_Result">
+        <ComplexType Name="pa_RetornaUsuarioCorreoPwd_Select_Result">
           <Property Type="Int32" Name="Id_Usuario" Nullable="false" />
           <Property Type="String" Name="Primer_Nombre" Nullable="false" MaxLength="200" />
           <Property Type="String" Name="Primer_Apellido" Nullable="false" MaxLength="200" />
           <Property Type="String" Name="Segundo_Apellido" Nullable="false" MaxLength="200" />
-          <Property Type="String" Name="Nombre_Usuario" Nullable="false" MaxLength="200" />
+          <Property Type="String" Name="Correo_Electronico" Nullable="false" MaxLength="200" />
           <Property Type="String" Name="Contrasena_Usuario" Nullable="false" MaxLength="200" />
           <Property Type="Int32" Name="Id_Tipo_Usuario" Nullable="false" />
           <Property Type="String" Name="Desc_Tipo_Usuario" Nullable="false" MaxLength="200" />
@@ -675,8 +693,15 @@
           <Property Type="String" Name="Primer_Nombre" Nullable="false" MaxLength="200" />
           <Property Type="String" Name="Primer_Apellido" Nullable="false" MaxLength="200" />
           <Property Type="String" Name="Segundo_Apellido" Nullable="false" MaxLength="200" />
-          <Property Type="String" Name="Nombre_Usuario" Nullable="false" MaxLength="200" />
           <Property Type="String" Name="Desc_Tipo_Usuario" Nullable="false" MaxLength="200" />
+        </ComplexType>
+        <ComplexType Name="pa_Usuarios_SelectTodo_Result">
+          <Property Type="Int32" Name="Id_Usuario" Nullable="false" />
+          <Property Type="String" Name="Primer_Nombre" Nullable="false" MaxLength="200" />
+          <Property Type="String" Name="Primer_Apellido" Nullable="false" MaxLength="200" />
+          <Property Type="String" Name="Segundo_Apellido" Nullable="false" MaxLength="200" />
+          <Property Type="String" Name="Correo_Electronico" Nullable="false" MaxLength="200" />
+          <Property Type="String" Name="Contrasena_Usuario" Nullable="false" MaxLength="200" />
         </ComplexType>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
@@ -791,7 +816,7 @@
                 <ScalarProperty Name="Primer_Nombre" ColumnName="Primer_Nombre" />
                 <ScalarProperty Name="Primer_Apellido" ColumnName="Primer_Apellido" />
                 <ScalarProperty Name="Segundo_Apellido" ColumnName="Segundo_Apellido" />
-                <ScalarProperty Name="Nombre_Usuario" ColumnName="Nombre_Usuario" />
+                <ScalarProperty Name="Correo_Electronico" ColumnName="Correo_Electronico" />
                 <ScalarProperty Name="Contrasena_Usuario" ColumnName="Contrasena_Usuario" />
                 <ScalarProperty Name="Id_Tipo_Usuario" ColumnName="Id_Tipo_Usuario" />
                 <ScalarProperty Name="Id_Estado_Usuario" ColumnName="Id_Estado_Usuario" />
@@ -817,6 +842,20 @@
                 <ScalarProperty Name="Nombre_Pais" ColumnName="Nombre_Pais" />
                 <ScalarProperty Name="Sigla_Pais" ColumnName="Sigla_Pais" />
                 <ScalarProperty Name="Moneda_Pais" ColumnName="Moneda_Pais" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="pa_Permisos_Select" FunctionName="LithioBDModel.Store.pa_Permisos_Select">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="LithioBDModel.pa_Permisos_Select_Result">
+                <ScalarProperty Name="Id_Usuario" ColumnName="Id_Usuario" />
+                <ScalarProperty Name="Primer_Nombre" ColumnName="Primer_Nombre" />
+                <ScalarProperty Name="Primer_Apellido" ColumnName="Primer_Apellido" />
+                <ScalarProperty Name="Segundo_Apellido" ColumnName="Segundo_Apellido" />
+                <ScalarProperty Name="Id_Tipo_Usuario" ColumnName="Id_Tipo_Usuario" />
+                <ScalarProperty Name="Desc_Tipo_Usuario" ColumnName="Desc_Tipo_Usuario" />
+                <ScalarProperty Name="Id_Estado_Usuario" ColumnName="Id_Estado_Usuario" />
+                <ScalarProperty Name="Desc_Estado_Usuario" ColumnName="Desc_Estado_Usuario" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -861,14 +900,14 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="pa_RetornaUsuarioPwd_Select" FunctionName="LithioBDModel.Store.pa_RetornaUsuarioPwd_Select">
+          <FunctionImportMapping FunctionImportName="pa_RetornaUsuarioCorreoPwd_Select" FunctionName="LithioBDModel.Store.pa_RetornaUsuarioCorreoPwd_Select">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="LithioBDModel.pa_RetornaUsuarioPwd_Select_Result">
+              <ComplexTypeMapping TypeName="LithioBDModel.pa_RetornaUsuarioCorreoPwd_Select_Result">
                 <ScalarProperty Name="Id_Usuario" ColumnName="Id_Usuario" />
                 <ScalarProperty Name="Primer_Nombre" ColumnName="Primer_Nombre" />
                 <ScalarProperty Name="Primer_Apellido" ColumnName="Primer_Apellido" />
                 <ScalarProperty Name="Segundo_Apellido" ColumnName="Segundo_Apellido" />
-                <ScalarProperty Name="Nombre_Usuario" ColumnName="Nombre_Usuario" />
+                <ScalarProperty Name="Correo_Electronico" ColumnName="Correo_Electronico" />
                 <ScalarProperty Name="Contrasena_Usuario" ColumnName="Contrasena_Usuario" />
                 <ScalarProperty Name="Id_Tipo_Usuario" ColumnName="Id_Tipo_Usuario" />
                 <ScalarProperty Name="Desc_Tipo_Usuario" ColumnName="Desc_Tipo_Usuario" />
@@ -885,8 +924,19 @@
                 <ScalarProperty Name="Primer_Nombre" ColumnName="Primer_Nombre" />
                 <ScalarProperty Name="Primer_Apellido" ColumnName="Primer_Apellido" />
                 <ScalarProperty Name="Segundo_Apellido" ColumnName="Segundo_Apellido" />
-                <ScalarProperty Name="Nombre_Usuario" ColumnName="Nombre_Usuario" />
                 <ScalarProperty Name="Desc_Tipo_Usuario" ColumnName="Desc_Tipo_Usuario" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="pa_Usuarios_SelectTodo" FunctionName="LithioBDModel.Store.pa_Usuarios_SelectTodo">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="LithioBDModel.pa_Usuarios_SelectTodo_Result">
+                <ScalarProperty Name="Id_Usuario" ColumnName="Id_Usuario" />
+                <ScalarProperty Name="Primer_Nombre" ColumnName="Primer_Nombre" />
+                <ScalarProperty Name="Primer_Apellido" ColumnName="Primer_Apellido" />
+                <ScalarProperty Name="Segundo_Apellido" ColumnName="Segundo_Apellido" />
+                <ScalarProperty Name="Correo_Electronico" ColumnName="Correo_Electronico" />
+                <ScalarProperty Name="Contrasena_Usuario" ColumnName="Contrasena_Usuario" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

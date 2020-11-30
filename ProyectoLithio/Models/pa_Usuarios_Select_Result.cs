@@ -17,7 +17,6 @@ namespace ProyectoLithio.Models
         public string Primer_Nombre { get; set; }
         public string Primer_Apellido { get; set; }
         public string Segundo_Apellido { get; set; }
-        public string Nombre_Usuario { get; set; }
         public string Desc_Tipo_Usuario { get; set; }
     }
 }

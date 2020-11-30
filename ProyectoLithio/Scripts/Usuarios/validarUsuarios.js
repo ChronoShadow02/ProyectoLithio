@@ -17,12 +17,13 @@ function validaUsuarios() {
                 required: true,
                 maxlength: 200
             },
-            Nombre_Usuario: {
+            Correo_Electronico: {
                 required: true,
+                email: true,
                 maxlength: 200
             },
             Contrasena_Usuario: {
-                required: true,
+                required:true,
                 maxlength: 200
             }
         }

@@ -24,7 +24,7 @@ namespace ProyectoLithio.Controllers
             if (sesionIniciada == true)
             {
                 /// se "reconstruye " los datos del modelo accediendo al objeto Session
-                pa_RetornaUsuarioPwd_Select_Result modelo = (pa_RetornaUsuarioPwd_Select_Result) this.Session["datosUsuario"];
+                pa_RetornaUsuarioCorreoPwd_Select_Result modelo = (pa_RetornaUsuarioCorreoPwd_Select_Result) this.Session["datosUsuario"];
 
                 return View(modelo);
             }

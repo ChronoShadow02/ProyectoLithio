@@ -30,12 +30,12 @@ namespace ProyectoLithio.Controllers
         /// <param name="pModelo"></param>
         /// <returns></returns>
         [HttpPost]
-        public ActionResult VerificaLogin(pa_RetornaUsuarioPwd_Select_Result pModelo)
+        public ActionResult VerificaLogin(pa_RetornaUsuarioCorreoPwd_Select_Result pModelo)
         {
-            
+
             ///Busca el usuario tomando en cuenta el usuario y contraseña
-            pa_RetornaUsuarioPwd_Select_Result usuarioBuscar = 
-                this.modeloBD.pa_RetornaUsuarioPwd_Select(pModelo.Nombre_Usuario, pModelo.Contrasena_Usuario).FirstOrDefault();
+            pa_RetornaUsuarioCorreoPwd_Select_Result usuarioBuscar = 
+                this.modeloBD.pa_RetornaUsuarioCorreoPwd_Select(pModelo.Correo_Electronico, pModelo.Contrasena_Usuario).FirstOrDefault();
 
             if (usuarioBuscar == null)
             {

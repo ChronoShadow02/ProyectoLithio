@@ -132,6 +132,7 @@
     <Compile Include="Controllers\InicioController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\PaisesController.cs" />
+    <Compile Include="Controllers\PermisosController.cs" />
     <Compile Include="Controllers\PresentacionesController.cs" />
     <Compile Include="Controllers\ProveedoresController.cs" />
     <Compile Include="Controllers\UsuariosController.cs" />
@@ -171,6 +172,9 @@
     <Compile Include="Models\pa_Paises_Select_Result.cs">
       <DependentUpon>ModelBD.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\pa_Permisos_Select_Result.cs">
+      <DependentUpon>ModelBD.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\pa_PresentacionesRetornaID_Result.cs">
       <DependentUpon>ModelBD.tt</DependentUpon>
     </Compile>
@@ -183,7 +187,10 @@
     <Compile Include="Models\pa_Proveedores_Select_Result.cs">
       <DependentUpon>ModelBD.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\pa_RetornaUsuarioPwd_Select_Result.cs">
+    <Compile Include="Models\pa_RetornaUsuarioCorreoPwd_Select_Result.cs">
+      <DependentUpon>ModelBD.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\pa_Usuarios_SelectTodo_Result.cs">
       <DependentUpon>ModelBD.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\pa_Usuarios_Select_Result.cs">
@@ -432,6 +439,8 @@
     <Content Include="Views\Proveedores\ProveedoresLista.cshtml" />
     <Content Include="Views\Proveedores\ProveedoresNuevo.cshtml" />
     <Content Include="Views\Proveedores\ProveedoresModifica.cshtml" />
+    <Content Include="Views\Usuarios\UsuarioModifica.cshtml" />
+    <Content Include="Views\Permisos\PermisosLista.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

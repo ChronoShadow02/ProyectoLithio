@@ -1,13 +1,10 @@
-﻿@model List<ProyectoLithio.Models.pa_Usuarios_Select_Result>
+﻿@model List<ProyectoLithio.Models.pa_Permisos_Select_Result>
 @{
-    ViewBag.Title = "Lista de usuarios";
+    ViewBag.Title = "Lista de Permisos";
     Layout = "~/Views/Shared/_LayoutCosteo.cshtml";
 }
-@section styles{
-    <link href="~/Content/Tablas/datatables.min.css" rel="stylesheet" />
-    <link href="~/Content/Tablas/dataTables.bootstrap4.min.css" rel="stylesheet" />
-}
-<h2>Lista de usuarios</h2>
+
+<h2>Lista de Permisos</h2>
 <br />
 <div class="row">
     <div class="col-lg-12">
@@ -17,16 +14,20 @@
                     <tr>
                         <th>Identificador</th>
                         <th>Nombre Completo</th>
+                        <th>Tipo de usuario</th>
+                        <th>Estado</th>
                         <th>Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (var oListaUsuarios in this.Model)
+                    @foreach (var oListaPermisos in this.Model)
                     {
                         <tr>
-                            <td>@oListaUsuarios.Id_Usuario</td>
-                            <td>@oListaUsuarios.Primer_Nombre @oListaUsuarios.Primer_Apellido @oListaUsuarios.Segundo_Apellido</td>
-                            <td><a href="~/Usuarios/UsuariosModifica" class="btn btn-success">Editar</a></td>
+                            <td>@oListaPermisos.Id_Usuario</td>
+                            <td>@oListaPermisos.Primer_Nombre @oListaPermisos.Primer_Apellido @oListaPermisos.Segundo_Apellido</td>
+                            <td>@oListaPermisos.Desc_Tipo_Usuario</td>
+                            <td>@oListaPermisos.Desc_Estado_Usuario</td>
+                            <td><a href="~/Permisos/PermisosModifica" class="btn btn-success">Editar</a></td>
                         </tr>
                     }
                 </tbody>
@@ -47,5 +48,7 @@
     <script src="~/Scripts/Tablas/datatables.min.js"></script>
     <script src="~/Scripts/Tablas/mensajesGenericosDataTables.js"></script>
 }
+
+
 
 
