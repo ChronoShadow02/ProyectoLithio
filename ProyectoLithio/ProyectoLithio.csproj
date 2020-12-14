@@ -166,10 +166,16 @@
     <Compile Include="Models\Paises.cs">
       <DependentUpon>ModelBD.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\pa_EstadoUsuario_Select_Result.cs">
+      <DependentUpon>ModelBD.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\pa_PaisesRetornaID_Result.cs">
       <DependentUpon>ModelBD.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\pa_Paises_Select_Result.cs">
+      <DependentUpon>ModelBD.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\pa_PermisosRetornaID_Result.cs">
       <DependentUpon>ModelBD.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\pa_Permisos_Select_Result.cs">
@@ -188,6 +194,12 @@
       <DependentUpon>ModelBD.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\pa_RetornaUsuarioCorreoPwd_Select_Result.cs">
+      <DependentUpon>ModelBD.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\pa_TipoUsuario_Select_Result.cs">
+      <DependentUpon>ModelBD.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\pa_UsuariosRetornaID_Result.cs">
       <DependentUpon>ModelBD.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\pa_Usuarios_SelectTodo_Result.cs">
@@ -441,6 +453,7 @@
     <Content Include="Views\Proveedores\ProveedoresModifica.cshtml" />
     <Content Include="Views\Usuarios\UsuarioModifica.cshtml" />
     <Content Include="Views\Permisos\PermisosLista.cshtml" />
+    <Content Include="Views\Permisos\PermisosModifica.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

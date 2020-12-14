@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="LithioBDModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="LithioBDModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Articulos">
           <Key>
             <PropertyRef Name="Id_Articulo" />
@@ -184,6 +184,7 @@
           </ReferentialConstraint>
         </Association>
         <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+        <Function Name="pa_EstadoUsuario_Select" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="pa_Paises_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Nombre_Pais" Type="varchar" Mode="In" />
           <Parameter Name="Sigla_Pais" Type="varchar" Mode="In" />
@@ -200,6 +201,14 @@
           <Parameter Name="Id_Pais" Type="int" Mode="In" />
         </Function>
         <Function Name="pa_Permisos_Select" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="pa_Permisos_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id_Usuario" Type="int" Mode="In" />
+          <Parameter Name="Id_Estado_Usuario" Type="int" Mode="In" />
+          <Parameter Name="Id_Tipo_Usuario" Type="int" Mode="In" />
+        </Function>
+        <Function Name="pa_PermisosRetornaID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id_Usuario" Type="int" Mode="In" />
+        </Function>
         <Function Name="pa_Presentaciones_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Nombre_Presentacion" Type="varchar" Mode="In" />
         </Function>
@@ -230,6 +239,7 @@
           <Parameter Name="Correo" Type="varchar" Mode="In" />
           <Parameter Name="Contrasena" Type="varchar" Mode="In" />
         </Function>
+        <Function Name="pa_TipoUsuario_Select" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="pa_Usuarios_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Primer_Nombre" Type="varchar" Mode="In" />
           <Parameter Name="Primer_Apellido" Type="varchar" Mode="In" />
@@ -241,6 +251,17 @@
         </Function>
         <Function Name="pa_Usuarios_Select" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="pa_Usuarios_SelectTodo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="pa_UsuariosRetornaID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id_Usuario" Type="int" Mode="In" />
+        </Function>
+        <Function Name="pa_UsuariosUpdate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Primer_Nombre" Type="varchar" Mode="In" />
+          <Parameter Name="Primer_Apellido" Type="varchar" Mode="In" />
+          <Parameter Name="Segundo_Apellido" Type="varchar" Mode="In" />
+          <Parameter Name="Correo_Electronico" Type="varchar" Mode="In" />
+          <Parameter Name="Contrasena_Usuario" Type="varchar" Mode="In" />
+          <Parameter Name="Id_Usuario" Type="int" Mode="In" />
+        </Function>
         <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
           <Parameter Name="owner_id" Type="int" Mode="In" />
@@ -310,8 +331,7 @@
             <End Role="Usuarios" EntitySet="Usuarios" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="LithioBDModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -558,11 +578,11 @@
             <Parameter Name="Moneda_Pais" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="pa_PaisesRetornaID" ReturnType="Collection(LithioBDModel.pa_PaisesRetornaID_Result)">
-            <Parameter Name="Id_Pais" Mode="In" Type="Int32" />
+          <Parameter Name="Id_Pais" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="pa_Permisos_Select" ReturnType="Collection(LithioBDModel.pa_Permisos_Select_Result)" />
           <FunctionImport Name="pa_Presentaciones_Insert">
-            <Parameter Name="Nombre_Presentacion" Mode="In" Type="String" />
+          <Parameter Name="Nombre_Presentacion" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="pa_Presentaciones_Select" ReturnType="Collection(LithioBDModel.pa_Presentaciones_Select_Result)" />
           <FunctionImport Name="pa_Presentaciones_Update">
@@ -570,7 +590,7 @@
             <Parameter Name="Nombre_Presentacion" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="pa_PresentacionesRetornaID" ReturnType="Collection(LithioBDModel.pa_PresentacionesRetornaID_Result)">
-            <Parameter Name="Id_Presentacion" Mode="In" Type="Int32" />
+          <Parameter Name="Id_Presentacion" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="pa_Proveedores_Insert">
             <Parameter Name="Nombre_Proveedor" Mode="In" Type="String" />
@@ -585,7 +605,7 @@
             <Parameter Name="Id_Pais" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="pa_ProveedoresRetornaID" ReturnType="Collection(LithioBDModel.pa_ProveedoresRetornaID_Result)">
-            <Parameter Name="Id_Proveedor" Mode="In" Type="Int32" />
+          <Parameter Name="Id_Proveedor" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="pa_RetornaUsuarioCorreoPwd_Select" ReturnType="Collection(LithioBDModel.pa_RetornaUsuarioCorreoPwd_Select_Result)">
             <Parameter Name="Correo" Mode="In" Type="String" />
@@ -632,6 +652,27 @@
             <Parameter Name="new_diagramname" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="sp_upgraddiagrams" />
+          <FunctionImport Name="pa_UsuariosRetornaID" ReturnType="Collection(LithioBDModel.pa_UsuariosRetornaID_Result)">
+          <Parameter Name="Id_Usuario" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="pa_UsuariosUpdate">
+            <Parameter Name="Primer_Nombre" Mode="In" Type="String" />
+            <Parameter Name="Primer_Apellido" Mode="In" Type="String" />
+            <Parameter Name="Segundo_Apellido" Mode="In" Type="String" />
+            <Parameter Name="Correo_Electronico" Mode="In" Type="String" />
+            <Parameter Name="Contrasena_Usuario" Mode="In" Type="String" />
+            <Parameter Name="Id_Usuario" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="pa_PermisosRetornaID" ReturnType="Collection(LithioBDModel.pa_PermisosRetornaID_Result)">
+          <Parameter Name="Id_Usuario" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="pa_Permisos_Update">
+            <Parameter Name="Id_Usuario" Mode="In" Type="Int32" />
+            <Parameter Name="Id_Estado_Usuario" Mode="In" Type="Int32" />
+            <Parameter Name="Id_Tipo_Usuario" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="pa_EstadoUsuario_Select" ReturnType="Collection(LithioBDModel.pa_EstadoUsuario_Select_Result)" />
+          <FunctionImport Name="pa_TipoUsuario_Select" ReturnType="Collection(LithioBDModel.pa_TipoUsuario_Select_Result)" />
         </EntityContainer>
         <ComplexType Name="pa_Paises_Select_Result">
           <Property Type="Int32" Name="Id_Pais" Nullable="false" />
@@ -713,6 +754,32 @@
           <Property Type="Int32" Name="ID" Nullable="false" />
           <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
           <Property Type="Int32" Name="OwnerID" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="pa_UsuariosRetornaID_Result">
+          <Property Type="Int32" Name="Id_Usuario" Nullable="false" />
+          <Property Type="String" Name="Primer_Nombre" Nullable="false" MaxLength="200" />
+          <Property Type="String" Name="Primer_Apellido" Nullable="false" MaxLength="200" />
+          <Property Type="String" Name="Segundo_Apellido" Nullable="false" MaxLength="200" />
+          <Property Type="String" Name="Correo_Electronico" Nullable="false" MaxLength="200" />
+          <Property Type="String" Name="Contrasena_Usuario" Nullable="false" MaxLength="200" />
+        </ComplexType>
+        <ComplexType Name="pa_PermisosRetornaID_Result">
+          <Property Type="Int32" Name="Id_Usuario" Nullable="false" />
+          <Property Type="String" Name="Primer_Nombre" Nullable="false" MaxLength="200" />
+          <Property Type="String" Name="Primer_Apellido" Nullable="false" MaxLength="200" />
+          <Property Type="String" Name="Segundo_Apellido" Nullable="false" MaxLength="200" />
+          <Property Type="Int32" Name="Id_Tipo_Usuario" Nullable="false" />
+          <Property Type="String" Name="Desc_Tipo_Usuario" Nullable="false" MaxLength="200" />
+          <Property Type="Int32" Name="Id_Estado_Usuario" Nullable="false" />
+          <Property Type="String" Name="Desc_Estado_Usuario" Nullable="false" MaxLength="200" />
+        </ComplexType>
+        <ComplexType Name="pa_EstadoUsuario_Select_Result">
+          <Property Type="Int32" Name="Id_Estado_Usuario" Nullable="false" />
+          <Property Type="String" Name="Desc_Estado_Usuario" Nullable="false" MaxLength="200" />
+        </ComplexType>
+        <ComplexType Name="pa_TipoUsuario_Select_Result">
+          <Property Type="Int32" Name="Id_Tipo_Usuario" Nullable="false" />
+          <Property Type="String" Name="Desc_Tipo_Usuario" Nullable="false" MaxLength="200" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -964,6 +1031,50 @@
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="LithioBDModel.Store.sp_renamediagram" />
           <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="LithioBDModel.Store.sp_upgraddiagrams" />
+          <FunctionImportMapping FunctionImportName="pa_UsuariosRetornaID" FunctionName="LithioBDModel.Store.pa_UsuariosRetornaID">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="LithioBDModel.pa_UsuariosRetornaID_Result">
+                <ScalarProperty Name="Id_Usuario" ColumnName="Id_Usuario" />
+                <ScalarProperty Name="Primer_Nombre" ColumnName="Primer_Nombre" />
+                <ScalarProperty Name="Primer_Apellido" ColumnName="Primer_Apellido" />
+                <ScalarProperty Name="Segundo_Apellido" ColumnName="Segundo_Apellido" />
+                <ScalarProperty Name="Correo_Electronico" ColumnName="Correo_Electronico" />
+                <ScalarProperty Name="Contrasena_Usuario" ColumnName="Contrasena_Usuario" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="pa_UsuariosUpdate" FunctionName="LithioBDModel.Store.pa_UsuariosUpdate" />
+          <FunctionImportMapping FunctionImportName="pa_PermisosRetornaID" FunctionName="LithioBDModel.Store.pa_PermisosRetornaID">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="LithioBDModel.pa_PermisosRetornaID_Result">
+                <ScalarProperty Name="Id_Usuario" ColumnName="Id_Usuario" />
+                <ScalarProperty Name="Primer_Nombre" ColumnName="Primer_Nombre" />
+                <ScalarProperty Name="Primer_Apellido" ColumnName="Primer_Apellido" />
+                <ScalarProperty Name="Segundo_Apellido" ColumnName="Segundo_Apellido" />
+                <ScalarProperty Name="Id_Tipo_Usuario" ColumnName="Id_Tipo_Usuario" />
+                <ScalarProperty Name="Desc_Tipo_Usuario" ColumnName="Desc_Tipo_Usuario" />
+                <ScalarProperty Name="Id_Estado_Usuario" ColumnName="Id_Estado_Usuario" />
+                <ScalarProperty Name="Desc_Estado_Usuario" ColumnName="Desc_Estado_Usuario" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="pa_Permisos_Update" FunctionName="LithioBDModel.Store.pa_Permisos_Update" />
+          <FunctionImportMapping FunctionImportName="pa_EstadoUsuario_Select" FunctionName="LithioBDModel.Store.pa_EstadoUsuario_Select">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="LithioBDModel.pa_EstadoUsuario_Select_Result">
+                <ScalarProperty Name="Id_Estado_Usuario" ColumnName="Id_Estado_Usuario" />
+                <ScalarProperty Name="Desc_Estado_Usuario" ColumnName="Desc_Estado_Usuario" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="pa_TipoUsuario_Select" FunctionName="LithioBDModel.Store.pa_TipoUsuario_Select">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="LithioBDModel.pa_TipoUsuario_Select_Result">
+                <ScalarProperty Name="Id_Tipo_Usuario" ColumnName="Id_Tipo_Usuario" />
+                <ScalarProperty Name="Desc_Tipo_Usuario" ColumnName="Desc_Tipo_Usuario" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

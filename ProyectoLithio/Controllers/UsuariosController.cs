@@ -19,7 +19,7 @@ namespace ProyectoLithio.Controllers
         [HttpGet]
         public ActionResult UsuariosLista()
         {
-            List<pa_Usuarios_Select_Result> modeloVistaUsuarios = new List<pa_Usuarios_Select_Result> ();
+            List<pa_Usuarios_Select_Result> modeloVistaUsuarios = new List<pa_Usuarios_Select_Result>();
 
             modeloVistaUsuarios = this.modeloBD.pa_Usuarios_Select().ToList();
 
@@ -78,16 +78,57 @@ namespace ProyectoLithio.Controllers
                     Response.Write("<script language = javascript > Swal.fire({title: 'Falló!',text:'" + mensaje + "',icon: 'error',showConfirmButton: true})</script>");
                 }
             }
-                return View();
+            return View();
         }
         #endregion
 
         #region UsuarioModifica
         [HttpGet]
-        public ActionResult UsuarioModifica()
+        public ActionResult UsuarioModifica(int Id_Usuario)
         {
-            
-            return View();
+            pa_UsuariosRetornaID_Result modeloVista = new pa_UsuariosRetornaID_Result();
+
+            modeloVista = this.modeloBD.pa_UsuariosRetornaID(Id_Usuario).FirstOrDefault();
+
+            return View(modeloVista);
+        }
+        #endregion
+
+        #region UsuarioModificaPost 
+
+        public ActionResult UsuarioModifica(pa_UsuariosRetornaID_Result modeloVista)
+        {
+            string mensaje = "";
+            int RegistrosAfectados = 0;
+
+            try
+            {
+                RegistrosAfectados = this.modeloBD.pa_UsuariosUpdate(modeloVista.Primer_Nombre,
+                                                                     modeloVista.Primer_Nombre,
+                                                                     modeloVista.Segundo_Apellido,
+                                                                     modeloVista.Correo_Electronico,
+                                                                     modeloVista.Contrasena_Usuario,
+                                                                     modeloVista.Id_Usuario);
+            }
+            catch (Exception ex)
+            {
+                mensaje = "Ocurrio un error " + ex.Message;
+            }
+            finally
+            {
+                Response.Write("<script src='https://cdn.jsdelivr.net/npm/sweetalert2@10'></script> <br>");
+                if (RegistrosAfectados > 0)
+                {
+                    mensaje = "Usuario Modificado";
+                    Response.Write("<script language = javascript > Swal.fire({title: 'Exito!',text:'" + mensaje + "',icon: 'success',showConfirmButton: true})</script>");
+                }
+                else
+                {
+                    mensaje += ".No se pudo modificar";
+                    Response.Write("<script language = javascript > Swal.fire({title: 'Falló!',text:'" + mensaje + "',icon: 'error',showConfirmButton: true})</script>");
+                }
+            }
+            return View(modeloVista);
         }
         #endregion
     }

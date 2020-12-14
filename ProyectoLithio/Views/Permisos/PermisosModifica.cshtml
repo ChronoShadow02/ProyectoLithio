@@ -1,0 +1,35 @@
+﻿@model ProyectoLithio.Models.pa_PermisosRetornaID_Result
+@{
+    ViewBag.Title = "Modificación de permisos";
+    Layout = "~/Views/Shared/_LayoutCosteo.cshtml";
+}
+
+<h2>Modificación de permisos</h2>
+<br />
+<form method="post" id="frmPermisos">
+    <label><span class="Obligatorio">* Obligatorio</span></label> <br />
+    <div class="form-group">
+        <label><span class="Obligatorio">*</span>Tipo de usuario</label>
+        <select class="form-control">
+            <option value="">Seleccione una opción</option>
+            @{
+                foreach (ProyectoLithio.Models.pa_PermisosRetornaID_Result Permisos in this.ViewBag.ListaProvincias)
+                {
+                    bool esIdTipoUsuarioModelo = Permisos.Id_Tipo_Usuario == Model.Id_Tipo_Usuario;
+
+                    if (esIdTipoUsuarioModelo)
+                    {
+                        <option value="@Permisos.Id_Tipo_Usuario" selected>@Permisos.Desc_Tipo_Usuario</option>
+                    }
+                    else
+                    {
+                        <option value="@Permisos.Id_Tipo_Usuario">@Permisos.Desc_Tipo_Usuario</option>
+                    }
+                }
+
+            }
+        </select>
+    </div>
+</form>
+
+

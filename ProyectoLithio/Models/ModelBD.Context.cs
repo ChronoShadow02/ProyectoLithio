@@ -341,5 +341,79 @@ namespace ProyectoLithio.Models
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_upgraddiagrams");
         }
+    
+        public virtual ObjectResult<pa_UsuariosRetornaID_Result> pa_UsuariosRetornaID(Nullable<int> id_Usuario)
+        {
+            var id_UsuarioParameter = id_Usuario.HasValue ?
+                new ObjectParameter("Id_Usuario", id_Usuario) :
+                new ObjectParameter("Id_Usuario", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<pa_UsuariosRetornaID_Result>("pa_UsuariosRetornaID", id_UsuarioParameter);
+        }
+    
+        public virtual int pa_UsuariosUpdate(string primer_Nombre, string primer_Apellido, string segundo_Apellido, string correo_Electronico, string contrasena_Usuario, Nullable<int> id_Usuario)
+        {
+            var primer_NombreParameter = primer_Nombre != null ?
+                new ObjectParameter("Primer_Nombre", primer_Nombre) :
+                new ObjectParameter("Primer_Nombre", typeof(string));
+    
+            var primer_ApellidoParameter = primer_Apellido != null ?
+                new ObjectParameter("Primer_Apellido", primer_Apellido) :
+                new ObjectParameter("Primer_Apellido", typeof(string));
+    
+            var segundo_ApellidoParameter = segundo_Apellido != null ?
+                new ObjectParameter("Segundo_Apellido", segundo_Apellido) :
+                new ObjectParameter("Segundo_Apellido", typeof(string));
+    
+            var correo_ElectronicoParameter = correo_Electronico != null ?
+                new ObjectParameter("Correo_Electronico", correo_Electronico) :
+                new ObjectParameter("Correo_Electronico", typeof(string));
+    
+            var contrasena_UsuarioParameter = contrasena_Usuario != null ?
+                new ObjectParameter("Contrasena_Usuario", contrasena_Usuario) :
+                new ObjectParameter("Contrasena_Usuario", typeof(string));
+    
+            var id_UsuarioParameter = id_Usuario.HasValue ?
+                new ObjectParameter("Id_Usuario", id_Usuario) :
+                new ObjectParameter("Id_Usuario", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("pa_UsuariosUpdate", primer_NombreParameter, primer_ApellidoParameter, segundo_ApellidoParameter, correo_ElectronicoParameter, contrasena_UsuarioParameter, id_UsuarioParameter);
+        }
+    
+        public virtual ObjectResult<pa_PermisosRetornaID_Result> pa_PermisosRetornaID(Nullable<int> id_Usuario)
+        {
+            var id_UsuarioParameter = id_Usuario.HasValue ?
+                new ObjectParameter("Id_Usuario", id_Usuario) :
+                new ObjectParameter("Id_Usuario", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<pa_PermisosRetornaID_Result>("pa_PermisosRetornaID", id_UsuarioParameter);
+        }
+    
+        public virtual int pa_Permisos_Update(Nullable<int> id_Usuario, Nullable<int> id_Estado_Usuario, Nullable<int> id_Tipo_Usuario)
+        {
+            var id_UsuarioParameter = id_Usuario.HasValue ?
+                new ObjectParameter("Id_Usuario", id_Usuario) :
+                new ObjectParameter("Id_Usuario", typeof(int));
+    
+            var id_Estado_UsuarioParameter = id_Estado_Usuario.HasValue ?
+                new ObjectParameter("Id_Estado_Usuario", id_Estado_Usuario) :
+                new ObjectParameter("Id_Estado_Usuario", typeof(int));
+    
+            var id_Tipo_UsuarioParameter = id_Tipo_Usuario.HasValue ?
+                new ObjectParameter("Id_Tipo_Usuario", id_Tipo_Usuario) :
+                new ObjectParameter("Id_Tipo_Usuario", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("pa_Permisos_Update", id_UsuarioParameter, id_Estado_UsuarioParameter, id_Tipo_UsuarioParameter);
+        }
+    
+        public virtual ObjectResult<pa_EstadoUsuario_Select_Result> pa_EstadoUsuario_Select()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<pa_EstadoUsuario_Select_Result>("pa_EstadoUsuario_Select");
+        }
+    
+        public virtual ObjectResult<pa_TipoUsuario_Select_Result> pa_TipoUsuario_Select()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<pa_TipoUsuario_Select_Result>("pa_TipoUsuario_Select");
+        }
     }
 }

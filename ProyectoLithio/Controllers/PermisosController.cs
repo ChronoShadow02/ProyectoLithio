@@ -10,6 +10,8 @@ namespace ProyectoLithio.Controllers
     public class PermisosController : Controller
     {
         LithioBDEntities modeloBD = new LithioBDEntities();
+
+        #region PermisosLista
         // GET: Permisos
         public ActionResult PermisosLista()
         {
@@ -19,5 +21,22 @@ namespace ProyectoLithio.Controllers
 
             return View(modeloVista);
         }
+        #endregion
+
+        #region PermisosModifica
+        /// <summary>
+        /// Metodo que retorna el usuario dependiendo de su id
+        /// </summary>
+        /// <param name="Id_Usuario"></param>
+        /// <returns></returns>
+        public ActionResult PermisosModifica(int Id_Usuario)
+        {
+            pa_PermisosRetornaID_Result modeloVista = new pa_PermisosRetornaID_Result();
+
+            modeloVista = this.modeloBD.pa_PermisosRetornaID(Id_Usuario).FirstOrDefault();
+
+            return View(modeloVista);
+        }
+        #endregion
     }
 }
