@@ -336,6 +336,7 @@
     <Content Include="Scripts\Paises\validaPais.js" />
     <Content Include="Scripts\Panel\expandir-menu.js" />
     <Content Include="Scripts\Panel\relojRigital.js" />
+    <Content Include="Scripts\Permisos\validaPermisos.js" />
     <Content Include="Scripts\popper-utils.js" />
     <Content Include="Scripts\popper-utils.min.js" />
     <Content Include="Scripts\popper.js" />
