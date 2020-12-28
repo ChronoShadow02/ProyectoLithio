@@ -11,7 +11,7 @@ namespace ProyectoLithio.Models
 {
     using System;
     
-    public partial class pa_Articulos_Select_Result
+    public partial class pa_ArticulosRetornaID_Result
     {
         public int Id_Articulo { get; set; }
         public string Codigo_Articulo { get; set; }

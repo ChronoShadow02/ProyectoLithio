@@ -29,21 +29,28 @@
                 <tbody>
                     @foreach (var oListaArticulos in this.Model)
                     {
-                    <tr>
-                        <td>@oListaArticulos.Id_Articulo</td>
-                        <td>@oListaArticulos.Codigo_Articulo</td>
-                        <td>@oListaArticulos.Nombre_Articulo</td>
-                        <td>@oListaArticulos.Descripcion_Articulo</td>
-                        <td>@oListaArticulos.Costo_Articulo</td>
-                        <td>@oListaArticulos.Costo_Anterior_Articulo</td>
-                        <td>@oListaArticulos.Nombre_Proveedor</td>
-                        <td>@oListaArticulos.Nombre_Presentacion</td>
-                        <td>@oListaArticulos.Costo_Articulo</td>
-                    </tr>
+                        <tr>
+                            <td>@oListaArticulos.Id_Articulo</td>
+                            <td>@oListaArticulos.Codigo_Articulo</td>
+                            <td>@oListaArticulos.Nombre_Articulo</td>
+                            <td>@oListaArticulos.Descripcion_Articulo</td>
+                            <td>@oListaArticulos.Costo_Articulo</td>
+                            <td>@oListaArticulos.Costo_Anterior_Articulo</td>
+                            <td>@oListaArticulos.Nombre_Proveedor</td>
+                            <td>@oListaArticulos.Nombre_Presentacion</td>
+                            <td>@oListaArticulos.Costo_Articulo</td>
+                        </tr>
                     }
                 </tbody>
             </table>
         </div>
+    </div>
+</div>
+<br />
+<br />
+<div class="row">
+    <div class="col-lg-12 text-center">
+        <a href="~/Articulos/ArticulosNuevo" class="btn btn-primary">Nuevo Artículo</a>
     </div>
 </div>
 @section scripts{

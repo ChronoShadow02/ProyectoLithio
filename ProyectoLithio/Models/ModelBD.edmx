@@ -184,7 +184,29 @@
           </ReferentialConstraint>
         </Association>
         <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+        <Function Name="pa_Articulos_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Codigo_Articulo" Type="varchar" Mode="In" />
+          <Parameter Name="Nombre_Articulo" Type="varchar" Mode="In" />
+          <Parameter Name="Descripcion_Articulo" Type="varchar" Mode="In" />
+          <Parameter Name="Costo_Articulo" Type="float" Mode="In" />
+          <Parameter Name="Costo_Anterior_Articulo" Type="float" Mode="In" />
+          <Parameter Name="Id_Proveedor" Type="int" Mode="In" />
+          <Parameter Name="Id_Presentacion" Type="int" Mode="In" />
+        </Function>
         <Function Name="pa_Articulos_Select" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="pa_Articulos_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id_Articulo" Type="int" Mode="In" />
+          <Parameter Name="Codigo_Articulo" Type="varchar" Mode="In" />
+          <Parameter Name="Nombre_Articulo" Type="varchar" Mode="In" />
+          <Parameter Name="Descripcion_Articulo" Type="varchar" Mode="In" />
+          <Parameter Name="Costo_Articulo" Type="float" Mode="In" />
+          <Parameter Name="Costo_Anterior_Articulo" Type="float" Mode="In" />
+          <Parameter Name="Id_Proveedor" Type="int" Mode="In" />
+          <Parameter Name="Id_Presentacion" Type="int" Mode="In" />
+        </Function>
+        <Function Name="pa_ArticulosRetornaID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id_Articulo" Type="int" Mode="In" />
+        </Function>
         <Function Name="pa_EstadoUsuario_Select" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="pa_Paises_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Nombre_Pais" Type="varchar" Mode="In" />
@@ -674,6 +696,28 @@
             <Parameter Name="new_diagramname" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="sp_upgraddiagrams" />
+          <FunctionImport Name="pa_Articulos_Insert">
+            <Parameter Name="Codigo_Articulo" Mode="In" Type="String" />
+            <Parameter Name="Nombre_Articulo" Mode="In" Type="String" />
+            <Parameter Name="Descripcion_Articulo" Mode="In" Type="String" />
+            <Parameter Name="Costo_Articulo" Mode="In" Type="Double" />
+            <Parameter Name="Costo_Anterior_Articulo" Mode="In" Type="Double" />
+            <Parameter Name="Id_Proveedor" Mode="In" Type="Int32" />
+            <Parameter Name="Id_Presentacion" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="pa_Articulos_Update">
+            <Parameter Name="Id_Articulo" Mode="In" Type="Int32" />
+            <Parameter Name="Codigo_Articulo" Mode="In" Type="String" />
+            <Parameter Name="Nombre_Articulo" Mode="In" Type="String" />
+            <Parameter Name="Descripcion_Articulo" Mode="In" Type="String" />
+            <Parameter Name="Costo_Articulo" Mode="In" Type="Double" />
+            <Parameter Name="Costo_Anterior_Articulo" Mode="In" Type="Double" />
+            <Parameter Name="Id_Proveedor" Mode="In" Type="Int32" />
+            <Parameter Name="Id_Presentacion" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="pa_ArticulosRetornaID" ReturnType="Collection(LithioBDModel.pa_ArticulosRetornaID_Result)">
+          <Parameter Name="Id_Articulo" Mode="In" Type="Int32" />
+          </FunctionImport>
           <FunctionImport Name="pa_Articulos_Select" ReturnType="Collection(LithioBDModel.pa_Articulos_Select_Result)" />
         </EntityContainer>
         <ComplexType Name="pa_EstadoUsuario_Select_Result">
@@ -783,6 +827,18 @@
           <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
           <Property Type="Int32" Name="OwnerID" Nullable="false" />
         </ComplexType>
+        <ComplexType Name="pa_ArticulosRetornaID_Result">
+          <Property Type="Int32" Name="Id_Articulo" Nullable="false" />
+          <Property Type="String" Name="Codigo_Articulo" Nullable="false" MaxLength="200" />
+          <Property Type="String" Name="Nombre_Articulo" Nullable="false" MaxLength="200" />
+          <Property Type="String" Name="Descripcion_Articulo" Nullable="false" MaxLength="200" />
+          <Property Type="Double" Name="Costo_Articulo" Nullable="false" />
+          <Property Type="Double" Name="Costo_Anterior_Articulo" Nullable="false" />
+          <Property Type="Int32" Name="Id_Proveedor" Nullable="false" />
+          <Property Type="String" Name="Nombre_Proveedor" Nullable="false" MaxLength="200" />
+          <Property Type="Int32" Name="Id_Presentacion" Nullable="false" />
+          <Property Type="String" Name="Nombre_Presentacion" Nullable="false" MaxLength="200" />
+        </ComplexType>
         <ComplexType Name="pa_Articulos_Select_Result">
           <Property Type="Int32" Name="Id_Articulo" Nullable="false" />
           <Property Type="String" Name="Codigo_Articulo" Nullable="false" MaxLength="200" />
@@ -790,7 +846,9 @@
           <Property Type="String" Name="Descripcion_Articulo" Nullable="false" MaxLength="200" />
           <Property Type="Double" Name="Costo_Articulo" Nullable="false" />
           <Property Type="Double" Name="Costo_Anterior_Articulo" Nullable="false" />
+          <Property Type="Int32" Name="Id_Proveedor" Nullable="false" />
           <Property Type="String" Name="Nombre_Proveedor" Nullable="false" MaxLength="200" />
+          <Property Type="Int32" Name="Id_Presentacion" Nullable="false" />
           <Property Type="String" Name="Nombre_Presentacion" Nullable="false" MaxLength="200" />
         </ComplexType>
       </Schema>
@@ -1087,6 +1145,24 @@
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="LithioBDModel.Store.sp_renamediagram" />
           <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="LithioBDModel.Store.sp_upgraddiagrams" />
+          <FunctionImportMapping FunctionImportName="pa_Articulos_Insert" FunctionName="LithioBDModel.Store.pa_Articulos_Insert" />
+          <FunctionImportMapping FunctionImportName="pa_Articulos_Update" FunctionName="LithioBDModel.Store.pa_Articulos_Update" />
+          <FunctionImportMapping FunctionImportName="pa_ArticulosRetornaID" FunctionName="LithioBDModel.Store.pa_ArticulosRetornaID">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="LithioBDModel.pa_ArticulosRetornaID_Result">
+                <ScalarProperty Name="Id_Articulo" ColumnName="Id_Articulo" />
+                <ScalarProperty Name="Codigo_Articulo" ColumnName="Codigo_Articulo" />
+                <ScalarProperty Name="Nombre_Articulo" ColumnName="Nombre_Articulo" />
+                <ScalarProperty Name="Descripcion_Articulo" ColumnName="Descripcion_Articulo" />
+                <ScalarProperty Name="Costo_Articulo" ColumnName="Costo_Articulo" />
+                <ScalarProperty Name="Costo_Anterior_Articulo" ColumnName="Costo_Anterior_Articulo" />
+                <ScalarProperty Name="Id_Proveedor" ColumnName="Id_Proveedor" />
+                <ScalarProperty Name="Nombre_Proveedor" ColumnName="Nombre_Proveedor" />
+                <ScalarProperty Name="Id_Presentacion" ColumnName="Id_Presentacion" />
+                <ScalarProperty Name="Nombre_Presentacion" ColumnName="Nombre_Presentacion" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="pa_Articulos_Select" FunctionName="LithioBDModel.Store.pa_Articulos_Select">
             <ResultMapping>
               <ComplexTypeMapping TypeName="LithioBDModel.pa_Articulos_Select_Result">
@@ -1096,7 +1172,9 @@
                 <ScalarProperty Name="Descripcion_Articulo" ColumnName="Descripcion_Articulo" />
                 <ScalarProperty Name="Costo_Articulo" ColumnName="Costo_Articulo" />
                 <ScalarProperty Name="Costo_Anterior_Articulo" ColumnName="Costo_Anterior_Articulo" />
+                <ScalarProperty Name="Id_Proveedor" ColumnName="Id_Proveedor" />
                 <ScalarProperty Name="Nombre_Proveedor" ColumnName="Nombre_Proveedor" />
+                <ScalarProperty Name="Id_Presentacion" ColumnName="Id_Presentacion" />
                 <ScalarProperty Name="Nombre_Presentacion" ColumnName="Nombre_Presentacion" />
               </ComplexTypeMapping>
             </ResultMapping>

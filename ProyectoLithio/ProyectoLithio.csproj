@@ -167,6 +167,9 @@
     <Compile Include="Models\Paises.cs">
       <DependentUpon>ModelBD.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\pa_ArticulosRetornaID_Result.cs">
+      <DependentUpon>ModelBD.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\pa_Articulos_Select_Result.cs">
       <DependentUpon>ModelBD.tt</DependentUpon>
     </Compile>
@@ -295,6 +298,7 @@
       <LastGenOutput>ModelBD.cs</LastGenOutput>
     </Content>
     <Content Include="Scripts\AjaxGenerico.js" />
+    <Content Include="Scripts\Articulos\validarArticulos.js" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -460,6 +464,7 @@
     <Content Include="Views\Permisos\PermisosLista.cshtml" />
     <Content Include="Views\Permisos\PermisosModifica.cshtml" />
     <Content Include="Views\Articulos\ArticulosLista.cshtml" />
+    <Content Include="Views\Articulos\ArticulosNuevo.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

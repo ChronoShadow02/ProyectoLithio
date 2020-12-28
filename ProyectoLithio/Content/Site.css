@@ -26,3 +26,7 @@ select#ddlPais{
     color:#000 !important;
     font-weight:normal;
 }
+select#ddlPresentacion, select#ddlProveedor {
+    color: #000 !important;
+    font-weight: normal;
+}

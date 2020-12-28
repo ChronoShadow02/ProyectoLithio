@@ -12,7 +12,10 @@ namespace ProyectoLithio.Controllers
         LithioBDEntities modeloBD = new LithioBDEntities();
 
         #region ArticulosLista
-        // GET: Articulos
+        /// <summary>
+        /// Lista de artículos
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public ActionResult ArticulosLista()
         {
@@ -21,7 +24,77 @@ namespace ProyectoLithio.Controllers
             modeloVista = this.modeloBD.pa_Articulos_Select().ToList();
 
             return View(modeloVista);
-        } 
+        }
+        #endregion
+
+
+        #region ArticulosNuevo
+        /// <summary>
+        /// Formulario de Articulos Nuevo
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult ArticulosNuevo()
+        {
+            this.PresentacionViewBag();
+            this.ProveedorViewBag();
+            return View();
+        }
+        #endregion
+        [HttpPost]
+        public ActionResult ArticulosNuevo(pa_Articulos_Select_Result modeloVista)
+        {
+            string mensaje = "";
+            int RegistrosAfectados = 0;
+            try
+            {
+                RegistrosAfectados = this.modeloBD.pa_Articulos_Insert(modeloVista.Codigo_Articulo,
+                                                                       modeloVista.Nombre_Articulo,
+                                                                       modeloVista.Descripcion_Articulo,
+                                                                       modeloVista.Costo_Articulo,
+                                                                       modeloVista.Costo_Anterior_Articulo,
+                                                                       modeloVista.Id_Proveedor,
+                                                                       modeloVista.Id_Presentacion
+                                                                       );
+            }
+            catch (Exception ex)
+            {
+                mensaje = "Hubo un error " + ex.Message;
+            }
+            finally
+            {
+                Response.Write("<script src='https://cdn.jsdelivr.net/npm/sweetalert2@10'></script> <br>");
+                if (RegistrosAfectados > 0)
+                {
+                    mensaje = "Artículo Registrado";
+                    Response.Write("<script language = javascript >Swal.fire({title: 'Exito!',text:'" + mensaje + "',icon: 'success',showConfirmButton: true}); </script>");
+                }
+                else
+                {
+                    mensaje += "No se pudo ingresar";
+                    Response.Write("<script language = javascript > Swal.fire({title: 'Falló!',text:'" + mensaje + "',icon: 'error',showConfirmButton: true})</script>");
+                }
+            }
+                this.PresentacionViewBag();
+            this.ProveedorViewBag();
+            return View();
+        }
+        #region ArticulosNuevoPost
+
+        #endregion
+
+        #region PresentacionViewBag
+        void PresentacionViewBag()
+        {
+            this.ViewBag.ListaPresentaciones = this.modeloBD.pa_Presentaciones_Select().ToList();
+        }
+        #endregion
+
+        #region ProveedorViewBag
+        void ProveedorViewBag()
+        {
+            this.ViewBag.ListaProveedores = this.modeloBD.pa_Proveedores_Select().ToList();
+        }
         #endregion
     }
 }
