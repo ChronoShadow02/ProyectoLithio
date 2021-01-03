@@ -1,0 +1,88 @@
+﻿@model ProyectoLithio.Models.pa_ArticulosRetornaID_Result
+@{
+    ViewBag.Title = "Modificación de artículos";
+    Layout = "~/Views/Shared/_LayoutCosteo.cshtml";
+}
+
+<h2>Modificación de artículos</h2>
+<br />
+<form method="post" id="frmArticulos">
+    <label><span class="Obligatorio">* Obligatorio</span></label> <br />
+    <div class="form-group">
+        <label><span class="Obligatorio">*</span>Código</label>
+        <input type="text" name="Codigo_Articulo" class="form-control" id="Codigo_Articulo" value="@Model.Codigo_Articulo"/>
+    </div>
+    <div class="form-group">
+        <label><span class="Obligatorio">*</span>Nombre</label>
+        <input type="text" name="Nombre_Articulo" class="form-control" id="Nombre_Articulo" value="@Model.Nombre_Articulo"/>
+    </div>
+    <div class="form-group">
+        <label><span class="Obligatorio">*</span>Descripción</label>
+        <input type="text" name="Descripcion_Articulo" class="form-control" id="Descripcion_Articulo" value="@Model.Descripcion_Articulo"/>
+    </div>
+    <div class="form-group">
+        <label><span class="Obligatorio">*</span>Costo</label>
+        <input type="text" name="Costo_Articulo" class="form-control" id="Costo_Articulo" value="@Model.Costo_Articulo"/>
+    </div>
+    <div class="form-group">
+        <label><span class="Obligatorio">*</span>Costo anterior</label>
+        <input type="text" name="Costo_Anterior_Articulo" class="form-control" id="Costo_Anterior_Articulo" value="@Model.Costo_Anterior_Articulo"/>
+    </div>
+    <div class="form-group">
+        <label><span class="Obligatorio">*</span>Proveedor</label>
+        <select id="ddlProveedor" class="form-control" name="Id_Proveedor">
+            <option value="">Seleccione un proveedor</option>
+            @{
+                foreach (ProyectoLithio.Models.pa_Proveedores_Select_Result oListaProveedores in this.ViewBag.ListaProveedores)
+                {
+                    bool esIdListaProveedores = oListaProveedores.Id_Proveedor == Model.Id_Proveedor;
+
+                    if (esIdListaProveedores)
+                    {
+                        <option value="@oListaProveedores.Id_Proveedor" selected>@oListaProveedores.Nombre_Proveedor</option>
+                    }
+                    else
+                    {
+                        <option value="@oListaProveedores.Id_Proveedor">@oListaProveedores.Nombre_Proveedor</option>
+                    }
+
+
+                }
+            }
+        </select>
+    </div>
+    <div class="form-group">
+        <label><span class="Obligatorio">*</span>Presentación</label>
+        <select id="ddlPresentacion" class="form-control" name="Id_Presentacion">
+            <option value="">Seleccione una presentación</option>
+            @{
+                foreach (ProyectoLithio.Models.pa_Presentaciones_Select_Result oListaPresentaciones in this.ViewBag.ListaPresentaciones)
+                {
+                    bool esIdListaPresentaciones = oListaPresentaciones.Id_Presentacion == Model.Id_Presentacion;
+
+                    if (esIdListaPresentaciones)
+                    {
+                        <option value="@oListaPresentaciones.Id_Presentacion" selected>@oListaPresentaciones.Nombre_Presentacion</option>
+                    }
+                    else
+                    {
+                        <option value="@oListaPresentaciones.Id_Presentacion">@oListaPresentaciones.Nombre_Presentacion</option>
+                    }
+
+                }
+            }
+        </select>
+    </div>
+    <div class="form-group text-right">
+        <input type="submit" value="Modificar " class="btn-success btn" id="btnModificarArticulo" />
+        <a href="~/Articulos/ArticulosLista" class="btn btn-info">Regresar a la lista</a>
+    </div>
+
+</form>
+<br />
+@section scripts{
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/validacionesGenericas.js"></script>
+    <script src="~/Scripts/Articulos/validarArticulos.js"></script>
+}
+

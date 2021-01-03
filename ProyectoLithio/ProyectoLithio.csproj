@@ -129,6 +129,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\ArticulosController.cs" />
+    <Compile Include="Controllers\CostosController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InicioController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
@@ -465,9 +466,11 @@
     <Content Include="Views\Permisos\PermisosModifica.cshtml" />
     <Content Include="Views\Articulos\ArticulosLista.cshtml" />
     <Content Include="Views\Articulos\ArticulosNuevo.cshtml" />
+    <Content Include="Views\Articulos\ArticulosModifica.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Costos\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

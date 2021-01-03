@@ -30,3 +30,6 @@ select#ddlPresentacion, select#ddlProveedor {
     color: #000 !important;
     font-weight: normal;
 }
+table.datatable{
+    width:auto !important;
+}

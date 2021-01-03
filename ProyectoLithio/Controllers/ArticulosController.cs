@@ -41,6 +41,8 @@ namespace ProyectoLithio.Controllers
             return View();
         }
         #endregion
+
+        #region ArticulosNuevoPost
         [HttpPost]
         public ActionResult ArticulosNuevo(pa_Articulos_Select_Result modeloVista)
         {
@@ -75,12 +77,64 @@ namespace ProyectoLithio.Controllers
                     Response.Write("<script language = javascript > Swal.fire({title: 'Falló!',text:'" + mensaje + "',icon: 'error',showConfirmButton: true})</script>");
                 }
             }
-                this.PresentacionViewBag();
+            this.PresentacionViewBag();
             this.ProveedorViewBag();
             return View();
         }
-        #region ArticulosNuevoPost
+        #endregion
 
+        #region ArticulosModifica
+        [HttpGet]
+        public ActionResult ArticulosModifica(int Id_Articulo)
+        {
+            pa_ArticulosRetornaID_Result modeloVista = new pa_ArticulosRetornaID_Result();
+
+            modeloVista = this.modeloBD.pa_ArticulosRetornaID(Id_Articulo).FirstOrDefault();
+            this.PresentacionViewBag();
+            this.ProveedorViewBag();
+            return View(modeloVista);
+        }
+        #endregion
+
+        #region ArticulosModificaPost
+        [HttpPost]
+        public ActionResult ArticulosModifica(pa_ArticulosRetornaID_Result modeloVista)
+        {
+            string mensaje = "";
+            int RegistrosAfectados = 0;
+            try
+            {
+                RegistrosAfectados = this.modeloBD.pa_Articulos_Update(modeloVista.Id_Articulo,
+                                                                       modeloVista.Codigo_Articulo,
+                                                                       modeloVista.Nombre_Articulo,
+                                                                       modeloVista.Descripcion_Articulo,
+                                                                       modeloVista.Costo_Articulo,
+                                                                       modeloVista.Costo_Anterior_Articulo,
+                                                                       modeloVista.Id_Proveedor,
+                                                                       modeloVista.Id_Presentacion);
+            }
+            catch (Exception ex)
+            {
+                mensaje = "Hubo un error " + ex.Message;
+            }
+            finally
+            {
+                Response.Write("<script src='https://cdn.jsdelivr.net/npm/sweetalert2@10'></script> <br>");
+                if (RegistrosAfectados > 0)
+                {
+                    mensaje = "Artículo Modificado";
+                    Response.Write("<script language = javascript >Swal.fire({title: 'Exito!',text:'" + mensaje + "',icon: 'success',showConfirmButton: true}); </script>");
+                }
+                else
+                {
+                    mensaje += "No se pudo ingresar";
+                    Response.Write("<script language = javascript > Swal.fire({title: 'Falló!',text:'" + mensaje + "',icon: 'error',showConfirmButton: true})</script>");
+                }
+            }
+            this.PresentacionViewBag();
+            this.ProveedorViewBag();
+            return View(modeloVista);
+        }
         #endregion
 
         #region PresentacionViewBag

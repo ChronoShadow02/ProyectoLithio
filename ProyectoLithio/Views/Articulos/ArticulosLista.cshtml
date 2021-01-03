@@ -38,7 +38,9 @@
                             <td>@oListaArticulos.Costo_Anterior_Articulo</td>
                             <td>@oListaArticulos.Nombre_Proveedor</td>
                             <td>@oListaArticulos.Nombre_Presentacion</td>
-                            <td>@oListaArticulos.Costo_Articulo</td>
+                            <td>
+                                <a href="~/Articulos/ArticulosModifica?Id_Articulo=@oListaArticulos.Id_Articulo" class="btn btn-success">Editar</a>
+                            </td>
                         </tr>
                     }
                 </tbody>
@@ -53,6 +55,7 @@
         <a href="~/Articulos/ArticulosNuevo" class="btn btn-primary">Nuevo Artículo</a>
     </div>
 </div>
+<br />
 @section scripts{
     <script src="~/Scripts/Tablas/datatables.min.js"></script>
     <script src="~/Scripts/Tablas/mensajesGenericosDataTables.js"></script>
