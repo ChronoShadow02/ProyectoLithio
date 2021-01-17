@@ -55,6 +55,10 @@
                         <li><a class="app-menu__item" href="~/Usuarios/UsuariosLista"><i class="app-menu__icon fa fa-user"></i><span class="app-menu__label">Usuarios</span></a></li>
                         <li><a class="app-menu__item" href="~/Permisos/PermisosLista"><i class="app-menu__icon fa fa-user"></i><span class="app-menu__label">Permisos</span></a></li>
                     }
+                    if (modelo.Desc_Tipo_Usuario == "Consultor" && modelo.Desc_Estado_Usuario == "Activo")
+                    {
+                        <li><a class="app-menu__item" href="#"><i class="app-menu__icon fa fa-bar-chart"></i><span class="app-menu__label">Reportes</span></a></li>
+                    }
                     <li><a class="app-menu__item" href="~/Login/CerrarSesion" id="linkCerrarSesion"><i class="app-menu__icon fa fa-sign-out"></i><span class="app-menu__label">Salir</span></a></li>
                 }
             }

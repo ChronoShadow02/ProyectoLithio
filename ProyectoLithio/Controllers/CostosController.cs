@@ -9,7 +9,8 @@ namespace ProyectoLithio.Controllers
     public class CostosController : Controller
     {
         // GET: Costos
-        public ActionResult Index()
+        [HttpGet]
+        public ActionResult Costeo()
         {
             return View();
         }

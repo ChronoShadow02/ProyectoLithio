@@ -180,6 +180,9 @@
     <Compile Include="Models\pa_PaisesRetornaID_Result.cs">
       <DependentUpon>ModelBD.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\pa_Paises_ExistePais_Result.cs">
+      <DependentUpon>ModelBD.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\pa_Paises_Select_Result.cs">
       <DependentUpon>ModelBD.tt</DependentUpon>
     </Compile>
@@ -467,10 +470,10 @@
     <Content Include="Views\Articulos\ArticulosLista.cshtml" />
     <Content Include="Views\Articulos\ArticulosNuevo.cshtml" />
     <Content Include="Views\Articulos\ArticulosModifica.cshtml" />
+    <Content Include="Views\Costos\Costeo.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Costos\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

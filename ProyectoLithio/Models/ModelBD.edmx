@@ -208,6 +208,9 @@
           <Parameter Name="Id_Articulo" Type="int" Mode="In" />
         </Function>
         <Function Name="pa_EstadoUsuario_Select" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="pa_Paises_ExistePais" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="NombrePais" Type="varchar" Mode="In" />
+        </Function>
         <Function Name="pa_Paises_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Nombre_Pais" Type="varchar" Mode="In" />
           <Parameter Name="Sigla_Pais" Type="varchar" Mode="In" />
@@ -719,6 +722,9 @@
           <Parameter Name="Id_Articulo" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="pa_Articulos_Select" ReturnType="Collection(LithioBDModel.pa_Articulos_Select_Result)" />
+          <FunctionImport Name="pa_Paises_ExistePais" ReturnType="Collection(LithioBDModel.pa_Paises_ExistePais_Result)">
+            <Parameter Name="NombrePais" Mode="In" Type="String" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="pa_EstadoUsuario_Select_Result">
           <Property Type="Int32" Name="Id_Estado_Usuario" Nullable="false" />
@@ -850,6 +856,12 @@
           <Property Type="String" Name="Nombre_Proveedor" Nullable="false" MaxLength="200" />
           <Property Type="Int32" Name="Id_Presentacion" Nullable="false" />
           <Property Type="String" Name="Nombre_Presentacion" Nullable="false" MaxLength="200" />
+        </ComplexType>
+        <ComplexType Name="pa_Paises_ExistePais_Result">
+          <Property Type="Int32" Name="Id_Pais" Nullable="false" />
+          <Property Type="String" Name="Nombre_Pais" Nullable="false" MaxLength="200" />
+          <Property Type="String" Name="Sigla_Pais" Nullable="false" MaxLength="3" />
+          <Property Type="String" Name="Moneda_Pais" Nullable="false" MaxLength="200" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -1176,6 +1188,16 @@
                 <ScalarProperty Name="Nombre_Proveedor" ColumnName="Nombre_Proveedor" />
                 <ScalarProperty Name="Id_Presentacion" ColumnName="Id_Presentacion" />
                 <ScalarProperty Name="Nombre_Presentacion" ColumnName="Nombre_Presentacion" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="pa_Paises_ExistePais" FunctionName="LithioBDModel.Store.pa_Paises_ExistePais">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="LithioBDModel.pa_Paises_ExistePais_Result">
+                <ScalarProperty Name="Id_Pais" ColumnName="Id_Pais" />
+                <ScalarProperty Name="Nombre_Pais" ColumnName="Nombre_Pais" />
+                <ScalarProperty Name="Sigla_Pais" ColumnName="Sigla_Pais" />
+                <ScalarProperty Name="Moneda_Pais" ColumnName="Moneda_Pais" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

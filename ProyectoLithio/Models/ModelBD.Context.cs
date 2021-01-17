@@ -499,5 +499,14 @@ namespace ProyectoLithio.Models
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<pa_Articulos_Select_Result>("pa_Articulos_Select");
         }
+    
+        public virtual ObjectResult<pa_Paises_ExistePais_Result> pa_Paises_ExistePais(string nombrePais)
+        {
+            var nombrePaisParameter = nombrePais != null ?
+                new ObjectParameter("NombrePais", nombrePais) :
+                new ObjectParameter("NombrePais", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<pa_Paises_ExistePais_Result>("pa_Paises_ExistePais", nombrePaisParameter);
+        }
     }
 }
