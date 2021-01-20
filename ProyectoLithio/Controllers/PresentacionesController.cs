@@ -1,4 +1,4 @@
-﻿using ProyectoLithio.Models;
+﻿ using ProyectoLithio.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,8 +13,6 @@ namespace ProyectoLithio.Controllers
         private LithioBDEntities modeloBD = new LithioBDEntities();
 
         #endregion Modelo de base de datos
-
-        // GET: Presentaciones
 
         #region PresentacionesLista
 
@@ -51,9 +49,20 @@ namespace ProyectoLithio.Controllers
         {
             string mensaje = "";
             int RegistrosAfectados = 0;
+            bool PresentacionExiste = true;
             try
             {
-                RegistrosAfectados = this.modeloBD.pa_Presentaciones_Insert(modeloVista.Nombre_Presentacion);
+                pa_Presentaciones_ExistePresentacion_Result PresentacionVerifica = new pa_Presentaciones_ExistePresentacion_Result();
+                PresentacionVerifica = this.modeloBD.pa_Presentaciones_ExistePresentacion(modeloVista.Nombre_Presentacion).FirstOrDefault();
+
+                if (PresentacionVerifica!=null)
+                {
+                    PresentacionExiste = true;
+                }
+                else
+                {
+                    RegistrosAfectados = this.modeloBD.pa_Presentaciones_Insert(modeloVista.Nombre_Presentacion);
+                }
             }
             catch (Exception ex)
             {
@@ -69,8 +78,15 @@ namespace ProyectoLithio.Controllers
                 }
                 else
                 {
-                    mensaje += "No se pudo ingresar";
-                    Response.Write("<script language = javascript > Swal.fire({title: 'Falló!',text:'" + mensaje + "',icon: 'error',showConfirmButton: true})</script>");
+                    if (PresentacionExiste)
+                    {
+                        Response.Write("<script language = javascript > Swal.fire({title: 'Esta presentación ya existe!',text:'" + "" + "',icon: 'error',showConfirmButton: true})</script>");
+                    }
+                    else
+                    {
+                        mensaje += "No se pudo ingresar";
+                        Response.Write("<script language = javascript > Swal.fire({title: 'Falló!',text:'" + mensaje + "',icon: 'error',showConfirmButton: true})</script>");
+                    }
                 }
             }
             return View(modeloVista);
@@ -99,9 +115,21 @@ namespace ProyectoLithio.Controllers
         {
             string mensaje = "";
             int RegistrosAfectados = 0;
+            bool PresentacionExiste = true;
             try
             {
-                RegistrosAfectados = this.modeloBD.pa_Presentaciones_Update(modeloVista.Id_Presentacion, modeloVista.Nombre_Presentacion);
+                pa_Presentaciones_ExistePresentacion_Result PresentacionVerifica = new pa_Presentaciones_ExistePresentacion_Result();
+                PresentacionVerifica = this.modeloBD.pa_Presentaciones_ExistePresentacion(modeloVista.Nombre_Presentacion).FirstOrDefault();
+
+                if (PresentacionVerifica != null)
+                {
+                    PresentacionExiste = true;
+                }
+                else
+                {
+                    RegistrosAfectados = this.modeloBD.pa_Presentaciones_Update(modeloVista.Id_Presentacion, modeloVista.Nombre_Presentacion);
+                }
+                
             }
             catch (Exception ex)
             {
@@ -117,8 +145,15 @@ namespace ProyectoLithio.Controllers
                 }
                 else
                 {
-                    mensaje += "No se pudo ingresar";
-                    Response.Write("<script language = javascript > Swal.fire({title: 'Falló!',text:'" + mensaje + "',icon: 'error',showConfirmButton: true})</script>");
+                    if (PresentacionExiste)
+                    {
+                        Response.Write("<script language = javascript > Swal.fire({title: 'Esta presentación ya existe!',text:'" + "" + "',icon: 'error',showConfirmButton: true})</script>");
+                    }
+                    else
+                    {
+                        mensaje += "No se pudo ingresar";
+                        Response.Write("<script language = javascript > Swal.fire({title: 'Falló!',text:'" + mensaje + "',icon: 'error',showConfirmButton: true})</script>");
+                    }
                 }
             }
             return View(modeloVista);

@@ -13,14 +13,14 @@
         <EntityTypeShape EntityType="LithioBDModel.Proveedores" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="LithioBDModel.sysdiagrams" Width="1.5" PointX="7.75" PointY="2.5" IsExpanded="false" />
         <EntityTypeShape EntityType="LithioBDModel.Tipo_Usuario" Width="1.5" PointX="3.75" PointY="12.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="LithioBDModel.Usuarios" Width="1.5" PointX="6" PointY="8.75" IsExpanded="true" />
         <AssociationConnector Association="LithioBDModel.FK_Articulos_Presentaciones" ManuallyRouted="false" />
         <AssociationConnector Association="LithioBDModel.FK_Articulos_Proveedores" ManuallyRouted="false" />
         <AssociationConnector Association="LithioBDModel.FK_Costos_Articulos" ManuallyRouted="false" />
         <AssociationConnector Association="LithioBDModel.FK_Costos_Presentaciones" ManuallyRouted="false" />
-        <AssociationConnector Association="LithioBDModel.FK_Usuarios_Estado_Usuario" ManuallyRouted="false" />
         <AssociationConnector Association="LithioBDModel.FK_Proveedores_Paises" ManuallyRouted="false" />
-        <AssociationConnector Association="LithioBDModel.FK_Usuarios_Tipo_Usuario" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="LithioBDModel.Usuarios" Width="1.5" PointX="6" PointY="10.125" />
+        <AssociationConnector Association="LithioBDModel.FK_Usuarios_Estado_Usuario" />
+        <AssociationConnector Association="LithioBDModel.FK_Usuarios_Tipo_Usuario" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -508,5 +508,49 @@ namespace ProyectoLithio.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<pa_Paises_ExistePais_Result>("pa_Paises_ExistePais", nombrePaisParameter);
         }
+    
+        public virtual ObjectResult<pa_Presentaciones_ExistePresentacion_Result> pa_Presentaciones_ExistePresentacion(string nombre_Presentacion)
+        {
+            var nombre_PresentacionParameter = nombre_Presentacion != null ?
+                new ObjectParameter("Nombre_Presentacion", nombre_Presentacion) :
+                new ObjectParameter("Nombre_Presentacion", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<pa_Presentaciones_ExistePresentacion_Result>("pa_Presentaciones_ExistePresentacion", nombre_PresentacionParameter);
+        }
+    
+        public virtual ObjectResult<pa_Proveedores_ExisteProveedor_Result> pa_Proveedores_ExisteProveedor(string codigo_Proveedor, string nombre_Proveedor)
+        {
+            var codigo_ProveedorParameter = codigo_Proveedor != null ?
+                new ObjectParameter("Codigo_Proveedor", codigo_Proveedor) :
+                new ObjectParameter("Codigo_Proveedor", typeof(string));
+    
+            var nombre_ProveedorParameter = nombre_Proveedor != null ?
+                new ObjectParameter("Nombre_Proveedor", nombre_Proveedor) :
+                new ObjectParameter("Nombre_Proveedor", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<pa_Proveedores_ExisteProveedor_Result>("pa_Proveedores_ExisteProveedor", codigo_ProveedorParameter, nombre_ProveedorParameter);
+        }
+    
+        public virtual ObjectResult<pa_VerificarCorreoRecuperacionPass_Result> pa_VerificarCorreoRecuperacionPass(string correo_Electronico)
+        {
+            var correo_ElectronicoParameter = correo_Electronico != null ?
+                new ObjectParameter("Correo_Electronico", correo_Electronico) :
+                new ObjectParameter("Correo_Electronico", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<pa_VerificarCorreoRecuperacionPass_Result>("pa_VerificarCorreoRecuperacionPass", correo_ElectronicoParameter);
+        }
+    
+        public virtual int pa_ActualizarTokenRecuperacionPass(string correo_Electronico, string token)
+        {
+            var correo_ElectronicoParameter = correo_Electronico != null ?
+                new ObjectParameter("Correo_Electronico", correo_Electronico) :
+                new ObjectParameter("Correo_Electronico", typeof(string));
+    
+            var tokenParameter = token != null ?
+                new ObjectParameter("Token", token) :
+                new ObjectParameter("Token", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("pa_ActualizarTokenRecuperacionPass", correo_ElectronicoParameter, tokenParameter);
+        }
     }
 }

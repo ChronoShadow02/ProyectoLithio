@@ -122,15 +122,26 @@ namespace ProyectoLithio.Controllers
         [HttpPost]
         public ActionResult PaisModifica(pa_PaisesRetornaID_Result modeloVista)
         {
+
             string mensaje = "";
             int RegistrosAfectados = 0;
-
+            bool PaisExiste = true;
             try
             {
-                RegistrosAfectados = this.modeloBD.pa_Paises_Update(modeloVista.Id_Pais,
+                pa_Paises_ExistePais_Result PaisVerifica = new pa_Paises_ExistePais_Result();
+                PaisVerifica = modeloBD.pa_Paises_ExistePais(modeloVista.Nombre_Pais).FirstOrDefault();
+                if (PaisVerifica != null)///Si no es igual a null o ya existe el dato
+                {
+                    PaisExiste = true;
+                }
+                else
+                {
+                    RegistrosAfectados = this.modeloBD.pa_Paises_Update(modeloVista.Id_Pais,
                                                                     modeloVista.Nombre_Pais,
                                                                     modeloVista.Sigla_Pais,
                                                                     modeloVista.Moneda_Pais);
+                }
+                
             }
             catch (Exception ex)
             {
@@ -146,8 +157,15 @@ namespace ProyectoLithio.Controllers
                 }
                 else
                 {
-                    mensaje += ".No se pudo modificar";
-                    Response.Write("<script language = javascript > Swal.fire({title: 'Falló!',text:'" + mensaje + "',icon: 'error',showConfirmButton: true})</script>");
+                    if (PaisExiste)
+                    {
+                        Response.Write("<script language = javascript > Swal.fire({title: 'Este país ya existe!',text:'" + "" + "',icon: 'error',showConfirmButton: true})</script>");
+                    }
+                    else
+                    {
+                        mensaje += "No se pudo modificar";
+                        Response.Write("<script language = javascript > Swal.fire({title: 'Falló!',text:'" + mensaje + "',icon: 'error',showConfirmButton: true})</script>");
+                    }
                 }
             }
             

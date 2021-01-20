@@ -47,11 +47,21 @@ namespace ProyectoLithio.Controllers
         {
             int RegistrosAfectados = 0;
             string mensaje = "";
+            bool ProveedorExiste = true;
             try
             {
-                RegistrosAfectados = this.modeloBD.pa_Proveedores_Insert(modeloVista.Nombre_Proveedor,
+                pa_Proveedores_ExisteProveedor_Result ProveedorVerifica = new pa_Proveedores_ExisteProveedor_Result();
+                ProveedorVerifica = this.modeloBD.pa_Proveedores_ExisteProveedor(modeloVista.Codigo_Proveedor,modeloVista.Nombre_Proveedor).FirstOrDefault();
+                if (ProveedorVerifica!=null)
+                {
+                    ProveedorExiste = true;
+                }
+                else{
+                    RegistrosAfectados = this.modeloBD.pa_Proveedores_Insert(modeloVista.Nombre_Proveedor,
                                                                          modeloVista.Codigo_Proveedor,
                                                                          modeloVista.Id_Pais);
+                }
+                
             }
             catch (Exception ex)
             {
@@ -68,8 +78,15 @@ namespace ProyectoLithio.Controllers
                 }
                 else
                 {
-                    mensaje += "No se pudo ingresar";
-                    Response.Write("<script language = javascript > Swal.fire({title: 'Falló!',text:'" + mensaje + "',icon: 'error',showConfirmButton: true})</script>");
+                    if (ProveedorExiste)
+                    {
+                        Response.Write("<script language = javascript > Swal.fire({title: 'Este proveedor ya existe!',text:'" + "" + "',icon: 'error',showConfirmButton: true})</script>");
+                    }
+                    else
+                    {
+                        mensaje += "No se pudo ingresar";
+                        Response.Write("<script language = javascript > Swal.fire({title: 'Falló!',text:'" + mensaje + "',icon: 'error',showConfirmButton: true})</script>");
+                    }
                 }
             }
             this.MostrarPaises();
@@ -107,12 +124,22 @@ namespace ProyectoLithio.Controllers
         {
             int RegistrosAfectados = 0;
             string mensaje = "";
+            bool ProveedorExiste = true;
             try
             {
-                RegistrosAfectados = this.modeloBD.pa_Proveedores_Update(modeloVista.Id_Proveedor,
-                                                                         modeloVista.Codigo_Proveedor,
-                                                                         modeloVista.Nombre_Proveedor,
-                                                                         modeloVista.Id_Pais);
+                pa_Proveedores_ExisteProveedor_Result ProveedorVerifica = new pa_Proveedores_ExisteProveedor_Result();
+                ProveedorVerifica = this.modeloBD.pa_Proveedores_ExisteProveedor(modeloVista.Codigo_Proveedor, modeloVista.Nombre_Proveedor).FirstOrDefault();
+                if (ProveedorVerifica != null)
+                {
+                    ProveedorExiste = true;
+                }
+                else
+                {
+                    RegistrosAfectados = this.modeloBD.pa_Proveedores_Update(modeloVista.Id_Proveedor,
+                                                                             modeloVista.Codigo_Proveedor,
+                                                                             modeloVista.Nombre_Proveedor,
+                                                                             modeloVista.Id_Pais);
+                }
             }
             catch (Exception ex)
             {
@@ -129,12 +156,18 @@ namespace ProyectoLithio.Controllers
                 }
                 else
                 {
-                    mensaje += "No se pudo ingresar";
-                    Response.Write("<script language = javascript > Swal.fire({title: 'Falló!',text:'" + mensaje + "',icon: 'error',showConfirmButton: true})</script>");
+                    if (ProveedorExiste)
+                    {
+                        Response.Write("<script language = javascript > Swal.fire({title: 'Este proveedor ya existe!',text:'" + "" + "',icon: 'error',showConfirmButton: true})</script>");
+                    }
+                    else
+                    {
+                        mensaje += "No se pudo ingresar";
+                        Response.Write("<script language = javascript > Swal.fire({title: 'Falló!',text:'" + mensaje + "',icon: 'error',showConfirmButton: true})</script>");
+                    }
                 }
             }
-                this.MostrarPaises();
-              
+            this.MostrarPaises();   
             return View(modeloVista);
         }
         #endregion

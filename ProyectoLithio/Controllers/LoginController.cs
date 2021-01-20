@@ -1,5 +1,9 @@
 ﻿using ProyectoLithio.Models;
+using System;
 using System.Linq;
+using System.Net.Mail;
+using System.Security.Cryptography;
+using System.Text;
 using System.Web.Mvc;
 
 namespace ProyectoLithio.Controllers
@@ -7,6 +11,8 @@ namespace ProyectoLithio.Controllers
     public class LoginController : Controller
     {
         LithioBDEntities modeloBD = new LithioBDEntities();
+
+        string urlDominio= "http://localhost:58219/";
 
         #region Index
 
@@ -73,6 +79,106 @@ namespace ProyectoLithio.Controllers
             this.Session["datosUsuario"] = null;
             
             return RedirectToAction("Index", "Login");
+        }
+        #endregion
+
+        #region startRecovery
+        /// <summary>
+        /// Metodo que inicia el proceso de olvidar contraseña
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public ActionResult StartRecovery()
+        {
+            return View();
+        }
+        #endregion
+
+        #region startRecoveryPost
+        /// <summary>
+        /// Metodo que inicia el proceso de olvidar contraseña
+        /// </summary>
+        /// <returns></returns>
+        [HttpPost]
+        public ActionResult StartRecovery(string Correo_Electronico)
+        {
+            ///Forma de generar un token
+
+            string token = GetSha256(Guid.NewGuid().ToString());
+
+            pa_VerificarCorreoRecuperacionPass_Result modeloRecuperacionPass = new pa_VerificarCorreoRecuperacionPass_Result();
+
+            modeloRecuperacionPass = this.modeloBD.pa_VerificarCorreoRecuperacionPass(Correo_Electronico).FirstOrDefault();
+
+            Response.Write("<script src='https://cdn.jsdelivr.net/npm/sweetalert2@10'></script> <br>");
+
+            if (modeloRecuperacionPass!=null)//Si el registro existe actualizar el campo de token
+            {
+                ///utilizar aca un sp para indicar la actualización del token
+                this.modeloBD.pa_ActualizarTokenRecuperacionPass(Correo_Electronico, token);
+
+                SendEmail(Correo_Electronico,token);
+                Response.Write("<script language = javascript > Swal.fire({title: 'Favor verificar el correo!',text:'" + "" + "',icon: 'error',showConfirmButton: true})</script>");
+            }
+            else
+            {
+                Response.Write("<script language = javascript > Swal.fire({title: 'Este correo no existe!',text:'" + "" + "',icon: 'error',showConfirmButton: true})</script>");
+            }
+            return View();
+        }
+        #endregion
+
+        #region Recovery
+        /// <summary>
+        /// Metodo donde ya se recibe el correo para hacer el cambio de contraseña
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult Recovery(string token)
+        {
+            return View();
+        }
+
+        #endregion
+
+        #region Helpers
+        private string GetSha256(string str)
+        {
+            SHA256 sha256 = SHA256Managed.Create();
+            ASCIIEncoding encoding = new ASCIIEncoding();
+            byte[] stream = null;
+            StringBuilder sb = new StringBuilder();
+            stream = sha256.ComputeHash(encoding.GetBytes(str));
+            for (int i = 0; i < stream.Length; i++) sb.AppendFormat("{0:x2}", stream[i]);
+            return sb.ToString();
+        }
+
+        private void SendEmail(string EmailDestino,string token)
+        {
+            try
+            {
+                string EmailOrigen = "andresvegacordero007@gmail.com";
+                string Contrasena = "erngeiz02";
+                string url = urlDominio+"/Login/Recovery?token="+token;
+                MailMessage oMailMessage = new MailMessage(EmailOrigen, EmailDestino, "Recuperación de contraseña",
+                    "<p>Correo para recuperación de contraseña</p><br>" +
+                    "<a href='" + url + "'>Click para recuperar</a>");
+
+                oMailMessage.IsBodyHtml = true;
+
+                SmtpClient oSmtpClient = new SmtpClient("smtp.gmail.com");
+                oSmtpClient.EnableSsl = true;
+                oSmtpClient.UseDefaultCredentials = false;
+                oSmtpClient.Port = 587;
+                oSmtpClient.Credentials = new System.Net.NetworkCredential(EmailOrigen, Contrasena);
+
+                oSmtpClient.Send(oMailMessage);
+            }
+            catch (Exception ex)
+            {
+                string error = ex.Message;
+                Console.WriteLine(error);
+            }
+            
         }
         #endregion
     }
