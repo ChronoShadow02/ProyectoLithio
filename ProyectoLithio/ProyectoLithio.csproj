@@ -249,6 +249,7 @@
     <Compile Include="Models\Usuarios.cs">
       <DependentUpon>ModelBD.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ViewModel\RecuperarPassViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -353,6 +354,7 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\Login\validaContrasena.js" />
     <Content Include="Scripts\Login\validaCorreo.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\Paises\validaPais.js" />
@@ -481,8 +483,8 @@
     <Content Include="Views\Articulos\ArticulosNuevo.cshtml" />
     <Content Include="Views\Articulos\ArticulosModifica.cshtml" />
     <Content Include="Views\Costos\Costeo.cshtml" />
-    <Content Include="Views\Login\Recovery.cshtml" />
     <Content Include="Views\Login\StartRecovery.cshtml" />
+    <Content Include="Views\Login\Recovery.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

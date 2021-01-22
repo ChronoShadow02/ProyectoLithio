@@ -1,10 +1,13 @@
-﻿
-@{
+﻿@{
     Layout = null;
     ///Constriur de URL del método del controlador
     string URLMetodoFormulario = Url.Action("VerificaLogin", "Login");
 
     var UsuarioLogueado = this.ViewBag.UsuarioLogueado;
+
+    var mensaje = this.ViewBag.mensaje;
+
+    var error = this.ViewBag.Error;
 }
 
 <!DOCTYPE html>
@@ -17,6 +20,7 @@
     <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css">
     <link href="~/Content/Login/styleLogin.css" rel="stylesheet" />
+    <script src='https://cdn.jsdelivr.net/npm/sweetalert2@10'></script>
 </head>
 <body>
     <div class="container h-100">
@@ -52,8 +56,20 @@
                         @{
                             if (UsuarioLogueado == false)
                             {
-                                <div class="alert alert-danger text-center" role="alert">
+                                <div class="alert alert-info text-center" role="alert">
                                     @Html.ValidationSummary(true)
+                                </div>
+                            }
+                            if (mensaje == "Contraseña modificada con éxito")
+                            {
+                                <div class="alert alert-success text-center">
+                                    @ViewBag.mensaje
+                                </div>
+                            }
+                            if (error == "El token ha expirado")
+                            {
+                                <div class="alert alert-danger text-center">
+                                    @ViewBag.error
                                 </div>
                             }
                         }

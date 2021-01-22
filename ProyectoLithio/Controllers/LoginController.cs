@@ -118,7 +118,7 @@ namespace ProyectoLithio.Controllers
                 this.modeloBD.pa_ActualizarTokenRecuperacionPass(Correo_Electronico, token);
 
                 SendEmail(Correo_Electronico,token);
-                Response.Write("<script language = javascript > Swal.fire({title: 'Favor verificar el correo!',text:'" + "" + "',icon: 'error',showConfirmButton: true})</script>");
+                Response.Write("<script language = javascript > Swal.fire({title: 'Favor verificar el correo!',text:'" + "" + "',icon: 'success',showConfirmButton: true})</script>");
             }
             else
             {
@@ -133,11 +133,53 @@ namespace ProyectoLithio.Controllers
         /// Metodo donde ya se recibe el correo para hacer el cambio de contraseña
         /// </summary>
         /// <returns></returns>
+        [HttpGet]
         public ActionResult Recovery(string token)
         {
+            Models.ViewModel.RecuperarPassViewModel modeloVista = new Models.ViewModel.RecuperarPassViewModel();
+            modeloVista.token = token;
+            using (modeloBD)
+            {
+                if (modeloVista.token==null || modeloVista.token.Trim().Equals(""))
+                {
+                    return View("Index");
+                }
+                var oUsuario = modeloBD.Usuarios.Where(d => d.Token_Recovery == modeloVista.token).FirstOrDefault();
+                if (oUsuario == null)
+                {
+                    this.ViewBag.Error = "El token ha expirado";
+                    return View("Index");
+                }
+            }
             return View();
         }
+        #endregion
+        #region RecoveryPost
+        [HttpPost]
+        public ActionResult Recovery(Models.ViewModel.RecuperarPassViewModel modeloVista)
+        {
+            try
+            {
+                using (modeloBD)
+                {
+                    var oUsuario = modeloBD.Usuarios.Where(d => d.Token_Recovery == modeloVista.token).FirstOrDefault();
 
+                    if (oUsuario != null)
+                    {
+                        oUsuario.Contrasena_Usuario = modeloVista.Contrasena;
+                        oUsuario.Token_Recovery = null;
+                        modeloBD.Entry(oUsuario).State = System.Data.EntityState.Modified;
+                        modeloBD.SaveChanges();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            this.ViewBag.Mensaje = "Contraseña modificada con éxito";
+            return View("Index");
+        }
         #endregion
 
         #region Helpers
@@ -156,8 +198,8 @@ namespace ProyectoLithio.Controllers
         {
             try
             {
-                string EmailOrigen = "andresvegacordero007@gmail.com";
-                string Contrasena = "erngeiz02";
+                string EmailOrigen = "angelandresvc007@gmail.com";
+                string Contrasena = "Ir3n3b433$un4d10$4";
                 string url = urlDominio+"/Login/Recovery?token="+token;
                 MailMessage oMailMessage = new MailMessage(EmailOrigen, EmailDestino, "Recuperación de contraseña",
                     "<p>Correo para recuperación de contraseña</p><br>" +
@@ -173,12 +215,11 @@ namespace ProyectoLithio.Controllers
 
                 oSmtpClient.Send(oMailMessage);
             }
-            catch (Exception ex)
+            catch (Exception ex) 
             {
                 string error = ex.Message;
                 Console.WriteLine(error);
             }
-            
         }
         #endregion
     }
