@@ -124,22 +124,22 @@ namespace ProyectoLithio.Controllers
         {
             int RegistrosAfectados = 0;
             string mensaje = "";
-            bool ProveedorExiste = true;
+            //bool ProveedorExiste = true;
             try
             {
-                pa_Proveedores_ExisteProveedor_Result ProveedorVerifica = new pa_Proveedores_ExisteProveedor_Result();
+                /*pa_Proveedores_ExisteProveedor_Result ProveedorVerifica = new pa_Proveedores_ExisteProveedor_Result();
                 ProveedorVerifica = this.modeloBD.pa_Proveedores_ExisteProveedor(modeloVista.Codigo_Proveedor, modeloVista.Nombre_Proveedor).FirstOrDefault();
                 if (ProveedorVerifica != null)
                 {
                     ProveedorExiste = true;
                 }
                 else
-                {
+                {*/
                     RegistrosAfectados = this.modeloBD.pa_Proveedores_Update(modeloVista.Id_Proveedor,
                                                                              modeloVista.Codigo_Proveedor,
                                                                              modeloVista.Nombre_Proveedor,
                                                                              modeloVista.Id_Pais);
-                }
+                //}
             }
             catch (Exception ex)
             {
@@ -156,15 +156,15 @@ namespace ProyectoLithio.Controllers
                 }
                 else
                 {
-                    if (ProveedorExiste)
+                    /*if (ProveedorExiste)
                     {
                         Response.Write("<script language = javascript > Swal.fire({title: 'Este proveedor ya existe!',text:'" + "" + "',icon: 'error',showConfirmButton: true})</script>");
                     }
                     else
-                    {
+                    {*/
                         mensaje += "No se pudo ingresar";
                         Response.Write("<script language = javascript > Swal.fire({title: 'Falló!',text:'" + mensaje + "',icon: 'error',showConfirmButton: true})</script>");
-                    }
+                    //}
                 }
             }
             this.MostrarPaises();   

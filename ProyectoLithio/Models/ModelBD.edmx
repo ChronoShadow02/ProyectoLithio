@@ -189,6 +189,12 @@
           <Parameter Name="Correo_Electronico" Type="varchar" Mode="In" />
           <Parameter Name="Token" Type="varchar" Mode="In" />
         </Function>
+        <Function Name="pa_Articulos_ExisteArticulosCodigo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Codigo_Articulo" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="pa_Articulos_ExisteArticulosNombre" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Nombre_Articulo" Type="varchar" Mode="In" />
+        </Function>
         <Function Name="pa_Articulos_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Codigo_Articulo" Type="varchar" Mode="In" />
           <Parameter Name="Nombre_Articulo" Type="varchar" Mode="In" />
@@ -715,6 +721,12 @@
             <Parameter Name="Correo_Electronico" Mode="In" Type="String" />
             <Parameter Name="Token" Mode="In" Type="String" />
           </FunctionImport>
+          <FunctionImport Name="pa_Articulos_ExisteArticulosCodigo" ReturnType="Collection(LithioBDModel.pa_Articulos_ExisteArticulosCodigo_Result)">
+            <Parameter Name="Codigo_Articulo" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="pa_Articulos_ExisteArticulosNombre" ReturnType="Collection(LithioBDModel.pa_Articulos_ExisteArticulosNombre_Result)">
+            <Parameter Name="Nombre_Articulo" Mode="In" Type="String" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="pa_EstadoUsuario_Select_Result">
           <Property Type="Int32" Name="Id_Estado_Usuario" Nullable="false" />
@@ -909,6 +921,30 @@
           <Property Type="String" Name="Primer_Apellido" Nullable="false" MaxLength="200" />
           <Property Type="String" Name="Segundo_Apellido" Nullable="false" MaxLength="200" />
           <Property Type="String" Name="Correo_Electronico" Nullable="false" MaxLength="200" />
+        </ComplexType>
+        <ComplexType Name="pa_Articulos_ExisteArticulosCodigo_Result">
+          <Property Type="Int32" Name="Id_Articulo" Nullable="false" />
+          <Property Type="String" Name="Codigo_Articulo" Nullable="false" MaxLength="200" />
+          <Property Type="String" Name="Nombre_Articulo" Nullable="false" MaxLength="200" />
+          <Property Type="String" Name="Descripcion_Articulo" Nullable="false" MaxLength="200" />
+          <Property Type="Double" Name="Costo_Articulo" Nullable="false" />
+          <Property Type="Double" Name="Costo_Anterior_Articulo" Nullable="false" />
+          <Property Type="Int32" Name="Id_Proveedor" Nullable="false" />
+          <Property Type="String" Name="Nombre_Proveedor" Nullable="false" MaxLength="200" />
+          <Property Type="Int32" Name="Id_Presentacion" Nullable="false" />
+          <Property Type="String" Name="Nombre_Presentacion" Nullable="false" MaxLength="200" />
+        </ComplexType>
+        <ComplexType Name="pa_Articulos_ExisteArticulosNombre_Result">
+          <Property Type="Int32" Name="Id_Articulo" Nullable="false" />
+          <Property Type="String" Name="Codigo_Articulo" Nullable="false" MaxLength="200" />
+          <Property Type="String" Name="Nombre_Articulo" Nullable="false" MaxLength="200" />
+          <Property Type="String" Name="Descripcion_Articulo" Nullable="false" MaxLength="200" />
+          <Property Type="Double" Name="Costo_Articulo" Nullable="false" />
+          <Property Type="Double" Name="Costo_Anterior_Articulo" Nullable="false" />
+          <Property Type="Int32" Name="Id_Proveedor" Nullable="false" />
+          <Property Type="String" Name="Nombre_Proveedor" Nullable="false" MaxLength="200" />
+          <Property Type="Int32" Name="Id_Presentacion" Nullable="false" />
+          <Property Type="String" Name="Nombre_Presentacion" Nullable="false" MaxLength="200" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -1279,6 +1315,38 @@
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="pa_ActualizarTokenRecuperacionPass" FunctionName="LithioBDModel.Store.pa_ActualizarTokenRecuperacionPass" />
+          <FunctionImportMapping FunctionImportName="pa_Articulos_ExisteArticulosCodigo" FunctionName="LithioBDModel.Store.pa_Articulos_ExisteArticulosCodigo">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="LithioBDModel.pa_Articulos_ExisteArticulosCodigo_Result">
+                <ScalarProperty Name="Id_Articulo" ColumnName="Id_Articulo" />
+                <ScalarProperty Name="Codigo_Articulo" ColumnName="Codigo_Articulo" />
+                <ScalarProperty Name="Nombre_Articulo" ColumnName="Nombre_Articulo" />
+                <ScalarProperty Name="Descripcion_Articulo" ColumnName="Descripcion_Articulo" />
+                <ScalarProperty Name="Costo_Articulo" ColumnName="Costo_Articulo" />
+                <ScalarProperty Name="Costo_Anterior_Articulo" ColumnName="Costo_Anterior_Articulo" />
+                <ScalarProperty Name="Id_Proveedor" ColumnName="Id_Proveedor" />
+                <ScalarProperty Name="Nombre_Proveedor" ColumnName="Nombre_Proveedor" />
+                <ScalarProperty Name="Id_Presentacion" ColumnName="Id_Presentacion" />
+                <ScalarProperty Name="Nombre_Presentacion" ColumnName="Nombre_Presentacion" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="pa_Articulos_ExisteArticulosNombre" FunctionName="LithioBDModel.Store.pa_Articulos_ExisteArticulosNombre">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="LithioBDModel.pa_Articulos_ExisteArticulosNombre_Result">
+                <ScalarProperty Name="Id_Articulo" ColumnName="Id_Articulo" />
+                <ScalarProperty Name="Codigo_Articulo" ColumnName="Codigo_Articulo" />
+                <ScalarProperty Name="Nombre_Articulo" ColumnName="Nombre_Articulo" />
+                <ScalarProperty Name="Descripcion_Articulo" ColumnName="Descripcion_Articulo" />
+                <ScalarProperty Name="Costo_Articulo" ColumnName="Costo_Articulo" />
+                <ScalarProperty Name="Costo_Anterior_Articulo" ColumnName="Costo_Anterior_Articulo" />
+                <ScalarProperty Name="Id_Proveedor" ColumnName="Id_Proveedor" />
+                <ScalarProperty Name="Nombre_Proveedor" ColumnName="Nombre_Proveedor" />
+                <ScalarProperty Name="Id_Presentacion" ColumnName="Id_Presentacion" />
+                <ScalarProperty Name="Nombre_Presentacion" ColumnName="Nombre_Presentacion" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

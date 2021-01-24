@@ -48,9 +48,19 @@ namespace ProyectoLithio.Controllers
         {
             string mensaje = "";
             int RegistrosAfectados = 0;
+            bool ExisteCodigo=true;
             try
             {
-                RegistrosAfectados = this.modeloBD.pa_Articulos_Insert(modeloVista.Codigo_Articulo,
+                pa_Articulos_ExisteArticulosCodigo_Result VerificaCodigo = new pa_Articulos_ExisteArticulosCodigo_Result();
+                VerificaCodigo = this.modeloBD.pa_Articulos_ExisteArticulosCodigo(modeloVista.Codigo_Articulo).FirstOrDefault();
+
+                if (VerificaCodigo!=null)
+                {
+                    ExisteCodigo = true;
+                }
+                else
+                {
+                    RegistrosAfectados = this.modeloBD.pa_Articulos_Insert(modeloVista.Codigo_Articulo,
                                                                        modeloVista.Nombre_Articulo,
                                                                        modeloVista.Descripcion_Articulo,
                                                                        modeloVista.Costo_Articulo,
@@ -58,6 +68,7 @@ namespace ProyectoLithio.Controllers
                                                                        modeloVista.Id_Proveedor,
                                                                        modeloVista.Id_Presentacion
                                                                        );
+                }
             }
             catch (Exception ex)
             {
@@ -73,8 +84,17 @@ namespace ProyectoLithio.Controllers
                 }
                 else
                 {
-                    mensaje += "No se pudo ingresar";
-                    Response.Write("<script language = javascript > Swal.fire({title: 'Falló!',text:'" + mensaje + "',icon: 'error',showConfirmButton: true})</script>");
+                    if (ExisteCodigo == true)
+                    {
+                        mensaje = "El artículo ya existe!";
+                        Response.Write("<script language = javascript > Swal.fire({title: 'Falló!',text:'" + mensaje + "',icon: 'error',showConfirmButton: true})</script>");
+                    }
+                    else
+                    {
+                        mensaje += "No se pudo ingresar";
+                        Response.Write("<script language = javascript > Swal.fire({title: 'Falló!',text:'" + mensaje + "',icon: 'error',showConfirmButton: true})</script>");
+                    }
+                    
                 }
             }
             this.PresentacionViewBag();

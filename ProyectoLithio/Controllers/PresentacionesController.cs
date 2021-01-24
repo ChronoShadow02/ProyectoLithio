@@ -115,10 +115,10 @@ namespace ProyectoLithio.Controllers
         {
             string mensaje = "";
             int RegistrosAfectados = 0;
-            bool PresentacionExiste = true;
+            //bool PresentacionExiste = true;
             try
             {
-                pa_Presentaciones_ExistePresentacion_Result PresentacionVerifica = new pa_Presentaciones_ExistePresentacion_Result();
+              /*  pa_Presentaciones_ExistePresentacion_Result PresentacionVerifica = new pa_Presentaciones_ExistePresentacion_Result();
                 PresentacionVerifica = this.modeloBD.pa_Presentaciones_ExistePresentacion(modeloVista.Nombre_Presentacion).FirstOrDefault();
 
                 if (PresentacionVerifica != null)
@@ -126,9 +126,9 @@ namespace ProyectoLithio.Controllers
                     PresentacionExiste = true;
                 }
                 else
-                {
+                {*/
                     RegistrosAfectados = this.modeloBD.pa_Presentaciones_Update(modeloVista.Id_Presentacion, modeloVista.Nombre_Presentacion);
-                }
+                //}
                 
             }
             catch (Exception ex)
@@ -145,15 +145,15 @@ namespace ProyectoLithio.Controllers
                 }
                 else
                 {
-                    if (PresentacionExiste)
+                    /*if (PresentacionExiste)
                     {
                         Response.Write("<script language = javascript > Swal.fire({title: 'Esta presentación ya existe!',text:'" + "" + "',icon: 'error',showConfirmButton: true})</script>");
                     }
                     else
-                    {
+                    {*/
                         mensaje += "No se pudo ingresar";
                         Response.Write("<script language = javascript > Swal.fire({title: 'Falló!',text:'" + mensaje + "',icon: 'error',showConfirmButton: true})</script>");
-                    }
+                    //}
                 }
             }
             return View(modeloVista);

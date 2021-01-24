@@ -552,5 +552,23 @@ namespace ProyectoLithio.Models
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("pa_ActualizarTokenRecuperacionPass", correo_ElectronicoParameter, tokenParameter);
         }
+    
+        public virtual ObjectResult<pa_Articulos_ExisteArticulosCodigo_Result> pa_Articulos_ExisteArticulosCodigo(string codigo_Articulo)
+        {
+            var codigo_ArticuloParameter = codigo_Articulo != null ?
+                new ObjectParameter("Codigo_Articulo", codigo_Articulo) :
+                new ObjectParameter("Codigo_Articulo", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<pa_Articulos_ExisteArticulosCodigo_Result>("pa_Articulos_ExisteArticulosCodigo", codigo_ArticuloParameter);
+        }
+    
+        public virtual ObjectResult<pa_Articulos_ExisteArticulosNombre_Result> pa_Articulos_ExisteArticulosNombre(string nombre_Articulo)
+        {
+            var nombre_ArticuloParameter = nombre_Articulo != null ?
+                new ObjectParameter("Nombre_Articulo", nombre_Articulo) :
+                new ObjectParameter("Nombre_Articulo", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<pa_Articulos_ExisteArticulosNombre_Result>("pa_Articulos_ExisteArticulosNombre", nombre_ArticuloParameter);
+        }
     }
 }
