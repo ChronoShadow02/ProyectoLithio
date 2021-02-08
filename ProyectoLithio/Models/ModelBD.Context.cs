@@ -38,9 +38,133 @@ namespace ProyectoLithio.Models
         public DbSet<Tipo_Usuario> Tipo_Usuario { get; set; }
         public DbSet<Usuarios> Usuarios { get; set; }
     
+        public virtual int pa_ActualizarTokenRecuperacionPass(string correo_Electronico, string token)
+        {
+            var correo_ElectronicoParameter = correo_Electronico != null ?
+                new ObjectParameter("Correo_Electronico", correo_Electronico) :
+                new ObjectParameter("Correo_Electronico", typeof(string));
+    
+            var tokenParameter = token != null ?
+                new ObjectParameter("Token", token) :
+                new ObjectParameter("Token", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("pa_ActualizarTokenRecuperacionPass", correo_ElectronicoParameter, tokenParameter);
+        }
+    
+        public virtual ObjectResult<pa_Articulos_ExisteArticulosCodigo_Result> pa_Articulos_ExisteArticulosCodigo(string codigo_Articulo)
+        {
+            var codigo_ArticuloParameter = codigo_Articulo != null ?
+                new ObjectParameter("Codigo_Articulo", codigo_Articulo) :
+                new ObjectParameter("Codigo_Articulo", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<pa_Articulos_ExisteArticulosCodigo_Result>("pa_Articulos_ExisteArticulosCodigo", codigo_ArticuloParameter);
+        }
+    
+        public virtual ObjectResult<pa_Articulos_ExisteArticulosNombre_Result> pa_Articulos_ExisteArticulosNombre(string nombre_Articulo)
+        {
+            var nombre_ArticuloParameter = nombre_Articulo != null ?
+                new ObjectParameter("Nombre_Articulo", nombre_Articulo) :
+                new ObjectParameter("Nombre_Articulo", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<pa_Articulos_ExisteArticulosNombre_Result>("pa_Articulos_ExisteArticulosNombre", nombre_ArticuloParameter);
+        }
+    
+        public virtual int pa_Articulos_Insert(string codigo_Articulo, string nombre_Articulo, string descripcion_Articulo, Nullable<double> costo_Articulo, Nullable<double> costo_Anterior_Articulo, Nullable<int> id_Proveedor, Nullable<int> id_Presentacion)
+        {
+            var codigo_ArticuloParameter = codigo_Articulo != null ?
+                new ObjectParameter("Codigo_Articulo", codigo_Articulo) :
+                new ObjectParameter("Codigo_Articulo", typeof(string));
+    
+            var nombre_ArticuloParameter = nombre_Articulo != null ?
+                new ObjectParameter("Nombre_Articulo", nombre_Articulo) :
+                new ObjectParameter("Nombre_Articulo", typeof(string));
+    
+            var descripcion_ArticuloParameter = descripcion_Articulo != null ?
+                new ObjectParameter("Descripcion_Articulo", descripcion_Articulo) :
+                new ObjectParameter("Descripcion_Articulo", typeof(string));
+    
+            var costo_ArticuloParameter = costo_Articulo.HasValue ?
+                new ObjectParameter("Costo_Articulo", costo_Articulo) :
+                new ObjectParameter("Costo_Articulo", typeof(double));
+    
+            var costo_Anterior_ArticuloParameter = costo_Anterior_Articulo.HasValue ?
+                new ObjectParameter("Costo_Anterior_Articulo", costo_Anterior_Articulo) :
+                new ObjectParameter("Costo_Anterior_Articulo", typeof(double));
+    
+            var id_ProveedorParameter = id_Proveedor.HasValue ?
+                new ObjectParameter("Id_Proveedor", id_Proveedor) :
+                new ObjectParameter("Id_Proveedor", typeof(int));
+    
+            var id_PresentacionParameter = id_Presentacion.HasValue ?
+                new ObjectParameter("Id_Presentacion", id_Presentacion) :
+                new ObjectParameter("Id_Presentacion", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("pa_Articulos_Insert", codigo_ArticuloParameter, nombre_ArticuloParameter, descripcion_ArticuloParameter, costo_ArticuloParameter, costo_Anterior_ArticuloParameter, id_ProveedorParameter, id_PresentacionParameter);
+        }
+    
+        public virtual ObjectResult<pa_Articulos_Select_Result> pa_Articulos_Select()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<pa_Articulos_Select_Result>("pa_Articulos_Select");
+        }
+    
+        public virtual int pa_Articulos_Update(Nullable<int> id_Articulo, string codigo_Articulo, string nombre_Articulo, string descripcion_Articulo, Nullable<double> costo_Articulo, Nullable<double> costo_Anterior_Articulo, Nullable<int> id_Proveedor, Nullable<int> id_Presentacion)
+        {
+            var id_ArticuloParameter = id_Articulo.HasValue ?
+                new ObjectParameter("Id_Articulo", id_Articulo) :
+                new ObjectParameter("Id_Articulo", typeof(int));
+    
+            var codigo_ArticuloParameter = codigo_Articulo != null ?
+                new ObjectParameter("Codigo_Articulo", codigo_Articulo) :
+                new ObjectParameter("Codigo_Articulo", typeof(string));
+    
+            var nombre_ArticuloParameter = nombre_Articulo != null ?
+                new ObjectParameter("Nombre_Articulo", nombre_Articulo) :
+                new ObjectParameter("Nombre_Articulo", typeof(string));
+    
+            var descripcion_ArticuloParameter = descripcion_Articulo != null ?
+                new ObjectParameter("Descripcion_Articulo", descripcion_Articulo) :
+                new ObjectParameter("Descripcion_Articulo", typeof(string));
+    
+            var costo_ArticuloParameter = costo_Articulo.HasValue ?
+                new ObjectParameter("Costo_Articulo", costo_Articulo) :
+                new ObjectParameter("Costo_Articulo", typeof(double));
+    
+            var costo_Anterior_ArticuloParameter = costo_Anterior_Articulo.HasValue ?
+                new ObjectParameter("Costo_Anterior_Articulo", costo_Anterior_Articulo) :
+                new ObjectParameter("Costo_Anterior_Articulo", typeof(double));
+    
+            var id_ProveedorParameter = id_Proveedor.HasValue ?
+                new ObjectParameter("Id_Proveedor", id_Proveedor) :
+                new ObjectParameter("Id_Proveedor", typeof(int));
+    
+            var id_PresentacionParameter = id_Presentacion.HasValue ?
+                new ObjectParameter("Id_Presentacion", id_Presentacion) :
+                new ObjectParameter("Id_Presentacion", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("pa_Articulos_Update", id_ArticuloParameter, codigo_ArticuloParameter, nombre_ArticuloParameter, descripcion_ArticuloParameter, costo_ArticuloParameter, costo_Anterior_ArticuloParameter, id_ProveedorParameter, id_PresentacionParameter);
+        }
+    
+        public virtual ObjectResult<pa_ArticulosRetornaID_Result> pa_ArticulosRetornaID(Nullable<int> id_Articulo)
+        {
+            var id_ArticuloParameter = id_Articulo.HasValue ?
+                new ObjectParameter("Id_Articulo", id_Articulo) :
+                new ObjectParameter("Id_Articulo", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<pa_ArticulosRetornaID_Result>("pa_ArticulosRetornaID", id_ArticuloParameter);
+        }
+    
         public virtual ObjectResult<pa_EstadoUsuario_Select_Result> pa_EstadoUsuario_Select()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<pa_EstadoUsuario_Select_Result>("pa_EstadoUsuario_Select");
+        }
+    
+        public virtual ObjectResult<pa_Paises_ExistePais_Result> pa_Paises_ExistePais(string nombrePais)
+        {
+            var nombrePaisParameter = nombrePais != null ?
+                new ObjectParameter("NombrePais", nombrePais) :
+                new ObjectParameter("NombrePais", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<pa_Paises_ExistePais_Result>("pa_Paises_ExistePais", nombrePaisParameter);
         }
     
         public virtual int pa_Paises_Insert(string nombre_Pais, string sigla_Pais, string moneda_Pais)
@@ -126,6 +250,15 @@ namespace ProyectoLithio.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<pa_PermisosRetornaID_Result>("pa_PermisosRetornaID", id_UsuarioParameter);
         }
     
+        public virtual ObjectResult<pa_Presentaciones_ExistePresentacion_Result> pa_Presentaciones_ExistePresentacion(string nombre_Presentacion)
+        {
+            var nombre_PresentacionParameter = nombre_Presentacion != null ?
+                new ObjectParameter("Nombre_Presentacion", nombre_Presentacion) :
+                new ObjectParameter("Nombre_Presentacion", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<pa_Presentaciones_ExistePresentacion_Result>("pa_Presentaciones_ExistePresentacion", nombre_PresentacionParameter);
+        }
+    
         public virtual int pa_Presentaciones_Insert(string nombre_Presentacion)
         {
             var nombre_PresentacionParameter = nombre_Presentacion != null ?
@@ -160,6 +293,19 @@ namespace ProyectoLithio.Models
                 new ObjectParameter("Id_Presentacion", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<pa_PresentacionesRetornaID_Result>("pa_PresentacionesRetornaID", id_PresentacionParameter);
+        }
+    
+        public virtual ObjectResult<pa_Proveedores_ExisteProveedor_Result> pa_Proveedores_ExisteProveedor(string codigo_Proveedor, string nombre_Proveedor)
+        {
+            var codigo_ProveedorParameter = codigo_Proveedor != null ?
+                new ObjectParameter("Codigo_Proveedor", codigo_Proveedor) :
+                new ObjectParameter("Codigo_Proveedor", typeof(string));
+    
+            var nombre_ProveedorParameter = nombre_Proveedor != null ?
+                new ObjectParameter("Nombre_Proveedor", nombre_Proveedor) :
+                new ObjectParameter("Nombre_Proveedor", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<pa_Proveedores_ExisteProveedor_Result>("pa_Proveedores_ExisteProveedor", codigo_ProveedorParameter, nombre_ProveedorParameter);
         }
     
         public virtual int pa_Proveedores_Insert(string nombre_Proveedor, string codigo_Proveedor, Nullable<int> id_Pais)
@@ -313,6 +459,15 @@ namespace ProyectoLithio.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("pa_UsuariosUpdate", primer_NombreParameter, primer_ApellidoParameter, segundo_ApellidoParameter, correo_ElectronicoParameter, contrasena_UsuarioParameter, id_UsuarioParameter);
         }
     
+        public virtual ObjectResult<pa_VerificarCorreoRecuperacionPass_Result> pa_VerificarCorreoRecuperacionPass(string correo_Electronico)
+        {
+            var correo_ElectronicoParameter = correo_Electronico != null ?
+                new ObjectParameter("Correo_Electronico", correo_Electronico) :
+                new ObjectParameter("Correo_Electronico", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<pa_VerificarCorreoRecuperacionPass_Result>("pa_VerificarCorreoRecuperacionPass", correo_ElectronicoParameter);
+        }
+    
         public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
         {
             var diagramnameParameter = diagramname != null ?
@@ -414,161 +569,6 @@ namespace ProyectoLithio.Models
         public virtual int sp_upgraddiagrams()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_upgraddiagrams");
-        }
-    
-        public virtual int pa_Articulos_Insert(string codigo_Articulo, string nombre_Articulo, string descripcion_Articulo, Nullable<double> costo_Articulo, Nullable<double> costo_Anterior_Articulo, Nullable<int> id_Proveedor, Nullable<int> id_Presentacion)
-        {
-            var codigo_ArticuloParameter = codigo_Articulo != null ?
-                new ObjectParameter("Codigo_Articulo", codigo_Articulo) :
-                new ObjectParameter("Codigo_Articulo", typeof(string));
-    
-            var nombre_ArticuloParameter = nombre_Articulo != null ?
-                new ObjectParameter("Nombre_Articulo", nombre_Articulo) :
-                new ObjectParameter("Nombre_Articulo", typeof(string));
-    
-            var descripcion_ArticuloParameter = descripcion_Articulo != null ?
-                new ObjectParameter("Descripcion_Articulo", descripcion_Articulo) :
-                new ObjectParameter("Descripcion_Articulo", typeof(string));
-    
-            var costo_ArticuloParameter = costo_Articulo.HasValue ?
-                new ObjectParameter("Costo_Articulo", costo_Articulo) :
-                new ObjectParameter("Costo_Articulo", typeof(double));
-    
-            var costo_Anterior_ArticuloParameter = costo_Anterior_Articulo.HasValue ?
-                new ObjectParameter("Costo_Anterior_Articulo", costo_Anterior_Articulo) :
-                new ObjectParameter("Costo_Anterior_Articulo", typeof(double));
-    
-            var id_ProveedorParameter = id_Proveedor.HasValue ?
-                new ObjectParameter("Id_Proveedor", id_Proveedor) :
-                new ObjectParameter("Id_Proveedor", typeof(int));
-    
-            var id_PresentacionParameter = id_Presentacion.HasValue ?
-                new ObjectParameter("Id_Presentacion", id_Presentacion) :
-                new ObjectParameter("Id_Presentacion", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("pa_Articulos_Insert", codigo_ArticuloParameter, nombre_ArticuloParameter, descripcion_ArticuloParameter, costo_ArticuloParameter, costo_Anterior_ArticuloParameter, id_ProveedorParameter, id_PresentacionParameter);
-        }
-    
-        public virtual int pa_Articulos_Update(Nullable<int> id_Articulo, string codigo_Articulo, string nombre_Articulo, string descripcion_Articulo, Nullable<double> costo_Articulo, Nullable<double> costo_Anterior_Articulo, Nullable<int> id_Proveedor, Nullable<int> id_Presentacion)
-        {
-            var id_ArticuloParameter = id_Articulo.HasValue ?
-                new ObjectParameter("Id_Articulo", id_Articulo) :
-                new ObjectParameter("Id_Articulo", typeof(int));
-    
-            var codigo_ArticuloParameter = codigo_Articulo != null ?
-                new ObjectParameter("Codigo_Articulo", codigo_Articulo) :
-                new ObjectParameter("Codigo_Articulo", typeof(string));
-    
-            var nombre_ArticuloParameter = nombre_Articulo != null ?
-                new ObjectParameter("Nombre_Articulo", nombre_Articulo) :
-                new ObjectParameter("Nombre_Articulo", typeof(string));
-    
-            var descripcion_ArticuloParameter = descripcion_Articulo != null ?
-                new ObjectParameter("Descripcion_Articulo", descripcion_Articulo) :
-                new ObjectParameter("Descripcion_Articulo", typeof(string));
-    
-            var costo_ArticuloParameter = costo_Articulo.HasValue ?
-                new ObjectParameter("Costo_Articulo", costo_Articulo) :
-                new ObjectParameter("Costo_Articulo", typeof(double));
-    
-            var costo_Anterior_ArticuloParameter = costo_Anterior_Articulo.HasValue ?
-                new ObjectParameter("Costo_Anterior_Articulo", costo_Anterior_Articulo) :
-                new ObjectParameter("Costo_Anterior_Articulo", typeof(double));
-    
-            var id_ProveedorParameter = id_Proveedor.HasValue ?
-                new ObjectParameter("Id_Proveedor", id_Proveedor) :
-                new ObjectParameter("Id_Proveedor", typeof(int));
-    
-            var id_PresentacionParameter = id_Presentacion.HasValue ?
-                new ObjectParameter("Id_Presentacion", id_Presentacion) :
-                new ObjectParameter("Id_Presentacion", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("pa_Articulos_Update", id_ArticuloParameter, codigo_ArticuloParameter, nombre_ArticuloParameter, descripcion_ArticuloParameter, costo_ArticuloParameter, costo_Anterior_ArticuloParameter, id_ProveedorParameter, id_PresentacionParameter);
-        }
-    
-        public virtual ObjectResult<pa_ArticulosRetornaID_Result> pa_ArticulosRetornaID(Nullable<int> id_Articulo)
-        {
-            var id_ArticuloParameter = id_Articulo.HasValue ?
-                new ObjectParameter("Id_Articulo", id_Articulo) :
-                new ObjectParameter("Id_Articulo", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<pa_ArticulosRetornaID_Result>("pa_ArticulosRetornaID", id_ArticuloParameter);
-        }
-    
-        public virtual ObjectResult<pa_Articulos_Select_Result> pa_Articulos_Select()
-        {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<pa_Articulos_Select_Result>("pa_Articulos_Select");
-        }
-    
-        public virtual ObjectResult<pa_Paises_ExistePais_Result> pa_Paises_ExistePais(string nombrePais)
-        {
-            var nombrePaisParameter = nombrePais != null ?
-                new ObjectParameter("NombrePais", nombrePais) :
-                new ObjectParameter("NombrePais", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<pa_Paises_ExistePais_Result>("pa_Paises_ExistePais", nombrePaisParameter);
-        }
-    
-        public virtual ObjectResult<pa_Presentaciones_ExistePresentacion_Result> pa_Presentaciones_ExistePresentacion(string nombre_Presentacion)
-        {
-            var nombre_PresentacionParameter = nombre_Presentacion != null ?
-                new ObjectParameter("Nombre_Presentacion", nombre_Presentacion) :
-                new ObjectParameter("Nombre_Presentacion", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<pa_Presentaciones_ExistePresentacion_Result>("pa_Presentaciones_ExistePresentacion", nombre_PresentacionParameter);
-        }
-    
-        public virtual ObjectResult<pa_Proveedores_ExisteProveedor_Result> pa_Proveedores_ExisteProveedor(string codigo_Proveedor, string nombre_Proveedor)
-        {
-            var codigo_ProveedorParameter = codigo_Proveedor != null ?
-                new ObjectParameter("Codigo_Proveedor", codigo_Proveedor) :
-                new ObjectParameter("Codigo_Proveedor", typeof(string));
-    
-            var nombre_ProveedorParameter = nombre_Proveedor != null ?
-                new ObjectParameter("Nombre_Proveedor", nombre_Proveedor) :
-                new ObjectParameter("Nombre_Proveedor", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<pa_Proveedores_ExisteProveedor_Result>("pa_Proveedores_ExisteProveedor", codigo_ProveedorParameter, nombre_ProveedorParameter);
-        }
-    
-        public virtual ObjectResult<pa_VerificarCorreoRecuperacionPass_Result> pa_VerificarCorreoRecuperacionPass(string correo_Electronico)
-        {
-            var correo_ElectronicoParameter = correo_Electronico != null ?
-                new ObjectParameter("Correo_Electronico", correo_Electronico) :
-                new ObjectParameter("Correo_Electronico", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<pa_VerificarCorreoRecuperacionPass_Result>("pa_VerificarCorreoRecuperacionPass", correo_ElectronicoParameter);
-        }
-    
-        public virtual int pa_ActualizarTokenRecuperacionPass(string correo_Electronico, string token)
-        {
-            var correo_ElectronicoParameter = correo_Electronico != null ?
-                new ObjectParameter("Correo_Electronico", correo_Electronico) :
-                new ObjectParameter("Correo_Electronico", typeof(string));
-    
-            var tokenParameter = token != null ?
-                new ObjectParameter("Token", token) :
-                new ObjectParameter("Token", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("pa_ActualizarTokenRecuperacionPass", correo_ElectronicoParameter, tokenParameter);
-        }
-    
-        public virtual ObjectResult<pa_Articulos_ExisteArticulosCodigo_Result> pa_Articulos_ExisteArticulosCodigo(string codigo_Articulo)
-        {
-            var codigo_ArticuloParameter = codigo_Articulo != null ?
-                new ObjectParameter("Codigo_Articulo", codigo_Articulo) :
-                new ObjectParameter("Codigo_Articulo", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<pa_Articulos_ExisteArticulosCodigo_Result>("pa_Articulos_ExisteArticulosCodigo", codigo_ArticuloParameter);
-        }
-    
-        public virtual ObjectResult<pa_Articulos_ExisteArticulosNombre_Result> pa_Articulos_ExisteArticulosNombre(string nombre_Articulo)
-        {
-            var nombre_ArticuloParameter = nombre_Articulo != null ?
-                new ObjectParameter("Nombre_Articulo", nombre_Articulo) :
-                new ObjectParameter("Nombre_Articulo", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<pa_Articulos_ExisteArticulosNombre_Result>("pa_Articulos_ExisteArticulosNombre", nombre_ArticuloParameter);
         }
     }
 }

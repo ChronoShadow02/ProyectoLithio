@@ -59,10 +59,17 @@
                     {
                         <li><a class="app-menu__item" href="#"><i class="app-menu__icon fa fa-bar-chart"></i><span class="app-menu__label">Reportes</span></a></li>
                     }
+                    <li class="treeview">
+                        <a class="app-menu__item" href="#" data-toggle="treeview"><i class="app-menu__icon fa fa-question"></i><span class="app-menu__label">Ayuda</span><i class="treeview-indicator fa fa-angle-right"></i></a>
+                        <ul class="treeview-menu">
+                            <li><a class="treeview-item" href="#" id="btnModalVersion" data-target="#modalVersion"><i class="icon fa fa-circle-o"></i> Versión</a></li>
+                            <li><a class="treeview-item" href="#" rel="noopener"><i class="icon fa fa-circle-o"></i>Manual de usuario</a></li>
+                            <li><a class="treeview-item" href="#" rel="noopener"><i class="icon fa fa-circle-o"></i> Crear respaldo</a></li>
+                        </ul>
+                    </li>
                     <li><a class="app-menu__item" href="~/Login/CerrarSesion" id="linkCerrarSesion"><i class="app-menu__icon fa fa-sign-out"></i><span class="app-menu__label">Salir</span></a></li>
                 }
             }
-
         </ul>
     </aside>
     <div class="app-content">
@@ -93,11 +100,27 @@
 
         </footer>
     </div>
-
+    <!-- Modal -->
+    <div class="modal fade" id="modalVersion" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Versión del sistema</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Versión: 1.0
+                </div>
+            </div>
+        </div>
+    </div>
     <!-- Footer -->
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     <script src="~/Scripts/Panel/expandir-menu.js"></script>
+    <script src="~/Scripts/Panel/abrirModalVersion.js"></script>
     @RenderSection("scripts", required: false)
 
 </body>

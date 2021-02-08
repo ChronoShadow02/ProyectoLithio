@@ -364,6 +364,7 @@
     <Content Include="Scripts\Login\validaCorreo.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\Paises\validaPais.js" />
+    <Content Include="Scripts\Panel\abrirModalVersion.js" />
     <Content Include="Scripts\Panel\expandir-menu.js" />
     <Content Include="Scripts\Panel\relojRigital.js" />
     <Content Include="Scripts\Permisos\validaPermisos.js" />
