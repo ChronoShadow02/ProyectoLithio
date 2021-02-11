@@ -27,6 +27,7 @@
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     @RenderSection("Styles", false)
     <link href="~/Content/Panel/style.css" rel="stylesheet" />
+    <script src='https://cdn.jsdelivr.net/npm/sweetalert2@10'></script>
 </head>
 <body onload="startTime();">
     <aside class="app-sidebar">
@@ -64,7 +65,7 @@
                         <ul class="treeview-menu">
                             <li><a class="treeview-item" href="#" id="btnModalVersion" data-target="#modalVersion"><i class="icon fa fa-circle-o"></i> Versión</a></li>
                             <li><a class="treeview-item" href="#" rel="noopener"><i class="icon fa fa-circle-o"></i>Manual de usuario</a></li>
-                            <li><a class="treeview-item" href="#" rel="noopener"><i class="icon fa fa-circle-o"></i> Crear respaldo</a></li>
+                            <li><a class="treeview-item" href="#" rel="noopener" id="btnModalCrearRespaldo" data-target="#modalRespaldo"><i class="icon fa fa-circle-o"></i>Respaldos</a></li>
                         </ul>
                     </li>
                     <li><a class="app-menu__item" href="~/Login/CerrarSesion" id="linkCerrarSesion"><i class="app-menu__icon fa fa-sign-out"></i><span class="app-menu__label">Salir</span></a></li>
@@ -100,7 +101,7 @@
 
         </footer>
     </div>
-    <!-- Modal -->
+    <!-- Modal VERSION-->
     <div class="modal fade" id="modalVersion" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
@@ -116,11 +117,34 @@
             </div>
         </div>
     </div>
+
+    <!-- Modal Crear Respaldo-->
+    <div class="modal fade" id="modalRespaldo" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Creación de Respaldo</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form method="post">
+                        <div class="form-group text-center">
+                            <a href="#" class="btn btn-success" id="btnCrearRespaldo">Crear Respaldo</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
     <!-- Footer -->
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
+    <script src="~/Scripts/AjaxGenerico.js"></script>
     <script src="~/Scripts/Panel/expandir-menu.js"></script>
     <script src="~/Scripts/Panel/abrirModalVersion.js"></script>
+    <script src="~/Scripts/Panel/abrirModalRespaldos.js"></script>
     @RenderSection("scripts", required: false)
 
 </body>

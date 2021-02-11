@@ -137,6 +137,7 @@
     <Compile Include="Controllers\PermisosController.cs" />
     <Compile Include="Controllers\PresentacionesController.cs" />
     <Compile Include="Controllers\ProveedoresController.cs" />
+    <Compile Include="Controllers\RespaldosController.cs" />
     <Compile Include="Controllers\UsuariosController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -364,6 +365,7 @@
     <Content Include="Scripts\Login\validaCorreo.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\Paises\validaPais.js" />
+    <Content Include="Scripts\Panel\abrirModalRespaldos.js" />
     <Content Include="Scripts\Panel\abrirModalVersion.js" />
     <Content Include="Scripts\Panel\expandir-menu.js" />
     <Content Include="Scripts\Panel\relojRigital.js" />
@@ -495,6 +497,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Respaldos\" />
+    <Folder Include="Views\Respaldos\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
