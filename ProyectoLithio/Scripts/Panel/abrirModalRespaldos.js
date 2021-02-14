@@ -22,7 +22,6 @@ function CrearRespaldo() {
 
         ejecutaAjax(url, parametros, funcion);
     });
-    
 }
 
 function ProcesarCrearRespaldo(data) {

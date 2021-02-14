@@ -15,9 +15,7 @@ namespace ProyectoLithio.Models
     public partial class Usuarios
     {
         public int Id_Usuario { get; set; }
-        public string Primer_Nombre { get; set; }
-        public string Primer_Apellido { get; set; }
-        public string Segundo_Apellido { get; set; }
+        public string Nombre_Completo { get; set; }
         public string Correo_Electronico { get; set; }
         public string Contrasena_Usuario { get; set; }
         public int Id_Tipo_Usuario { get; set; }

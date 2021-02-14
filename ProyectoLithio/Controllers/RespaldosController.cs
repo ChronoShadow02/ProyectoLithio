@@ -4,11 +4,13 @@ using System.Data;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-
+using ProyectoLithio.Models;
 namespace ProyectoLithio.Controllers
 {
     public class RespaldosController : Controller
     {
+
+        LithioBDEntities LithioBD = new LithioBDEntities();
 
         [HttpPost]
         public ActionResult CrearRespaldo()
@@ -18,6 +20,9 @@ namespace ProyectoLithio.Controllers
             string icono = "";
             try
             {
+                ///ejecuta el procedimiento de respaldo
+                this.LithioBD.pa_CrearRespaldo();
+
                 mensaje = "Respaldo hecho de forma existosa!";
                 titulo = "Éxito";
                 icono = "success";

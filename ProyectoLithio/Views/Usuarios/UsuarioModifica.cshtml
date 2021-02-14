@@ -9,27 +9,21 @@
 <form method="post" id="frmUsuario">
     <label><span class="Obligatorio">* Obligatorio</span></label> <br />
     <div class="form-group">
-        <label><span class="Obligatorio">*</span>Nombre</label>
-        <input type="text" name="Primer_Nombre" class="form-control" placeholder="Ejemplo:Juan" id="Primer_Nombre" value="@Model.Primer_Nombre" />
-    </div>
-    <div class="form-group">
-        <label><span class="Obligatorio">*</span>Primer apellido</label>
-        <input type="text" name="Primer_Apellido" class="form-control" placeholder="Ejemplo:Pérez" id="Primer_Apellido" value="@Model.Primer_Apellido" />
-    </div>
-    <div class="form-group">
-        <label><span class="Obligatorio">*</span>Segundo apellido</label>
-        <input type="text" name="Segundo_Apellido" class="form-control" placeholder="Ejemplo:Pérez" id="Segundo_Apellido" value="@Model.Segundo_Apellido" />
+        <label><span class="Obligatorio">*</span>Nombre Completo</label>
+        <input type="text" name="Nombre_Completo" class="form-control" placeholder="Ejemplo:Juan" id="Nombre_Completo" value="@Model.Nombre_Completo" />
     </div>
     <div class="form-group">
         <label><span class="Obligatorio">*</span>Correo Electrónico</label>
         <input type="text" name="Correo_Electronico" class="form-control" id="Correo_Electronico" value="@Model.Correo_Electronico" />
     </div>
     <div class="form-group">
-        <label><span class="Obligatorio">*</span>Contraseña</label>
-        <input type="password" name="Contrasena_Usuario" class="form-control" id="Contrasena_Usuario" />
+        <label>¿Olvido de contraseña?</label>
+        <br />
+        <a href="~/Usuarios/RecuperarContrasena" class="btn btn-success">Recuperar Contraseña</a>
     </div>
     <div class="form-group text-right">
-        <input type="submit" value="Ingresar" class="btn-success btn" id="btnModificarUsuario" />
+        <input type="submit" value="Modificar" class="btn-success btn" id="btnModificarUsuario" />
+        
         <a href="~/Usuarios/UsuariosLista" class="btn btn-info">Regresar a la lista</a>
     </div>
 </form>

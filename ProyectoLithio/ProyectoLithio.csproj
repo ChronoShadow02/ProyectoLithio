@@ -494,6 +494,8 @@
     <Content Include="Views\Costos\Costeo.cshtml" />
     <Content Include="Views\Login\StartRecovery.cshtml" />
     <Content Include="Views\Login\Recovery.cshtml" />
+    <Content Include="Views\Usuarios\RecuperarContrasena.cshtml" />
+    <Content Include="Views\Usuarios\Recovery.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -5,15 +5,7 @@
 function validaUsuarios() {
     $("#frmUsuario").validate({
         rules: {
-            Primer_Nombre: {
-                required: true,
-                maxlength: 200
-            },
-            Primer_Apellido: {
-                required: true,
-                maxlength: 200
-            },
-            Segundo_Apellido: {
+            Nombre_Completo: {
                 required: true,
                 maxlength: 200
             },

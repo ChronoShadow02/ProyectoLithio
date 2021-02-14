@@ -1,0 +1,31 @@
+﻿
+@{
+    ViewBag.Title = "Recuperar Contraseña";
+    Layout = "~/Views/Shared/_LayoutCosteo.cshtml";
+}
+
+<br />
+<h2 class="text-center">Recuperación de contraseña</h2>
+<br />
+<div class="row">
+    <div class="col-md-6 offset-3">
+        <div style="background-color:rgba(255,255,255,0.4); padding:50px">
+            <form method="post" id="frmRecuperarContraseña">
+                <div class="form-group">
+                    <label><strong>Ingrese su correo electrónico</strong></label>
+                    <input type="text" value="" placeholder="Correo electrónico" name="Correo_Electronico" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Enviar" class="btn btn-primary" />
+                    <a href="~/Inicio/Bienvenida" class="btn btn-secondary">Regresar</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/validacionesGenericas.js"></script>
+    <script src="~/Scripts/Login/validaCorreo.js"></script>
+}

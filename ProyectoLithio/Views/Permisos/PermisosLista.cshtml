@@ -27,7 +27,7 @@
                     {
                         <tr>
                             <td>@oListaPermisos.Id_Usuario</td>
-                            <td>@oListaPermisos.Primer_Nombre @oListaPermisos.Primer_Apellido @oListaPermisos.Segundo_Apellido</td>
+                            <td>@oListaPermisos.Nombre_Completo</td>
                             <td>@oListaPermisos.Desc_Tipo_Usuario</td>
                             <td>@oListaPermisos.Desc_Estado_Usuario</td>
                             <td><a href="~/Permisos/PermisosModifica?Id_Usuario=@oListaPermisos.Id_Usuario" class="btn btn-success">Cambiar Permisos</a></td>
@@ -41,6 +41,5 @@
 <br />
 @section scripts{
     <script src="~/Scripts/Tablas/datatables.min.js"></script>
-
     <script src="~/Scripts/Tablas/mensajesGenericosDataTables.js"></script>
 }

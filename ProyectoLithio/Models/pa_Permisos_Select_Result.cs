@@ -14,9 +14,7 @@ namespace ProyectoLithio.Models
     public partial class pa_Permisos_Select_Result
     {
         public int Id_Usuario { get; set; }
-        public string Primer_Nombre { get; set; }
-        public string Primer_Apellido { get; set; }
-        public string Segundo_Apellido { get; set; }
+        public string Nombre_Completo { get; set; }
         public int Id_Tipo_Usuario { get; set; }
         public string Desc_Tipo_Usuario { get; set; }
         public int Id_Estado_Usuario { get; set; }
