@@ -1,0 +1,1204 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="LithioBDModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Articulos">
+          <Key>
+            <PropertyRef Name="Id_Articulo" />
+          </Key>
+          <Property Name="Id_Articulo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Codigo_Articulo" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="Nombre_Articulo" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="Descripcion_Articulo" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="Costo_Articulo" Type="float" Nullable="false" />
+          <Property Name="Costo_Anterior_Articulo" Type="float" Nullable="false" />
+          <Property Name="Id_Proveedor" Type="int" Nullable="false" />
+          <Property Name="Id_Presentacion" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Costos">
+          <Key>
+            <PropertyRef Name="Id_Costo" />
+          </Key>
+          <Property Name="Id_Costo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DUA" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="Numero_Costos" Type="int" Nullable="false" />
+          <Property Name="Id_Articulo" Type="int" Nullable="false" />
+          <Property Name="Codigo_Articulo" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="Nombre_Articulo" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="Id_Presentacion" Type="int" Nullable="false" />
+          <Property Name="Unidades_Articulos" Type="int" Nullable="false" />
+          <Property Name="Tipo_De_Cambio" Type="float" Nullable="false" />
+          <Property Name="Costo_Por_Unidad_Dolares" Type="float" Nullable="false" />
+          <Property Name="Subtotal_Costo_Dolares" Type="float" Nullable="false" />
+          <Property Name="Porcentaje_Costo" Type="float" Nullable="false" />
+          <Property Name="Total_Costo_Dolares" Type="float" Nullable="false" />
+          <Property Name="Fecha_Creacion" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Estado_Usuario">
+          <Key>
+            <PropertyRef Name="Id_Estado_Usuario" />
+          </Key>
+          <Property Name="Id_Estado_Usuario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Desc_Estado_Usuario" Type="varchar" MaxLength="200" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Paises">
+          <Key>
+            <PropertyRef Name="Id_Pais" />
+          </Key>
+          <Property Name="Id_Pais" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre_Pais" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="Sigla_Pais" Type="varchar" MaxLength="3" Nullable="false" />
+          <Property Name="Moneda_Pais" Type="varchar" MaxLength="200" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Presentaciones">
+          <Key>
+            <PropertyRef Name="Id_Presentacion" />
+          </Key>
+          <Property Name="Id_Presentacion" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre_Presentacion" Type="varchar" MaxLength="200" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Proveedores">
+          <Key>
+            <PropertyRef Name="Id_Proveedor" />
+          </Key>
+          <Property Name="Id_Proveedor" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Codigo_Proveedor" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="Nombre_Proveedor" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="Id_Pais" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Tipo_Usuario">
+          <Key>
+            <PropertyRef Name="Id_Tipo_Usuario" />
+          </Key>
+          <Property Name="Id_Tipo_Usuario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Desc_Tipo_Usuario" Type="varchar" MaxLength="200" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Usuarios">
+          <Key>
+            <PropertyRef Name="Id_Usuario" />
+          </Key>
+          <Property Name="Id_Usuario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre_Completo" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="Correo_Electronico" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="Contrasena_Usuario" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="Id_Tipo_Usuario" Type="int" Nullable="false" />
+          <Property Name="Id_Estado_Usuario" Type="int" Nullable="false" />
+          <Property Name="Token_Recovery" Type="varchar" MaxLength="200" />
+        </EntityType>
+        <Association Name="FK_Articulos_Presentaciones">
+          <End Role="Presentaciones" Type="Self.Presentaciones" Multiplicity="1" />
+          <End Role="Articulos" Type="Self.Articulos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Presentaciones">
+              <PropertyRef Name="Id_Presentacion" />
+            </Principal>
+            <Dependent Role="Articulos">
+              <PropertyRef Name="Id_Presentacion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Articulos_Proveedores">
+          <End Role="Proveedores" Type="Self.Proveedores" Multiplicity="1" />
+          <End Role="Articulos" Type="Self.Articulos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Proveedores">
+              <PropertyRef Name="Id_Proveedor" />
+            </Principal>
+            <Dependent Role="Articulos">
+              <PropertyRef Name="Id_Proveedor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Costos_Articulos">
+          <End Role="Articulos" Type="Self.Articulos" Multiplicity="1" />
+          <End Role="Costos" Type="Self.Costos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Articulos">
+              <PropertyRef Name="Id_Articulo" />
+            </Principal>
+            <Dependent Role="Costos">
+              <PropertyRef Name="Id_Articulo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Costos_Presentaciones">
+          <End Role="Presentaciones" Type="Self.Presentaciones" Multiplicity="1" />
+          <End Role="Costos" Type="Self.Costos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Presentaciones">
+              <PropertyRef Name="Id_Presentacion" />
+            </Principal>
+            <Dependent Role="Costos">
+              <PropertyRef Name="Id_Presentacion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Proveedores_Paises">
+          <End Role="Paises" Type="Self.Paises" Multiplicity="1" />
+          <End Role="Proveedores" Type="Self.Proveedores" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Paises">
+              <PropertyRef Name="Id_Pais" />
+            </Principal>
+            <Dependent Role="Proveedores">
+              <PropertyRef Name="Id_Pais" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Usuarios_Estado_Usuario">
+          <End Role="Estado_Usuario" Type="Self.Estado_Usuario" Multiplicity="1" />
+          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Estado_Usuario">
+              <PropertyRef Name="Id_Estado_Usuario" />
+            </Principal>
+            <Dependent Role="Usuarios">
+              <PropertyRef Name="Id_Estado_Usuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Usuarios_Tipo_Usuario">
+          <End Role="Tipo_Usuario" Type="Self.Tipo_Usuario" Multiplicity="1" />
+          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tipo_Usuario">
+              <PropertyRef Name="Id_Tipo_Usuario" />
+            </Principal>
+            <Dependent Role="Usuarios">
+              <PropertyRef Name="Id_Tipo_Usuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="pa_ActualizarTokenRecuperacionPass" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Correo_Electronico" Type="varchar" Mode="In" />
+          <Parameter Name="Token" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="pa_Articulos_ExisteArticulosCodigo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Codigo_Articulo" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="pa_Articulos_ExisteArticulosNombre" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Nombre_Articulo" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="pa_Articulos_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Codigo_Articulo" Type="varchar" Mode="In" />
+          <Parameter Name="Nombre_Articulo" Type="varchar" Mode="In" />
+          <Parameter Name="Descripcion_Articulo" Type="varchar" Mode="In" />
+          <Parameter Name="Costo_Articulo" Type="float" Mode="In" />
+          <Parameter Name="Costo_Anterior_Articulo" Type="float" Mode="In" />
+          <Parameter Name="Id_Proveedor" Type="int" Mode="In" />
+          <Parameter Name="Id_Presentacion" Type="int" Mode="In" />
+        </Function>
+        <Function Name="pa_Articulos_Select" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="pa_Articulos_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id_Articulo" Type="int" Mode="In" />
+          <Parameter Name="Codigo_Articulo" Type="varchar" Mode="In" />
+          <Parameter Name="Nombre_Articulo" Type="varchar" Mode="In" />
+          <Parameter Name="Descripcion_Articulo" Type="varchar" Mode="In" />
+          <Parameter Name="Costo_Articulo" Type="float" Mode="In" />
+          <Parameter Name="Costo_Anterior_Articulo" Type="float" Mode="In" />
+          <Parameter Name="Id_Proveedor" Type="int" Mode="In" />
+          <Parameter Name="Id_Presentacion" Type="int" Mode="In" />
+        </Function>
+        <Function Name="pa_ArticulosRetornaID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id_Articulo" Type="int" Mode="In" />
+        </Function>
+        <Function Name="pa_CrearRespaldo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="pa_EstadoUsuario_Select" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="pa_Paises_ExistePais" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="NombrePais" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="pa_Paises_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Nombre_Pais" Type="varchar" Mode="In" />
+          <Parameter Name="Sigla_Pais" Type="varchar" Mode="In" />
+          <Parameter Name="Moneda_Pais" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="pa_Paises_Select" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="pa_Paises_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id_Pais" Type="int" Mode="In" />
+          <Parameter Name="Nombre_Pais" Type="varchar" Mode="In" />
+          <Parameter Name="Sigla_Pais" Type="varchar" Mode="In" />
+          <Parameter Name="Moneda_Pais" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="pa_PaisesRetornaID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id_Pais" Type="int" Mode="In" />
+        </Function>
+        <Function Name="pa_Permisos_Select" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="pa_Permisos_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id_Usuario" Type="int" Mode="In" />
+          <Parameter Name="Id_Estado_Usuario" Type="int" Mode="In" />
+          <Parameter Name="Id_Tipo_Usuario" Type="int" Mode="In" />
+        </Function>
+        <Function Name="pa_PermisosRetornaID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id_Usuario" Type="int" Mode="In" />
+        </Function>
+        <Function Name="pa_Presentaciones_ExistePresentacion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Nombre_Presentacion" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="pa_Presentaciones_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Nombre_Presentacion" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="pa_Presentaciones_Select" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="pa_Presentaciones_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id_Presentacion" Type="int" Mode="In" />
+          <Parameter Name="Nombre_Presentacion" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="pa_PresentacionesRetornaID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id_Presentacion" Type="int" Mode="In" />
+        </Function>
+        <Function Name="pa_Proveedores_ExisteProveedor" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Codigo_Proveedor" Type="varchar" Mode="In" />
+          <Parameter Name="Nombre_Proveedor" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="pa_Proveedores_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Nombre_Proveedor" Type="varchar" Mode="In" />
+          <Parameter Name="Codigo_Proveedor" Type="varchar" Mode="In" />
+          <Parameter Name="Id_Pais" Type="int" Mode="In" />
+        </Function>
+        <Function Name="pa_Proveedores_Select" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="pa_Proveedores_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id_Proveedor" Type="int" Mode="In" />
+          <Parameter Name="Codigo_Proveedor" Type="varchar" Mode="In" />
+          <Parameter Name="Nombre_Proveedor" Type="varchar" Mode="In" />
+          <Parameter Name="Id_Pais" Type="int" Mode="In" />
+        </Function>
+        <Function Name="pa_ProveedoresRetornaID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id_Proveedor" Type="int" Mode="In" />
+        </Function>
+        <Function Name="pa_RetornaUsuarioCorreoPwd_Select" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Correo" Type="varchar" Mode="In" />
+          <Parameter Name="Contrasena" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="pa_TipoUsuario_Select" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="pa_Usuarios_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Nombre_Completo" Type="varchar" Mode="In" />
+          <Parameter Name="Correo_Electronico" Type="varchar" Mode="In" />
+          <Parameter Name="Contrasena_Usuario" Type="varchar" Mode="In" />
+          <Parameter Name="Id_Tipo_Usuario" Type="int" Mode="In" />
+          <Parameter Name="Id_Estado_Usuario" Type="int" Mode="In" />
+        </Function>
+        <Function Name="pa_Usuarios_Select" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="pa_Usuarios_SelectTodo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="pa_UsuariosRetornaID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id_Usuario" Type="int" Mode="In" />
+        </Function>
+        <Function Name="pa_UsuariosUpdate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Nombre_Completo" Type="varchar" Mode="In" />
+          <Parameter Name="Correo_Electronico" Type="varchar" Mode="In" />
+          <Parameter Name="Id_Usuario" Type="int" Mode="In" />
+        </Function>
+        <Function Name="pa_VerificarCorreoRecuperacionPass" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Correo_Electronico" Type="varchar" Mode="In" />
+        </Function>
+        <EntityContainer Name="LithioBDModelStoreContainer">
+          <EntitySet Name="Articulos" EntityType="Self.Articulos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Costos" EntityType="Self.Costos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Estado_Usuario" EntityType="Self.Estado_Usuario" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Paises" EntityType="Self.Paises" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Presentaciones" EntityType="Self.Presentaciones" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Proveedores" EntityType="Self.Proveedores" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tipo_Usuario" EntityType="Self.Tipo_Usuario" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Usuarios" EntityType="Self.Usuarios" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Articulos_Presentaciones" Association="Self.FK_Articulos_Presentaciones">
+            <End Role="Presentaciones" EntitySet="Presentaciones" />
+            <End Role="Articulos" EntitySet="Articulos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Articulos_Proveedores" Association="Self.FK_Articulos_Proveedores">
+            <End Role="Proveedores" EntitySet="Proveedores" />
+            <End Role="Articulos" EntitySet="Articulos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Costos_Articulos" Association="Self.FK_Costos_Articulos">
+            <End Role="Articulos" EntitySet="Articulos" />
+            <End Role="Costos" EntitySet="Costos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Costos_Presentaciones" Association="Self.FK_Costos_Presentaciones">
+            <End Role="Presentaciones" EntitySet="Presentaciones" />
+            <End Role="Costos" EntitySet="Costos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Proveedores_Paises" Association="Self.FK_Proveedores_Paises">
+            <End Role="Paises" EntitySet="Paises" />
+            <End Role="Proveedores" EntitySet="Proveedores" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Usuarios_Estado_Usuario" Association="Self.FK_Usuarios_Estado_Usuario">
+            <End Role="Estado_Usuario" EntitySet="Estado_Usuario" />
+            <End Role="Usuarios" EntitySet="Usuarios" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Usuarios_Tipo_Usuario" Association="Self.FK_Usuarios_Tipo_Usuario">
+            <End Role="Tipo_Usuario" EntitySet="Tipo_Usuario" />
+            <End Role="Usuarios" EntitySet="Usuarios" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="LithioBDModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Articulos">
+          <Key>
+            <PropertyRef Name="Id_Articulo" />
+          </Key>
+          <Property Name="Id_Articulo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Codigo_Articulo" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Nombre_Articulo" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Descripcion_Articulo" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Costo_Articulo" Type="Double" Nullable="false" />
+          <Property Name="Costo_Anterior_Articulo" Type="Double" Nullable="false" />
+          <Property Name="Id_Proveedor" Type="Int32" Nullable="false" />
+          <Property Name="Id_Presentacion" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Presentaciones" Relationship="Self.FK_Articulos_Presentaciones" FromRole="Articulos" ToRole="Presentaciones" />
+          <NavigationProperty Name="Proveedores" Relationship="Self.FK_Articulos_Proveedores" FromRole="Articulos" ToRole="Proveedores" />
+          <NavigationProperty Name="Costos" Relationship="Self.FK_Costos_Articulos" FromRole="Articulos" ToRole="Costos" />
+        </EntityType>
+        <EntityType Name="Costos">
+          <Key>
+            <PropertyRef Name="Id_Costo" />
+          </Key>
+          <Property Name="Id_Costo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DUA" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Numero_Costos" Type="Int32" Nullable="false" />
+          <Property Name="Id_Articulo" Type="Int32" Nullable="false" />
+          <Property Name="Codigo_Articulo" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Nombre_Articulo" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Id_Presentacion" Type="Int32" Nullable="false" />
+          <Property Name="Unidades_Articulos" Type="Int32" Nullable="false" />
+          <Property Name="Tipo_De_Cambio" Type="Double" Nullable="false" />
+          <Property Name="Costo_Por_Unidad_Dolares" Type="Double" Nullable="false" />
+          <Property Name="Subtotal_Costo_Dolares" Type="Double" Nullable="false" />
+          <Property Name="Porcentaje_Costo" Type="Double" Nullable="false" />
+          <Property Name="Total_Costo_Dolares" Type="Double" Nullable="false" />
+          <Property Name="Fecha_Creacion" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="Articulos" Relationship="Self.FK_Costos_Articulos" FromRole="Costos" ToRole="Articulos" />
+          <NavigationProperty Name="Presentaciones" Relationship="Self.FK_Costos_Presentaciones" FromRole="Costos" ToRole="Presentaciones" />
+        </EntityType>
+        <EntityType Name="Estado_Usuario">
+          <Key>
+            <PropertyRef Name="Id_Estado_Usuario" />
+          </Key>
+          <Property Name="Id_Estado_Usuario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Desc_Estado_Usuario" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Usuarios" Relationship="Self.FK_Usuarios_Estado_Usuario" FromRole="Estado_Usuario" ToRole="Usuarios" />
+        </EntityType>
+        <EntityType Name="Paises">
+          <Key>
+            <PropertyRef Name="Id_Pais" />
+          </Key>
+          <Property Name="Id_Pais" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre_Pais" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Sigla_Pais" Type="String" MaxLength="3" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Moneda_Pais" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Proveedores" Relationship="Self.FK_Proveedores_Paises" FromRole="Paises" ToRole="Proveedores" />
+        </EntityType>
+        <EntityType Name="Presentaciones">
+          <Key>
+            <PropertyRef Name="Id_Presentacion" />
+          </Key>
+          <Property Name="Id_Presentacion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre_Presentacion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Articulos" Relationship="Self.FK_Articulos_Presentaciones" FromRole="Presentaciones" ToRole="Articulos" />
+          <NavigationProperty Name="Costos" Relationship="Self.FK_Costos_Presentaciones" FromRole="Presentaciones" ToRole="Costos" />
+        </EntityType>
+        <EntityType Name="Proveedores">
+          <Key>
+            <PropertyRef Name="Id_Proveedor" />
+          </Key>
+          <Property Name="Id_Proveedor" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Codigo_Proveedor" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Nombre_Proveedor" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Id_Pais" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Articulos" Relationship="Self.FK_Articulos_Proveedores" FromRole="Proveedores" ToRole="Articulos" />
+          <NavigationProperty Name="Paises" Relationship="Self.FK_Proveedores_Paises" FromRole="Proveedores" ToRole="Paises" />
+        </EntityType>
+        <EntityType Name="Tipo_Usuario">
+          <Key>
+            <PropertyRef Name="Id_Tipo_Usuario" />
+          </Key>
+          <Property Name="Id_Tipo_Usuario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Desc_Tipo_Usuario" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Usuarios" Relationship="Self.FK_Usuarios_Tipo_Usuario" FromRole="Tipo_Usuario" ToRole="Usuarios" />
+        </EntityType>
+        <EntityType Name="Usuarios">
+          <Key>
+            <PropertyRef Name="Id_Usuario" />
+          </Key>
+          <Property Name="Id_Usuario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre_Completo" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Correo_Electronico" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Contrasena_Usuario" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Id_Tipo_Usuario" Type="Int32" Nullable="false" />
+          <Property Name="Id_Estado_Usuario" Type="Int32" Nullable="false" />
+          <Property Name="Token_Recovery" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Estado_Usuario" Relationship="Self.FK_Usuarios_Estado_Usuario" FromRole="Usuarios" ToRole="Estado_Usuario" />
+          <NavigationProperty Name="Tipo_Usuario" Relationship="Self.FK_Usuarios_Tipo_Usuario" FromRole="Usuarios" ToRole="Tipo_Usuario" />
+        </EntityType>
+        <Association Name="FK_Articulos_Presentaciones">
+          <End Role="Presentaciones" Type="Self.Presentaciones" Multiplicity="1" />
+          <End Role="Articulos" Type="Self.Articulos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Presentaciones">
+              <PropertyRef Name="Id_Presentacion" />
+            </Principal>
+            <Dependent Role="Articulos">
+              <PropertyRef Name="Id_Presentacion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Articulos_Proveedores">
+          <End Role="Proveedores" Type="Self.Proveedores" Multiplicity="1" />
+          <End Role="Articulos" Type="Self.Articulos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Proveedores">
+              <PropertyRef Name="Id_Proveedor" />
+            </Principal>
+            <Dependent Role="Articulos">
+              <PropertyRef Name="Id_Proveedor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Costos_Articulos">
+          <End Role="Articulos" Type="Self.Articulos" Multiplicity="1" />
+          <End Role="Costos" Type="Self.Costos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Articulos">
+              <PropertyRef Name="Id_Articulo" />
+            </Principal>
+            <Dependent Role="Costos">
+              <PropertyRef Name="Id_Articulo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Costos_Presentaciones">
+          <End Role="Presentaciones" Type="Self.Presentaciones" Multiplicity="1" />
+          <End Role="Costos" Type="Self.Costos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Presentaciones">
+              <PropertyRef Name="Id_Presentacion" />
+            </Principal>
+            <Dependent Role="Costos">
+              <PropertyRef Name="Id_Presentacion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Usuarios_Estado_Usuario">
+          <End Role="Estado_Usuario" Type="Self.Estado_Usuario" Multiplicity="1" />
+          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Estado_Usuario">
+              <PropertyRef Name="Id_Estado_Usuario" />
+            </Principal>
+            <Dependent Role="Usuarios">
+              <PropertyRef Name="Id_Estado_Usuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Proveedores_Paises">
+          <End Role="Paises" Type="Self.Paises" Multiplicity="1" />
+          <End Role="Proveedores" Type="Self.Proveedores" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Paises">
+              <PropertyRef Name="Id_Pais" />
+            </Principal>
+            <Dependent Role="Proveedores">
+              <PropertyRef Name="Id_Pais" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Usuarios_Tipo_Usuario">
+          <End Role="Tipo_Usuario" Type="Self.Tipo_Usuario" Multiplicity="1" />
+          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tipo_Usuario">
+              <PropertyRef Name="Id_Tipo_Usuario" />
+            </Principal>
+            <Dependent Role="Usuarios">
+              <PropertyRef Name="Id_Tipo_Usuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="LithioBDEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Articulos" EntityType="Self.Articulos" />
+          <EntitySet Name="Costos" EntityType="Self.Costos" />
+          <EntitySet Name="Estado_Usuario" EntityType="Self.Estado_Usuario" />
+          <EntitySet Name="Paises" EntityType="Self.Paises" />
+          <EntitySet Name="Presentaciones" EntityType="Self.Presentaciones" />
+          <EntitySet Name="Proveedores" EntityType="Self.Proveedores" />
+          <EntitySet Name="Tipo_Usuario" EntityType="Self.Tipo_Usuario" />
+          <EntitySet Name="Usuarios" EntityType="Self.Usuarios" />
+          <AssociationSet Name="FK_Articulos_Presentaciones" Association="Self.FK_Articulos_Presentaciones">
+            <End Role="Presentaciones" EntitySet="Presentaciones" />
+            <End Role="Articulos" EntitySet="Articulos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Articulos_Proveedores" Association="Self.FK_Articulos_Proveedores">
+            <End Role="Proveedores" EntitySet="Proveedores" />
+            <End Role="Articulos" EntitySet="Articulos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Costos_Articulos" Association="Self.FK_Costos_Articulos">
+            <End Role="Articulos" EntitySet="Articulos" />
+            <End Role="Costos" EntitySet="Costos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Costos_Presentaciones" Association="Self.FK_Costos_Presentaciones">
+            <End Role="Presentaciones" EntitySet="Presentaciones" />
+            <End Role="Costos" EntitySet="Costos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Usuarios_Estado_Usuario" Association="Self.FK_Usuarios_Estado_Usuario">
+            <End Role="Estado_Usuario" EntitySet="Estado_Usuario" />
+            <End Role="Usuarios" EntitySet="Usuarios" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Proveedores_Paises" Association="Self.FK_Proveedores_Paises">
+            <End Role="Paises" EntitySet="Paises" />
+            <End Role="Proveedores" EntitySet="Proveedores" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Usuarios_Tipo_Usuario" Association="Self.FK_Usuarios_Tipo_Usuario">
+            <End Role="Tipo_Usuario" EntitySet="Tipo_Usuario" />
+            <End Role="Usuarios" EntitySet="Usuarios" />
+          </AssociationSet>
+          <FunctionImport Name="pa_ActualizarTokenRecuperacionPass">
+            <Parameter Name="Correo_Electronico" Mode="In" Type="String" />
+            <Parameter Name="Token" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="pa_Articulos_ExisteArticulosCodigo" ReturnType="Collection(LithioBDModel.pa_Articulos_ExisteArticulosCodigo_Result)">
+            <Parameter Name="Codigo_Articulo" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="pa_Articulos_ExisteArticulosNombre" ReturnType="Collection(LithioBDModel.pa_Articulos_ExisteArticulosNombre_Result)">
+            <Parameter Name="Nombre_Articulo" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="pa_Articulos_Insert">
+            <Parameter Name="Codigo_Articulo" Mode="In" Type="String" />
+            <Parameter Name="Nombre_Articulo" Mode="In" Type="String" />
+            <Parameter Name="Descripcion_Articulo" Mode="In" Type="String" />
+            <Parameter Name="Costo_Articulo" Mode="In" Type="Double" />
+            <Parameter Name="Costo_Anterior_Articulo" Mode="In" Type="Double" />
+            <Parameter Name="Id_Proveedor" Mode="In" Type="Int32" />
+            <Parameter Name="Id_Presentacion" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="pa_Articulos_Select" ReturnType="Collection(LithioBDModel.pa_Articulos_Select_Result)" />
+          <FunctionImport Name="pa_Articulos_Update">
+            <Parameter Name="Id_Articulo" Mode="In" Type="Int32" />
+            <Parameter Name="Codigo_Articulo" Mode="In" Type="String" />
+            <Parameter Name="Nombre_Articulo" Mode="In" Type="String" />
+            <Parameter Name="Descripcion_Articulo" Mode="In" Type="String" />
+            <Parameter Name="Costo_Articulo" Mode="In" Type="Double" />
+            <Parameter Name="Costo_Anterior_Articulo" Mode="In" Type="Double" />
+            <Parameter Name="Id_Proveedor" Mode="In" Type="Int32" />
+            <Parameter Name="Id_Presentacion" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="pa_ArticulosRetornaID" ReturnType="Collection(LithioBDModel.pa_ArticulosRetornaID_Result)">
+            <Parameter Name="Id_Articulo" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="pa_CrearRespaldo" />
+          <FunctionImport Name="pa_EstadoUsuario_Select" ReturnType="Collection(LithioBDModel.pa_EstadoUsuario_Select_Result)" />
+          <FunctionImport Name="pa_Paises_ExistePais" ReturnType="Collection(LithioBDModel.pa_Paises_ExistePais_Result)">
+            <Parameter Name="NombrePais" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="pa_Paises_Insert">
+            <Parameter Name="Nombre_Pais" Mode="In" Type="String" />
+            <Parameter Name="Sigla_Pais" Mode="In" Type="String" />
+            <Parameter Name="Moneda_Pais" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="pa_Paises_Select" ReturnType="Collection(LithioBDModel.pa_Paises_Select_Result)" />
+          <FunctionImport Name="pa_Paises_Update">
+            <Parameter Name="Id_Pais" Mode="In" Type="Int32" />
+            <Parameter Name="Nombre_Pais" Mode="In" Type="String" />
+            <Parameter Name="Sigla_Pais" Mode="In" Type="String" />
+            <Parameter Name="Moneda_Pais" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="pa_PaisesRetornaID" ReturnType="Collection(LithioBDModel.pa_PaisesRetornaID_Result)">
+            <Parameter Name="Id_Pais" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="pa_Permisos_Select" ReturnType="Collection(LithioBDModel.pa_Permisos_Select_Result)" />
+          <FunctionImport Name="pa_Permisos_Update">
+            <Parameter Name="Id_Usuario" Mode="In" Type="Int32" />
+            <Parameter Name="Id_Estado_Usuario" Mode="In" Type="Int32" />
+            <Parameter Name="Id_Tipo_Usuario" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="pa_PermisosRetornaID" ReturnType="Collection(LithioBDModel.pa_PermisosRetornaID_Result)">
+            <Parameter Name="Id_Usuario" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="pa_Presentaciones_ExistePresentacion" ReturnType="Collection(LithioBDModel.pa_Presentaciones_ExistePresentacion_Result)">
+            <Parameter Name="Nombre_Presentacion" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="pa_Presentaciones_Insert">
+            <Parameter Name="Nombre_Presentacion" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="pa_Presentaciones_Select" ReturnType="Collection(LithioBDModel.pa_Presentaciones_Select_Result)" />
+          <FunctionImport Name="pa_Presentaciones_Update">
+            <Parameter Name="Id_Presentacion" Mode="In" Type="Int32" />
+            <Parameter Name="Nombre_Presentacion" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="pa_PresentacionesRetornaID" ReturnType="Collection(LithioBDModel.pa_PresentacionesRetornaID_Result)">
+            <Parameter Name="Id_Presentacion" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="pa_Proveedores_ExisteProveedor" ReturnType="Collection(LithioBDModel.pa_Proveedores_ExisteProveedor_Result)">
+            <Parameter Name="Codigo_Proveedor" Mode="In" Type="String" />
+            <Parameter Name="Nombre_Proveedor" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="pa_Proveedores_Insert">
+            <Parameter Name="Nombre_Proveedor" Mode="In" Type="String" />
+            <Parameter Name="Codigo_Proveedor" Mode="In" Type="String" />
+            <Parameter Name="Id_Pais" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="pa_Proveedores_Select" ReturnType="Collection(LithioBDModel.pa_Proveedores_Select_Result)" />
+          <FunctionImport Name="pa_Proveedores_Update">
+            <Parameter Name="Id_Proveedor" Mode="In" Type="Int32" />
+            <Parameter Name="Codigo_Proveedor" Mode="In" Type="String" />
+            <Parameter Name="Nombre_Proveedor" Mode="In" Type="String" />
+            <Parameter Name="Id_Pais" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="pa_ProveedoresRetornaID" ReturnType="Collection(LithioBDModel.pa_ProveedoresRetornaID_Result)">
+            <Parameter Name="Id_Proveedor" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="pa_RetornaUsuarioCorreoPwd_Select" ReturnType="Collection(LithioBDModel.pa_RetornaUsuarioCorreoPwd_Select_Result)">
+            <Parameter Name="Correo" Mode="In" Type="String" />
+            <Parameter Name="Contrasena" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="pa_TipoUsuario_Select" ReturnType="Collection(LithioBDModel.pa_TipoUsuario_Select_Result)" />
+          <FunctionImport Name="pa_Usuarios_Insert">
+            <Parameter Name="Nombre_Completo" Mode="In" Type="String" />
+            <Parameter Name="Correo_Electronico" Mode="In" Type="String" />
+            <Parameter Name="Contrasena_Usuario" Mode="In" Type="String" />
+            <Parameter Name="Id_Tipo_Usuario" Mode="In" Type="Int32" />
+            <Parameter Name="Id_Estado_Usuario" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="pa_Usuarios_Select" ReturnType="Collection(LithioBDModel.pa_Usuarios_Select_Result)" />
+          <FunctionImport Name="pa_Usuarios_SelectTodo" ReturnType="Collection(LithioBDModel.pa_Usuarios_SelectTodo_Result)" />
+          <FunctionImport Name="pa_UsuariosRetornaID" ReturnType="Collection(LithioBDModel.pa_UsuariosRetornaID_Result)">
+            <Parameter Name="Id_Usuario" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="pa_UsuariosUpdate">
+            <Parameter Name="Nombre_Completo" Mode="In" Type="String" />
+            <Parameter Name="Correo_Electronico" Mode="In" Type="String" />
+            <Parameter Name="Id_Usuario" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="pa_VerificarCorreoRecuperacionPass" ReturnType="Collection(LithioBDModel.pa_VerificarCorreoRecuperacionPass_Result)">
+            <Parameter Name="Correo_Electronico" Mode="In" Type="String" />
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="pa_Articulos_ExisteArticulosCodigo_Result">
+          <Property Type="Int32" Name="Id_Articulo" Nullable="false" />
+          <Property Type="String" Name="Codigo_Articulo" Nullable="false" MaxLength="200" />
+          <Property Type="String" Name="Nombre_Articulo" Nullable="false" MaxLength="200" />
+          <Property Type="String" Name="Descripcion_Articulo" Nullable="false" MaxLength="200" />
+          <Property Type="Double" Name="Costo_Articulo" Nullable="false" />
+          <Property Type="Double" Name="Costo_Anterior_Articulo" Nullable="false" />
+          <Property Type="Int32" Name="Id_Proveedor" Nullable="false" />
+          <Property Type="String" Name="Nombre_Proveedor" Nullable="false" MaxLength="200" />
+          <Property Type="Int32" Name="Id_Presentacion" Nullable="false" />
+          <Property Type="String" Name="Nombre_Presentacion" Nullable="false" MaxLength="200" />
+        </ComplexType>
+        <ComplexType Name="pa_Articulos_ExisteArticulosNombre_Result">
+          <Property Type="Int32" Name="Id_Articulo" Nullable="false" />
+          <Property Type="String" Name="Codigo_Articulo" Nullable="false" MaxLength="200" />
+          <Property Type="String" Name="Nombre_Articulo" Nullable="false" MaxLength="200" />
+          <Property Type="String" Name="Descripcion_Articulo" Nullable="false" MaxLength="200" />
+          <Property Type="Double" Name="Costo_Articulo" Nullable="false" />
+          <Property Type="Double" Name="Costo_Anterior_Articulo" Nullable="false" />
+          <Property Type="Int32" Name="Id_Proveedor" Nullable="false" />
+          <Property Type="String" Name="Nombre_Proveedor" Nullable="false" MaxLength="200" />
+          <Property Type="Int32" Name="Id_Presentacion" Nullable="false" />
+          <Property Type="String" Name="Nombre_Presentacion" Nullable="false" MaxLength="200" />
+        </ComplexType>
+        <ComplexType Name="pa_Articulos_Select_Result">
+          <Property Type="Int32" Name="Id_Articulo" Nullable="false" />
+          <Property Type="String" Name="Codigo_Articulo" Nullable="false" MaxLength="200" />
+          <Property Type="String" Name="Nombre_Articulo" Nullable="false" MaxLength="200" />
+          <Property Type="String" Name="Descripcion_Articulo" Nullable="false" MaxLength="200" />
+          <Property Type="Double" Name="Costo_Articulo" Nullable="false" />
+          <Property Type="Double" Name="Costo_Anterior_Articulo" Nullable="false" />
+          <Property Type="Int32" Name="Id_Proveedor" Nullable="false" />
+          <Property Type="String" Name="Nombre_Proveedor" Nullable="false" MaxLength="200" />
+          <Property Type="Int32" Name="Id_Presentacion" Nullable="false" />
+          <Property Type="String" Name="Nombre_Presentacion" Nullable="false" MaxLength="200" />
+        </ComplexType>
+        <ComplexType Name="pa_ArticulosRetornaID_Result">
+          <Property Type="Int32" Name="Id_Articulo" Nullable="false" />
+          <Property Type="String" Name="Codigo_Articulo" Nullable="false" MaxLength="200" />
+          <Property Type="String" Name="Nombre_Articulo" Nullable="false" MaxLength="200" />
+          <Property Type="String" Name="Descripcion_Articulo" Nullable="false" MaxLength="200" />
+          <Property Type="Double" Name="Costo_Articulo" Nullable="false" />
+          <Property Type="Double" Name="Costo_Anterior_Articulo" Nullable="false" />
+          <Property Type="Int32" Name="Id_Proveedor" Nullable="false" />
+          <Property Type="String" Name="Nombre_Proveedor" Nullable="false" MaxLength="200" />
+          <Property Type="Int32" Name="Id_Presentacion" Nullable="false" />
+          <Property Type="String" Name="Nombre_Presentacion" Nullable="false" MaxLength="200" />
+        </ComplexType>
+        <ComplexType Name="pa_EstadoUsuario_Select_Result">
+          <Property Type="Int32" Name="Id_Estado_Usuario" Nullable="false" />
+          <Property Type="String" Name="Desc_Estado_Usuario" Nullable="false" MaxLength="200" />
+        </ComplexType>
+        <ComplexType Name="pa_Paises_ExistePais_Result">
+          <Property Type="Int32" Name="Id_Pais" Nullable="false" />
+          <Property Type="String" Name="Nombre_Pais" Nullable="false" MaxLength="200" />
+          <Property Type="String" Name="Sigla_Pais" Nullable="false" MaxLength="3" />
+          <Property Type="String" Name="Moneda_Pais" Nullable="false" MaxLength="200" />
+        </ComplexType>
+        <ComplexType Name="pa_Paises_Select_Result">
+          <Property Type="Int32" Name="Id_Pais" Nullable="false" />
+          <Property Type="String" Name="Nombre_Pais" Nullable="false" MaxLength="200" />
+          <Property Type="String" Name="Sigla_Pais" Nullable="false" MaxLength="3" />
+          <Property Type="String" Name="Moneda_Pais" Nullable="false" MaxLength="200" />
+        </ComplexType>
+        <ComplexType Name="pa_PaisesRetornaID_Result">
+          <Property Type="Int32" Name="Id_Pais" Nullable="false" />
+          <Property Type="String" Name="Nombre_Pais" Nullable="false" MaxLength="200" />
+          <Property Type="String" Name="Sigla_Pais" Nullable="false" MaxLength="3" />
+          <Property Type="String" Name="Moneda_Pais" Nullable="false" MaxLength="200" />
+        </ComplexType>
+        <ComplexType Name="pa_Permisos_Select_Result">
+          <Property Type="Int32" Name="Id_Usuario" Nullable="false" />
+          <Property Type="String" Name="Nombre_Completo" Nullable="false" MaxLength="200" />
+          <Property Type="Int32" Name="Id_Tipo_Usuario" Nullable="false" />
+          <Property Type="String" Name="Desc_Tipo_Usuario" Nullable="false" MaxLength="200" />
+          <Property Type="Int32" Name="Id_Estado_Usuario" Nullable="false" />
+          <Property Type="String" Name="Desc_Estado_Usuario" Nullable="false" MaxLength="200" />
+        </ComplexType>
+        <ComplexType Name="pa_PermisosRetornaID_Result">
+          <Property Type="Int32" Name="Id_Usuario" Nullable="false" />
+          <Property Type="String" Name="Nombre_Completo" Nullable="false" MaxLength="200" />
+          <Property Type="Int32" Name="Id_Tipo_Usuario" Nullable="false" />
+          <Property Type="String" Name="Desc_Tipo_Usuario" Nullable="false" MaxLength="200" />
+          <Property Type="Int32" Name="Id_Estado_Usuario" Nullable="false" />
+          <Property Type="String" Name="Desc_Estado_Usuario" Nullable="false" MaxLength="200" />
+        </ComplexType>
+        <ComplexType Name="pa_Presentaciones_ExistePresentacion_Result">
+          <Property Type="Int32" Name="Id_Presentacion" Nullable="false" />
+          <Property Type="String" Name="Nombre_Presentacion" Nullable="false" MaxLength="200" />
+        </ComplexType>
+        <ComplexType Name="pa_Presentaciones_Select_Result">
+          <Property Type="Int32" Name="Id_Presentacion" Nullable="false" />
+          <Property Type="String" Name="Nombre_Presentacion" Nullable="false" MaxLength="200" />
+        </ComplexType>
+        <ComplexType Name="pa_PresentacionesRetornaID_Result">
+          <Property Type="Int32" Name="Id_Presentacion" Nullable="false" />
+          <Property Type="String" Name="Nombre_Presentacion" Nullable="false" MaxLength="200" />
+        </ComplexType>
+        <ComplexType Name="pa_Proveedores_ExisteProveedor_Result">
+          <Property Type="Int32" Name="Id_Proveedor" Nullable="false" />
+          <Property Type="String" Name="Codigo_Proveedor" Nullable="false" MaxLength="200" />
+          <Property Type="String" Name="Nombre_Proveedor" Nullable="false" MaxLength="200" />
+          <Property Type="Int32" Name="Id_Pais" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="pa_Proveedores_Select_Result">
+          <Property Type="Int32" Name="Id_Proveedor" Nullable="false" />
+          <Property Type="String" Name="Codigo_Proveedor" Nullable="false" MaxLength="200" />
+          <Property Type="String" Name="Nombre_Proveedor" Nullable="false" MaxLength="200" />
+          <Property Type="Int32" Name="Id_Pais" Nullable="false" />
+          <Property Type="String" Name="Nombre_Pais" Nullable="false" MaxLength="200" />
+        </ComplexType>
+        <ComplexType Name="pa_ProveedoresRetornaID_Result">
+          <Property Type="Int32" Name="Id_Proveedor" Nullable="false" />
+          <Property Type="String" Name="Codigo_Proveedor" Nullable="false" MaxLength="200" />
+          <Property Type="String" Name="Nombre_Proveedor" Nullable="false" MaxLength="200" />
+          <Property Type="Int32" Name="Id_Pais" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="pa_RetornaUsuarioCorreoPwd_Select_Result">
+          <Property Type="Int32" Name="Id_Usuario" Nullable="false" />
+          <Property Type="String" Name="Nombre_Completo" Nullable="false" MaxLength="200" />
+          <Property Type="String" Name="Correo_Electronico" Nullable="false" MaxLength="200" />
+          <Property Type="String" Name="Contrasena_Usuario" Nullable="false" MaxLength="200" />
+          <Property Type="Int32" Name="Id_Tipo_Usuario" Nullable="false" />
+          <Property Type="String" Name="Desc_Tipo_Usuario" Nullable="false" MaxLength="200" />
+          <Property Type="Int32" Name="Id_Estado_Usuario" Nullable="false" />
+          <Property Type="String" Name="Desc_Estado_Usuario" Nullable="false" MaxLength="200" />
+        </ComplexType>
+        <ComplexType Name="pa_TipoUsuario_Select_Result">
+          <Property Type="Int32" Name="Id_Tipo_Usuario" Nullable="false" />
+          <Property Type="String" Name="Desc_Tipo_Usuario" Nullable="false" MaxLength="200" />
+        </ComplexType>
+        <ComplexType Name="pa_Usuarios_Select_Result">
+          <Property Type="Int32" Name="Id_Usuario" Nullable="false" />
+          <Property Type="String" Name="Nombre_Completo" Nullable="false" MaxLength="200" />
+          <Property Type="String" Name="Desc_Tipo_Usuario" Nullable="false" MaxLength="200" />
+        </ComplexType>
+        <ComplexType Name="pa_Usuarios_SelectTodo_Result">
+          <Property Type="Int32" Name="Id_Usuario" Nullable="false" />
+          <Property Type="String" Name="Nombre_Completo" Nullable="false" MaxLength="200" />
+          <Property Type="String" Name="Correo_Electronico" Nullable="false" MaxLength="200" />
+          <Property Type="String" Name="Contrasena_Usuario" Nullable="false" MaxLength="200" />
+        </ComplexType>
+        <ComplexType Name="pa_UsuariosRetornaID_Result">
+          <Property Type="Int32" Name="Id_Usuario" Nullable="false" />
+          <Property Type="String" Name="Nombre_Completo" Nullable="false" MaxLength="200" />
+          <Property Type="String" Name="Correo_Electronico" Nullable="false" MaxLength="200" />
+          <Property Type="String" Name="Contrasena_Usuario" Nullable="false" MaxLength="200" />
+        </ComplexType>
+        <ComplexType Name="pa_VerificarCorreoRecuperacionPass_Result">
+          <Property Type="Int32" Name="Id_Usuario" Nullable="false" />
+          <Property Type="String" Name="Nombre_Completo" Nullable="false" MaxLength="200" />
+          <Property Type="String" Name="Correo_Electronico" Nullable="false" MaxLength="200" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="LithioBDModelStoreContainer" CdmEntityContainer="LithioBDEntities">
+          <EntitySetMapping Name="Articulos">
+            <EntityTypeMapping TypeName="LithioBDModel.Articulos">
+              <MappingFragment StoreEntitySet="Articulos">
+                <ScalarProperty Name="Id_Articulo" ColumnName="Id_Articulo" />
+                <ScalarProperty Name="Codigo_Articulo" ColumnName="Codigo_Articulo" />
+                <ScalarProperty Name="Nombre_Articulo" ColumnName="Nombre_Articulo" />
+                <ScalarProperty Name="Descripcion_Articulo" ColumnName="Descripcion_Articulo" />
+                <ScalarProperty Name="Costo_Articulo" ColumnName="Costo_Articulo" />
+                <ScalarProperty Name="Costo_Anterior_Articulo" ColumnName="Costo_Anterior_Articulo" />
+                <ScalarProperty Name="Id_Proveedor" ColumnName="Id_Proveedor" />
+                <ScalarProperty Name="Id_Presentacion" ColumnName="Id_Presentacion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Costos">
+            <EntityTypeMapping TypeName="LithioBDModel.Costos">
+              <MappingFragment StoreEntitySet="Costos">
+                <ScalarProperty Name="Id_Costo" ColumnName="Id_Costo" />
+                <ScalarProperty Name="DUA" ColumnName="DUA" />
+                <ScalarProperty Name="Numero_Costos" ColumnName="Numero_Costos" />
+                <ScalarProperty Name="Id_Articulo" ColumnName="Id_Articulo" />
+                <ScalarProperty Name="Codigo_Articulo" ColumnName="Codigo_Articulo" />
+                <ScalarProperty Name="Nombre_Articulo" ColumnName="Nombre_Articulo" />
+                <ScalarProperty Name="Id_Presentacion" ColumnName="Id_Presentacion" />
+                <ScalarProperty Name="Unidades_Articulos" ColumnName="Unidades_Articulos" />
+                <ScalarProperty Name="Tipo_De_Cambio" ColumnName="Tipo_De_Cambio" />
+                <ScalarProperty Name="Costo_Por_Unidad_Dolares" ColumnName="Costo_Por_Unidad_Dolares" />
+                <ScalarProperty Name="Subtotal_Costo_Dolares" ColumnName="Subtotal_Costo_Dolares" />
+                <ScalarProperty Name="Porcentaje_Costo" ColumnName="Porcentaje_Costo" />
+                <ScalarProperty Name="Total_Costo_Dolares" ColumnName="Total_Costo_Dolares" />
+                <ScalarProperty Name="Fecha_Creacion" ColumnName="Fecha_Creacion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Estado_Usuario">
+            <EntityTypeMapping TypeName="LithioBDModel.Estado_Usuario">
+              <MappingFragment StoreEntitySet="Estado_Usuario">
+                <ScalarProperty Name="Id_Estado_Usuario" ColumnName="Id_Estado_Usuario" />
+                <ScalarProperty Name="Desc_Estado_Usuario" ColumnName="Desc_Estado_Usuario" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Paises">
+            <EntityTypeMapping TypeName="LithioBDModel.Paises">
+              <MappingFragment StoreEntitySet="Paises">
+                <ScalarProperty Name="Id_Pais" ColumnName="Id_Pais" />
+                <ScalarProperty Name="Nombre_Pais" ColumnName="Nombre_Pais" />
+                <ScalarProperty Name="Sigla_Pais" ColumnName="Sigla_Pais" />
+                <ScalarProperty Name="Moneda_Pais" ColumnName="Moneda_Pais" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Presentaciones">
+            <EntityTypeMapping TypeName="LithioBDModel.Presentaciones">
+              <MappingFragment StoreEntitySet="Presentaciones">
+                <ScalarProperty Name="Id_Presentacion" ColumnName="Id_Presentacion" />
+                <ScalarProperty Name="Nombre_Presentacion" ColumnName="Nombre_Presentacion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Proveedores">
+            <EntityTypeMapping TypeName="LithioBDModel.Proveedores">
+              <MappingFragment StoreEntitySet="Proveedores">
+                <ScalarProperty Name="Id_Proveedor" ColumnName="Id_Proveedor" />
+                <ScalarProperty Name="Codigo_Proveedor" ColumnName="Codigo_Proveedor" />
+                <ScalarProperty Name="Nombre_Proveedor" ColumnName="Nombre_Proveedor" />
+                <ScalarProperty Name="Id_Pais" ColumnName="Id_Pais" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tipo_Usuario">
+            <EntityTypeMapping TypeName="LithioBDModel.Tipo_Usuario">
+              <MappingFragment StoreEntitySet="Tipo_Usuario">
+                <ScalarProperty Name="Id_Tipo_Usuario" ColumnName="Id_Tipo_Usuario" />
+                <ScalarProperty Name="Desc_Tipo_Usuario" ColumnName="Desc_Tipo_Usuario" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Usuarios">
+            <EntityTypeMapping TypeName="LithioBDModel.Usuarios">
+              <MappingFragment StoreEntitySet="Usuarios">
+                <ScalarProperty Name="Id_Usuario" ColumnName="Id_Usuario" />
+                <ScalarProperty Name="Nombre_Completo" ColumnName="Nombre_Completo" />
+                <ScalarProperty Name="Correo_Electronico" ColumnName="Correo_Electronico" />
+                <ScalarProperty Name="Contrasena_Usuario" ColumnName="Contrasena_Usuario" />
+                <ScalarProperty Name="Id_Tipo_Usuario" ColumnName="Id_Tipo_Usuario" />
+                <ScalarProperty Name="Id_Estado_Usuario" ColumnName="Id_Estado_Usuario" />
+                <ScalarProperty Name="Token_Recovery" ColumnName="Token_Recovery" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="pa_ActualizarTokenRecuperacionPass" FunctionName="LithioBDModel.Store.pa_ActualizarTokenRecuperacionPass" />
+          <FunctionImportMapping FunctionImportName="pa_Articulos_ExisteArticulosCodigo" FunctionName="LithioBDModel.Store.pa_Articulos_ExisteArticulosCodigo">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="LithioBDModel.pa_Articulos_ExisteArticulosCodigo_Result">
+                <ScalarProperty Name="Id_Articulo" ColumnName="Id_Articulo" />
+                <ScalarProperty Name="Codigo_Articulo" ColumnName="Codigo_Articulo" />
+                <ScalarProperty Name="Nombre_Articulo" ColumnName="Nombre_Articulo" />
+                <ScalarProperty Name="Descripcion_Articulo" ColumnName="Descripcion_Articulo" />
+                <ScalarProperty Name="Costo_Articulo" ColumnName="Costo_Articulo" />
+                <ScalarProperty Name="Costo_Anterior_Articulo" ColumnName="Costo_Anterior_Articulo" />
+                <ScalarProperty Name="Id_Proveedor" ColumnName="Id_Proveedor" />
+                <ScalarProperty Name="Nombre_Proveedor" ColumnName="Nombre_Proveedor" />
+                <ScalarProperty Name="Id_Presentacion" ColumnName="Id_Presentacion" />
+                <ScalarProperty Name="Nombre_Presentacion" ColumnName="Nombre_Presentacion" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="pa_Articulos_ExisteArticulosNombre" FunctionName="LithioBDModel.Store.pa_Articulos_ExisteArticulosNombre">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="LithioBDModel.pa_Articulos_ExisteArticulosNombre_Result">
+                <ScalarProperty Name="Id_Articulo" ColumnName="Id_Articulo" />
+                <ScalarProperty Name="Codigo_Articulo" ColumnName="Codigo_Articulo" />
+                <ScalarProperty Name="Nombre_Articulo" ColumnName="Nombre_Articulo" />
+                <ScalarProperty Name="Descripcion_Articulo" ColumnName="Descripcion_Articulo" />
+                <ScalarProperty Name="Costo_Articulo" ColumnName="Costo_Articulo" />
+                <ScalarProperty Name="Costo_Anterior_Articulo" ColumnName="Costo_Anterior_Articulo" />
+                <ScalarProperty Name="Id_Proveedor" ColumnName="Id_Proveedor" />
+                <ScalarProperty Name="Nombre_Proveedor" ColumnName="Nombre_Proveedor" />
+                <ScalarProperty Name="Id_Presentacion" ColumnName="Id_Presentacion" />
+                <ScalarProperty Name="Nombre_Presentacion" ColumnName="Nombre_Presentacion" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="pa_Articulos_Insert" FunctionName="LithioBDModel.Store.pa_Articulos_Insert" />
+          <FunctionImportMapping FunctionImportName="pa_Articulos_Select" FunctionName="LithioBDModel.Store.pa_Articulos_Select">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="LithioBDModel.pa_Articulos_Select_Result">
+                <ScalarProperty Name="Id_Articulo" ColumnName="Id_Articulo" />
+                <ScalarProperty Name="Codigo_Articulo" ColumnName="Codigo_Articulo" />
+                <ScalarProperty Name="Nombre_Articulo" ColumnName="Nombre_Articulo" />
+                <ScalarProperty Name="Descripcion_Articulo" ColumnName="Descripcion_Articulo" />
+                <ScalarProperty Name="Costo_Articulo" ColumnName="Costo_Articulo" />
+                <ScalarProperty Name="Costo_Anterior_Articulo" ColumnName="Costo_Anterior_Articulo" />
+                <ScalarProperty Name="Id_Proveedor" ColumnName="Id_Proveedor" />
+                <ScalarProperty Name="Nombre_Proveedor" ColumnName="Nombre_Proveedor" />
+                <ScalarProperty Name="Id_Presentacion" ColumnName="Id_Presentacion" />
+                <ScalarProperty Name="Nombre_Presentacion" ColumnName="Nombre_Presentacion" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="pa_Articulos_Update" FunctionName="LithioBDModel.Store.pa_Articulos_Update" />
+          <FunctionImportMapping FunctionImportName="pa_ArticulosRetornaID" FunctionName="LithioBDModel.Store.pa_ArticulosRetornaID">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="LithioBDModel.pa_ArticulosRetornaID_Result">
+                <ScalarProperty Name="Id_Articulo" ColumnName="Id_Articulo" />
+                <ScalarProperty Name="Codigo_Articulo" ColumnName="Codigo_Articulo" />
+                <ScalarProperty Name="Nombre_Articulo" ColumnName="Nombre_Articulo" />
+                <ScalarProperty Name="Descripcion_Articulo" ColumnName="Descripcion_Articulo" />
+                <ScalarProperty Name="Costo_Articulo" ColumnName="Costo_Articulo" />
+                <ScalarProperty Name="Costo_Anterior_Articulo" ColumnName="Costo_Anterior_Articulo" />
+                <ScalarProperty Name="Id_Proveedor" ColumnName="Id_Proveedor" />
+                <ScalarProperty Name="Nombre_Proveedor" ColumnName="Nombre_Proveedor" />
+                <ScalarProperty Name="Id_Presentacion" ColumnName="Id_Presentacion" />
+                <ScalarProperty Name="Nombre_Presentacion" ColumnName="Nombre_Presentacion" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="pa_CrearRespaldo" FunctionName="LithioBDModel.Store.pa_CrearRespaldo" />
+          <FunctionImportMapping FunctionImportName="pa_EstadoUsuario_Select" FunctionName="LithioBDModel.Store.pa_EstadoUsuario_Select">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="LithioBDModel.pa_EstadoUsuario_Select_Result">
+                <ScalarProperty Name="Id_Estado_Usuario" ColumnName="Id_Estado_Usuario" />
+                <ScalarProperty Name="Desc_Estado_Usuario" ColumnName="Desc_Estado_Usuario" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="pa_Paises_ExistePais" FunctionName="LithioBDModel.Store.pa_Paises_ExistePais">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="LithioBDModel.pa_Paises_ExistePais_Result">
+                <ScalarProperty Name="Id_Pais" ColumnName="Id_Pais" />
+                <ScalarProperty Name="Nombre_Pais" ColumnName="Nombre_Pais" />
+                <ScalarProperty Name="Sigla_Pais" ColumnName="Sigla_Pais" />
+                <ScalarProperty Name="Moneda_Pais" ColumnName="Moneda_Pais" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="pa_Paises_Insert" FunctionName="LithioBDModel.Store.pa_Paises_Insert" />
+          <FunctionImportMapping FunctionImportName="pa_Paises_Select" FunctionName="LithioBDModel.Store.pa_Paises_Select">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="LithioBDModel.pa_Paises_Select_Result">
+                <ScalarProperty Name="Id_Pais" ColumnName="Id_Pais" />
+                <ScalarProperty Name="Nombre_Pais" ColumnName="Nombre_Pais" />
+                <ScalarProperty Name="Sigla_Pais" ColumnName="Sigla_Pais" />
+                <ScalarProperty Name="Moneda_Pais" ColumnName="Moneda_Pais" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="pa_Paises_Update" FunctionName="LithioBDModel.Store.pa_Paises_Update" />
+          <FunctionImportMapping FunctionImportName="pa_PaisesRetornaID" FunctionName="LithioBDModel.Store.pa_PaisesRetornaID">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="LithioBDModel.pa_PaisesRetornaID_Result">
+                <ScalarProperty Name="Id_Pais" ColumnName="Id_Pais" />
+                <ScalarProperty Name="Nombre_Pais" ColumnName="Nombre_Pais" />
+                <ScalarProperty Name="Sigla_Pais" ColumnName="Sigla_Pais" />
+                <ScalarProperty Name="Moneda_Pais" ColumnName="Moneda_Pais" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="pa_Permisos_Select" FunctionName="LithioBDModel.Store.pa_Permisos_Select">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="LithioBDModel.pa_Permisos_Select_Result">
+                <ScalarProperty Name="Id_Usuario" ColumnName="Id_Usuario" />
+                <ScalarProperty Name="Nombre_Completo" ColumnName="Nombre_Completo" />
+                <ScalarProperty Name="Id_Tipo_Usuario" ColumnName="Id_Tipo_Usuario" />
+                <ScalarProperty Name="Desc_Tipo_Usuario" ColumnName="Desc_Tipo_Usuario" />
+                <ScalarProperty Name="Id_Estado_Usuario" ColumnName="Id_Estado_Usuario" />
+                <ScalarProperty Name="Desc_Estado_Usuario" ColumnName="Desc_Estado_Usuario" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="pa_Permisos_Update" FunctionName="LithioBDModel.Store.pa_Permisos_Update" />
+          <FunctionImportMapping FunctionImportName="pa_PermisosRetornaID" FunctionName="LithioBDModel.Store.pa_PermisosRetornaID">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="LithioBDModel.pa_PermisosRetornaID_Result">
+                <ScalarProperty Name="Id_Usuario" ColumnName="Id_Usuario" />
+                <ScalarProperty Name="Nombre_Completo" ColumnName="Nombre_Completo" />
+                <ScalarProperty Name="Id_Tipo_Usuario" ColumnName="Id_Tipo_Usuario" />
+                <ScalarProperty Name="Desc_Tipo_Usuario" ColumnName="Desc_Tipo_Usuario" />
+                <ScalarProperty Name="Id_Estado_Usuario" ColumnName="Id_Estado_Usuario" />
+                <ScalarProperty Name="Desc_Estado_Usuario" ColumnName="Desc_Estado_Usuario" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="pa_Presentaciones_ExistePresentacion" FunctionName="LithioBDModel.Store.pa_Presentaciones_ExistePresentacion">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="LithioBDModel.pa_Presentaciones_ExistePresentacion_Result">
+                <ScalarProperty Name="Id_Presentacion" ColumnName="Id_Presentacion" />
+                <ScalarProperty Name="Nombre_Presentacion" ColumnName="Nombre_Presentacion" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="pa_Presentaciones_Insert" FunctionName="LithioBDModel.Store.pa_Presentaciones_Insert" />
+          <FunctionImportMapping FunctionImportName="pa_Presentaciones_Select" FunctionName="LithioBDModel.Store.pa_Presentaciones_Select">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="LithioBDModel.pa_Presentaciones_Select_Result">
+                <ScalarProperty Name="Id_Presentacion" ColumnName="Id_Presentacion" />
+                <ScalarProperty Name="Nombre_Presentacion" ColumnName="Nombre_Presentacion" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="pa_Presentaciones_Update" FunctionName="LithioBDModel.Store.pa_Presentaciones_Update" />
+          <FunctionImportMapping FunctionImportName="pa_PresentacionesRetornaID" FunctionName="LithioBDModel.Store.pa_PresentacionesRetornaID">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="LithioBDModel.pa_PresentacionesRetornaID_Result">
+                <ScalarProperty Name="Id_Presentacion" ColumnName="Id_Presentacion" />
+                <ScalarProperty Name="Nombre_Presentacion" ColumnName="Nombre_Presentacion" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="pa_Proveedores_ExisteProveedor" FunctionName="LithioBDModel.Store.pa_Proveedores_ExisteProveedor">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="LithioBDModel.pa_Proveedores_ExisteProveedor_Result">
+                <ScalarProperty Name="Id_Proveedor" ColumnName="Id_Proveedor" />
+                <ScalarProperty Name="Codigo_Proveedor" ColumnName="Codigo_Proveedor" />
+                <ScalarProperty Name="Nombre_Proveedor" ColumnName="Nombre_Proveedor" />
+                <ScalarProperty Name="Id_Pais" ColumnName="Id_Pais" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="pa_Proveedores_Insert" FunctionName="LithioBDModel.Store.pa_Proveedores_Insert" />
+          <FunctionImportMapping FunctionImportName="pa_Proveedores_Select" FunctionName="LithioBDModel.Store.pa_Proveedores_Select">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="LithioBDModel.pa_Proveedores_Select_Result">
+                <ScalarProperty Name="Id_Proveedor" ColumnName="Id_Proveedor" />
+                <ScalarProperty Name="Codigo_Proveedor" ColumnName="Codigo_Proveedor" />
+                <ScalarProperty Name="Nombre_Proveedor" ColumnName="Nombre_Proveedor" />
+                <ScalarProperty Name="Id_Pais" ColumnName="Id_Pais" />
+                <ScalarProperty Name="Nombre_Pais" ColumnName="Nombre_Pais" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="pa_Proveedores_Update" FunctionName="LithioBDModel.Store.pa_Proveedores_Update" />
+          <FunctionImportMapping FunctionImportName="pa_ProveedoresRetornaID" FunctionName="LithioBDModel.Store.pa_ProveedoresRetornaID">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="LithioBDModel.pa_ProveedoresRetornaID_Result">
+                <ScalarProperty Name="Id_Proveedor" ColumnName="Id_Proveedor" />
+                <ScalarProperty Name="Codigo_Proveedor" ColumnName="Codigo_Proveedor" />
+                <ScalarProperty Name="Nombre_Proveedor" ColumnName="Nombre_Proveedor" />
+                <ScalarProperty Name="Id_Pais" ColumnName="Id_Pais" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="pa_RetornaUsuarioCorreoPwd_Select" FunctionName="LithioBDModel.Store.pa_RetornaUsuarioCorreoPwd_Select">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="LithioBDModel.pa_RetornaUsuarioCorreoPwd_Select_Result">
+                <ScalarProperty Name="Id_Usuario" ColumnName="Id_Usuario" />
+                <ScalarProperty Name="Nombre_Completo" ColumnName="Nombre_Completo" />
+                <ScalarProperty Name="Correo_Electronico" ColumnName="Correo_Electronico" />
+                <ScalarProperty Name="Contrasena_Usuario" ColumnName="Contrasena_Usuario" />
+                <ScalarProperty Name="Id_Tipo_Usuario" ColumnName="Id_Tipo_Usuario" />
+                <ScalarProperty Name="Desc_Tipo_Usuario" ColumnName="Desc_Tipo_Usuario" />
+                <ScalarProperty Name="Id_Estado_Usuario" ColumnName="Id_Estado_Usuario" />
+                <ScalarProperty Name="Desc_Estado_Usuario" ColumnName="Desc_Estado_Usuario" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="pa_TipoUsuario_Select" FunctionName="LithioBDModel.Store.pa_TipoUsuario_Select">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="LithioBDModel.pa_TipoUsuario_Select_Result">
+                <ScalarProperty Name="Id_Tipo_Usuario" ColumnName="Id_Tipo_Usuario" />
+                <ScalarProperty Name="Desc_Tipo_Usuario" ColumnName="Desc_Tipo_Usuario" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="pa_Usuarios_Insert" FunctionName="LithioBDModel.Store.pa_Usuarios_Insert" />
+          <FunctionImportMapping FunctionImportName="pa_Usuarios_Select" FunctionName="LithioBDModel.Store.pa_Usuarios_Select">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="LithioBDModel.pa_Usuarios_Select_Result">
+                <ScalarProperty Name="Id_Usuario" ColumnName="Id_Usuario" />
+                <ScalarProperty Name="Nombre_Completo" ColumnName="Nombre_Completo" />
+                <ScalarProperty Name="Desc_Tipo_Usuario" ColumnName="Desc_Tipo_Usuario" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="pa_Usuarios_SelectTodo" FunctionName="LithioBDModel.Store.pa_Usuarios_SelectTodo">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="LithioBDModel.pa_Usuarios_SelectTodo_Result">
+                <ScalarProperty Name="Id_Usuario" ColumnName="Id_Usuario" />
+                <ScalarProperty Name="Nombre_Completo" ColumnName="Nombre_Completo" />
+                <ScalarProperty Name="Correo_Electronico" ColumnName="Correo_Electronico" />
+                <ScalarProperty Name="Contrasena_Usuario" ColumnName="Contrasena_Usuario" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="pa_UsuariosRetornaID" FunctionName="LithioBDModel.Store.pa_UsuariosRetornaID">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="LithioBDModel.pa_UsuariosRetornaID_Result">
+                <ScalarProperty Name="Id_Usuario" ColumnName="Id_Usuario" />
+                <ScalarProperty Name="Nombre_Completo" ColumnName="Nombre_Completo" />
+                <ScalarProperty Name="Correo_Electronico" ColumnName="Correo_Electronico" />
+                <ScalarProperty Name="Contrasena_Usuario" ColumnName="Contrasena_Usuario" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="pa_UsuariosUpdate" FunctionName="LithioBDModel.Store.pa_UsuariosUpdate" />
+          <FunctionImportMapping FunctionImportName="pa_VerificarCorreoRecuperacionPass" FunctionName="LithioBDModel.Store.pa_VerificarCorreoRecuperacionPass">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="LithioBDModel.pa_VerificarCorreoRecuperacionPass_Result">
+                <ScalarProperty Name="Id_Usuario" ColumnName="Id_Usuario" />
+                <ScalarProperty Name="Nombre_Completo" ColumnName="Nombre_Completo" />
+                <ScalarProperty Name="Correo_Electronico" ColumnName="Correo_Electronico" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

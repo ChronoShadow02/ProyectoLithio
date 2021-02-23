@@ -1,0 +1,35 @@
+﻿.error{
+    font-weight:bold;
+    color:red;
+}
+label {
+    font-family: 'Roboto', sans-serif;
+}
+span.Obligatorio{
+    color :red;
+}
+/*Barra de scroll*/
+body::-webkit-scrollbar {
+    width: 8px;
+}
+
+body::-webkit-scrollbar-track {
+    background-color: rgba(0, 0, 0, 0.4);
+    border-radius: 10px;
+}
+
+body::-webkit-scrollbar-thumb {
+    background-color: #dfdfdf;
+    border-radius: 10px;
+}
+select#ddlPais{
+    color:#000 !important;
+    font-weight:normal;
+}
+select#ddlPresentacion, select#ddlProveedor {
+    color: #000 !important;
+    font-weight: normal;
+}
+table.datatable{
+    width:auto !important;
+}

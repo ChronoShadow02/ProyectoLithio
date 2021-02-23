@@ -1,0 +1,165 @@
+﻿@{ ///Variable que posee los datos de la sesion del usuario
+    ProyectoLithio.Models.pa_RetornaUsuarioCorreoPwd_Select_Result modelo
+        = (ProyectoLithio.Models.pa_RetornaUsuarioCorreoPwd_Select_Result)this.Session["datosUsuario"];
+
+    ///Variable con la direccion de la vista del Login
+    string URLogin = this.Url.Action("Index", "Login");
+
+    string CerrarSesion = this.Url.Action("CerrarSesion", "Login");
+
+    bool sesionIniciada = false;
+    if (this.Session["logueado"] != null)
+    {
+        sesionIniciada = Convert.ToBoolean(this.Session["logueado"]);
+    } }
+<!DOCTYPE html>
+
+<html lang="es-mx">
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <script src="~/Scripts/modernizr-2.8.3.js"></script>
+    @Styles.Render("~/Content/css")<!-- boostrap y site.css-->
+    <!-- Font-icon css-->
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="~/Content/Panel/main.css" rel="stylesheet" />
+    <link href="~/Content/Panel/style.css" rel="stylesheet" />
+    @RenderSection("Styles", false)
+    <script src='https://cdn.jsdelivr.net/npm/sweetalert2@10'></script>
+</head>
+<body onload="startTime();">
+    <div id="wrapper">
+        <!-- NAVBAR -->
+        <nav class="navbar navbar-default navbar-fixed-top">
+            <div class="brand">
+                <a href="index.html"><img src="~/img/LogoDashboard.jpg" alt="Klorofil Logo" class="img-responsive logo" style="width:120px; height:35px;"></a>
+            </div>
+            <div class="container-fluid">
+                <div class="navbar-btn">
+                    <button type="button" class="btn-toggle-fullwidth"><i class="lnr lnr-arrow-left-circle"></i></button>
+                </div>
+            </div>
+        </nav>
+        <!-- END NAVBAR -->
+        <!-- LEFT SIDEBAR -->
+        <div id="sidebar-nav" class="sidebar">
+            <div class="slimScrollDiv" style="position: relative; overflow: hidden; width: auto; height: auto;">
+                <div class="sidebar-scroll" style="overflow: hidden; width: auto; height: auto">
+                    <nav>
+                        <ul class="nav">
+                            <li><a href="~/Inicio/Bienvenida"><span class="lnr lnr-home"></span> <span>Inicio</span></a></li>
+                            <li><a href="~/Costos/Costeo" class=""><span class="lnr lnr-magic-wand"></span> <span>Costeo</span></a></li>
+                            <li>
+                                <a href="#subPages" data-toggle="collapse" class="collapsed"><span class="lnr lnr-briefcase"></span> <span>Mantenimientos</span><i class="icon-submenu lnr lnr-chevron-left"></i></a>
+                                <div id="subPages" class="collapse ">
+                                    <ul class="nav">
+                                        <li><a href="~/Paises/PaisesLista" class="">Países</a></li>
+                                        <li><a href="~/Articulos/ArticulosLista" class="">Login</a></li>
+                                        <li><a href="page-lockscreen.html" class="">Lockscreen</a></li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li><a href="#" class=""><span class="lnr lnr-chart-bars"></span> <span>Reportes</span></a></li>
+                            <li>
+                                <a href="#subseguridad" data-toggle="collapse" class="collapsed"><span class="lnr lnr-lock"></span> <span>Seguridad</span> <i class="icon-submenu lnr lnr-chevron-left"></i></a>
+                                <div id="subseguridad" class="collapse ">
+                                    <ul class="nav">
+                                        <li><a href="~/Permisos/PermisosLista" class="">Permisos</a></li>
+                                        <li><a href="~/Usuarios/UsuariosLista" class="">Usuarios</a></li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li>
+                                <a href="#subhelp" data-toggle="collapse" class="collapsed"><span class="lnr lnr-hand"></span> <span>Ayuda</span> <i class="icon-submenu lnr lnr-chevron-left"></i></a>
+                                <div id="subhelp" class="collapse ">
+                                    <ul class="nav">
+                                        <li><a href="#" class="" id="btnModalVersion" data-target="#modalVersion">Versión</a></li>
+                                        <li><a href="page-login.html" class="">Manual de usuario</a></li>
+                                        <li><a href="#" class="" id="btnModalCrearRespaldo" data-target="#modalRespaldo">Crear Respaldo</a></li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li><a href="~/Login/CerrarSesion" class="" id="linkCerrarSesion"><span class="lnr lnr-exit"></span> <span>Salir</span></a></li>
+                        </ul>
+                    </nav>
+                </div><div class="slimScrollBar" style="background: rgb(0, 0, 0); width: 7px; position: absolute; top: 0px; opacity: 0.4; display: none; border-radius: 7px; z-index: 99; right: 1px; height: 859px;"></div><div class="slimScrollRail" style="width: 7px; height: 100%; position: absolute; top: 0px; display: none; border-radius: 7px; background: rgb(51, 51, 51); opacity: 0.2; z-index: 90; right: 1px;"></div>
+            </div>
+        </div>
+        <!-- END LEFT SIDEBAR -->
+        <div class="main">
+            <div class="main-content">
+                <div class="container-fluid">
+                    @{ ///Si es verdadero, carga el contenido de la pagina hija
+                        if (sesionIniciada == true)
+                        {
+            @RenderBody() }
+        else
+        {
+            ///de lo contrario redireccionar el controlador del
+            ///login y a su metodo index para que solicite los
+            ///datos de inicio de sesion
+            this.Response.Redirect(URLogin);
+        } }
+                </div>
+            </div>
+
+        </div>
+
+        <!-- END MAIN -->
+        <div class="clearfix"></div>
+        <footer>
+            <div class="container-fluid">
+                <p class="copyright">© 2017 <a href="https://www.themeineed.com" target="_blank">Theme I Need</a>. All Rights Reserved.</p>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Modal VERSION-->
+    <div class="modal fade" id="modalVersion" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Versión del sistema</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Versión: 1.0
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Crear Respaldo-->
+    <div class="modal fade" id="modalRespaldo" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Creación de Respaldo</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form method="post">
+                        <div class="form-group text-center">
+                            <a href="#" class="btn btn-success" id="btnCrearRespaldo">Crear Respaldo</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Footer -->
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    <script src="~/Scripts/AjaxGenerico.js"></script>
+    <script src="~/Scripts/Panel/expandir-menu.js"></script>
+    <script src="~/Scripts/Panel/abrirModalVersion.js"></script>
+    <script src="~/Scripts/Panel/abrirModalRespaldos.js"></script>
+    <script src="~/Scripts/Panel/klorofil.js"></script>
+    @RenderSection("scripts", required: false)
+
+</body>
+</html>

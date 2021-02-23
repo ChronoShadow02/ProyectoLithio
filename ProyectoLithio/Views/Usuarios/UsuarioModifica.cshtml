@@ -1,0 +1,34 @@
+﻿@model ProyectoLithio.Models.pa_UsuariosRetornaID_Result
+@{
+    ViewBag.Title = "UsuarioModifica";
+    Layout = "~/Views/Shared/_LayoutCosteo.cshtml";
+}
+
+<h2>Modificación de usuarios</h2>
+<br />
+<form method="post" id="frmUsuario">
+    <label><span class="Obligatorio">* Obligatorio</span></label> <br />
+    <div class="form-group">
+        <label><span class="Obligatorio">*</span>Nombre Completo</label>
+        <input type="text" name="Nombre_Completo" class="form-control" placeholder="Ejemplo:Juan" id="Nombre_Completo" value="@Model.Nombre_Completo" />
+    </div>
+    <div class="form-group">
+        <label><span class="Obligatorio">*</span>Correo Electrónico</label>
+        <input type="text" name="Correo_Electronico" class="form-control" id="Correo_Electronico" value="@Model.Correo_Electronico" />
+    </div>
+    <div class="form-group">
+        <label>¿Olvido de contraseña?</label>
+        <br />
+        <a href="~/Usuarios/RecuperarContrasena" class="btn btn-success">Recuperar Contraseña</a>
+    </div>
+    <div class="form-group text-right">
+        <input type="submit" value="Modificar" class="btn-success btn" id="btnModificarUsuario" />
+        
+        <a href="~/Usuarios/UsuariosLista" class="btn btn-info">Regresar a la lista</a>
+    </div>
+</form>
+@section scripts{
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/validacionesGenericas.js"></script>
+    <script src="~/Scripts/Usuarios/validarUsuarios.js"></script>
+}

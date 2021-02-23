@@ -1,0 +1,62 @@
+﻿@model ProyectoLithio.Models.pa_PermisosRetornaID_Result
+@{
+    ViewBag.Title = "Modificación de permisos";
+    Layout = "~/Views/Shared/_LayoutCosteo.cshtml";
+}
+
+<h2>Modificación de permisos</h2>
+<br />
+<form method="post" id="frmPermisos">
+    <label><span class="Obligatorio">* Obligatorio</span></label> <br />
+    <div class="form-group">
+        <label><span class="Obligatorio">*</span>Tipo de usuario</label>
+        <select class="form-control" id="Id_Tipo_Usuario" name="Id_Tipo_Usuario">
+            <option value="">Seleccione una opción</option>
+            @{
+                foreach (ProyectoLithio.Models.pa_TipoUsuario_Select_Result TipoUsuario in this.ViewBag.ListaTipoUsuario)
+                {
+                    bool esIdTipoUsuarioModelo = TipoUsuario.Id_Tipo_Usuario == Model.Id_Tipo_Usuario;
+
+                    if (esIdTipoUsuarioModelo)
+                    {
+                        <option value="@TipoUsuario.Id_Tipo_Usuario" selected>@TipoUsuario.Desc_Tipo_Usuario</option>
+                    }
+                    else
+                    {
+                        <option value="@TipoUsuario.Id_Tipo_Usuario">@TipoUsuario.Desc_Tipo_Usuario</option>
+                    }
+                }
+            }
+        </select>
+    </div>
+    <div class="form-group">
+        <label><span class="Obligatorio">*</span>Estado de usuario</label>
+        <select class="form-control" id="Id_Estado_Usuario" name="Id_Estado_Usuario">
+            <option value="">Seleccione una opción</option>
+            @{
+                foreach (ProyectoLithio.Models.pa_EstadoUsuario_Select_Result Estados in this.ViewBag.ListaEstadoUsuario)
+                {
+                    bool esIdTipoUsuarioModelo = Estados.Id_Estado_Usuario == Model.Id_Estado_Usuario;
+
+                    if (esIdTipoUsuarioModelo)
+                    {
+                        <option value="@Estados.Id_Estado_Usuario" selected>@Estados.Desc_Estado_Usuario</option>
+                    }
+                    else
+                    {
+                        <option value="@Estados.Id_Estado_Usuario">@Estados.Desc_Estado_Usuario</option>
+                    }
+                }
+            }
+        </select>
+    </div>
+    <div class="form-group text-right">
+        <input type="submit" value="Modificar" class="btn-success btn" id="btnModificarPermisos" />
+        <a href="~/Permisos/PermisosLista" class="btn btn-info">Regresar a la lista</a>
+    </div>
+</form>
+@section scripts{
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/validacionesGenericas.js"></script>
+    <script src="~/Scripts/Permisos/validaPermisos.js"></script>
+}

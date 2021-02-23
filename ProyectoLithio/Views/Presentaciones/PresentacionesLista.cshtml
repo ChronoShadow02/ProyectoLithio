@@ -1,0 +1,51 @@
+﻿@model List<ProyectoLithio.Models.pa_Presentaciones_Select_Result>
+@{
+    ViewBag.Title = "PresentacionesLista";
+    Layout = "~/Views/Shared/_LayoutCosteo.cshtml";
+}
+@section styles{
+    <link href="~/Content/Tablas/datatables.min.css" rel="stylesheet" />
+    <link href="~/Content/Tablas/dataTables.bootstrap4.min.css" rel="stylesheet" />
+}
+<h2>Lista de presentaciones</h2>
+
+<br />
+<div class="row">
+    <div class="col-lg-12">
+        <div class="table-responsive">
+            <table id="tablaDataTable" class="table table-striped table-bordered dt-responsive nowrap bg-white">
+                <thead>
+                    <tr>
+                        <th>Identificador</th>
+                        <th>Presentación</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var oListaPresentaciones in this.Model)
+                    {
+                        <tr>
+                            <td>@oListaPresentaciones.Id_Presentacion</td>
+                            <td>@oListaPresentaciones.Nombre_Presentacion</td>
+                            <td><a href="~/Presentaciones/PresentacionesModifica?Id_Presentacion=@oListaPresentaciones.Id_Presentacion" class="btn btn-success">Editar</a></td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<br />
+<br />
+<div class="row">
+    <div class="col-lg-12 text-center">
+        <a href="~/Presentaciones/PresentacionesNuevo" class="btn btn-primary">Nueva presentación</a>
+    </div>
+</div>
+
+<br />
+@section scripts{
+    <script src="~/Scripts/Tablas/datatables.min.js"></script>
+    <script src="~/Scripts/Tablas/mensajesGenericosDataTables.js"></script>
+}
+
