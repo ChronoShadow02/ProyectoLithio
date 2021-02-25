@@ -1,8 +1,6 @@
 ﻿@model List<ProyectoLithio.Models.pa_Permisos_Select_Result>
-@{
-    ViewBag.Title = "Lista de Permisos";
-    Layout = "~/Views/Shared/_LayoutCosteo.cshtml";
-}
+@{ ViewBag.Title = "Lista de Permisos";
+                Layout = "~/Views/Shared/_LayoutCosteo.cshtml"; }
 @section styles{
     <link href="~/Content/Tablas/datatables.min.css" rel="stylesheet" />
     <link href="~/Content/Tablas/dataTables.bootstrap4.min.css" rel="stylesheet" />
@@ -25,14 +23,13 @@
                 <tbody>
                     @foreach (var oListaPermisos in this.Model)
                     {
-                        <tr>
-                            <td>@oListaPermisos.Id_Usuario</td>
-                            <td>@oListaPermisos.Nombre_Completo</td>
-                            <td>@oListaPermisos.Desc_Tipo_Usuario</td>
-                            <td>@oListaPermisos.Desc_Estado_Usuario</td>
-                            <td><a href="~/Permisos/PermisosModifica?Id_Usuario=@oListaPermisos.Id_Usuario" class="btn btn-success">Cambiar Permisos</a></td>
-                        </tr>
-                    }
+        <tr>
+            <td>@oListaPermisos.Id_Usuario</td>
+            <td>@oListaPermisos.Nombre_Completo</td>
+            <td>@oListaPermisos.Desc_Tipo_Usuario</td>
+            <td>@oListaPermisos.Desc_Estado_Usuario</td>
+            <td><a href="~/Permisos/PermisosModifica?Id_Usuario=@oListaPermisos.Id_Usuario" class="btn btn-success">Cambiar Permisos</a></td>
+        </tr>}
                 </tbody>
             </table>
         </div>
@@ -42,4 +39,6 @@
 @section scripts{
     <script src="~/Scripts/Tablas/datatables.min.js"></script>
     <script src="~/Scripts/Tablas/mensajesGenericosDataTables.js"></script>
+    <script src="~/Scripts/Panel/abrirModalVersion.js"></script>
+    <script src="~/Scripts/Panel/abrirModalRespaldos.js"></script>
 }

@@ -1,3 +1,3 @@
-﻿$("#btnModalVersion").click(function () {
-    $('#modalVersion').modal('show')
-});
+﻿//$("#btnModalVersion").click(function () {
+//     $("#modalVersion").modal("show")
+//});

@@ -1,14 +1,13 @@
 ﻿$(function () {
-    abrirModalRespaldo();
     CrearRespaldo();
 });
 
 
-function abrirModalRespaldo() {
-    $("#btnModalCrearRespaldo").click(function () {
-        $('#modalRespaldo').modal('show')
-    });
-}
+//function abrirModalRespaldo() {
+//    $("#btnModalCrearRespaldo").click(function () {
+//        $("#modalRespaldo").modal("show")
+//    });
+//}
 
 function CrearRespaldo() {
 

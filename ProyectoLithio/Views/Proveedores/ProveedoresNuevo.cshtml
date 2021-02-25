@@ -1,8 +1,6 @@
 ﻿
-@{
-    ViewBag.Title = "ProveedoresNuevo";
-    Layout = "~/Views/Shared/_LayoutCosteo.cshtml";
-}
+@{ ViewBag.Title = "ProveedoresNuevo";
+                Layout = "~/Views/Shared/_LayoutCosteo.cshtml"; }
 
 <h2>Ingresar nuevo proveedor</h2>
 <br />
@@ -19,13 +17,10 @@
     <div class="form-group">
         <label><span class="Obligatorio">*</span>País</label>
         <select id="ddlPais" class="form-control" name="Id_Pais">
-                <option value="">Seleccione un país</option>
-                @{
-                    foreach (ProyectoLithio.Models.pa_Paises_Select_Result ListaPaises in ViewBag.ListaPaises)
-                    {
-                        <option value="@ListaPaises.Id_Pais">@ListaPaises.Nombre_Pais</option>
-                    }
-                }
+            <option value="">Seleccione un país</option>
+            @{ foreach (ProyectoLithio.Models.pa_Paises_Select_Result ListaPaises in ViewBag.ListaPaises)
+                            {
+                <option value="@ListaPaises.Id_Pais">@ListaPaises.Nombre_Pais</option> } }
         </select>
     </div>
     <div class="form-group text-right">
@@ -38,4 +33,6 @@
     <script src="~/Scripts/jquery.validate.min.js"></script>
     <script src="~/Scripts/validacionesGenericas.js"></script>
     <script src="~/Scripts/Proveedores/validarProveedores.js"></script>
+    <script src="~/Scripts/Panel/abrirModalVersion.js"></script>
+    <script src="~/Scripts/Panel/abrirModalRespaldos.js"></script>
 }

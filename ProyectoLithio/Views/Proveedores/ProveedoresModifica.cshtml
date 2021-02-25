@@ -1,8 +1,6 @@
 ﻿@model ProyectoLithio.Models.pa_ProveedoresRetornaID_Result
-@{
-    ViewBag.Title = "ProveedoresModifica";
-    Layout = "~/Views/Shared/_LayoutCosteo.cshtml";
-}
+@{ ViewBag.Title = "ProveedoresModifica";
+                Layout = "~/Views/Shared/_LayoutCosteo.cshtml"; }
 
 <h2>Modificar proveedor</h2>
 <br />
@@ -10,33 +8,29 @@
     <label><span class="Obligatorio">* Obligatorio</span></label> <br />
     <div class="form-group">
         <label><span class="Obligatorio">*</span>Nombre de proveedor</label>
-        <input type="text" name="Nombre_Proveedor" class="form-control" placeholder="Ejemplo:Lubriplate" id="Nombre_Proveedor" value="@Model.Nombre_Proveedor"/>
+        <input type="text" name="Nombre_Proveedor" class="form-control" placeholder="Ejemplo:Lubriplate" id="Nombre_Proveedor" value="@Model.Nombre_Proveedor" />
     </div>
     <div class="form-group">
         <label><span class="Obligatorio">*</span>Código de proveedor</label>
-        <input type="text" name="Codigo_Proveedor" class="form-control" id="Codigo_Proveedor" value="@Model.Codigo_Proveedor"/>
+        <input type="text" name="Codigo_Proveedor" class="form-control" id="Codigo_Proveedor" value="@Model.Codigo_Proveedor" />
     </div>
     <div class="form-group">
         <label><span class="Obligatorio">*</span>País</label>
         <select id="ddlPais" class="form-control" name="Id_Pais">
             <option value="">Seleccione un país</option>
-            @{
-                foreach (ProyectoLithio.Models.pa_Paises_Select_Result ListaPaises in ViewBag.ListaPaises)
-                {
-                    ///variable que indica si la provincia esta en el modelo
-                    
-                    bool esPosicionPais = ListaPaises.Id_Pais== Model.Id_Pais;
+            @{ foreach (ProyectoLithio.Models.pa_Paises_Select_Result ListaPaises in ViewBag.ListaPaises)
+                            {
+                                ///variable que indica si la provincia esta en el modelo
 
-                    if (esPosicionPais)
-                    {
-                        <option value="@ListaPaises.Id_Pais" selected>@ListaPaises.Nombre_Pais</option>
-                    }
-                    else
-                    {
-                        <option value="@ListaPaises.Id_Pais" >@ListaPaises.Nombre_Pais</option>
-                    }
-                }
-            }
+                                bool esPosicionPais = ListaPaises.Id_Pais == Model.Id_Pais;
+
+                                if (esPosicionPais)
+                                {
+                <option value="@ListaPaises.Id_Pais" selected>@ListaPaises.Nombre_Pais</option> }
+                                else
+                                {
+                <option value="@ListaPaises.Id_Pais">@ListaPaises.Nombre_Pais</option> }
+                            } }
         </select>
     </div>
     <div class="form-group text-right">
@@ -49,4 +43,6 @@
     <script src="~/Scripts/jquery.validate.min.js"></script>
     <script src="~/Scripts/validacionesGenericas.js"></script>
     <script src="~/Scripts/Proveedores/validarProveedores.js"></script>
+    <script src="~/Scripts/Panel/abrirModalVersion.js"></script>
+    <script src="~/Scripts/Panel/abrirModalRespaldos.js"></script>
 }

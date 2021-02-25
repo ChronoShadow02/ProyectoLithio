@@ -1,8 +1,6 @@
 ﻿@model ProyectoLithio.Models.pa_UsuariosRetornaID_Result
-@{
-    ViewBag.Title = "UsuarioModifica";
-    Layout = "~/Views/Shared/_LayoutCosteo.cshtml";
-}
+@{ ViewBag.Title = "UsuarioModifica";
+                Layout = "~/Views/Shared/_LayoutCosteo.cshtml"; }
 
 <h2>Modificación de usuarios</h2>
 <br />
@@ -23,7 +21,7 @@
     </div>
     <div class="form-group text-right">
         <input type="submit" value="Modificar" class="btn-success btn" id="btnModificarUsuario" />
-        
+
         <a href="~/Usuarios/UsuariosLista" class="btn btn-info">Regresar a la lista</a>
     </div>
 </form>
@@ -31,4 +29,6 @@
     <script src="~/Scripts/jquery.validate.min.js"></script>
     <script src="~/Scripts/validacionesGenericas.js"></script>
     <script src="~/Scripts/Usuarios/validarUsuarios.js"></script>
+    <script src="~/Scripts/Panel/abrirModalVersion.js"></script>
+    <script src="~/Scripts/Panel/abrirModalRespaldos.js"></script>
 }

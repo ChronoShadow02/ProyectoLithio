@@ -1,8 +1,6 @@
 ﻿
-@{
-    ViewBag.Title = "Artículos Nuevo";
-    Layout = "~/Views/Shared/_LayoutCosteo.cshtml";
-}
+@{ ViewBag.Title = "Artículos Nuevo";
+                Layout = "~/Views/Shared/_LayoutCosteo.cshtml"; }
 
 <h2>Ingresar nuevo artículo</h2>
 <br />
@@ -32,24 +30,18 @@
         <label><span class="Obligatorio">*</span>Proveedor</label>
         <select id="ddlProveedor" class="form-control" name="Id_Proveedor">
             <option value="">Seleccione un proveedor</option>
-            @{
-                foreach (ProyectoLithio.Models.pa_Proveedores_Select_Result oListaProveedores in this.ViewBag.ListaProveedores)
-                {
-                    <option value="@oListaProveedores.Id_Proveedor">@oListaProveedores.Nombre_Proveedor</option>
-                }
-            }
+            @{ foreach (ProyectoLithio.Models.pa_Proveedores_Select_Result oListaProveedores in this.ViewBag.ListaProveedores)
+                            {
+                <option value="@oListaProveedores.Id_Proveedor">@oListaProveedores.Nombre_Proveedor</option> } }
         </select>
     </div>
     <div class="form-group">
         <label><span class="Obligatorio">*</span>Presentación</label>
         <select id="ddlPresentacion" class="form-control" name="Id_Presentacion">
             <option value="">Seleccione una presentación</option>
-            @{
-                foreach (ProyectoLithio.Models.pa_Presentaciones_Select_Result oListaPresentaciones in this.ViewBag.ListaPresentaciones)
-                {
-                    <option value="@oListaPresentaciones.Id_Presentacion">@oListaPresentaciones.Nombre_Presentacion</option>
-                }
-            }
+            @{ foreach (ProyectoLithio.Models.pa_Presentaciones_Select_Result oListaPresentaciones in this.ViewBag.ListaPresentaciones)
+                            {
+                <option value="@oListaPresentaciones.Id_Presentacion">@oListaPresentaciones.Nombre_Presentacion</option> } }
         </select>
     </div>
     <div class="form-group text-right">
@@ -62,5 +54,7 @@
     <script src="~/Scripts/jquery.validate.min.js"></script>
     <script src="~/Scripts/validacionesGenericas.js"></script>
     <script src="~/Scripts/Articulos/validarArticulos.js"></script>
+    <script src="~/Scripts/Panel/abrirModalVersion.js"></script>
+    <script src="~/Scripts/Panel/abrirModalRespaldos.js"></script>
 }
 

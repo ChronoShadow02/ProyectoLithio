@@ -1,8 +1,6 @@
 ﻿@model List<ProyectoLithio.Models.pa_Presentaciones_Select_Result>
-@{
-    ViewBag.Title = "PresentacionesLista";
-    Layout = "~/Views/Shared/_LayoutCosteo.cshtml";
-}
+@{ ViewBag.Title = "PresentacionesLista";
+                Layout = "~/Views/Shared/_LayoutCosteo.cshtml"; }
 @section styles{
     <link href="~/Content/Tablas/datatables.min.css" rel="stylesheet" />
     <link href="~/Content/Tablas/dataTables.bootstrap4.min.css" rel="stylesheet" />
@@ -24,12 +22,11 @@
                 <tbody>
                     @foreach (var oListaPresentaciones in this.Model)
                     {
-                        <tr>
-                            <td>@oListaPresentaciones.Id_Presentacion</td>
-                            <td>@oListaPresentaciones.Nombre_Presentacion</td>
-                            <td><a href="~/Presentaciones/PresentacionesModifica?Id_Presentacion=@oListaPresentaciones.Id_Presentacion" class="btn btn-success">Editar</a></td>
-                        </tr>
-                    }
+        <tr>
+            <td>@oListaPresentaciones.Id_Presentacion</td>
+            <td>@oListaPresentaciones.Nombre_Presentacion</td>
+            <td><a href="~/Presentaciones/PresentacionesModifica?Id_Presentacion=@oListaPresentaciones.Id_Presentacion" class="btn btn-success">Editar</a></td>
+        </tr>}
                 </tbody>
             </table>
         </div>
@@ -47,5 +44,7 @@
 @section scripts{
     <script src="~/Scripts/Tablas/datatables.min.js"></script>
     <script src="~/Scripts/Tablas/mensajesGenericosDataTables.js"></script>
+    <script src="~/Scripts/Panel/abrirModalVersion.js"></script>
+    <script src="~/Scripts/Panel/abrirModalRespaldos.js"></script>
 }
 

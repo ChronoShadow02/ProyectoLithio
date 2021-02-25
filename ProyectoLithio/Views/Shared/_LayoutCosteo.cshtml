@@ -53,9 +53,10 @@
                                 <a href="#subPages" data-toggle="collapse" class="collapsed"><span class="lnr lnr-briefcase"></span> <span>Mantenimientos</span><i class="icon-submenu lnr lnr-chevron-left"></i></a>
                                 <div id="subPages" class="collapse ">
                                     <ul class="nav">
+                                        <li><a href="~/Articulos/ArticulosLista" class="">Artículos</a></li>
+                                        <li><a href="~/Proveedores/ProveedoresLista" class="">Proveedores</a></li>
+                                        <li><a href="~/Presentaciones/PresentacionesLista" class="">Presentaciones</a></li>
                                         <li><a href="~/Paises/PaisesLista" class="">Países</a></li>
-                                        <li><a href="~/Articulos/ArticulosLista" class="">Login</a></li>
-                                        <li><a href="page-lockscreen.html" class="">Lockscreen</a></li>
                                     </ul>
                                 </div>
                             </li>
@@ -73,9 +74,9 @@
                                 <a href="#subhelp" data-toggle="collapse" class="collapsed"><span class="lnr lnr-hand"></span> <span>Ayuda</span> <i class="icon-submenu lnr lnr-chevron-left"></i></a>
                                 <div id="subhelp" class="collapse ">
                                     <ul class="nav">
-                                        <li><a href="#" class="" id="btnModalVersion" data-target="#modalVersion">Versión</a></li>
+                                        <li><a href="#" class="" id="btnModalVersion" data-target="#modalVersion" data-toggle="modal">Versión</a></li>
                                         <li><a href="page-login.html" class="">Manual de usuario</a></li>
-                                        <li><a href="#" class="" id="btnModalCrearRespaldo" data-target="#modalRespaldo">Crear Respaldo</a></li>
+                                        <li><a class="" href="#" id="btnModalCrearRespaldo" data-target="#modalRespaldo" data-toggle="modal">Crear Respaldo</a></li>
                                     </ul>
                                 </div>
                             </li>
@@ -115,28 +116,31 @@
     </div>
 
     <!-- Modal VERSION-->
-    <div class="modal fade" id="modalVersion" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal fade" id="modalVersion" tabindex="-1" role="dialog" aria-labelledby="LmodalVersion" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLongTitle">Versión del sistema</h5>
+                    <h5 class="modal-title" id="LmodalVersion"></h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    Versión: 1.0
+                    <h1>Sistema de costeos de importación</h1>
+                    <p>Versión: 1.0</p>
+                    <p>Usuario ingresado en el sistema: @modelo.Nombre_Completo</p>
+                    <p>Fecha de lanzamiento: 28/02/2021</p>
+                    <br />
+
                 </div>
             </div>
         </div>
     </div>
-
-    <!-- Modal Crear Respaldo-->
-    <div class="modal fade" id="modalRespaldo" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal fade" id="modalRespaldo" tabindex="-1" role="dialog" aria-labelledby="LmodalRespaldo" aria-hidden="true">
+        <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLongTitle">Creación de Respaldo</h5>
+                    <h5 class="modal-title" id="LmodalRespaldo">Creación de Respaldo</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -154,12 +158,11 @@
     <!-- Footer -->
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
-    <script src="~/Scripts/AjaxGenerico.js"></script>
     <script src="~/Scripts/Panel/expandir-menu.js"></script>
+    <script src="~/Scripts/AjaxGenerico.js"></script>
+    <script src="~/Scripts/Panel/klorofil.js"></script>
     <script src="~/Scripts/Panel/abrirModalVersion.js"></script>
     <script src="~/Scripts/Panel/abrirModalRespaldos.js"></script>
-    <script src="~/Scripts/Panel/klorofil.js"></script>
     @RenderSection("scripts", required: false)
-
 </body>
 </html>

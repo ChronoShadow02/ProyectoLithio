@@ -1,8 +1,6 @@
 ﻿@model List<ProyectoLithio.Models.pa_Proveedores_Select_Result>
-@{
-    ViewBag.Title = "ProveedoresLista";
-    Layout = "~/Views/Shared/_LayoutCosteo.cshtml";
-}
+@{ ViewBag.Title = "ProveedoresLista";
+                Layout = "~/Views/Shared/_LayoutCosteo.cshtml"; }
 @section styles{
     <link href="~/Content/Tablas/datatables.min.css" rel="stylesheet" />
     <link href="~/Content/Tablas/dataTables.bootstrap4.min.css" rel="stylesheet" />
@@ -25,14 +23,13 @@
                 <tbody>
                     @foreach (var oListaProveedores in this.Model)
                     {
-                        <tr>
-                            <td>@oListaProveedores.Id_Proveedor</td>
-                            <td>@oListaProveedores.Codigo_Proveedor</td>
-                            <td>@oListaProveedores.Nombre_Proveedor</td>
-                            <td>@oListaProveedores.Nombre_Pais</td>
-                            <td><a href="~/Proveedores/ProveedoresModifica?Id_Proveedor=@oListaProveedores.Id_Proveedor" class="btn btn-success">Editar</a></td>
-                        </tr>
-                    }
+        <tr>
+            <td>@oListaProveedores.Id_Proveedor</td>
+            <td>@oListaProveedores.Codigo_Proveedor</td>
+            <td>@oListaProveedores.Nombre_Proveedor</td>
+            <td>@oListaProveedores.Nombre_Pais</td>
+            <td><a href="~/Proveedores/ProveedoresModifica?Id_Proveedor=@oListaProveedores.Id_Proveedor" class="btn btn-success">Editar</a></td>
+        </tr>}
                 </tbody>
             </table>
         </div>
@@ -50,6 +47,8 @@
 @section scripts{
     <script src="~/Scripts/Tablas/datatables.min.js"></script>
     <script src="~/Scripts/Tablas/mensajesGenericosDataTables.js"></script>
+    <script src="~/Scripts/Panel/abrirModalVersion.js"></script>
+    <script src="~/Scripts/Panel/abrirModalRespaldos.js"></script>
 }
 
 

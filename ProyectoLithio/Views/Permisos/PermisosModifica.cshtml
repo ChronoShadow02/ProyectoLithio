@@ -1,8 +1,6 @@
 ﻿@model ProyectoLithio.Models.pa_PermisosRetornaID_Result
-@{
-    ViewBag.Title = "Modificación de permisos";
-    Layout = "~/Views/Shared/_LayoutCosteo.cshtml";
-}
+@{ ViewBag.Title = "Modificación de permisos";
+                Layout = "~/Views/Shared/_LayoutCosteo.cshtml"; }
 
 <h2>Modificación de permisos</h2>
 <br />
@@ -12,42 +10,34 @@
         <label><span class="Obligatorio">*</span>Tipo de usuario</label>
         <select class="form-control" id="Id_Tipo_Usuario" name="Id_Tipo_Usuario">
             <option value="">Seleccione una opción</option>
-            @{
-                foreach (ProyectoLithio.Models.pa_TipoUsuario_Select_Result TipoUsuario in this.ViewBag.ListaTipoUsuario)
-                {
-                    bool esIdTipoUsuarioModelo = TipoUsuario.Id_Tipo_Usuario == Model.Id_Tipo_Usuario;
+            @{ foreach (ProyectoLithio.Models.pa_TipoUsuario_Select_Result TipoUsuario in this.ViewBag.ListaTipoUsuario)
+                            {
+                                bool esIdTipoUsuarioModelo = TipoUsuario.Id_Tipo_Usuario == Model.Id_Tipo_Usuario;
 
-                    if (esIdTipoUsuarioModelo)
-                    {
-                        <option value="@TipoUsuario.Id_Tipo_Usuario" selected>@TipoUsuario.Desc_Tipo_Usuario</option>
-                    }
-                    else
-                    {
-                        <option value="@TipoUsuario.Id_Tipo_Usuario">@TipoUsuario.Desc_Tipo_Usuario</option>
-                    }
-                }
-            }
+                                if (esIdTipoUsuarioModelo)
+                                {
+                <option value="@TipoUsuario.Id_Tipo_Usuario" selected>@TipoUsuario.Desc_Tipo_Usuario</option> }
+                                else
+                                {
+                <option value="@TipoUsuario.Id_Tipo_Usuario">@TipoUsuario.Desc_Tipo_Usuario</option> }
+                            } }
         </select>
     </div>
     <div class="form-group">
         <label><span class="Obligatorio">*</span>Estado de usuario</label>
         <select class="form-control" id="Id_Estado_Usuario" name="Id_Estado_Usuario">
             <option value="">Seleccione una opción</option>
-            @{
-                foreach (ProyectoLithio.Models.pa_EstadoUsuario_Select_Result Estados in this.ViewBag.ListaEstadoUsuario)
-                {
-                    bool esIdTipoUsuarioModelo = Estados.Id_Estado_Usuario == Model.Id_Estado_Usuario;
+            @{ foreach (ProyectoLithio.Models.pa_EstadoUsuario_Select_Result Estados in this.ViewBag.ListaEstadoUsuario)
+                            {
+                                bool esIdTipoUsuarioModelo = Estados.Id_Estado_Usuario == Model.Id_Estado_Usuario;
 
-                    if (esIdTipoUsuarioModelo)
-                    {
-                        <option value="@Estados.Id_Estado_Usuario" selected>@Estados.Desc_Estado_Usuario</option>
-                    }
-                    else
-                    {
-                        <option value="@Estados.Id_Estado_Usuario">@Estados.Desc_Estado_Usuario</option>
-                    }
-                }
-            }
+                                if (esIdTipoUsuarioModelo)
+                                {
+                <option value="@Estados.Id_Estado_Usuario" selected>@Estados.Desc_Estado_Usuario</option> }
+                                else
+                                {
+                <option value="@Estados.Id_Estado_Usuario">@Estados.Desc_Estado_Usuario</option> }
+                            } }
         </select>
     </div>
     <div class="form-group text-right">
@@ -59,4 +49,6 @@
     <script src="~/Scripts/jquery.validate.min.js"></script>
     <script src="~/Scripts/validacionesGenericas.js"></script>
     <script src="~/Scripts/Permisos/validaPermisos.js"></script>
+    <script src="~/Scripts/Panel/abrirModalVersion.js"></script>
+    <script src="~/Scripts/Panel/abrirModalRespaldos.js"></script>
 }

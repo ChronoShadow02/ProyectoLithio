@@ -1,8 +1,6 @@
 ﻿@model List<ProyectoLithio.Models.pa_Articulos_Select_Result>
-@{
-    ViewBag.Title = "Lista de articulos";
-    Layout = "~/Views/Shared/_LayoutCosteo.cshtml";
-}
+@{ ViewBag.Title = "Lista de articulos";
+                Layout = "~/Views/Shared/_LayoutCosteo.cshtml"; }
 @section styles{
     <link href="~/Content/Tablas/datatables.min.css" rel="stylesheet" />
     <link href="~/Content/Tablas/dataTables.bootstrap4.min.css" rel="stylesheet" />
@@ -29,20 +27,19 @@
                 <tbody>
                     @foreach (var oListaArticulos in this.Model)
                     {
-                        <tr>
-                            <td>@oListaArticulos.Id_Articulo</td>
-                            <td>@oListaArticulos.Codigo_Articulo</td>
-                            <td>@oListaArticulos.Nombre_Articulo</td>
-                            <td>@oListaArticulos.Descripcion_Articulo</td>
-                            <td>@oListaArticulos.Costo_Articulo</td>
-                            <td>@oListaArticulos.Costo_Anterior_Articulo</td>
-                            <td>@oListaArticulos.Nombre_Proveedor</td>
-                            <td>@oListaArticulos.Nombre_Presentacion</td>
-                            <td>
-                                <a href="~/Articulos/ArticulosModifica?Id_Articulo=@oListaArticulos.Id_Articulo" class="btn btn-success">Editar</a>
-                            </td>
-                        </tr>
-                    }
+        <tr>
+            <td>@oListaArticulos.Id_Articulo</td>
+            <td>@oListaArticulos.Codigo_Articulo</td>
+            <td>@oListaArticulos.Nombre_Articulo</td>
+            <td>@oListaArticulos.Descripcion_Articulo</td>
+            <td>@oListaArticulos.Costo_Articulo</td>
+            <td>@oListaArticulos.Costo_Anterior_Articulo</td>
+            <td>@oListaArticulos.Nombre_Proveedor</td>
+            <td>@oListaArticulos.Nombre_Presentacion</td>
+            <td>
+                <a href="~/Articulos/ArticulosModifica?Id_Articulo=@oListaArticulos.Id_Articulo" class="btn btn-success">Editar</a>
+            </td>
+        </tr>}
                 </tbody>
             </table>
         </div>
@@ -59,4 +56,6 @@
 @section scripts{
     <script src="~/Scripts/Tablas/datatables.min.js"></script>
     <script src="~/Scripts/Tablas/mensajesGenericosDataTables.js"></script>
+    <script src="~/Scripts/Panel/abrirModalVersion.js"></script>
+    <script src="~/Scripts/Panel/abrirModalRespaldos.js"></script>
 }
