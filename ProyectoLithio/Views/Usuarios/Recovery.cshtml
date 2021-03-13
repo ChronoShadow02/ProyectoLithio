@@ -1,7 +1,6 @@
 ﻿@model ProyectoLithio.Models.ViewModel.RecuperarPassViewModel
-@{
-    Layout = null;
-}
+@{ Layout = null;
+                var CambioPass = this.ViewBag.CambioPassword; }
 
 <!DOCTYPE html>
 
@@ -18,9 +17,9 @@
     <br />
     <h2 class="text-center">Recuperación de contraseña</h2>
     <br />
-    <div class="row">
+    <div class="" style="justify-content:center !important;display:flex">
         <div class="col-md-6 offset-3">
-            <div style="background-color:rgba(255,255,255,0.4); padding:50px">
+            <div style="background-color:rgba(255,255,255,0.6); padding:50px">
                 <form method="post" id="frmRecuperarContraseña">
                     @Html.HiddenFor(d => d.token)
                     <div class="form-group">
@@ -33,7 +32,15 @@
                     </div>
 
                     <div class="form-group">
-                        <input type="submit" value="Cambiar contraseña" class="btn btn-primary" />
+                        @if (CambioPass==null || !CambioPass)
+                        {
+                            <input type="submit" value="Cambiar contraseña" class="btn btn-primary" /> 
+                        }
+                        else
+                        {
+                            <input type="submit" value="Cambiar contraseña" class="btn btn-primary" disabled />
+                        }
+                        <a href="~/Usuarios/UsuariosLista" class="btn btn-info">Regresar a la lista</a>
                     </div>
                 </form>
             </div>

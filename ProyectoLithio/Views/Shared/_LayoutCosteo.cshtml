@@ -32,7 +32,7 @@
         <!-- NAVBAR -->
         <nav class="navbar navbar-default navbar-fixed-top">
             <div class="brand">
-                <a href="index.html"><img src="~/img/LogoDashboard.jpg" alt="Klorofil Logo" class="img-responsive logo" style="width:120px; height:35px;"></a>
+                <a href="#"><img src="~/img/LogoDashboard.jpg" alt="Klorofil Logo" class="img-responsive logo" style="width:120px; height:35px;"></a>
             </div>
             <div class="container-fluid">
                 <div class="navbar-btn">
@@ -110,7 +110,7 @@
         <div class="clearfix"></div>
         <footer>
             <div class="container-fluid">
-                <p class="copyright">© 2017 <a href="https://www.themeineed.com" target="_blank">Theme I Need</a>. All Rights Reserved.</p>
+                <p class="copyright">© @DateTime.Today.Year Lithio Lubs. Todos los derechos reservados.</p>
             </div>
         </footer>
     </div>
@@ -120,15 +120,15 @@
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="LmodalVersion"></h5>
+                    <h3 class="modal-title" id="LmodalVersion">Acerca de </h3>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
+                    <img src="~/img/LogoDashboard.jpg" alt="Klorofil Logo" class="img-responsive logo" style="width:150px; height:55px;">
                     <h1>Sistema de costeos de importación</h1>
                     <p>Versión: 1.0</p>
-                    <p>Usuario ingresado en el sistema: @modelo.Nombre_Completo</p>
                     <p>Fecha de lanzamiento: 28/02/2021</p>
                     <br />
 
@@ -140,12 +140,14 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="LmodalRespaldo">Creación de Respaldo</h5>
+                    <h5 class="modal-title" id="LmodalRespaldo"></h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
+                    <h1 class="text-center">Creación de Respaldo</h1>
+                    <br />  
                     <form method="post">
                         <div class="form-group text-center">
                             <a href="#" class="btn btn-success" id="btnCrearRespaldo">Crear Respaldo</a>

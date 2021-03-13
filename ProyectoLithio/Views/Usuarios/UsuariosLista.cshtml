@@ -1,6 +1,8 @@
 ﻿@model List<ProyectoLithio.Models.pa_Usuarios_Select_Result>
 @{ ViewBag.Title = "Lista de usuarios";
-                Layout = "~/Views/Shared/_LayoutCosteo.cshtml"; }
+    Layout = "~/Views/Shared/_LayoutCosteo.cshtml";
+    var mensajeUsuario = this.ViewBag.Mensaje;
+}
 @section styles{
     <link href="~/Content/Tablas/datatables.min.css" rel="stylesheet" />
     <link href="~/Content/Tablas/dataTables.bootstrap4.min.css" rel="stylesheet" />
@@ -24,8 +26,11 @@
         <tr>
             <td>@oListaUsuarios.Id_Usuario</td>
             <td>@oListaUsuarios.Nombre_Completo</td>
-            <td><a href="~/Usuarios/UsuarioModifica?Id_Usuario=@oListaUsuarios.Id_Usuario" class="btn btn-success">Editar</a></td>
-        </tr>}
+            <td>
+                <a href="~/Usuarios/UsuarioModifica?Id_Usuario=@oListaUsuarios.Id_Usuario" class="btn btn-success">Editar</a>
+            </td>
+        </tr>
+}
                 </tbody>
             </table>
         </div>

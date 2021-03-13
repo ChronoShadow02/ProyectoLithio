@@ -80,7 +80,7 @@ namespace ProyectoLithio.Controllers
                 {
                     if (ProveedorExiste)
                     {
-                        Response.Write("<script language = javascript > Swal.fire({title: 'Este proveedor ya existe!',text:'" + "" + "',icon: 'error',showConfirmButton: true})</script>");
+                        Response.Write("<script language = javascript > Swal.fire({title: 'Este proveedor ya existe! o los valores son incorrectos',text:'" + "" + "',icon: 'error',showConfirmButton: true})</script>");
                     }
                     else
                     {

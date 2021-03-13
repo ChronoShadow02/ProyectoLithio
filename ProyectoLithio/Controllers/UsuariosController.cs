@@ -27,7 +27,7 @@ namespace ProyectoLithio.Controllers
             List<pa_Usuarios_Select_Result> modeloVistaUsuarios = new List<pa_Usuarios_Select_Result>();
 
             modeloVistaUsuarios = this.modeloBD.pa_Usuarios_Select().ToList();
-
+            
             return View(modeloVistaUsuarios);
         }
         #endregion
@@ -140,7 +140,6 @@ namespace ProyectoLithio.Controllers
         }
         #endregion
 
-
         #region RecuperarContrasenaPost
         [HttpPost]
         public ActionResult RecuperarContrasena(string Correo_Electronico)
@@ -203,6 +202,7 @@ namespace ProyectoLithio.Controllers
         [HttpPost]
         public ActionResult Recovery(Models.ViewModel.RecuperarPassViewModel modeloVista)
         {
+            string mensaje = "";
             try
             {
                 using (modeloBD)
@@ -217,13 +217,17 @@ namespace ProyectoLithio.Controllers
                         modeloBD.SaveChanges();
                     }
                 }
+                Response.Write("<script src='https://cdn.jsdelivr.net/npm/sweetalert2@10'></script> <br>");
+                mensaje = "Contraseña modificada con éxito";
+                Response.Write("<script language = javascript > Swal.fire({title: 'Exito!',text:'" + mensaje + "',icon: 'success',showConfirmButton: true})</script>");
+                this.ViewBag.CambioPassword = true;
             }
             catch (Exception ex)
             {
                 throw new Exception(ex.Message);
             }
-            this.ViewBag.Mensaje = "Contraseña modificada con éxito";
-            return View("Login", "Index");
+            
+            return View();
         }
         #endregion
 
