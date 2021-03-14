@@ -267,6 +267,7 @@
         <Function Name="pa_ProveedoresRetornaID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Id_Proveedor" Type="int" Mode="In" />
         </Function>
+        <Function Name="pa_RetornaArticulosAC" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="pa_RetornaUsuarioCorreoPwd_Select" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Correo" Type="varchar" Mode="In" />
           <Parameter Name="Contrasena" Type="varchar" Mode="In" />
@@ -648,6 +649,7 @@
           <FunctionImport Name="pa_ProveedoresRetornaID" ReturnType="Collection(LithioBDModel.pa_ProveedoresRetornaID_Result)">
             <Parameter Name="Id_Proveedor" Mode="In" Type="Int32" />
           </FunctionImport>
+          <FunctionImport Name="pa_RetornaArticulosAC" ReturnType="Collection(LithioBDModel.pa_RetornaArticulosAC_Result)" />
           <FunctionImport Name="pa_RetornaUsuarioCorreoPwd_Select" ReturnType="Collection(LithioBDModel.pa_RetornaUsuarioCorreoPwd_Select_Result)">
             <Parameter Name="Correo" Mode="In" Type="String" />
             <Parameter Name="Contrasena" Mode="In" Type="String" />
@@ -790,6 +792,10 @@
           <Property Type="String" Name="Codigo_Proveedor" Nullable="false" MaxLength="200" />
           <Property Type="String" Name="Nombre_Proveedor" Nullable="false" MaxLength="200" />
           <Property Type="Int32" Name="Id_Pais" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="pa_RetornaArticulosAC_Result">
+          <Property Type="Int32" Name="Id_Articulo" Nullable="false" />
+          <Property Type="String" Name="Codigo_Articulo" Nullable="false" MaxLength="200" />
         </ComplexType>
         <ComplexType Name="pa_RetornaUsuarioCorreoPwd_Select_Result">
           <Property Type="Int32" Name="Id_Usuario" Nullable="false" />
@@ -1113,6 +1119,14 @@
                 <ScalarProperty Name="Codigo_Proveedor" ColumnName="Codigo_Proveedor" />
                 <ScalarProperty Name="Nombre_Proveedor" ColumnName="Nombre_Proveedor" />
                 <ScalarProperty Name="Id_Pais" ColumnName="Id_Pais" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="pa_RetornaArticulosAC" FunctionName="LithioBDModel.Store.pa_RetornaArticulosAC">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="LithioBDModel.pa_RetornaArticulosAC_Result">
+                <ScalarProperty Name="Id_Articulo" ColumnName="Id_Articulo" />
+                <ScalarProperty Name="Codigo_Articulo" ColumnName="Codigo_Articulo" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

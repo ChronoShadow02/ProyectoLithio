@@ -9,7 +9,7 @@
             funcionSuccess(data);
         },
         error: function (jqXhr, textStatus, errorThrown) {
-            var errorMessage = jqXhr.status + ': ' + jqXhr.statusText
+            var errorMessage = jqXhr.status + ': ' + jqXhr.statusText;
             Swal.fire({
                 icon: 'error',
                 title: 'Oops...',

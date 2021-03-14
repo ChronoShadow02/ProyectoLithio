@@ -364,6 +364,11 @@ namespace ProyectoLithio.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<pa_ProveedoresRetornaID_Result>("pa_ProveedoresRetornaID", id_ProveedorParameter);
         }
     
+        public virtual ObjectResult<pa_RetornaArticulosAC_Result> pa_RetornaArticulosAC()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<pa_RetornaArticulosAC_Result>("pa_RetornaArticulosAC");
+        }
+    
         public virtual ObjectResult<pa_RetornaUsuarioCorreoPwd_Select_Result> pa_RetornaUsuarioCorreoPwd_Select(string correo, string contrasena)
         {
             var correoParameter = correo != null ?

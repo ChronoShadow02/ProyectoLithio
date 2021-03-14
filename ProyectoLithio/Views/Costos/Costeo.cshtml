@@ -1,11 +1,90 @@
 ﻿
 @{ ViewBag.Title = "Costeo";
-                Layout = "~/Views/Shared/_LayoutCosteo.cshtml"; }
+    Layout = "~/Views/Shared/_LayoutCosteo.cshtml";
 
-<h2>Costeo</h2>
+}
+<link rel="Stylesheet" href="https://ajax.aspnetcdn.com/ajax/jquery.ui/1.8.10/themes/redmond/jquery-ui.css" />
 
+<h1 class="text-center">Contenido principal</h1>
+<br>
+
+<form action="">
+
+    <!--Parte de fechas-->
+    <div class="form-group col-md-2">
+        <label class="">Fecha</label>
+        <input type="text" name="" id="Fecha" class="form-control" value="13/3/2021" readonly>
+    </div>
+    <div class="form-group col-md-2">
+        <label class=""># de Costeo</label>
+        <input type="text" name="" id="" class="form-control ">
+    </div>
+    <div class="form-group col-md-2">
+        <label class="">DUA</label>
+        <input type="text" name="" id="" class="form-control ">
+    </div>
+    <div class="form-group col-md-3">
+    </div>
+    <div class="form-group col-md-2">
+        <label class="">Tipo de cambio</label> 
+        <input type="text" name="" id="" class="form-control ">
+    </div>
+    <!--Parte de -->
+    <div class="form-group col-md-3">
+        <div><label for="txtCodigoArticuloAgregar">Código de Artículo</label></div>
+        <div class="input-group">
+            <input type="text" id="txtCodigoArticuloAgregar" name="IArticulo" class="form-control">
+            <span class="input-group-btn">
+                <button class="btn btn-primary" type="button">Agregar</button>
+            </span>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Código</th>
+                    <th scope="col">Articulo</th>
+                    <th scope="col">Presentación</th>
+                    <th scope="col">Cantidad</th>
+                    <th scope="col">Costo unitario</th>
+                    <th scope="col">Costo total</th>
+                    <th scope="col">Flete marítimo</th>
+                    <th scope="col">Costo Flete</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th scope="row">02904-04-0208</th>
+                    <td>Vascomil 22</td>
+                    <td>Tubo</td>
+                    <td><input type="text" name="" id="" class="form-control" style="width: 70px;"> </td>
+                    <td> &cent; 1500</td>
+                    <td> &cent; 150000</td>
+                    <td> <input type="checkbox" name="" id=""></td>
+                    <td><input type="text" name="" id="" class="form-control" style="width: 70px;"> </td>
+                </tr>
+                <tr>
+                    <th scope="row">2</th>
+                    <td>Jacob</td>
+                    <td>Thornton</td>
+                    <td>.</td>
+                </tr>
+                <tr>
+                    <th scope="row">3</th>
+                    <td>Larry</td>
+                    <td>the Bird</td>
+                    <td>.</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</form>
 
 @section scripts{
     <script src="~/Scripts/Panel/abrirModalVersion.js"></script>
     <script src="~/Scripts/Panel/abrirModalRespaldos.js"></script>
+    <script src="https://ajax.aspnetcdn.com/ajax/jquery.ui/1.8.22/jquery-ui.js"></script>
+    <script src="~/Scripts/Costos/AgregarAutoComplete.js"></script>
 }
