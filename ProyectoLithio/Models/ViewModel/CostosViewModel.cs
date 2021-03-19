@@ -11,9 +11,7 @@ namespace ProyectoLithio.Models.ViewModel
 
         public string DUA { get; set; }
 
-        public double Tipo_Cambio { get; set; }
-
-        public DateTime Fecha_Creacion { get; set; }
+        public decimal Tipo_De_Cambio { get; set; }
 
         public List<Concepto> Conceptos { get; set; }
     }

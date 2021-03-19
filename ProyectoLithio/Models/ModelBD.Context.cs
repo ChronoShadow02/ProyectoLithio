@@ -29,6 +29,8 @@ namespace ProyectoLithio.Models
         }
     
         public DbSet<Articulos> Articulos { get; set; }
+        public DbSet<Costo_Concepto> Costo_Concepto { get; set; }
+        public DbSet<Costos> Costos { get; set; }
         public DbSet<Estado_Usuario> Estado_Usuario { get; set; }
         public DbSet<Paises> Paises { get; set; }
         public DbSet<Presentaciones> Presentaciones { get; set; }
@@ -36,8 +38,6 @@ namespace ProyectoLithio.Models
         public DbSet<sysdiagrams> sysdiagrams { get; set; }
         public DbSet<Tipo_Usuario> Tipo_Usuario { get; set; }
         public DbSet<Usuarios> Usuarios { get; set; }
-        public DbSet<Costo_Concepto> Costo_Concepto { get; set; }
-        public DbSet<Costos> Costos { get; set; }
     
         public virtual int pa_ActualizarTokenRecuperacionPass(string correo_Electronico, string token)
         {

@@ -22,7 +22,7 @@ namespace ProyectoLithio.Models
         public int Id_Costo { get; set; }
         public int Numero_Costos { get; set; }
         public string DUA { get; set; }
-        public double Tipo_De_Cambio { get; set; }
+        public decimal Tipo_De_Cambio { get; set; }
         public System.DateTime Fecha_Creacion { get; set; }
     
         public virtual ICollection<Costo_Concepto> Costo_Concepto { get; set; }

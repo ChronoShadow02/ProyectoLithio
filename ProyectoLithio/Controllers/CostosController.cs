@@ -29,7 +29,7 @@ namespace ProyectoLithio.Controllers
                     //Se asigna a cada campo de la tabla los datos recolecados desde la vista
                     oCostos.Numero_Costos = model.Numero_Costos;
                     oCostos.DUA = model.DUA;
-                    oCostos.Tipo_De_Cambio = model.Tipo_Cambio;
+                    oCostos.Tipo_De_Cambio = model.Tipo_De_Cambio;
                     oCostos.Fecha_Creacion = DateTime.Now;
                     //Agrega los datos en la base de datos
                     LithioBD.Costos.Add(oCostos);
