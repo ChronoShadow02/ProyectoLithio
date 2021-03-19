@@ -14,22 +14,17 @@ namespace ProyectoLithio.Models
     
     public partial class Costos
     {
+        public Costos()
+        {
+            this.Costo_Concepto = new HashSet<Costo_Concepto>();
+        }
+    
         public int Id_Costo { get; set; }
-        public string DUA { get; set; }
         public int Numero_Costos { get; set; }
-        public int Id_Articulo { get; set; }
-        public string Codigo_Articulo { get; set; }
-        public string Nombre_Articulo { get; set; }
-        public int Id_Presentacion { get; set; }
-        public int Unidades_Articulos { get; set; }
+        public string DUA { get; set; }
         public double Tipo_De_Cambio { get; set; }
-        public double Costo_Por_Unidad_Dolares { get; set; }
-        public double Subtotal_Costo_Dolares { get; set; }
-        public double Porcentaje_Costo { get; set; }
-        public double Total_Costo_Dolares { get; set; }
         public System.DateTime Fecha_Creacion { get; set; }
     
-        public virtual Articulos Articulos { get; set; }
-        public virtual Presentaciones Presentaciones { get; set; }
+        public virtual ICollection<Costo_Concepto> Costo_Concepto { get; set; }
     }
 }

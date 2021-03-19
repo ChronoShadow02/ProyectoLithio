@@ -4,22 +4,25 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="f9b69468670340c0b249e901f1535249" Name="Diagram1">
-        <EntityTypeShape EntityType="LithioBDModel.Articulos" Width="1.5" PointX="3" PointY="3.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="LithioBDModel.Costos" Width="1.5" PointX="5.25" PointY="2.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="LithioBDModel.Estado_Usuario" Width="1.5" PointX="3.75" PointY="9.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="LithioBDModel.Paises" Width="1.5" PointX="1.5" PointY="7.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="LithioBDModel.Presentaciones" Width="1.5" PointX="0.75" PointY="4" IsExpanded="true" />
-        <EntityTypeShape EntityType="LithioBDModel.Proveedores" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="LithioBDModel.Tipo_Usuario" Width="1.5" PointX="3.75" PointY="12.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="LithioBDModel.Usuarios" Width="1.5" PointX="6" PointY="8.75" IsExpanded="true" />
+      <Diagram DiagramId="72213218f9ac48f5ba0fc1bc3f2c488a" Name="Diagram1" ZoomLevel="66">
+        <EntityTypeShape EntityType="LithioBDModel.Articulos" Width="1.5" PointX="3" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="LithioBDModel.Estado_Usuario" Width="1.5" PointX="5.75" PointY="6.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="LithioBDModel.Paises" Width="1.5" PointX="1.5" PointY="8.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="LithioBDModel.Presentaciones" Width="1.5" PointX="0.75" PointY="2" IsExpanded="true" />
+        <EntityTypeShape EntityType="LithioBDModel.Proveedores" Width="1.5" PointX="0.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LithioBDModel.sysdiagrams" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LithioBDModel.Tipo_Usuario" Width="1.5" PointX="5.75" PointY="9.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="LithioBDModel.Usuarios" Width="1.5" PointX="8" PointY="6" IsExpanded="true" />
         <AssociationConnector Association="LithioBDModel.FK_Articulos_Presentaciones" ManuallyRouted="false" />
         <AssociationConnector Association="LithioBDModel.FK_Articulos_Proveedores" ManuallyRouted="false" />
-        <AssociationConnector Association="LithioBDModel.FK_Costos_Articulos" ManuallyRouted="false" />
-        <AssociationConnector Association="LithioBDModel.FK_Costos_Presentaciones" ManuallyRouted="false" />
         <AssociationConnector Association="LithioBDModel.FK_Usuarios_Estado_Usuario" ManuallyRouted="false" />
         <AssociationConnector Association="LithioBDModel.FK_Proveedores_Paises" ManuallyRouted="false" />
         <AssociationConnector Association="LithioBDModel.FK_Usuarios_Tipo_Usuario" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="LithioBDModel.Costo_Concepto" Width="1.5" PointX="5.25" PointY="1" />
+        <EntityTypeShape EntityType="LithioBDModel.Costos" Width="1.5" PointX="3" PointY="5.75" />
+        <AssociationConnector Association="LithioBDModel.FK_Costo_Concepto_Articulos" />
+        <AssociationConnector Association="LithioBDModel.FK_Costo_Concepto_Costos" />
+        <AssociationConnector Association="LithioBDModel.FK_Costo_Concepto_Presentaciones" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -12,18 +12,12 @@ namespace ProyectoLithio.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Presentaciones
+    public partial class sysdiagrams
     {
-        public Presentaciones()
-        {
-            this.Articulos = new HashSet<Articulos>();
-            this.Costo_Concepto = new HashSet<Costo_Concepto>();
-        }
-    
-        public int Id_Presentacion { get; set; }
-        public string Nombre_Presentacion { get; set; }
-    
-        public virtual ICollection<Articulos> Articulos { get; set; }
-        public virtual ICollection<Costo_Concepto> Costo_Concepto { get; set; }
+        public string name { get; set; }
+        public int principal_id { get; set; }
+        public int diagram_id { get; set; }
+        public Nullable<int> version { get; set; }
+        public byte[] definition { get; set; }
     }
 }

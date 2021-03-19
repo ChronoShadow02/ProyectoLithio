@@ -12,24 +12,22 @@ namespace ProyectoLithio.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Articulos
+    public partial class Costo_Concepto
     {
-        public Articulos()
-        {
-            this.Costo_Concepto = new HashSet<Costo_Concepto>();
-        }
-    
+        public int Id_Costo_Concepto { get; set; }
+        public int Id_Costo { get; set; }
         public int Id_Articulo { get; set; }
         public string Codigo_Articulo { get; set; }
         public string Nombre_Articulo { get; set; }
-        public string Descripcion_Articulo { get; set; }
-        public double Costo_Articulo { get; set; }
-        public double Costo_Anterior_Articulo { get; set; }
-        public int Id_Proveedor { get; set; }
         public int Id_Presentacion { get; set; }
+        public int Unidades_Articulos { get; set; }
+        public double Costo_Por_Unidad_Dolares { get; set; }
+        public double Subtotal_Costo_Dolares { get; set; }
+        public double Porcentaje_Costo { get; set; }
+        public double Total_Costo_Dolares { get; set; }
     
+        public virtual Articulos Articulos { get; set; }
+        public virtual Costos Costos { get; set; }
         public virtual Presentaciones Presentaciones { get; set; }
-        public virtual Proveedores Proveedores { get; set; }
-        public virtual ICollection<Costo_Concepto> Costo_Concepto { get; set; }
     }
 }

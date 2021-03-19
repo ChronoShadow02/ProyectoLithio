@@ -10,20 +10,13 @@
 namespace ProyectoLithio.Models
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class Presentaciones
+    public partial class sp_helpdiagrams_Result
     {
-        public Presentaciones()
-        {
-            this.Articulos = new HashSet<Articulos>();
-            this.Costo_Concepto = new HashSet<Costo_Concepto>();
-        }
-    
-        public int Id_Presentacion { get; set; }
-        public string Nombre_Presentacion { get; set; }
-    
-        public virtual ICollection<Articulos> Articulos { get; set; }
-        public virtual ICollection<Costo_Concepto> Costo_Concepto { get; set; }
+        public string Database { get; set; }
+        public string Name { get; set; }
+        public int ID { get; set; }
+        public string Owner { get; set; }
+        public int OwnerID { get; set; }
     }
 }
