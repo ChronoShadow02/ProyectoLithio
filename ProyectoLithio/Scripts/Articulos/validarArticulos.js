@@ -18,6 +18,10 @@ function validaArticulos() {
                 required: true,
                 maxlength: 200
             },
+            Cantidad_Articulo: {
+                required: true,
+                digits: true
+            },
             Costo_Articulo: {
                 required: true,
                 digits:true

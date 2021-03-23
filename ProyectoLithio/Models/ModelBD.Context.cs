@@ -70,7 +70,7 @@ namespace ProyectoLithio.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<pa_Articulos_ExisteArticulosNombre_Result>("pa_Articulos_ExisteArticulosNombre", nombre_ArticuloParameter);
         }
     
-        public virtual int pa_Articulos_Insert(string codigo_Articulo, string nombre_Articulo, string descripcion_Articulo, Nullable<double> costo_Articulo, Nullable<double> costo_Anterior_Articulo, Nullable<int> id_Proveedor, Nullable<int> id_Presentacion)
+        public virtual int pa_Articulos_Insert(string codigo_Articulo, string nombre_Articulo, string descripcion_Articulo, Nullable<int> cantidad_Articulo, Nullable<double> costo_Articulo, Nullable<double> costo_Anterior_Articulo, Nullable<int> id_Proveedor, Nullable<int> id_Presentacion)
         {
             var codigo_ArticuloParameter = codigo_Articulo != null ?
                 new ObjectParameter("Codigo_Articulo", codigo_Articulo) :
@@ -83,6 +83,10 @@ namespace ProyectoLithio.Models
             var descripcion_ArticuloParameter = descripcion_Articulo != null ?
                 new ObjectParameter("Descripcion_Articulo", descripcion_Articulo) :
                 new ObjectParameter("Descripcion_Articulo", typeof(string));
+    
+            var cantidad_ArticuloParameter = cantidad_Articulo.HasValue ?
+                new ObjectParameter("Cantidad_Articulo", cantidad_Articulo) :
+                new ObjectParameter("Cantidad_Articulo", typeof(int));
     
             var costo_ArticuloParameter = costo_Articulo.HasValue ?
                 new ObjectParameter("Costo_Articulo", costo_Articulo) :
@@ -100,7 +104,7 @@ namespace ProyectoLithio.Models
                 new ObjectParameter("Id_Presentacion", id_Presentacion) :
                 new ObjectParameter("Id_Presentacion", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("pa_Articulos_Insert", codigo_ArticuloParameter, nombre_ArticuloParameter, descripcion_ArticuloParameter, costo_ArticuloParameter, costo_Anterior_ArticuloParameter, id_ProveedorParameter, id_PresentacionParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("pa_Articulos_Insert", codigo_ArticuloParameter, nombre_ArticuloParameter, descripcion_ArticuloParameter, cantidad_ArticuloParameter, costo_ArticuloParameter, costo_Anterior_ArticuloParameter, id_ProveedorParameter, id_PresentacionParameter);
         }
     
         public virtual ObjectResult<pa_Articulos_Select_Result> pa_Articulos_Select()
@@ -108,7 +112,7 @@ namespace ProyectoLithio.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<pa_Articulos_Select_Result>("pa_Articulos_Select");
         }
     
-        public virtual int pa_Articulos_Update(Nullable<int> id_Articulo, string codigo_Articulo, string nombre_Articulo, string descripcion_Articulo, Nullable<double> costo_Articulo, Nullable<double> costo_Anterior_Articulo, Nullable<int> id_Proveedor, Nullable<int> id_Presentacion)
+        public virtual int pa_Articulos_Update(Nullable<int> id_Articulo, string codigo_Articulo, string nombre_Articulo, string descripcion_Articulo, Nullable<int> cantidad_Articulo, Nullable<double> costo_Articulo, Nullable<double> costo_Anterior_Articulo, Nullable<int> id_Proveedor, Nullable<int> id_Presentacion)
         {
             var id_ArticuloParameter = id_Articulo.HasValue ?
                 new ObjectParameter("Id_Articulo", id_Articulo) :
@@ -126,6 +130,10 @@ namespace ProyectoLithio.Models
                 new ObjectParameter("Descripcion_Articulo", descripcion_Articulo) :
                 new ObjectParameter("Descripcion_Articulo", typeof(string));
     
+            var cantidad_ArticuloParameter = cantidad_Articulo.HasValue ?
+                new ObjectParameter("Cantidad_Articulo", cantidad_Articulo) :
+                new ObjectParameter("Cantidad_Articulo", typeof(int));
+    
             var costo_ArticuloParameter = costo_Articulo.HasValue ?
                 new ObjectParameter("Costo_Articulo", costo_Articulo) :
                 new ObjectParameter("Costo_Articulo", typeof(double));
@@ -142,7 +150,7 @@ namespace ProyectoLithio.Models
                 new ObjectParameter("Id_Presentacion", id_Presentacion) :
                 new ObjectParameter("Id_Presentacion", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("pa_Articulos_Update", id_ArticuloParameter, codigo_ArticuloParameter, nombre_ArticuloParameter, descripcion_ArticuloParameter, costo_ArticuloParameter, costo_Anterior_ArticuloParameter, id_ProveedorParameter, id_PresentacionParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("pa_Articulos_Update", id_ArticuloParameter, codigo_ArticuloParameter, nombre_ArticuloParameter, descripcion_ArticuloParameter, cantidad_ArticuloParameter, costo_ArticuloParameter, costo_Anterior_ArticuloParameter, id_ProveedorParameter, id_PresentacionParameter);
         }
     
         public virtual ObjectResult<pa_ArticulosRetornaID_Result> pa_ArticulosRetornaID(Nullable<int> id_Articulo)
@@ -564,6 +572,15 @@ namespace ProyectoLithio.Models
         public virtual int sp_upgraddiagrams()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_upgraddiagrams");
+        }
+    
+        public virtual ObjectResult<pa_Costos_BusquedaCodigoArt_Result> pa_Costos_BusquedaCodigoArt(string codigo_Articulo)
+        {
+            var codigo_ArticuloParameter = codigo_Articulo != null ?
+                new ObjectParameter("Codigo_Articulo", codigo_Articulo) :
+                new ObjectParameter("Codigo_Articulo", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<pa_Costos_BusquedaCodigoArt_Result>("pa_Costos_BusquedaCodigoArt", codigo_ArticuloParameter);
         }
     }
 }

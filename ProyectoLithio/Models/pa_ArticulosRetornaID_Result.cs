@@ -17,6 +17,7 @@ namespace ProyectoLithio.Models
         public string Codigo_Articulo { get; set; }
         public string Nombre_Articulo { get; set; }
         public string Descripcion_Articulo { get; set; }
+        public int Cantidad_Articulo { get; set; }
         public double Costo_Articulo { get; set; }
         public double Costo_Anterior_Articulo { get; set; }
         public int Id_Proveedor { get; set; }

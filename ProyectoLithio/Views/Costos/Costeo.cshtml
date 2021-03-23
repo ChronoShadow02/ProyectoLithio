@@ -26,7 +26,7 @@
     <div class="form-group col-md-3">
     </div>
     <div class="form-group col-md-2">
-        <label class="">Tipo de cambio</label> 
+        <label class="">Tipo de cambio</label>
         <input type="text" name="Tipo_De_Cambio" id="Tipo_De_Cambio" class="form-control ">
     </div>
     <!--Parte de la busqueda del codigo de articulo-->
@@ -35,14 +35,14 @@
         <div class="input-group">
             <input type="text" id="txtCodigoArticuloAgregar" name="IArticulo" class="form-control">
             <span class="input-group-btn">
-                <button class="btn btn-primary" type="button">Agregar</button>
+                <button class="btn btn-primary" type="button" onclick="AgregarConcepto(); return false;" id="AgregarConcepto">Agregar</button>
                 <button class="btn btn-primary" type="submit">Agregar</button>
             </span>
         </div>
     </div>
     <div class="clearfix"></div>
     <div id="divConceptos">
-        <table class="table">
+        <table class="table" id="TablaConcetos">
             <thead>
                 <tr>
                     <th scope="col">Código</th>
@@ -80,8 +80,8 @@
                 </tr>
             </tbody>
         </table>
-        <input type="hidden" value="0" name="conceptos.Index" id="conceptos.Index"/>
-        <input type="hidden" value="02904-04-0208" name="conceptos[0].Codigo_Articulo" id="conceptos[0].Codigo_Articulo"/>
+        <input type="hidden" value="0" name="conceptos.Index" id="conceptos.Index" />
+        <input type="hidden" value="02904-04-0208" name="conceptos[0].Codigo_Articulo" id="conceptos[0].Codigo_Articulo" />
     </div>
 </form>
 
@@ -89,5 +89,10 @@
     <script src="~/Scripts/Panel/abrirModalVersion.js"></script>
     <script src="~/Scripts/Panel/abrirModalRespaldos.js"></script>
     <script src="https://ajax.aspnetcdn.com/ajax/jquery.ui/1.8.22/jquery-ui.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-maskmoney/3.0.2/jquery.maskMoney.min.js"></script>
+    <script>
+        $("#Tipo_De_Cambio").maskMoney({ thousands: '', decimal: ',' });
+    </script>
     <script src="~/Scripts/Costos/AgregarAutoComplete.js"></script>
+    <script src="~/Scripts/Costos/EventosCosteos.js"></script>
 }

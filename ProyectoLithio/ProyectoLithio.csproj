@@ -184,6 +184,9 @@
     <Compile Include="Models\pa_Articulos_Select_Result.cs">
       <DependentUpon>ModelBD.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\pa_Costos_BusquedaCodigoArt_Result.cs">
+      <DependentUpon>ModelBD.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\pa_EstadoUsuario_Select_Result.cs">
       <DependentUpon>ModelBD.tt</DependentUpon>
     </Compile>
@@ -332,6 +335,7 @@
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\Costos\AgregarAutoComplete.js" />
+    <Content Include="Scripts\Costos\EventosCosteos.js" />
     <Content Include="Scripts\esm\popper-utils.js" />
     <Content Include="Scripts\esm\popper-utils.min.js" />
     <Content Include="Scripts\esm\popper.js" />

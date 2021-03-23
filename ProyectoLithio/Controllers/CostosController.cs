@@ -42,6 +42,7 @@ namespace ProyectoLithio.Controllers
                         Concepto oConcepto = new Concepto();
                         oConcepto.Codigo_Articulo = OC.Codigo_Articulo;
 
+                        
                     }
 
                     //guarda los registros en la base de datos
@@ -50,7 +51,7 @@ namespace ProyectoLithio.Controllers
             }
             catch (Exception ex)
             {
-                throw new Exception();
+                this.ViewBag.Mensaje = "fallo" + ex.Message;
             }
             return View();
         }

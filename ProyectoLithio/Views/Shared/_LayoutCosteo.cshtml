@@ -11,7 +11,8 @@
     if (this.Session["logueado"] != null)
     {
         sesionIniciada = Convert.ToBoolean(this.Session["logueado"]);
-    } }
+    } 
+}
 <!DOCTYPE html>
 
 <html lang="es-mx">
@@ -93,14 +94,16 @@
                     @{ ///Si es verdadero, carga el contenido de la pagina hija
                         if (sesionIniciada == true)
                         {
-            @RenderBody() }
-        else
-        {
-            ///de lo contrario redireccionar el controlador del
-            ///login y a su metodo index para que solicite los
-            ///datos de inicio de sesion
-            this.Response.Redirect(URLogin);
-        } }
+                            @RenderBody() 
+                        }
+                        else
+                        {
+                            ///de lo contrario redireccionar el controlador del
+                            ///login y a su metodo index para que solicite los
+                            ///datos de inicio de sesion
+                            this.Response.Redirect(URLogin);
+                        } 
+                    }
                 </div>
             </div>
 
@@ -109,7 +112,8 @@
         <!-- END MAIN -->
         <div class="clearfix"></div>
         <footer>
-            <div class="container-fluid">
+            <br />
+            <div class="text-center">
                 <p class="copyright">© @DateTime.Today.Year Lithio Lubs. Todos los derechos reservados.</p>
             </div>
         </footer>

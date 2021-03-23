@@ -11,18 +11,15 @@ namespace ProyectoLithio.Models
 {
     using System;
     
-    public partial class pa_Articulos_Select_Result
+    public partial class pa_Costos_BusquedaCodigoArt_Result
     {
         public int Id_Articulo { get; set; }
         public string Codigo_Articulo { get; set; }
         public string Nombre_Articulo { get; set; }
-        public string Descripcion_Articulo { get; set; }
         public int Cantidad_Articulo { get; set; }
-        public double Costo_Articulo { get; set; }
-        public double Costo_Anterior_Articulo { get; set; }
-        public int Id_Proveedor { get; set; }
-        public string Nombre_Proveedor { get; set; }
         public int Id_Presentacion { get; set; }
         public string Nombre_Presentacion { get; set; }
+        public int Id_Proveedor { get; set; }
+        public double Costo_Articulo { get; set; }
     }
 }
