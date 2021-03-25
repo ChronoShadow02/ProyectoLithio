@@ -265,6 +265,7 @@
     <Compile Include="Models\Usuarios.cs">
       <DependentUpon>ModelBD.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ViewModel\ArticulosViewModel.cs" />
     <Compile Include="Models\ViewModel\CostosViewModel.cs" />
     <Compile Include="Models\ViewModel\RecuperarPassViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -56,11 +56,49 @@ namespace ProyectoLithio.Controllers
             return View();
         }
 
-        public JsonResult RetornaArticulos()
+        #region RetornaArticulosJSON
+        /// <summary>
+        /// Json que trae los codigos de los articulos 
+        /// </summary>
+        /// <returns></returns>
+        //[HttpPost]
+        public JsonResult RetornaArticulos(string search)
         {
-            List<pa_RetornaArticulosAC_Result> ListaArticulos = this.LithioBD.pa_RetornaArticulosAC(null).ToList();
-
-            return new JsonResult { Data = ListaArticulos, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
+            List<ArticulosViewModel> ArtVM = LithioBD.Articulos.Where(x => x.Codigo_Articulo.Contains(search)).Select(x => new ArticulosViewModel
+            {
+                Codigo_Articulo = x.Codigo_Articulo
+            }).ToList();
+            return new JsonResult { Data = ArtVM,JsonRequestBehavior = JsonRequestBehavior.AllowGet};
         }
+        #endregion
+
+        #region BuscaCodigo
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="Codigo_Articulo"></param>
+        /// <returns></returns>
+        //Metodo que busca los demas datos del articulo utilizando el codigo para realizar la busqueda
+        public ActionResult BuscaCodigo(string Codigo_Articulo)
+        {
+            //variables para cada uno de los campos que van a ir en la linea
+            string Nombre_Articulo = "";
+
+            try
+            {
+                pa_Costos_BusquedaCodigoArt_Result modeloBusquedaCodigo = new pa_Costos_BusquedaCodigoArt_Result();
+
+                modeloBusquedaCodigo = this.LithioBD.pa_Costos_BusquedaCodigoArt(Codigo_Articulo).FirstOrDefault();
+
+                Nombre_Articulo = modeloBusquedaCodigo.Nombre_Articulo;
+            }
+            catch (Exception ex)
+            {
+
+
+            }
+            return Json(new { });
+        }
+#endregion
     }
 }

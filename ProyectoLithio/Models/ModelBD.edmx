@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="LithioBDModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="LithioBDModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Articulos">
           <Key>
             <PropertyRef Name="Id_Articulo" />
@@ -405,7 +405,8 @@
             <End Role="Usuarios" EntitySet="Usuarios" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="LithioBDModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -670,10 +671,10 @@
             <Parameter Name="Token" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="pa_Articulos_ExisteArticulosCodigo" ReturnType="Collection(LithioBDModel.pa_Articulos_ExisteArticulosCodigo_Result)">
-          <Parameter Name="Codigo_Articulo" Mode="In" Type="String" />
+            <Parameter Name="Codigo_Articulo" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="pa_Articulos_ExisteArticulosNombre" ReturnType="Collection(LithioBDModel.pa_Articulos_ExisteArticulosNombre_Result)">
-          <Parameter Name="Nombre_Articulo" Mode="In" Type="String" />
+            <Parameter Name="Nombre_Articulo" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="pa_Articulos_Insert">
             <Parameter Name="Codigo_Articulo" Mode="In" Type="String" />
@@ -698,12 +699,15 @@
             <Parameter Name="Id_Presentacion" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="pa_ArticulosRetornaID" ReturnType="Collection(LithioBDModel.pa_ArticulosRetornaID_Result)">
-          <Parameter Name="Id_Articulo" Mode="In" Type="Int32" />
+            <Parameter Name="Id_Articulo" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="pa_Costos_BusquedaCodigoArt" ReturnType="Collection(LithioBDModel.pa_Costos_BusquedaCodigoArt_Result)">
+            <Parameter Name="Codigo_Articulo" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="pa_CrearRespaldo" />
           <FunctionImport Name="pa_EstadoUsuario_Select" ReturnType="Collection(LithioBDModel.pa_EstadoUsuario_Select_Result)" />
           <FunctionImport Name="pa_Paises_ExistePais" ReturnType="Collection(LithioBDModel.pa_Paises_ExistePais_Result)">
-          <Parameter Name="NombrePais" Mode="In" Type="String" />
+            <Parameter Name="NombrePais" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="pa_Paises_Insert">
             <Parameter Name="Nombre_Pais" Mode="In" Type="String" />
@@ -718,7 +722,7 @@
             <Parameter Name="Moneda_Pais" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="pa_PaisesRetornaID" ReturnType="Collection(LithioBDModel.pa_PaisesRetornaID_Result)">
-          <Parameter Name="Id_Pais" Mode="In" Type="Int32" />
+            <Parameter Name="Id_Pais" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="pa_Permisos_Select" ReturnType="Collection(LithioBDModel.pa_Permisos_Select_Result)" />
           <FunctionImport Name="pa_Permisos_Update">
@@ -727,13 +731,13 @@
             <Parameter Name="Id_Tipo_Usuario" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="pa_PermisosRetornaID" ReturnType="Collection(LithioBDModel.pa_PermisosRetornaID_Result)">
-          <Parameter Name="Id_Usuario" Mode="In" Type="Int32" />
+            <Parameter Name="Id_Usuario" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="pa_Presentaciones_ExistePresentacion" ReturnType="Collection(LithioBDModel.pa_Presentaciones_ExistePresentacion_Result)">
-          <Parameter Name="Nombre_Presentacion" Mode="In" Type="String" />
+            <Parameter Name="Nombre_Presentacion" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="pa_Presentaciones_Insert">
-          <Parameter Name="Nombre_Presentacion" Mode="In" Type="String" />
+            <Parameter Name="Nombre_Presentacion" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="pa_Presentaciones_Select" ReturnType="Collection(LithioBDModel.pa_Presentaciones_Select_Result)" />
           <FunctionImport Name="pa_Presentaciones_Update">
@@ -741,7 +745,7 @@
             <Parameter Name="Nombre_Presentacion" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="pa_PresentacionesRetornaID" ReturnType="Collection(LithioBDModel.pa_PresentacionesRetornaID_Result)">
-          <Parameter Name="Id_Presentacion" Mode="In" Type="Int32" />
+            <Parameter Name="Id_Presentacion" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="pa_Proveedores_ExisteProveedor" ReturnType="Collection(LithioBDModel.pa_Proveedores_ExisteProveedor_Result)">
             <Parameter Name="Codigo_Proveedor" Mode="In" Type="String" />
@@ -760,10 +764,10 @@
             <Parameter Name="Id_Pais" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="pa_ProveedoresRetornaID" ReturnType="Collection(LithioBDModel.pa_ProveedoresRetornaID_Result)">
-          <Parameter Name="Id_Proveedor" Mode="In" Type="Int32" />
+            <Parameter Name="Id_Proveedor" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="pa_RetornaArticulosAC" ReturnType="Collection(LithioBDModel.pa_RetornaArticulosAC_Result)">
-          <Parameter Name="Codigo_Articulo" Mode="In" Type="String" />
+            <Parameter Name="Codigo_Articulo" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="pa_RetornaUsuarioCorreoPwd_Select" ReturnType="Collection(LithioBDModel.pa_RetornaUsuarioCorreoPwd_Select_Result)">
             <Parameter Name="Correo" Mode="In" Type="String" />
@@ -780,7 +784,7 @@
           <FunctionImport Name="pa_Usuarios_Select" ReturnType="Collection(LithioBDModel.pa_Usuarios_Select_Result)" />
           <FunctionImport Name="pa_Usuarios_SelectTodo" ReturnType="Collection(LithioBDModel.pa_Usuarios_SelectTodo_Result)" />
           <FunctionImport Name="pa_UsuariosRetornaID" ReturnType="Collection(LithioBDModel.pa_UsuariosRetornaID_Result)">
-          <Parameter Name="Id_Usuario" Mode="In" Type="Int32" />
+            <Parameter Name="Id_Usuario" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="pa_UsuariosUpdate">
             <Parameter Name="Nombre_Completo" Mode="In" Type="String" />
@@ -788,7 +792,7 @@
             <Parameter Name="Id_Usuario" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="pa_VerificarCorreoRecuperacionPass" ReturnType="Collection(LithioBDModel.pa_VerificarCorreoRecuperacionPass_Result)">
-          <Parameter Name="Correo_Electronico" Mode="In" Type="String" />
+            <Parameter Name="Correo_Electronico" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="sp_alterdiagram">
             <Parameter Name="diagramname" Mode="In" Type="String" />
@@ -820,9 +824,6 @@
             <Parameter Name="new_diagramname" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="sp_upgraddiagrams" />
-          <FunctionImport Name="pa_Costos_BusquedaCodigoArt" ReturnType="Collection(LithioBDModel.pa_Costos_BusquedaCodigoArt_Result)">
-            <Parameter Name="Codigo_Articulo" Mode="In" Type="String" />
-          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="pa_Articulos_ExisteArticulosCodigo_Result">
           <Property Type="Int32" Name="Id_Articulo" Nullable="false" />
@@ -874,6 +875,17 @@
           <Property Type="String" Name="Nombre_Proveedor" Nullable="false" MaxLength="200" />
           <Property Type="Int32" Name="Id_Presentacion" Nullable="false" />
           <Property Type="String" Name="Nombre_Presentacion" Nullable="false" MaxLength="200" />
+        </ComplexType>
+        <ComplexType Name="pa_Costos_BusquedaCodigoArt_Result">
+          <Property Type="Int32" Name="Id_Articulo" Nullable="false" />
+          <Property Type="String" Name="Codigo_Articulo" Nullable="false" MaxLength="200" />
+          <Property Type="String" Name="Nombre_Articulo" Nullable="false" MaxLength="200" />
+          <Property Type="Int32" Name="Cantidad_Articulo" Nullable="false" />
+          <Property Type="Int32" Name="Id_Presentacion" Nullable="false" />
+          <Property Type="String" Name="Nombre_Presentacion" Nullable="false" MaxLength="200" />
+          <Property Type="Int32" Name="Id_Proveedor" Nullable="false" />
+          <Property Type="String" Name="Nombre_Proveedor" Nullable="false" MaxLength="200" />
+          <Property Type="Double" Name="Costo_Articulo" Nullable="false" />
         </ComplexType>
         <ComplexType Name="pa_EstadoUsuario_Select_Result">
           <Property Type="Int32" Name="Id_Estado_Usuario" Nullable="false" />
@@ -994,16 +1006,6 @@
           <Property Type="Int32" Name="ID" Nullable="false" />
           <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
           <Property Type="Int32" Name="OwnerID" Nullable="false" />
-        </ComplexType>
-        <ComplexType Name="pa_Costos_BusquedaCodigoArt_Result">
-          <Property Type="Int32" Name="Id_Articulo" Nullable="false" />
-          <Property Type="String" Name="Codigo_Articulo" Nullable="false" MaxLength="200" />
-          <Property Type="String" Name="Nombre_Articulo" Nullable="false" MaxLength="200" />
-          <Property Type="Int32" Name="Cantidad_Articulo" Nullable="false" />
-          <Property Type="Int32" Name="Id_Presentacion" Nullable="false" />
-          <Property Type="String" Name="Nombre_Presentacion" Nullable="false" MaxLength="200" />
-          <Property Type="Int32" Name="Id_Proveedor" Nullable="false" />
-          <Property Type="Double" Name="Costo_Articulo" Nullable="false" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -1189,6 +1191,21 @@
                 <ScalarProperty Name="Nombre_Proveedor" ColumnName="Nombre_Proveedor" />
                 <ScalarProperty Name="Id_Presentacion" ColumnName="Id_Presentacion" />
                 <ScalarProperty Name="Nombre_Presentacion" ColumnName="Nombre_Presentacion" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="pa_Costos_BusquedaCodigoArt" FunctionName="LithioBDModel.Store.pa_Costos_BusquedaCodigoArt">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="LithioBDModel.pa_Costos_BusquedaCodigoArt_Result">
+                <ScalarProperty Name="Id_Articulo" ColumnName="Id_Articulo" />
+                <ScalarProperty Name="Codigo_Articulo" ColumnName="Codigo_Articulo" />
+                <ScalarProperty Name="Nombre_Articulo" ColumnName="Nombre_Articulo" />
+                <ScalarProperty Name="Cantidad_Articulo" ColumnName="Cantidad_Articulo" />
+                <ScalarProperty Name="Id_Presentacion" ColumnName="Id_Presentacion" />
+                <ScalarProperty Name="Nombre_Presentacion" ColumnName="Nombre_Presentacion" />
+                <ScalarProperty Name="Id_Proveedor" ColumnName="Id_Proveedor" />
+                <ScalarProperty Name="Nombre_Proveedor" ColumnName="Nombre_Proveedor" />
+                <ScalarProperty Name="Costo_Articulo" ColumnName="Costo_Articulo" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -1411,20 +1428,6 @@
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="LithioBDModel.Store.sp_renamediagram" />
           <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="LithioBDModel.Store.sp_upgraddiagrams" />
-          <FunctionImportMapping FunctionImportName="pa_Costos_BusquedaCodigoArt" FunctionName="LithioBDModel.Store.pa_Costos_BusquedaCodigoArt">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="LithioBDModel.pa_Costos_BusquedaCodigoArt_Result">
-                <ScalarProperty Name="Id_Articulo" ColumnName="Id_Articulo" />
-                <ScalarProperty Name="Codigo_Articulo" ColumnName="Codigo_Articulo" />
-                <ScalarProperty Name="Nombre_Articulo" ColumnName="Nombre_Articulo" />
-                <ScalarProperty Name="Cantidad_Articulo" ColumnName="Cantidad_Articulo" />
-                <ScalarProperty Name="Id_Presentacion" ColumnName="Id_Presentacion" />
-                <ScalarProperty Name="Nombre_Presentacion" ColumnName="Nombre_Presentacion" />
-                <ScalarProperty Name="Id_Proveedor" ColumnName="Id_Proveedor" />
-                <ScalarProperty Name="Costo_Articulo" ColumnName="Costo_Articulo" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

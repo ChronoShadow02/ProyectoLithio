@@ -162,6 +162,15 @@ namespace ProyectoLithio.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<pa_ArticulosRetornaID_Result>("pa_ArticulosRetornaID", id_ArticuloParameter);
         }
     
+        public virtual ObjectResult<pa_Costos_BusquedaCodigoArt_Result> pa_Costos_BusquedaCodigoArt(string codigo_Articulo)
+        {
+            var codigo_ArticuloParameter = codigo_Articulo != null ?
+                new ObjectParameter("Codigo_Articulo", codigo_Articulo) :
+                new ObjectParameter("Codigo_Articulo", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<pa_Costos_BusquedaCodigoArt_Result>("pa_Costos_BusquedaCodigoArt", codigo_ArticuloParameter);
+        }
+    
         public virtual int pa_CrearRespaldo()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("pa_CrearRespaldo");
@@ -572,15 +581,6 @@ namespace ProyectoLithio.Models
         public virtual int sp_upgraddiagrams()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_upgraddiagrams");
-        }
-    
-        public virtual ObjectResult<pa_Costos_BusquedaCodigoArt_Result> pa_Costos_BusquedaCodigoArt(string codigo_Articulo)
-        {
-            var codigo_ArticuloParameter = codigo_Articulo != null ?
-                new ObjectParameter("Codigo_Articulo", codigo_Articulo) :
-                new ObjectParameter("Codigo_Articulo", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<pa_Costos_BusquedaCodigoArt_Result>("pa_Costos_BusquedaCodigoArt", codigo_ArticuloParameter);
         }
     }
 }

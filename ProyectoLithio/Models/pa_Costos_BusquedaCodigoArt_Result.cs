@@ -20,6 +20,7 @@ namespace ProyectoLithio.Models
         public int Id_Presentacion { get; set; }
         public string Nombre_Presentacion { get; set; }
         public int Id_Proveedor { get; set; }
+        public string Nombre_Proveedor { get; set; }
         public double Costo_Articulo { get; set; }
     }
 }
