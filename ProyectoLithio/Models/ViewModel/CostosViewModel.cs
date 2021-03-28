@@ -18,6 +18,10 @@ namespace ProyectoLithio.Models.ViewModel
 
     public class Concepto { 
 
+        public string NombreProveedor { get; set; }
+
+        public int Id_Proveedor { get; set; }
+
         public string Codigo_Articulo { get; set; }
 
         public string Nombre_Articulo { get; set; }

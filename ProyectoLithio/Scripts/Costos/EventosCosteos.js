@@ -2,9 +2,11 @@
 /*Por aca se agregan los eventos para agregar lineas
  de los productos para el calculo y tambien para procesar la informacion para realizar
  el calculo del costeo*/
+var num = 0;
 $(function () {
     AgregarConcepto();
 })
+
 //Mandar como parametro el codigo del articulo para buscar los demas datos
 
 function AgregarConcepto() {
@@ -27,13 +29,14 @@ function AgregarConcepto() {
     });
     
 }
+
 // aca se procesa la infomacion para agregar el concepto a la tabla
 function ProcesaAgregarConcepto(data) {
 
-    var num = 0;
+    
     //Borrar el campo del autocomplete del codigo
     $("#txtCodigoArticuloAgregar").val("");
-    
+
     //agregar los datos a la tabla dinamica
     let tabla = document.getElementById("TablaConceptos");
     //crear tr de forma autmatica
@@ -65,16 +68,16 @@ function ProcesaAgregarConcepto(data) {
 
     //Se agrega el texto a los td
     TDNombreProveedor.innerHTML = data.NombreProveedor;
-    TDCodigoArti.innerHTML=data.CodigoArti;
+    TDCodigoArti.innerHTML = data.CodigoArti;
     TDNombreArticulo.innerHTML = data.NombreArticulo;
     //TDIdPresentacion.innerHTML = data.IdPresentacion;
-    TDNombrePresentacion.innerHTML= data.NombrePresentacion;
-    TDCantidadArticulos.innerHTML=data.CantidadArticulos;
-    TDCostoArticulo.innerHTML ="¢"+data.CostoArticulo;
+    TDNombrePresentacion.innerHTML = data.NombrePresentacion;
+    TDCantidadArticulos.innerHTML = data.CantidadArticulos;
+    TDCostoArticulo.innerHTML = "¢" + data.CostoArticulo;
     //TDId_Proveedor.innerHTML=data.Id_Proveedor;
     TDCostoTotal.innerHTML = "<input type='number' class='form-control' value='' style='width:70px;'>";
     TDbtnEliminar.innerHTML = "<button class='btn btn-danger btn-sm'>Eliminar</button>";
-    
+
     tabla.appendChild(TR);
 
 
@@ -89,6 +92,38 @@ function ProcesaAgregarConcepto(data) {
     let hiddenId_Proveedor = document.createElement("input");
     let hiddenNombreProveedor = document.createElement("input");
 
+    //agregar hidden de index
     hiddenIndex.name = "conceptos.Index";
     hiddenIndex.value = num;
+    hiddenIndex.type = "hidden";
+
+    //agregar hidden de nombre de proveedor
+    hiddenNombreProveedor.name = "conceptos[" + num + "].NombreProveedor";
+    hiddenNombreProveedor.value = data.NombreProveedor;
+    hiddenNombreProveedor.type = "hidden";
+
+    //agregar hidden de id de proveedor
+    hiddenId_Proveedor.name = "conceptos[" + num + "].Id_Proveedor";
+    hiddenId_Proveedor.value = data.Id_Proveedor;
+    hiddenId_Proveedor.type = "hidden";
+
+    //agregar hidden de codigo articulo
+    hiddenCodigo.name = "conceptos[" + num + "].Codigo_Articulo";
+    hiddenCodigo.value = data.CodigoArti;
+    hiddenCodigo.type = "hidden";
+
+    ///agregar nombre de articulo
+    hiddenNombreArticulo.name = "conceptos[" + num + "].Nombre_Articulo";
+    hiddenNombreArticulo.value = data.NombreArticulo;
+    hiddenNombreArticulo.type = "hidden";
+
+
+    //se agrega los campos en la vista
+    DivConceptos.appendChild(hiddenIndex);
+    DivConceptos.appendChild(hiddenNombreProveedor);
+    DivConceptos.appendChild(hiddenId_Proveedor);
+    DivConceptos.appendChild(hiddenCodigo);
+    DivConceptos.appendChild(hiddenNombreArticulo);
+
+    num++;
 }
