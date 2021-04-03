@@ -337,6 +337,10 @@
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\Costos\AgregarAutoComplete.js" />
     <Content Include="Scripts\Costos\EventosCosteos.js" />
+    <Content Include="Scripts\Costos\validaCosteo.js" />
+    <Content Include="Scripts\Costos\validetta.min.css" />
+    <Content Include="Scripts\Costos\validetta.min.js" />
+    <Content Include="Scripts\Costos\validettaLang-es-ES.js" />
     <Content Include="Scripts\esm\popper-utils.js" />
     <Content Include="Scripts\esm\popper-utils.min.js" />
     <Content Include="Scripts\esm\popper.js" />

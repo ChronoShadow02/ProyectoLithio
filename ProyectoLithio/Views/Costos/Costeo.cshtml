@@ -4,11 +4,11 @@
 
 }
 <link rel="Stylesheet" href="https://ajax.aspnetcdn.com/ajax/jquery.ui/1.8.10/themes/redmond/jquery-ui.css" />
-
+<link href="~/Scripts/Costos/validetta.min.css" rel="stylesheet" />
 <h1 class="text-center">Cálculo de costeo </h1>
 <br>
 
-<form method="post">
+<form method="post" id="frmCosteo">
 
     <!--Parte de fechas-->
     <div class="form-group col-md-2">
@@ -17,17 +17,17 @@
     </div>
     <div class="form-group col-md-2">
         <label class=""># de Costeo</label>
-        <input type="text" name="Numero_Costos" id="Numero_Costos" class="form-control ">
+        <input type="number" name="Numero_Costos" id="Numero_Costos" class="form-control" min="0" data-validetta="required,number">
     </div>
     <div class="form-group col-md-2">
         <label class="">DUA</label>
-        <input type="text" name="DUA" id="DUA" class="form-control ">
+        <input type="text" name="DUA" id="DUA" class="form-control" data-validetta="required">
     </div>
     <div class="form-group col-md-3">
     </div>
     <div class="form-group col-md-2">
         <label class="">Tipo de cambio(colones)</label>
-        <input type="text" name="Tipo_De_Cambio" id="Tipo_De_Cambio" class="form-control ">
+        <input type="text" name="Tipo_De_Cambio" id="Tipo_De_Cambio" class="form-control" data-validetta="required">
     </div>
     <!--Parte de la busqueda del codigo de articulo-->
     <div class="form-group col-md-3">
@@ -35,7 +35,7 @@
         <div class="input-group">
             <input type="text" id="txtCodigoArticuloAgregar" name="Codigo_Articulo" class="form-control">
             <span class="input-group-btn">
-                <button class="btn btn-primary" type="button" id="AgregarConcepto">Agregar</button>
+                <input class="btn btn-primary" type="button" id="AgregarConcepto" value="Agregar">
             </span>
         </div>
     </div>
@@ -57,7 +57,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
+                @*<tr>
                     <th>02904-04-0208</th>
                     <td>Vascomil 22</td>
                     <td>Tubo</td>
@@ -66,16 +66,16 @@
                     <td> &cent; 150000</td>
                     <td> <input type="checkbox" name="" id=""></td>
                     <td><input type="text" name="" id="" class="form-control" style="width: 70px;"> </td>
-                </tr>
+                </tr>*@
 
             </tbody>
         </table>
-        @*<input type="hidden" value="0" name="conceptos.Index" id="conceptos.Index" />
+        @*@<input type="hidden" value="0" name="conceptos.Index" id="conceptos.Index" />
             <input type="hidden" value="02904-04-0208" name="conceptos[0].Codigo_Articulo" id="conceptos[0].Codigo_Articulo" />*@
 
     </div>
 
-    <button class="btn btn-primary" type="submit">Agregar</button>
+    <input class="btn btn-primary" type="submit" value="Agregar" id="btnAgregarCosteo">
 </form>
 
 @section scripts{
@@ -88,4 +88,7 @@
     </script>
     <script src="~/Scripts/Costos/AgregarAutoComplete.js"></script>
     <script src="~/Scripts/Costos/EventosCosteos.js"></script>
+    <script src="~/Scripts/Costos/validetta.min.js"></script>
+    <script src="~/Scripts/Costos/validettaLang-es-ES.js"></script>
+    <script src="~/Scripts/Costos/validaCosteo.js"></script>
 }

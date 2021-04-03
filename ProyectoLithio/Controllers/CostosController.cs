@@ -54,7 +54,7 @@ namespace ProyectoLithio.Controllers
             }
             catch (Exception ex)
             {
-                this.ViewBag.Mensaje = "fallo" + ex.Message;
+                
             }
             return View();
         }
