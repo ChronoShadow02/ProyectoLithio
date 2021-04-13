@@ -81,7 +81,7 @@ function ProcesaAgregarConcepto(data) {
 
 	TDUsaFlete.innerHTML = "<input type='checkbox' class='form-check-input' id='chkUsaFlete" + num + "' onclick='ArticuloUsaFlete(" + num +")'> Si";
 	TDCostoFlete.innerHTML = "<input type='text' class='form-control' value='' style='width:70px;' id='txtUsaFlete"+num+" '>";
-	TDbtnEliminar.innerHTML = "<button class='btn btn-danger btn-sm' onclick='BorrarLineaCosteo(" + num +");'>Eliminar</button>";
+	TDbtnEliminar.innerHTML = "<button class='btn btn-danger btn-sm glyphicon glyphicon-trash' onclick='BorrarLineaCosteo(" + num +");'></button>";
 
 	tabla.appendChild(TR);
 
@@ -139,7 +139,7 @@ function ProcesaAgregarConcepto(data) {
 
 function BorrarLineaCosteo(indice) {
 
-	$('#TablaConceptos').on('click', 'button[class="btn btn-danger btn-sm"]', function () {
+	$('#TablaConceptos').on('click', 'button[class="btn btn-danger btn-sm glyphicon glyphicon-trash"]', function () {
 		$(this).parents("tr").remove();
 		//Crear el nodo para despues eliminar los elementos del hidden
 		var NodoPadre = document.getElementById("divConceptos");
