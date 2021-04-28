@@ -178,9 +178,6 @@
     <Compile Include="Models\pa_Articulos_ExisteArticulosCodigo_Result.cs">
       <DependentUpon>ModelBD.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\pa_Articulos_ExisteArticulosNombre_Result.cs">
-      <DependentUpon>ModelBD.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\pa_Articulos_Select_Result.cs">
       <DependentUpon>ModelBD.tt</DependentUpon>
     </Compile>

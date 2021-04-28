@@ -17,19 +17,27 @@
                         <th>Código de proveedor</th>
                         <th>Nombre de proveedor</th>
                         <th>País</th>
+                        <th>¿Costo marítimo?</th>
+                        <th>Costo marítimo</th>
+                        <th>¿Costo Terrestre?</th>
+                        <th>Costo terrestre</th>
                         <th>Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach (var oListaProveedores in this.Model)
                     {
-        <tr>
-            <td>@oListaProveedores.Id_Proveedor</td>
-            <td>@oListaProveedores.Codigo_Proveedor</td>
-            <td>@oListaProveedores.Nombre_Proveedor</td>
-            <td>@oListaProveedores.Nombre_Pais</td>
-            <td><a href="~/Proveedores/ProveedoresModifica?Id_Proveedor=@oListaProveedores.Id_Proveedor" class="btn btn-success">Editar</a></td>
-        </tr>}
+                    <tr>
+                        <td>@oListaProveedores.Id_Proveedor</td>
+                        <td>@oListaProveedores.Codigo_Proveedor</td>
+                        <td>@oListaProveedores.Nombre_Proveedor</td>
+                        <td>@oListaProveedores.Nombre_Pais</td>
+                        <td>@oListaProveedores.Tiene_Costo_Maritimo</td>
+                        <td> &cent;@oListaProveedores.Costo_Maritimo</td>
+                        <td>@oListaProveedores.Tiene_Costo_Terrestre</td>
+                        <td> &cent;@oListaProveedores.Costo_Terrestre</td>
+                        <td><a href="~/Proveedores/ProveedoresModifica?Id_Proveedor=@oListaProveedores.Id_Proveedor" class="btn btn-success">Editar</a></td>
+                    </tr>}
                 </tbody>
             </table>
         </div>

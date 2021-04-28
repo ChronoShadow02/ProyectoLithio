@@ -61,15 +61,6 @@ namespace ProyectoLithio.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<pa_Articulos_ExisteArticulosCodigo_Result>("pa_Articulos_ExisteArticulosCodigo", codigo_ArticuloParameter);
         }
     
-        public virtual ObjectResult<pa_Articulos_ExisteArticulosNombre_Result> pa_Articulos_ExisteArticulosNombre(string nombre_Articulo)
-        {
-            var nombre_ArticuloParameter = nombre_Articulo != null ?
-                new ObjectParameter("Nombre_Articulo", nombre_Articulo) :
-                new ObjectParameter("Nombre_Articulo", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<pa_Articulos_ExisteArticulosNombre_Result>("pa_Articulos_ExisteArticulosNombre", nombre_ArticuloParameter);
-        }
-    
         public virtual int pa_Articulos_Insert(string codigo_Articulo, string nombre_Articulo, string descripcion_Articulo, Nullable<int> cantidad_Articulo, Nullable<double> costo_Articulo, Nullable<double> costo_Anterior_Articulo, Nullable<int> id_Proveedor, Nullable<int> id_Presentacion)
         {
             var codigo_ArticuloParameter = codigo_Articulo != null ?
@@ -112,7 +103,7 @@ namespace ProyectoLithio.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<pa_Articulos_Select_Result>("pa_Articulos_Select");
         }
     
-        public virtual int pa_Articulos_Update(Nullable<int> id_Articulo, string codigo_Articulo, string nombre_Articulo, string descripcion_Articulo, Nullable<int> cantidad_Articulo, Nullable<double> costo_Articulo, Nullable<double> costo_Anterior_Articulo, Nullable<int> id_Proveedor, Nullable<int> id_Presentacion)
+        public virtual int pa_Articulos_Update(Nullable<int> id_Articulo, string codigo_Articulo, string nombre_Articulo, string descripcion_Articulo, Nullable<int> cantidad_Articulo, Nullable<double> costo_Articulo, Nullable<int> id_Proveedor, Nullable<int> id_Presentacion)
         {
             var id_ArticuloParameter = id_Articulo.HasValue ?
                 new ObjectParameter("Id_Articulo", id_Articulo) :
@@ -138,10 +129,6 @@ namespace ProyectoLithio.Models
                 new ObjectParameter("Costo_Articulo", costo_Articulo) :
                 new ObjectParameter("Costo_Articulo", typeof(double));
     
-            var costo_Anterior_ArticuloParameter = costo_Anterior_Articulo.HasValue ?
-                new ObjectParameter("Costo_Anterior_Articulo", costo_Anterior_Articulo) :
-                new ObjectParameter("Costo_Anterior_Articulo", typeof(double));
-    
             var id_ProveedorParameter = id_Proveedor.HasValue ?
                 new ObjectParameter("Id_Proveedor", id_Proveedor) :
                 new ObjectParameter("Id_Proveedor", typeof(int));
@@ -150,7 +137,20 @@ namespace ProyectoLithio.Models
                 new ObjectParameter("Id_Presentacion", id_Presentacion) :
                 new ObjectParameter("Id_Presentacion", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("pa_Articulos_Update", id_ArticuloParameter, codigo_ArticuloParameter, nombre_ArticuloParameter, descripcion_ArticuloParameter, cantidad_ArticuloParameter, costo_ArticuloParameter, costo_Anterior_ArticuloParameter, id_ProveedorParameter, id_PresentacionParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("pa_Articulos_Update", id_ArticuloParameter, codigo_ArticuloParameter, nombre_ArticuloParameter, descripcion_ArticuloParameter, cantidad_ArticuloParameter, costo_ArticuloParameter, id_ProveedorParameter, id_PresentacionParameter);
+        }
+    
+        public virtual int pa_Articulos_Update_CostoAnterior(Nullable<int> id_Articulo, Nullable<double> costo_Articulo)
+        {
+            var id_ArticuloParameter = id_Articulo.HasValue ?
+                new ObjectParameter("Id_Articulo", id_Articulo) :
+                new ObjectParameter("Id_Articulo", typeof(int));
+    
+            var costo_ArticuloParameter = costo_Articulo.HasValue ?
+                new ObjectParameter("Costo_Articulo", costo_Articulo) :
+                new ObjectParameter("Costo_Articulo", typeof(double));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("pa_Articulos_Update_CostoAnterior", id_ArticuloParameter, costo_ArticuloParameter);
         }
     
         public virtual ObjectResult<pa_ArticulosRetornaID_Result> pa_ArticulosRetornaID(Nullable<int> id_Articulo)
@@ -331,7 +331,7 @@ namespace ProyectoLithio.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<pa_Proveedores_ExisteProveedor_Result>("pa_Proveedores_ExisteProveedor", codigo_ProveedorParameter, nombre_ProveedorParameter);
         }
     
-        public virtual int pa_Proveedores_Insert(string nombre_Proveedor, string codigo_Proveedor, Nullable<int> id_Pais)
+        public virtual int pa_Proveedores_Insert(string nombre_Proveedor, string codigo_Proveedor, Nullable<int> id_Pais, string tiene_Costo_Maritimo, Nullable<decimal> costo_Maritimo, string tiene_Costo_Terrestre, Nullable<decimal> costo_Terrestre)
         {
             var nombre_ProveedorParameter = nombre_Proveedor != null ?
                 new ObjectParameter("Nombre_Proveedor", nombre_Proveedor) :
@@ -345,7 +345,23 @@ namespace ProyectoLithio.Models
                 new ObjectParameter("Id_Pais", id_Pais) :
                 new ObjectParameter("Id_Pais", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("pa_Proveedores_Insert", nombre_ProveedorParameter, codigo_ProveedorParameter, id_PaisParameter);
+            var tiene_Costo_MaritimoParameter = tiene_Costo_Maritimo != null ?
+                new ObjectParameter("Tiene_Costo_Maritimo", tiene_Costo_Maritimo) :
+                new ObjectParameter("Tiene_Costo_Maritimo", typeof(string));
+    
+            var costo_MaritimoParameter = costo_Maritimo.HasValue ?
+                new ObjectParameter("Costo_Maritimo", costo_Maritimo) :
+                new ObjectParameter("Costo_Maritimo", typeof(decimal));
+    
+            var tiene_Costo_TerrestreParameter = tiene_Costo_Terrestre != null ?
+                new ObjectParameter("Tiene_Costo_Terrestre", tiene_Costo_Terrestre) :
+                new ObjectParameter("Tiene_Costo_Terrestre", typeof(string));
+    
+            var costo_TerrestreParameter = costo_Terrestre.HasValue ?
+                new ObjectParameter("Costo_Terrestre", costo_Terrestre) :
+                new ObjectParameter("Costo_Terrestre", typeof(decimal));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("pa_Proveedores_Insert", nombre_ProveedorParameter, codigo_ProveedorParameter, id_PaisParameter, tiene_Costo_MaritimoParameter, costo_MaritimoParameter, tiene_Costo_TerrestreParameter, costo_TerrestreParameter);
         }
     
         public virtual ObjectResult<pa_Proveedores_Select_Result> pa_Proveedores_Select()
@@ -353,7 +369,7 @@ namespace ProyectoLithio.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<pa_Proveedores_Select_Result>("pa_Proveedores_Select");
         }
     
-        public virtual int pa_Proveedores_Update(Nullable<int> id_Proveedor, string codigo_Proveedor, string nombre_Proveedor, Nullable<int> id_Pais)
+        public virtual int pa_Proveedores_Update(Nullable<int> id_Proveedor, string codigo_Proveedor, string nombre_Proveedor, Nullable<int> id_Pais, string tiene_Costo_Maritimo, Nullable<decimal> costo_Maritimo, string tiene_Costo_Terrestre, Nullable<decimal> costo_Terrestre)
         {
             var id_ProveedorParameter = id_Proveedor.HasValue ?
                 new ObjectParameter("Id_Proveedor", id_Proveedor) :
@@ -371,7 +387,23 @@ namespace ProyectoLithio.Models
                 new ObjectParameter("Id_Pais", id_Pais) :
                 new ObjectParameter("Id_Pais", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("pa_Proveedores_Update", id_ProveedorParameter, codigo_ProveedorParameter, nombre_ProveedorParameter, id_PaisParameter);
+            var tiene_Costo_MaritimoParameter = tiene_Costo_Maritimo != null ?
+                new ObjectParameter("Tiene_Costo_Maritimo", tiene_Costo_Maritimo) :
+                new ObjectParameter("Tiene_Costo_Maritimo", typeof(string));
+    
+            var costo_MaritimoParameter = costo_Maritimo.HasValue ?
+                new ObjectParameter("Costo_Maritimo", costo_Maritimo) :
+                new ObjectParameter("Costo_Maritimo", typeof(decimal));
+    
+            var tiene_Costo_TerrestreParameter = tiene_Costo_Terrestre != null ?
+                new ObjectParameter("Tiene_Costo_Terrestre", tiene_Costo_Terrestre) :
+                new ObjectParameter("Tiene_Costo_Terrestre", typeof(string));
+    
+            var costo_TerrestreParameter = costo_Terrestre.HasValue ?
+                new ObjectParameter("Costo_Terrestre", costo_Terrestre) :
+                new ObjectParameter("Costo_Terrestre", typeof(decimal));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("pa_Proveedores_Update", id_ProveedorParameter, codigo_ProveedorParameter, nombre_ProveedorParameter, id_PaisParameter, tiene_Costo_MaritimoParameter, costo_MaritimoParameter, tiene_Costo_TerrestreParameter, costo_TerrestreParameter);
         }
     
         public virtual ObjectResult<pa_ProveedoresRetornaID_Result> pa_ProveedoresRetornaID(Nullable<int> id_Proveedor)

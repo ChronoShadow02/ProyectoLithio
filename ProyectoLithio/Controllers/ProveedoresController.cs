@@ -58,8 +58,12 @@ namespace ProyectoLithio.Controllers
                 }
                 else{
                     RegistrosAfectados = this.modeloBD.pa_Proveedores_Insert(modeloVista.Nombre_Proveedor,
-                                                                         modeloVista.Codigo_Proveedor,
-                                                                         modeloVista.Id_Pais);
+                                                                            modeloVista.Codigo_Proveedor,
+                                                                            modeloVista.Id_Pais,
+                                                                            modeloVista.Tiene_Costo_Maritimo,
+                                                                            modeloVista.Costo_Maritimo,
+                                                                            modeloVista.Tiene_Costo_Terrestre,
+                                                                            modeloVista.Costo_Terrestre);
                 }
                 
             }
@@ -138,7 +142,11 @@ namespace ProyectoLithio.Controllers
                     RegistrosAfectados = this.modeloBD.pa_Proveedores_Update(modeloVista.Id_Proveedor,
                                                                              modeloVista.Codigo_Proveedor,
                                                                              modeloVista.Nombre_Proveedor,
-                                                                             modeloVista.Id_Pais);
+                                                                             modeloVista.Id_Pais,
+                                                                             modeloVista.Tiene_Costo_Maritimo,
+                                                                             modeloVista.Costo_Maritimo,
+                                                                             modeloVista.Tiene_Costo_Terrestre,
+                                                                             modeloVista.Costo_Terrestre);
                 //}
             }
             catch (Exception ex)

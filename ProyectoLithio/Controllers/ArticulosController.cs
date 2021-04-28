@@ -125,13 +125,20 @@ namespace ProyectoLithio.Controllers
             int RegistrosAfectados = 0;
             try
             {
+
+                pa_ArticulosRetornaID_Result modeloVistaID = new pa_ArticulosRetornaID_Result();
+
+                modeloVistaID = this.modeloBD.pa_ArticulosRetornaID(modeloVista.Id_Articulo).FirstOrDefault();
+
+
+                this.modeloBD.pa_Articulos_Update_CostoAnterior(modeloVista.Id_Articulo, modeloVistaID.Costo_Articulo);
+
                 RegistrosAfectados = this.modeloBD.pa_Articulos_Update(modeloVista.Id_Articulo,
                                                                        modeloVista.Codigo_Articulo,
                                                                        modeloVista.Nombre_Articulo,
                                                                        modeloVista.Descripcion_Articulo,
                                                                        modeloVista.Cantidad_Articulo,
                                                                        modeloVista.Costo_Articulo,
-                                                                       modeloVista.Costo_Anterior_Articulo,
                                                                        modeloVista.Id_Proveedor,
                                                                        modeloVista.Id_Presentacion);
             }

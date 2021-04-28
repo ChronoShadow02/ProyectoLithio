@@ -1,6 +1,7 @@
 ﻿
 @{ ViewBag.Title = "Agregar nuevo Artículo";
-                Layout = "~/Views/Shared/_LayoutCosteo.cshtml"; }
+                Layout = "~/Views/Shared/_LayoutCosteo.cshtml"; 
+}
 
 <h2>Ingresar nuevo artículo</h2>
 <br />
@@ -15,7 +16,7 @@
         <input type="text" name="Nombre_Articulo" class="form-control" id="Nombre_Articulo" />
     </div>
     <div class="form-group col-md-6">
-        <label><span class="Obligatorio">*</span>Descripción</label>
+        <label><span class=""></span>Descripción</label>
         <input type="text" name="Descripcion_Articulo" class="form-control" id="Descripcion_Articulo" />
     </div>
     <div class="form-group col-md-6">
@@ -28,7 +29,7 @@
     </div>
     <div class="form-group col-md-6">
         <label><span class="Obligatorio">*</span>Costo anterior</label>
-        <input type="text" name="Costo_Anterior_Articulo" class="form-control" id="Costo_Anterior_Articulo" />
+        <input type="text" name="Costo_Anterior_Articulo" class="form-control" id="Costo_Anterior_Articulo" value="0" disabled/>
     </div>
     <div class="form-group col-md-6">
         <label><span class="Obligatorio">*</span>Proveedor</label>

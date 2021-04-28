@@ -1,6 +1,6 @@
 ﻿@model ProyectoLithio.Models.pa_ProveedoresRetornaID_Result
 @{ ViewBag.Title = "Modificar proveedor";
-                Layout = "~/Views/Shared/_LayoutCosteo.cshtml"; }
+    Layout = "~/Views/Shared/_LayoutCosteo.cshtml"; }
 
 <h2>Modificar proveedor</h2>
 <br />
@@ -19,19 +19,71 @@
         <select id="ddlPais" class="form-control" name="Id_Pais">
             <option value="">Seleccione un país</option>
             @{ foreach (ProyectoLithio.Models.pa_Paises_Select_Result ListaPaises in ViewBag.ListaPaises)
-                            {
-                                ///variable que indica si la provincia esta en el modelo
+                {
+                    ///variable que indica si la provincia esta en el modelo
 
-                                bool esPosicionPais = ListaPaises.Id_Pais == Model.Id_Pais;
+                    bool esPosicionPais = ListaPaises.Id_Pais == Model.Id_Pais;
 
-                                if (esPosicionPais)
-                                {
-                <option value="@ListaPaises.Id_Pais" selected>@ListaPaises.Nombre_Pais</option> }
-                                else
-                                {
-                <option value="@ListaPaises.Id_Pais">@ListaPaises.Nombre_Pais</option> }
-                            } }
+                    if (esPosicionPais)
+                    {
+                        <option value="@ListaPaises.Id_Pais" selected>@ListaPaises.Nombre_Pais</option>
+                    }
+                    else
+                    {
+                        <option value="@ListaPaises.Id_Pais">@ListaPaises.Nombre_Pais</option>
+                    }
+                }
+              }
         </select>
+    </div>
+    <div class="form-group">
+        <label><span class="Obligatorio">* </span>Importe marítimo </label><br />
+
+        Sí @{ if (Model.Tiene_Costo_Maritimo == "SI")
+            {
+                <input type="radio" name="Tiene_Costo_Maritimo" class="" value="SI" id="Tiene_Costo_MaritimoSi" checked />
+                <br /> 
+              }
+              else
+              {
+                <input type="radio" name="Tiene_Costo_Maritimo" class="" value="SI" id="Tiene_Costo_MaritimoSi" /> 
+              } 
+            }
+        No @{ if (Model.Tiene_Costo_Maritimo == "NO")
+            {
+                <input type="radio" name="Tiene_Costo_Maritimo" class="" value="NO" id="Tiene_Costo_MaritimoNo" checked /> <br /> <br />
+            }
+            else
+            {
+                <input type="radio" name="Tiene_Costo_Maritimo" class="" value="NO" id="Tiene_Costo_MaritimoNo"  /> <br /> <br />
+            }
+            }
+        <label>Costo importe marítimo</label>
+        <input type="text" name="Costo_Maritimo" class="form-control" id="Costo_Maritimo" value="@Model.Costo_Maritimo" />
+    </div>
+    <div class="form-group">
+        <label><span class="Obligatorio">* </span>Importe terrestre </label><br />
+        Sí @{ if (Model.Tiene_Costo_Terrestre == "SI")
+            {
+               <input type="radio" name="Tiene_Costo_Terrestre" class="" value="SI" id="Tiene_Costo_TerrestreSi" checked/> <br />
+              }
+              else
+              {
+                <input type="radio" name="Tiene_Costo_Terrestre" class="" value="SI" id="Tiene_Costo_TerrestreSi"/> <br />
+
+              } 
+            }
+        No @{ if (Model.Tiene_Costo_Terrestre == "NO")
+            {
+                <input type="radio" name="Tiene_Costo_Terrestre" class="" value="NO" id="Tiene_Costo_TerrestreNo"checked /> <br /> <br />
+            }
+            else
+            {
+                <input type="radio" name="Tiene_Costo_Terrestre" class="" value="NO" id="Tiene_Costo_TerrestreNo" /> <br /> <br />
+            }
+            }
+        <label>Costo importe terrestre</label>
+        <input type="text" name="Costo_Terrestre" class="form-control" id="Costo_Terrestre" value="@Model.Costo_Terrestre" />
     </div>
     <div class="form-group text-right">
         <input type="submit" value="Modificar" class="btn-success btn" id="btnAgregarProveedor" />
@@ -41,8 +93,19 @@
 <br />
 @section scripts{
     <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-maskmoney/3.0.2/jquery.maskMoney.min.js"></script>
     <script src="~/Scripts/validacionesGenericas.js"></script>
     <script src="~/Scripts/Proveedores/validarProveedores.js"></script>
+    <script>
+        $(function () {
+          if (@Model.Tiene_Costo_Maritimo == "SI") {
+            $("#Costo_Maritimo").removeAttr("disabled");
+          }
+          if (@Model.Tiene_Costo_Terrestre == "SI") {
+              $("#Costo_Terrestr").removeAttr("disabled");
+          }
+        });
+    </script>
     <script src="~/Scripts/Panel/abrirModalVersion.js"></script>
     <script src="~/Scripts/Panel/abrirModalRespaldos.js"></script>
 }

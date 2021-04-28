@@ -15,7 +15,6 @@ function validaArticulos() {
                 maxlength: 200
             },
             Descripcion_Articulo: {
-                required: true,
                 maxlength: 200
             },
             Cantidad_Articulo: {

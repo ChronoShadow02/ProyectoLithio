@@ -17,5 +17,9 @@ namespace ProyectoLithio.Models
         public string Codigo_Proveedor { get; set; }
         public string Nombre_Proveedor { get; set; }
         public int Id_Pais { get; set; }
+        public string Tiene_Costo_Maritimo { get; set; }
+        public decimal Costo_Maritimo { get; set; }
+        public string Tiene_Costo_Terrestre { get; set; }
+        public decimal Costo_Terrestre { get; set; }
     }
 }

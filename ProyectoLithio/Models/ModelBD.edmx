@@ -12,7 +12,7 @@
           <Property Name="Id_Articulo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Codigo_Articulo" Type="varchar" MaxLength="200" Nullable="false" />
           <Property Name="Nombre_Articulo" Type="varchar" MaxLength="200" Nullable="false" />
-          <Property Name="Descripcion_Articulo" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="Descripcion_Articulo" Type="varchar" MaxLength="200" />
           <Property Name="Cantidad_Articulo" Type="int" Nullable="false" />
           <Property Name="Costo_Articulo" Type="float" Nullable="false" />
           <Property Name="Costo_Anterior_Articulo" Type="float" Nullable="false" />
@@ -43,7 +43,7 @@
           <Property Name="Numero_Costos" Type="int" Nullable="false" />
           <Property Name="DUA" Type="varchar" MaxLength="200" Nullable="false" />
           <Property Name="Tipo_De_Cambio" Type="decimal" Precision="18" Scale="2" Nullable="false" />
-          <Property Name="Fecha_Creacion" Type="date" Nullable="false" />
+          <Property Name="Fecha_Creacion" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="Estado_Usuario">
           <Key>
@@ -76,6 +76,10 @@
           <Property Name="Codigo_Proveedor" Type="varchar" MaxLength="200" Nullable="false" />
           <Property Name="Nombre_Proveedor" Type="varchar" MaxLength="200" Nullable="false" />
           <Property Name="Id_Pais" Type="int" Nullable="false" />
+          <Property Name="Tiene_Costo_Maritimo" Type="varchar" MaxLength="2" Nullable="false" />
+          <Property Name="Costo_Maritimo" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Tiene_Costo_Terrestre" Type="varchar" MaxLength="2" Nullable="false" />
+          <Property Name="Costo_Terrestre" Type="decimal" Precision="18" Scale="2" Nullable="false" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -210,9 +214,6 @@
         <Function Name="pa_Articulos_ExisteArticulosCodigo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Codigo_Articulo" Type="varchar" Mode="In" />
         </Function>
-        <Function Name="pa_Articulos_ExisteArticulosNombre" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
-          <Parameter Name="Nombre_Articulo" Type="varchar" Mode="In" />
-        </Function>
         <Function Name="pa_Articulos_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Codigo_Articulo" Type="varchar" Mode="In" />
           <Parameter Name="Nombre_Articulo" Type="varchar" Mode="In" />
@@ -231,9 +232,12 @@
           <Parameter Name="Descripcion_Articulo" Type="varchar" Mode="In" />
           <Parameter Name="Cantidad_Articulo" Type="int" Mode="In" />
           <Parameter Name="Costo_Articulo" Type="float" Mode="In" />
-          <Parameter Name="Costo_Anterior_Articulo" Type="float" Mode="In" />
           <Parameter Name="Id_Proveedor" Type="int" Mode="In" />
           <Parameter Name="Id_Presentacion" Type="int" Mode="In" />
+        </Function>
+        <Function Name="pa_Articulos_Update_CostoAnterior" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id_Articulo" Type="int" Mode="In" />
+          <Parameter Name="Costo_Articulo" Type="float" Mode="In" />
         </Function>
         <Function Name="pa_ArticulosRetornaID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Id_Articulo" Type="int" Mode="In" />
@@ -292,6 +296,10 @@
           <Parameter Name="Nombre_Proveedor" Type="varchar" Mode="In" />
           <Parameter Name="Codigo_Proveedor" Type="varchar" Mode="In" />
           <Parameter Name="Id_Pais" Type="int" Mode="In" />
+          <Parameter Name="Tiene_Costo_Maritimo" Type="varchar" Mode="In" />
+          <Parameter Name="Costo_Maritimo" Type="decimal" Mode="In" />
+          <Parameter Name="Tiene_Costo_Terrestre" Type="varchar" Mode="In" />
+          <Parameter Name="Costo_Terrestre" Type="decimal" Mode="In" />
         </Function>
         <Function Name="pa_Proveedores_Select" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="pa_Proveedores_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
@@ -299,6 +307,10 @@
           <Parameter Name="Codigo_Proveedor" Type="varchar" Mode="In" />
           <Parameter Name="Nombre_Proveedor" Type="varchar" Mode="In" />
           <Parameter Name="Id_Pais" Type="int" Mode="In" />
+          <Parameter Name="Tiene_Costo_Maritimo" Type="varchar" Mode="In" />
+          <Parameter Name="Costo_Maritimo" Type="decimal" Mode="In" />
+          <Parameter Name="Tiene_Costo_Terrestre" Type="varchar" Mode="In" />
+          <Parameter Name="Costo_Terrestre" Type="decimal" Mode="In" />
         </Function>
         <Function Name="pa_ProveedoresRetornaID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Id_Proveedor" Type="int" Mode="In" />
@@ -417,7 +429,7 @@
           <Property Name="Id_Articulo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Codigo_Articulo" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Nombre_Articulo" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Descripcion_Articulo" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Descripcion_Articulo" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Name="Cantidad_Articulo" Type="Int32" Nullable="false" />
           <Property Name="Costo_Articulo" Type="Double" Nullable="false" />
           <Property Name="Costo_Anterior_Articulo" Type="Double" Nullable="false" />
@@ -454,7 +466,7 @@
           <Property Name="Numero_Costos" Type="Int32" Nullable="false" />
           <Property Name="DUA" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Tipo_De_Cambio" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
-          <Property Name="Fecha_Creacion" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Fecha_Creacion" Type="DateTime" Nullable="false" Precision="3" />
           <NavigationProperty Name="Costo_Concepto" Relationship="Self.FK_Costo_Concepto_Costos" FromRole="Costos" ToRole="Costo_Concepto" />
         </EntityType>
         <EntityType Name="Estado_Usuario">
@@ -492,6 +504,10 @@
           <Property Name="Codigo_Proveedor" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Nombre_Proveedor" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Id_Pais" Type="Int32" Nullable="false" />
+          <Property Name="Tiene_Costo_Maritimo" Type="String" MaxLength="2" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Costo_Maritimo" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Tiene_Costo_Terrestre" Type="String" MaxLength="2" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Costo_Terrestre" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
           <NavigationProperty Name="Articulos" Relationship="Self.FK_Articulos_Proveedores" FromRole="Proveedores" ToRole="Articulos" />
           <NavigationProperty Name="Paises" Relationship="Self.FK_Proveedores_Paises" FromRole="Proveedores" ToRole="Paises" />
         </EntityType>
@@ -673,9 +689,6 @@
           <FunctionImport Name="pa_Articulos_ExisteArticulosCodigo" ReturnType="Collection(LithioBDModel.pa_Articulos_ExisteArticulosCodigo_Result)">
             <Parameter Name="Codigo_Articulo" Mode="In" Type="String" />
           </FunctionImport>
-          <FunctionImport Name="pa_Articulos_ExisteArticulosNombre" ReturnType="Collection(LithioBDModel.pa_Articulos_ExisteArticulosNombre_Result)">
-            <Parameter Name="Nombre_Articulo" Mode="In" Type="String" />
-          </FunctionImport>
           <FunctionImport Name="pa_Articulos_Insert">
             <Parameter Name="Codigo_Articulo" Mode="In" Type="String" />
             <Parameter Name="Nombre_Articulo" Mode="In" Type="String" />
@@ -694,9 +707,12 @@
             <Parameter Name="Descripcion_Articulo" Mode="In" Type="String" />
             <Parameter Name="Cantidad_Articulo" Mode="In" Type="Int32" />
             <Parameter Name="Costo_Articulo" Mode="In" Type="Double" />
-            <Parameter Name="Costo_Anterior_Articulo" Mode="In" Type="Double" />
             <Parameter Name="Id_Proveedor" Mode="In" Type="Int32" />
             <Parameter Name="Id_Presentacion" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="pa_Articulos_Update_CostoAnterior">
+            <Parameter Name="Id_Articulo" Mode="In" Type="Int32" />
+            <Parameter Name="Costo_Articulo" Mode="In" Type="Double" />
           </FunctionImport>
           <FunctionImport Name="pa_ArticulosRetornaID" ReturnType="Collection(LithioBDModel.pa_ArticulosRetornaID_Result)">
             <Parameter Name="Id_Articulo" Mode="In" Type="Int32" />
@@ -755,6 +771,10 @@
             <Parameter Name="Nombre_Proveedor" Mode="In" Type="String" />
             <Parameter Name="Codigo_Proveedor" Mode="In" Type="String" />
             <Parameter Name="Id_Pais" Mode="In" Type="Int32" />
+            <Parameter Name="Tiene_Costo_Maritimo" Mode="In" Type="String" />
+            <Parameter Name="Costo_Maritimo" Mode="In" Type="Decimal" />
+            <Parameter Name="Tiene_Costo_Terrestre" Mode="In" Type="String" />
+            <Parameter Name="Costo_Terrestre" Mode="In" Type="Decimal" />
           </FunctionImport>
           <FunctionImport Name="pa_Proveedores_Select" ReturnType="Collection(LithioBDModel.pa_Proveedores_Select_Result)" />
           <FunctionImport Name="pa_Proveedores_Update">
@@ -762,6 +782,10 @@
             <Parameter Name="Codigo_Proveedor" Mode="In" Type="String" />
             <Parameter Name="Nombre_Proveedor" Mode="In" Type="String" />
             <Parameter Name="Id_Pais" Mode="In" Type="Int32" />
+            <Parameter Name="Tiene_Costo_Maritimo" Mode="In" Type="String" />
+            <Parameter Name="Costo_Maritimo" Mode="In" Type="Decimal" />
+            <Parameter Name="Tiene_Costo_Terrestre" Mode="In" Type="String" />
+            <Parameter Name="Costo_Terrestre" Mode="In" Type="Decimal" />
           </FunctionImport>
           <FunctionImport Name="pa_ProveedoresRetornaID" ReturnType="Collection(LithioBDModel.pa_ProveedoresRetornaID_Result)">
             <Parameter Name="Id_Proveedor" Mode="In" Type="Int32" />
@@ -829,20 +853,8 @@
           <Property Type="Int32" Name="Id_Articulo" Nullable="false" />
           <Property Type="String" Name="Codigo_Articulo" Nullable="false" MaxLength="200" />
           <Property Type="String" Name="Nombre_Articulo" Nullable="false" MaxLength="200" />
-          <Property Type="String" Name="Descripcion_Articulo" Nullable="false" MaxLength="200" />
+          <Property Type="String" Name="Descripcion_Articulo" Nullable="true" MaxLength="200" />
           <Property Type="Int32" Name="Cantidad_Articulo" Nullable="false" />
-          <Property Type="Double" Name="Costo_Articulo" Nullable="false" />
-          <Property Type="Double" Name="Costo_Anterior_Articulo" Nullable="false" />
-          <Property Type="Int32" Name="Id_Proveedor" Nullable="false" />
-          <Property Type="String" Name="Nombre_Proveedor" Nullable="false" MaxLength="200" />
-          <Property Type="Int32" Name="Id_Presentacion" Nullable="false" />
-          <Property Type="String" Name="Nombre_Presentacion" Nullable="false" MaxLength="200" />
-        </ComplexType>
-        <ComplexType Name="pa_Articulos_ExisteArticulosNombre_Result">
-          <Property Type="Int32" Name="Id_Articulo" Nullable="false" />
-          <Property Type="String" Name="Codigo_Articulo" Nullable="false" MaxLength="200" />
-          <Property Type="String" Name="Nombre_Articulo" Nullable="false" MaxLength="200" />
-          <Property Type="String" Name="Descripcion_Articulo" Nullable="false" MaxLength="200" />
           <Property Type="Double" Name="Costo_Articulo" Nullable="false" />
           <Property Type="Double" Name="Costo_Anterior_Articulo" Nullable="false" />
           <Property Type="Int32" Name="Id_Proveedor" Nullable="false" />
@@ -854,7 +866,7 @@
           <Property Type="Int32" Name="Id_Articulo" Nullable="false" />
           <Property Type="String" Name="Codigo_Articulo" Nullable="false" MaxLength="200" />
           <Property Type="String" Name="Nombre_Articulo" Nullable="false" MaxLength="200" />
-          <Property Type="String" Name="Descripcion_Articulo" Nullable="false" MaxLength="200" />
+          <Property Type="String" Name="Descripcion_Articulo" Nullable="true" MaxLength="200" />
           <Property Type="Int32" Name="Cantidad_Articulo" Nullable="false" />
           <Property Type="Double" Name="Costo_Articulo" Nullable="false" />
           <Property Type="Double" Name="Costo_Anterior_Articulo" Nullable="false" />
@@ -867,7 +879,7 @@
           <Property Type="Int32" Name="Id_Articulo" Nullable="false" />
           <Property Type="String" Name="Codigo_Articulo" Nullable="false" MaxLength="200" />
           <Property Type="String" Name="Nombre_Articulo" Nullable="false" MaxLength="200" />
-          <Property Type="String" Name="Descripcion_Articulo" Nullable="false" MaxLength="200" />
+          <Property Type="String" Name="Descripcion_Articulo" Nullable="true" MaxLength="200" />
           <Property Type="Int32" Name="Cantidad_Articulo" Nullable="false" />
           <Property Type="Double" Name="Costo_Articulo" Nullable="false" />
           <Property Type="Double" Name="Costo_Anterior_Articulo" Nullable="false" />
@@ -949,12 +961,20 @@
           <Property Type="String" Name="Nombre_Proveedor" Nullable="false" MaxLength="200" />
           <Property Type="Int32" Name="Id_Pais" Nullable="false" />
           <Property Type="String" Name="Nombre_Pais" Nullable="false" MaxLength="200" />
+          <Property Type="String" Name="Tiene_Costo_Maritimo" Nullable="false" MaxLength="2" />
+          <Property Type="Decimal" Name="Costo_Maritimo" Nullable="false" Precision="18" Scale="2" />
+          <Property Type="String" Name="Tiene_Costo_Terrestre" Nullable="false" MaxLength="2" />
+          <Property Type="Decimal" Name="Costo_Terrestre" Nullable="false" Precision="18" Scale="2" />
         </ComplexType>
         <ComplexType Name="pa_ProveedoresRetornaID_Result">
           <Property Type="Int32" Name="Id_Proveedor" Nullable="false" />
           <Property Type="String" Name="Codigo_Proveedor" Nullable="false" MaxLength="200" />
           <Property Type="String" Name="Nombre_Proveedor" Nullable="false" MaxLength="200" />
           <Property Type="Int32" Name="Id_Pais" Nullable="false" />
+          <Property Type="String" Name="Tiene_Costo_Maritimo" Nullable="false" MaxLength="2" />
+          <Property Type="Decimal" Name="Costo_Maritimo" Nullable="false" Precision="18" Scale="2" />
+          <Property Type="String" Name="Tiene_Costo_Terrestre" Nullable="false" MaxLength="2" />
+          <Property Type="Decimal" Name="Costo_Terrestre" Nullable="false" Precision="18" Scale="2" />
         </ComplexType>
         <ComplexType Name="pa_RetornaArticulosAC_Result">
           <Property Type="Int32" Name="Id_Articulo" Nullable="false" />
@@ -1089,6 +1109,10 @@
                 <ScalarProperty Name="Codigo_Proveedor" ColumnName="Codigo_Proveedor" />
                 <ScalarProperty Name="Nombre_Proveedor" ColumnName="Nombre_Proveedor" />
                 <ScalarProperty Name="Id_Pais" ColumnName="Id_Pais" />
+                <ScalarProperty Name="Tiene_Costo_Maritimo" ColumnName="Tiene_Costo_Maritimo" />
+                <ScalarProperty Name="Costo_Maritimo" ColumnName="Costo_Maritimo" />
+                <ScalarProperty Name="Tiene_Costo_Terrestre" ColumnName="Tiene_Costo_Terrestre" />
+                <ScalarProperty Name="Costo_Terrestre" ColumnName="Costo_Terrestre" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1142,22 +1166,6 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="pa_Articulos_ExisteArticulosNombre" FunctionName="LithioBDModel.Store.pa_Articulos_ExisteArticulosNombre">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="LithioBDModel.pa_Articulos_ExisteArticulosNombre_Result">
-                <ScalarProperty Name="Id_Articulo" ColumnName="Id_Articulo" />
-                <ScalarProperty Name="Codigo_Articulo" ColumnName="Codigo_Articulo" />
-                <ScalarProperty Name="Nombre_Articulo" ColumnName="Nombre_Articulo" />
-                <ScalarProperty Name="Descripcion_Articulo" ColumnName="Descripcion_Articulo" />
-                <ScalarProperty Name="Costo_Articulo" ColumnName="Costo_Articulo" />
-                <ScalarProperty Name="Costo_Anterior_Articulo" ColumnName="Costo_Anterior_Articulo" />
-                <ScalarProperty Name="Id_Proveedor" ColumnName="Id_Proveedor" />
-                <ScalarProperty Name="Nombre_Proveedor" ColumnName="Nombre_Proveedor" />
-                <ScalarProperty Name="Id_Presentacion" ColumnName="Id_Presentacion" />
-                <ScalarProperty Name="Nombre_Presentacion" ColumnName="Nombre_Presentacion" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="pa_Articulos_Insert" FunctionName="LithioBDModel.Store.pa_Articulos_Insert" />
           <FunctionImportMapping FunctionImportName="pa_Articulos_Select" FunctionName="LithioBDModel.Store.pa_Articulos_Select">
             <ResultMapping>
@@ -1177,6 +1185,7 @@
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="pa_Articulos_Update" FunctionName="LithioBDModel.Store.pa_Articulos_Update" />
+          <FunctionImportMapping FunctionImportName="pa_Articulos_Update_CostoAnterior" FunctionName="LithioBDModel.Store.pa_Articulos_Update_CostoAnterior" />
           <FunctionImportMapping FunctionImportName="pa_ArticulosRetornaID" FunctionName="LithioBDModel.Store.pa_ArticulosRetornaID">
             <ResultMapping>
               <ComplexTypeMapping TypeName="LithioBDModel.pa_ArticulosRetornaID_Result">
@@ -1320,6 +1329,10 @@
                 <ScalarProperty Name="Nombre_Proveedor" ColumnName="Nombre_Proveedor" />
                 <ScalarProperty Name="Id_Pais" ColumnName="Id_Pais" />
                 <ScalarProperty Name="Nombre_Pais" ColumnName="Nombre_Pais" />
+                <ScalarProperty Name="Tiene_Costo_Maritimo" ColumnName="Tiene_Costo_Maritimo" />
+                <ScalarProperty Name="Costo_Maritimo" ColumnName="Costo_Maritimo" />
+                <ScalarProperty Name="Tiene_Costo_Terrestre" ColumnName="Tiene_Costo_Terrestre" />
+                <ScalarProperty Name="Costo_Terrestre" ColumnName="Costo_Terrestre" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -1331,6 +1344,10 @@
                 <ScalarProperty Name="Codigo_Proveedor" ColumnName="Codigo_Proveedor" />
                 <ScalarProperty Name="Nombre_Proveedor" ColumnName="Nombre_Proveedor" />
                 <ScalarProperty Name="Id_Pais" ColumnName="Id_Pais" />
+                <ScalarProperty Name="Tiene_Costo_Maritimo" ColumnName="Tiene_Costo_Maritimo" />
+                <ScalarProperty Name="Costo_Maritimo" ColumnName="Costo_Maritimo" />
+                <ScalarProperty Name="Tiene_Costo_Terrestre" ColumnName="Tiene_Costo_Terrestre" />
+                <ScalarProperty Name="Costo_Terrestre" ColumnName="Costo_Terrestre" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
