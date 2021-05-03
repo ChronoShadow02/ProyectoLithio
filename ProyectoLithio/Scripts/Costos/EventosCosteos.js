@@ -1,7 +1,7 @@
 ﻿/*Por aca se agregan los eventos para agregar lineas
  de los productos para el calculo y tambien para procesar la informacion para realizar
  el calculo del costeo*/
-var num = 0;
+let indice = 0;
 
 $(function () {
 	AgregarConcepto();
@@ -34,6 +34,8 @@ function AgregarConcepto() {
 // aca se procesa la infomacion para agregar el concepto a la tabla
 function ProcesaAgregarConcepto(data) {
 
+	console.log("Indice actual: " + indice);
+
 	//Borrar el campo del autocomplete del codigo
 	$("#txtCodigoArticuloAgregar").val("");
 
@@ -41,7 +43,8 @@ function ProcesaAgregarConcepto(data) {
 	let tabla = document.getElementById("TablaConceptos");
 	//crear tr de forma autmatica
 	let TR = document.createElement("tr");
-	TR.setAttribute("id", "tr"+num+"");
+	TR.setAttribute("id", "tr" + indice);
+
 	// agregar los 'td' que hacen falta para indicar los campos a cargar (son como 10 campos pero solo se ven 8)
 	let TDNombreProveedor = document.createElement("td");
 	let TDCodigoArti = document.createElement("td");
@@ -50,9 +53,7 @@ function ProcesaAgregarConcepto(data) {
 	let TDCantidadArticulos = document.createElement("td");
 	let TDCostoArticulo = document.createElement("td");
 	let TDCostoTotal = document.createElement("td");
-	///agregar los campos de flete maritimo
-	let TDUsaFlete = document.createElement("td");
-	let TDCostoFlete = document.createElement("td");
+
 	//agregar el boton de eliminar
 	let TDbtnEliminar = document.createElement("td");
 
@@ -64,8 +65,6 @@ function ProcesaAgregarConcepto(data) {
 	TR.appendChild(TDCantidadArticulos);
 	TR.appendChild(TDCostoArticulo);
 	TR.appendChild(TDCostoTotal);
-	TR.appendChild(TDUsaFlete);
-	TR.appendChild(TDCostoFlete);
 	//agregar el boton de eliminar
 	TR.appendChild(TDbtnEliminar);
 
@@ -79,9 +78,12 @@ function ProcesaAgregarConcepto(data) {
 	TDCostoArticulo.innerHTML = "¢" + data.CostoArticulo;
 	TDCostoTotal.innerHTML = "¢" + (data.CantidadArticulos * data.CostoArticulo);
 
-	TDUsaFlete.innerHTML = "<input type='checkbox' class='form-check-input' id='chkUsaFlete" + num + "' onclick='ArticuloUsaFlete(" + num +")'> Si";
-	TDCostoFlete.innerHTML = "<input type='text' class='form-control' value='' style='width:70px;' id='txtUsaFlete"+num+" '>";
-	TDbtnEliminar.innerHTML = "<button class='btn btn-danger btn-sm glyphicon glyphicon-trash' onclick='BorrarLineaCosteo(" + num +");'></button>";
+	var num = typeof (indice);
+	console.log(num);
+
+	TDbtnEliminar.innerHTML = "<button type='button' class='btn btn-danger btn-sm' onclick='BorrarLine(" + indice + ");' id='btnind" + indice + "'>Borrar</button>";
+	//TDbtnEliminar.innerHTML = "<button type='button' class='btn btn-danger btn-sm' onclick='BorrarLine(this);' id='btnind" + indice + "'>Borrar</button>";
+
 
 	tabla.appendChild(TR);
 
@@ -99,33 +101,33 @@ function ProcesaAgregarConcepto(data) {
 
 	//agregar hidden de index
 	hiddenIndex.name = "conceptos.Index";
-	hiddenIndex.value = num;
+	hiddenIndex.value = indice;
 	hiddenIndex.type = "hidden";
-	hiddenIndex.setAttribute("id", "hiddenIndex" + num);
+	hiddenIndex.setAttribute("id", "hiddenIndex" + indice);
 
 	//agregar hidden de nombre de proveedor
-	hiddenNombreProveedor.name = "conceptos[" + num + "].NombreProveedor";
+	hiddenNombreProveedor.name = "conceptos[" + indice + "].NombreProveedor";
 	hiddenNombreProveedor.value = data.NombreProveedor;
 	hiddenNombreProveedor.type = "hidden";
-	hiddenNombreProveedor.setAttribute("id", "hiddenNombreProveedor" + num);
+	hiddenNombreProveedor.setAttribute("id", "hiddenNombreProveedor" + indice);
 
 	//agregar hidden de id de proveedor
-	hiddenId_Proveedor.name = "conceptos[" + num + "].Id_Proveedor";
+	hiddenId_Proveedor.name = "conceptos[" + indice + "].Id_Proveedor";
 	hiddenId_Proveedor.value = data.Id_Proveedor;
 	hiddenId_Proveedor.type = "hidden";
-	hiddenId_Proveedor.setAttribute("id", "hiddenId_Proveedor" + num);
+	hiddenId_Proveedor.setAttribute("id", "hiddenId_Proveedor" + indice);
 
 	//agregar hidden de codigo articulo
-	hiddenCodigo.name = "conceptos[" + num + "].Codigo_Articulo";
+	hiddenCodigo.name = "conceptos[" + indice + "].Codigo_Articulo";
 	hiddenCodigo.value = data.CodigoArti;
 	hiddenCodigo.type = "hidden";
-	hiddenCodigo.setAttribute("id", "hiddenCodigo" + num);
+	hiddenCodigo.setAttribute("id", "hiddenCodigo" + indice);
 
 	///agregar nombre de articulo
-	hiddenNombreArticulo.name = "conceptos[" + num + "].Nombre_Articulo";
+	hiddenNombreArticulo.name = "conceptos[" + indice + "].Nombre_Articulo";
 	hiddenNombreArticulo.value = data.NombreArticulo;
 	hiddenNombreArticulo.type = "hidden";
-	hiddenNombreArticulo.setAttribute("id", "hiddenNombreArticulo" + num);
+	hiddenNombreArticulo.setAttribute("id", "hiddenNombreArticulo" + indice);
 
 	//se agrega los campos en la vista
 	DivConceptos.appendChild(hiddenIndex);
@@ -134,44 +136,100 @@ function ProcesaAgregarConcepto(data) {
 	DivConceptos.appendChild(hiddenCodigo);
 	DivConceptos.appendChild(hiddenNombreArticulo);
 
-	num++;
+	indice = indice + 1;
+
 }
 
-function BorrarLineaCosteo(indice) {
+function BorrarLineaCosteo(indiceBorrar) {
+	try {
 
-	$('#TablaConceptos').on('click', 'button[class="btn btn-danger btn-sm glyphicon glyphicon-trash"]', function () {
-		$(this).parents("tr").remove();
+		$('#TablaConceptos').on('click', 'button[class="btn btn-danger btn-sm"]', function () {
+			//remueve el tr de la tabla
+			//$("tr" + indiceBorrar).remove();
+
+			//Crear el nodo para despues eliminar los elementos del hidden
+			var NodoPadre = document.getElementById("divConceptos");
+			console.log(NodoPadre);
+
+			NodoPadre.removeChild(document.getElementById("hiddenIndex" + indiceBorrar));
+
+			NodoPadre.removeChild(document.getElementById("hiddenNombreProveedor" + indiceBorrar));
+
+			NodoPadre.removeChild(document.getElementById("hiddenId_Proveedor" + indiceBorrar));
+
+			NodoPadre.removeChild(document.getElementById("hiddenCodigo" + indiceBorrar));
+
+			NodoPadre.removeChild(document.getElementById("hiddenNombreArticulo" + indiceBorrar));
+
+		});
+	} catch (e) {
+
+		alert(e);
+	}
+}
+
+function BorrarLinea(num) {
+
+	try {
+
+		//$('#TablaConceptos').on('click', 'button[class="btn btn-danger btn-sm"]', function () {
+
 		//Crear el nodo para despues eliminar los elementos del hidden
-		var NodoPadre = document.getElementById("divConceptos");
 
+		console.log(NodoPadre);
 		//Eliminar los hidden de ese registro
-		var hiddenIndexEliminar = document.getElementById("hiddenIndex" + indice);
-		NodoPadre.removeChild(hiddenIndexEliminar);
+		var NodoPadre = document.getElementById("divConceptos");
+		//var hiddenIndexEliminar = document.getElementById("hiddenIndex" + num);
+		//var hiddenNombreProveedorEliminar = document.getElementById("hiddenNombreProveedor" + num);
+		//var hiddenId_ProveedorEliminar = document.getElementById("hiddenId_Proveedor" + num);
+		//var hiddenCodigoEliminar = document.getElementById("hiddenCodigo" + num);
+		//var hiddenNombreArticuloEliminar = document.getElementById("hiddenNombreArticulo" + num);
+		NodoPadre.removeChild(document.getElementById("hiddenIndex" + num));
 
-		var hiddenNombreProveedorEliminar = document.getElementById("hiddenNombreProveedor" + indice);
-		NodoPadre.removeChild(hiddenNombreProveedorEliminar);
+		//	var listatr = document.getElementById("tr");
+		//console.log(hiddenNombreProveedorEliminar);
+		NodoPadre.removeChild(document.getElementById("hiddenNombreProveedor" + num));
 
-		var hiddenId_ProveedorEliminar = document.getElementById("hiddenId_Proveedor" + indice);
-		NodoPadre.removeChild(hiddenId_ProveedorEliminar);
 
-		var hiddenCodigoEliminar = document.getElementById("hiddenCodigo" + indice);
-		NodoPadre.removeChild(hiddenCodigoEliminar);
+		//console.log(hiddenId_ProveedorEliminar);
+		NodoPadre.removeChild(document.getElementById("hiddenId_Proveedor" + num));
 
-		var hiddenNombreArticuloEliminar = document.getElementById("hiddenNombreArticulo" + indice);
-		NodoPadre.removeChild(hiddenNombreArticuloEliminar);
-	});
+
+		//console.log(hiddenCodigoEliminar);
+		NodoPadre.removeChild(document.getElementById("hiddenCodigo" + num));
+
+
+		//console.log(hiddenNombreArticuloEliminar);
+		NodoPadre.removeChild(document.getElementById("hiddenNombreArticulo" + num));
+
+
+		//NodoPadre.removechild(listatr).item(num);
+		$(this).parents("tr").remove();
+
+	} catch (e) {
+		alert("error");;
+	}
 }
 
 
+function BorrarLine(num) {
 
-//
-function ArticuloUsaFlete(indice) {
-	//V
-	var VerificarChkFlete = document.getElementById("chkUsaFlete" + indice);
-	//Se valida si el articulo utiliza el 
-	if (VerificarChkFlete.checked) {
-		
-	} else {
-	$("#txtUsaFlete").attr("disabled");
-    }
+	try {
+		$("#tr" + num).remove();
+		var NodoPadre = document.getElementById("divConceptos");
+		console.log(NodoPadre);
+
+		NodoPadre.removeChild(document.getElementById("hiddenIndex" + num));
+
+		NodoPadre.removeChild(document.getElementById("hiddenNombreProveedor" + num));
+
+		NodoPadre.removeChild(document.getElementById("hiddenId_Proveedor" + num));
+
+		NodoPadre.removeChild(document.getElementById("hiddenCodigo" + num));
+
+		NodoPadre.removeChild(document.getElementById("hiddenNombreArticulo" + num));
+	} catch (e) {
+		alert("error");
+		console.log(e);
+	}
 }
