@@ -35,6 +35,23 @@
           <Property Name="Porcentaje_Costo" Type="float" Nullable="false" />
           <Property Name="Total_Costo_Dolares" Type="float" Nullable="false" />
         </EntityType>
+        <EntityType Name="Costo_ConceptoAux">
+          <Key>
+            <PropertyRef Name="Id_Costo_Concepto_AUX" />
+          </Key>
+          <Property Name="Id_Costo_Concepto_AUX" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Id_Costo" Type="int" Nullable="false" />
+          <Property Name="Codigo_Articulo" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="Nombre_Articulo" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="Id_Presentacion" Type="int" Nullable="false" />
+          <Property Name="Nombre_Presentacion" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="Id_proveedor" Type="int" Nullable="false" />
+          <Property Name="Nombre_Proveedor" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="Unidades_Articulos" Type="int" Nullable="false" />
+          <Property Name="Costo_Por_Unidad_Dolares" Type="float" Nullable="false" />
+          <Property Name="Costo_Total_Dolares" Type="float" Nullable="false" />
+          <Property Name="Porcentaje_Costo" Type="float" />
+        </EntityType>
         <EntityType Name="Costos">
           <Key>
             <PropertyRef Name="Id_Costo" />
@@ -242,6 +259,18 @@
         <Function Name="pa_ArticulosRetornaID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Id_Articulo" Type="int" Mode="In" />
         </Function>
+        <Function Name="pa_Costo_ConceptoAux" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_costo" Type="int" Mode="In" />
+          <Parameter Name="codigo_articulo" Type="varchar" Mode="In" />
+          <Parameter Name="nombre_articulo" Type="varchar" Mode="In" />
+          <Parameter Name="id_presentacion" Type="int" Mode="In" />
+          <Parameter Name="nombre_presentacion" Type="varchar" Mode="In" />
+          <Parameter Name="id_proveedor" Type="int" Mode="In" />
+          <Parameter Name="nombre_proveedor" Type="varchar" Mode="In" />
+          <Parameter Name="unidades_articulos" Type="float" Mode="In" />
+          <Parameter Name="costo_por_unidad_dolares" Type="float" Mode="In" />
+          <Parameter Name="total_costo_dolares" Type="float" Mode="In" />
+        </Function>
         <Function Name="pa_Costos_BusquedaCodigoArt" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Codigo_Articulo" Type="varchar" Mode="In" />
         </Function>
@@ -376,6 +405,7 @@
         <EntityContainer Name="LithioBDModelStoreContainer">
           <EntitySet Name="Articulos" EntityType="Self.Articulos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Costo_Concepto" EntityType="Self.Costo_Concepto" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Costo_ConceptoAux" EntityType="Self.Costo_ConceptoAux" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Costos" EntityType="Self.Costos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Estado_Usuario" EntityType="Self.Estado_Usuario" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Paises" EntityType="Self.Paises" Schema="dbo" store:Type="Tables" />
@@ -457,6 +487,23 @@
           <NavigationProperty Name="Articulos" Relationship="Self.FK_Costo_Concepto_Articulos" FromRole="Costo_Concepto" ToRole="Articulos" />
           <NavigationProperty Name="Costos" Relationship="Self.FK_Costo_Concepto_Costos" FromRole="Costo_Concepto" ToRole="Costos" />
           <NavigationProperty Name="Presentaciones" Relationship="Self.FK_Costo_Concepto_Presentaciones" FromRole="Costo_Concepto" ToRole="Presentaciones" />
+        </EntityType>
+        <EntityType Name="Costo_ConceptoAux">
+          <Key>
+            <PropertyRef Name="Id_Costo_Concepto_AUX" />
+          </Key>
+          <Property Name="Id_Costo_Concepto_AUX" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Id_Costo" Type="Int32" Nullable="false" />
+          <Property Name="Codigo_Articulo" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Nombre_Articulo" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Id_Presentacion" Type="Int32" Nullable="false" />
+          <Property Name="Nombre_Presentacion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Id_proveedor" Type="Int32" Nullable="false" />
+          <Property Name="Nombre_Proveedor" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Unidades_Articulos" Type="Int32" Nullable="false" />
+          <Property Name="Costo_Por_Unidad_Dolares" Type="Double" Nullable="false" />
+          <Property Name="Costo_Total_Dolares" Type="Double" Nullable="false" />
+          <Property Name="Porcentaje_Costo" Type="Double" />
         </EntityType>
         <EntityType Name="Costos">
           <Key>
@@ -642,6 +689,7 @@
         <EntityContainer Name="LithioBDEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Articulos" EntityType="Self.Articulos" />
           <EntitySet Name="Costo_Concepto" EntityType="Self.Costo_Concepto" />
+          <EntitySet Name="Costo_ConceptoAux" EntityType="Self.Costo_ConceptoAux" />
           <EntitySet Name="Costos" EntityType="Self.Costos" />
           <EntitySet Name="Estado_Usuario" EntityType="Self.Estado_Usuario" />
           <EntitySet Name="Paises" EntityType="Self.Paises" />
@@ -716,6 +764,18 @@
           </FunctionImport>
           <FunctionImport Name="pa_ArticulosRetornaID" ReturnType="Collection(LithioBDModel.pa_ArticulosRetornaID_Result)">
             <Parameter Name="Id_Articulo" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="pa_Costo_ConceptoAux">
+            <Parameter Name="id_costo" Mode="In" Type="Int32" />
+            <Parameter Name="codigo_articulo" Mode="In" Type="String" />
+            <Parameter Name="nombre_articulo" Mode="In" Type="String" />
+            <Parameter Name="id_presentacion" Mode="In" Type="Int32" />
+            <Parameter Name="nombre_presentacion" Mode="In" Type="String" />
+            <Parameter Name="id_proveedor" Mode="In" Type="Int32" />
+            <Parameter Name="nombre_proveedor" Mode="In" Type="String" />
+            <Parameter Name="unidades_articulos" Mode="In" Type="Double" />
+            <Parameter Name="costo_por_unidad_dolares" Mode="In" Type="Double" />
+            <Parameter Name="total_costo_dolares" Mode="In" Type="Double" />
           </FunctionImport>
           <FunctionImport Name="pa_Costos_BusquedaCodigoArt" ReturnType="Collection(LithioBDModel.pa_Costos_BusquedaCodigoArt_Result)">
             <Parameter Name="Codigo_Articulo" Mode="In" Type="String" />
@@ -1065,6 +1125,24 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Costo_ConceptoAux">
+            <EntityTypeMapping TypeName="LithioBDModel.Costo_ConceptoAux">
+              <MappingFragment StoreEntitySet="Costo_ConceptoAux">
+                <ScalarProperty Name="Id_Costo_Concepto_AUX" ColumnName="Id_Costo_Concepto_AUX" />
+                <ScalarProperty Name="Id_Costo" ColumnName="Id_Costo" />
+                <ScalarProperty Name="Codigo_Articulo" ColumnName="Codigo_Articulo" />
+                <ScalarProperty Name="Nombre_Articulo" ColumnName="Nombre_Articulo" />
+                <ScalarProperty Name="Id_Presentacion" ColumnName="Id_Presentacion" />
+                <ScalarProperty Name="Nombre_Presentacion" ColumnName="Nombre_Presentacion" />
+                <ScalarProperty Name="Id_proveedor" ColumnName="Id_proveedor" />
+                <ScalarProperty Name="Nombre_Proveedor" ColumnName="Nombre_Proveedor" />
+                <ScalarProperty Name="Unidades_Articulos" ColumnName="Unidades_Articulos" />
+                <ScalarProperty Name="Costo_Por_Unidad_Dolares" ColumnName="Costo_Por_Unidad_Dolares" />
+                <ScalarProperty Name="Costo_Total_Dolares" ColumnName="Costo_Total_Dolares" />
+                <ScalarProperty Name="Porcentaje_Costo" ColumnName="Porcentaje_Costo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Costos">
             <EntityTypeMapping TypeName="LithioBDModel.Costos">
               <MappingFragment StoreEntitySet="Costos">
@@ -1203,6 +1281,7 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="pa_Costo_ConceptoAux" FunctionName="LithioBDModel.Store.pa_Costo_ConceptoAux" />
           <FunctionImportMapping FunctionImportName="pa_Costos_BusquedaCodigoArt" FunctionName="LithioBDModel.Store.pa_Costos_BusquedaCodigoArt">
             <ResultMapping>
               <ComplexTypeMapping TypeName="LithioBDModel.pa_Costos_BusquedaCodigoArt_Result">

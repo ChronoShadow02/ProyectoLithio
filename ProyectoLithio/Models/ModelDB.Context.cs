@@ -30,6 +30,7 @@ namespace ProyectoLithio.Models
     
         public DbSet<Articulos> Articulos { get; set; }
         public DbSet<Costo_Concepto> Costo_Concepto { get; set; }
+        public DbSet<Costo_ConceptoAux> Costo_ConceptoAux { get; set; }
         public DbSet<Costos> Costos { get; set; }
         public DbSet<Estado_Usuario> Estado_Usuario { get; set; }
         public DbSet<Paises> Paises { get; set; }
@@ -160,6 +161,51 @@ namespace ProyectoLithio.Models
                 new ObjectParameter("Id_Articulo", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<pa_ArticulosRetornaID_Result>("pa_ArticulosRetornaID", id_ArticuloParameter);
+        }
+    
+        public virtual int pa_Costo_ConceptoAux(Nullable<int> id_costo, string codigo_articulo, string nombre_articulo, Nullable<int> id_presentacion, string nombre_presentacion, Nullable<int> id_proveedor, string nombre_proveedor, Nullable<double> unidades_articulos, Nullable<double> costo_por_unidad_dolares, Nullable<double> total_costo_dolares)
+        {
+            var id_costoParameter = id_costo.HasValue ?
+                new ObjectParameter("id_costo", id_costo) :
+                new ObjectParameter("id_costo", typeof(int));
+    
+            var codigo_articuloParameter = codigo_articulo != null ?
+                new ObjectParameter("codigo_articulo", codigo_articulo) :
+                new ObjectParameter("codigo_articulo", typeof(string));
+    
+            var nombre_articuloParameter = nombre_articulo != null ?
+                new ObjectParameter("nombre_articulo", nombre_articulo) :
+                new ObjectParameter("nombre_articulo", typeof(string));
+    
+            var id_presentacionParameter = id_presentacion.HasValue ?
+                new ObjectParameter("id_presentacion", id_presentacion) :
+                new ObjectParameter("id_presentacion", typeof(int));
+    
+            var nombre_presentacionParameter = nombre_presentacion != null ?
+                new ObjectParameter("nombre_presentacion", nombre_presentacion) :
+                new ObjectParameter("nombre_presentacion", typeof(string));
+    
+            var id_proveedorParameter = id_proveedor.HasValue ?
+                new ObjectParameter("id_proveedor", id_proveedor) :
+                new ObjectParameter("id_proveedor", typeof(int));
+    
+            var nombre_proveedorParameter = nombre_proveedor != null ?
+                new ObjectParameter("nombre_proveedor", nombre_proveedor) :
+                new ObjectParameter("nombre_proveedor", typeof(string));
+    
+            var unidades_articulosParameter = unidades_articulos.HasValue ?
+                new ObjectParameter("unidades_articulos", unidades_articulos) :
+                new ObjectParameter("unidades_articulos", typeof(double));
+    
+            var costo_por_unidad_dolaresParameter = costo_por_unidad_dolares.HasValue ?
+                new ObjectParameter("costo_por_unidad_dolares", costo_por_unidad_dolares) :
+                new ObjectParameter("costo_por_unidad_dolares", typeof(double));
+    
+            var total_costo_dolaresParameter = total_costo_dolares.HasValue ?
+                new ObjectParameter("total_costo_dolares", total_costo_dolares) :
+                new ObjectParameter("total_costo_dolares", typeof(double));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("pa_Costo_ConceptoAux", id_costoParameter, codigo_articuloParameter, nombre_articuloParameter, id_presentacionParameter, nombre_presentacionParameter, id_proveedorParameter, nombre_proveedorParameter, unidades_articulosParameter, costo_por_unidad_dolaresParameter, total_costo_dolaresParameter);
         }
     
         public virtual ObjectResult<pa_Costos_BusquedaCodigoArt_Result> pa_Costos_BusquedaCodigoArt(string codigo_Articulo)

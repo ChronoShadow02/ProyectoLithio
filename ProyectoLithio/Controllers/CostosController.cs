@@ -24,6 +24,7 @@ namespace ProyectoLithio.Controllers
         [HttpPost]
         public ActionResult Costeo(CostosViewModel model)
         {
+            int registrosAfectados = 0;
             try
             {
                 using (LithioBD)
@@ -42,8 +43,16 @@ namespace ProyectoLithio.Controllers
                     //Recorrer cada linea del maestro detalle para guardar los datos
                     foreach (var OC in model.Conceptos)
                     {
-                        Concepto oConcepto = new Concepto();
-                        oConcepto.Codigo_Articulo = OC.Codigo_Articulo;
+                        registrosAfectados = this.LithioBD.pa_Costo_ConceptoAux(oCostos.Id_Costo,
+                                                                                OC.Codigo_Articulo,
+                                                                                OC.Nombre_Articulo,
+                                                                                OC.IdPresentacion,
+                                                                                OC.NombrePresentacion,
+                                                                                OC.Id_Proveedor,
+                                                                                OC.NombreProveedor,
+                                                                                OC.CantidadArticulos,
+                                                                                OC.Costo_Por_Unidad_Dolares,
+                                                                                OC.CantidadArticulos * OC.Costo_Por_Unidad_Dolares);
 
 
                     }
@@ -117,6 +126,7 @@ namespace ProyectoLithio.Controllers
             }
             return Json(new 
             {
+                
                 //Se indica los nombres a utilizar en el js
                 //Recordar que json es llave:valor
                 NombreArticulo = NombreArticulo,

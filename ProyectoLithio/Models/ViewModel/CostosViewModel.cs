@@ -26,7 +26,10 @@ namespace ProyectoLithio.Models.ViewModel
 
         public string Nombre_Articulo { get; set; }
 
-
+        public int IdPresentacion { get; set; }
+        public string NombrePresentacion { get; set; }
+        public double CantidadArticulos { get; set; }
+        public float Costo_Por_Unidad_Dolares { get; set; }
     }
         
     

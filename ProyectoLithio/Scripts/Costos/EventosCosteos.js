@@ -93,29 +93,19 @@ function ProcesaAgregarConcepto(data) {
 	let hiddenIndex = document.createElement("input");
 	let hiddenCodigo = document.createElement("input");
 	let hiddenNombreArticulo = document.createElement("input");
-	let hiddenIdPresentacion = document.createElement("input");
-	let hiddenNombrePresentacion = document.createElement("input");
-	let hiddenCostoArticulo = document.createElement("input");
 	let hiddenId_Proveedor = document.createElement("input");
 	let hiddenNombreProveedor = document.createElement("input");
+	let hiddenIdPresentacion = document.createElement("input");
+	let hiddenNombrePresentacion = document.createElement("input");
+	let hiddenCantidadArticulos = document.createElement("input");
+	let hiddenCosto_Por_Unidad_Dolares = document.createElement("input");
+
 
 	//agregar hidden de index
 	hiddenIndex.name = "conceptos.Index";
 	hiddenIndex.value = indice;
 	hiddenIndex.type = "hidden";
 	hiddenIndex.setAttribute("id", "hiddenIndex" + indice);
-
-	//agregar hidden de nombre de proveedor
-	hiddenNombreProveedor.name = "conceptos[" + indice + "].NombreProveedor";
-	hiddenNombreProveedor.value = data.NombreProveedor;
-	hiddenNombreProveedor.type = "hidden";
-	hiddenNombreProveedor.setAttribute("id", "hiddenNombreProveedor" + indice);
-
-	//agregar hidden de id de proveedor
-	hiddenId_Proveedor.name = "conceptos[" + indice + "].Id_Proveedor";
-	hiddenId_Proveedor.value = data.Id_Proveedor;
-	hiddenId_Proveedor.type = "hidden";
-	hiddenId_Proveedor.setAttribute("id", "hiddenId_Proveedor" + indice);
 
 	//agregar hidden de codigo articulo
 	hiddenCodigo.name = "conceptos[" + indice + "].Codigo_Articulo";
@@ -129,12 +119,53 @@ function ProcesaAgregarConcepto(data) {
 	hiddenNombreArticulo.type = "hidden";
 	hiddenNombreArticulo.setAttribute("id", "hiddenNombreArticulo" + indice);
 
+	//agregar hidden de nombre de proveedor
+	hiddenNombreProveedor.name = "conceptos[" + indice + "].NombreProveedor";
+	hiddenNombreProveedor.value = data.NombreProveedor;
+	hiddenNombreProveedor.type = "hidden";
+	hiddenNombreProveedor.setAttribute("id", "hiddenNombreProveedor" + indice);
+
+	//agregar hidden de id de proveedor
+	hiddenId_Proveedor.name = "conceptos[" + indice + "].Id_Proveedor";
+	hiddenId_Proveedor.value = data.Id_Proveedor;
+	hiddenId_Proveedor.type = "hidden";
+	hiddenId_Proveedor.setAttribute("id", "hiddenId_Proveedor" + indice);
+
+	//agregar hidden de id de presentacion
+	hiddenIdPresentacion.name = "conceptos[" + indice + "].IdPresentacion";
+	hiddenIdPresentacion.value = data.IdPresentacion;
+	hiddenIdPresentacion.type = "hidden";
+	hiddenIdPresentacion.setAttribute("id", "hiddenIdPresentacion" + indice);
+
+	//agregar hidden de id de NombrePresentacion
+	hiddenNombrePresentacion.name = "conceptos[" + indice + "].NombrePresentacion";
+	hiddenNombrePresentacion.value = data.NombrePresentacion;
+	hiddenNombrePresentacion.type = "hidden";
+	hiddenNombrePresentacion.setAttribute("id", "hiddenNombrePresentacion" + indice);
+
+	//agregar hidden de id de CantidadArticulos
+	hiddenCantidadArticulos.name = "conceptos[" + indice + "].CantidadArticulos";
+	hiddenCantidadArticulos.value = data.CantidadArticulos;
+	hiddenCantidadArticulos.type = "hidden";
+	hiddenCantidadArticulos.setAttribute("id", "hiddenCantidadArticulos" + indice);
+
+	//agregar hidden de id de CostoArticulo
+	hiddenCosto_Por_Unidad_Dolares.name = "conceptos[" + indice + "].Costo_Por_Unidad_Dolares";
+	hiddenCosto_Por_Unidad_Dolares.value = data.CostoArticulo;
+	hiddenCosto_Por_Unidad_Dolares.type = "hidden";
+	hiddenCosto_Por_Unidad_Dolares.setAttribute("id", "hiddenCosto_Por_Unidad_Dolares" + indice);
+
 	//se agrega los campos en la vista
 	DivConceptos.appendChild(hiddenIndex);
 	DivConceptos.appendChild(hiddenNombreProveedor);
 	DivConceptos.appendChild(hiddenId_Proveedor);
 	DivConceptos.appendChild(hiddenCodigo);
 	DivConceptos.appendChild(hiddenNombreArticulo);
+	DivConceptos.appendChild(hiddenIdPresentacion);
+	DivConceptos.appendChild(hiddenNombrePresentacion);
+	DivConceptos.appendChild(hiddenCantidadArticulos);
+	DivConceptos.appendChild(hiddenCosto_Por_Unidad_Dolares);
+
 
 	indice = indice + 1;
 
