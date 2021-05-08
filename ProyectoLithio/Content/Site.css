@@ -33,7 +33,3 @@ select#ddlPresentacion, select#ddlProveedor {
 table.datatable{
     width:auto !important;
 }
-/*--------------------------------ESto es para saparar los tr de la tabla de costeo*/
-table#TablaConceptos tr td {
-padding:7px;
-}
