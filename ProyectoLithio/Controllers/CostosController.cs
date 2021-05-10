@@ -59,11 +59,40 @@ namespace ProyectoLithio.Controllers
 
                     //guarda los registros en la base de datos
                     LithioBD.SaveChanges();
+
+
+                    //aca se va a realizar el orden de los articulos por proveedor
+
+                    List< pa_CostoAUX_OrdenarProveedor_Result> ordenarProveedor = this.LithioBD.pa_CostoAUX_OrdenarProveedor(oCostos.Id_Costo).ToList();
+
+                    //contamos cuantos proveedores hay en ese costeo
+
+                    List<pa_CostoContarProveedor_Result> pa_CostoContarProveedor = new List<pa_CostoContarProveedor_Result>();
+
+                    pa_CostoContarProveedor  = this.LithioBD.pa_CostoContarProveedor(oCostos.Id_Costo).ToList();
+
+                    ///se recorre todas las lineas del costeo dependioendo de la cantidad de proveedores
+                    ///para indicar el precio total de las lineas de cada proveedor
+                    foreach (var opa_CostoContarProveedor in pa_CostoContarProveedor)
+                    {
+                        foreach (var OordenarProveedor in ordenarProveedor)
+                        {
+                            if (opa_CostoContarProveedor.Nombre_Proveedor == OordenarProveedor.Nombre_Proveedor)
+                            {
+                                //actualiza el precio de cada articulo dependiendo de cada proveedor
+                                this.LithioBD.pa_updatePrecioFinalLineasCosteo(oCostos.Id_Costo, OordenarProveedor.Nombre_Proveedor, opa_CostoContarProveedor.CostoTotalporProveedor);
+
+                                //Actualiza el "procentaje de cada articulo en el costeo"
+                                this.LithioBD.pa_CostoProbUpdate(oCostos.Id_Costo,OordenarProveedor.Id_Costo_Concepto_AUX, OordenarProveedor.Nombre_Proveedor, OordenarProveedor.Costo_Total_Dolares/ opa_CostoContarProveedor.CostoTotalporProveedor);
+                            }
+
+                        }
+                    }
                 }
             }
             catch (Exception ex)
             {
-                
+                Console.WriteLine("Error" + ex.Message);
             }
             return View();
         }
@@ -121,7 +150,9 @@ namespace ProyectoLithio.Controllers
             }
             catch (Exception ex)
             {
+                Response.Write("<script src='https://cdn.jsdelivr.net/npm/sweetalert2@10'></script> <br>");
 
+                Response.Write("<script language = javascript > Swal.fire({title: 'Falló!',text:'" + ex.Message + "',icon: 'error',showConfirmButton: true})</script>");
 
             }
             return Json(new 

@@ -10,9 +10,8 @@
 namespace ProyectoLithio.Models
 {
     using System;
-    using System.Collections.Generic;
     
-    public partial class Costo_ConceptoAux
+    public partial class pa_CostoAUX_OrdenarProveedor_Result
     {
         public int Id_Costo_Concepto_AUX { get; set; }
         public int Id_Costo { get; set; }
@@ -26,6 +25,5 @@ namespace ProyectoLithio.Models
         public double Costo_Por_Unidad_Dolares { get; set; }
         public double Costo_Total_Dolares { get; set; }
         public Nullable<double> Total_Costo_Dolares { get; set; }
-        public Nullable<double> ProbCostoTotalCompra { get; set; }
     }
 }

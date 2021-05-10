@@ -50,7 +50,8 @@
           <Property Name="Unidades_Articulos" Type="int" Nullable="false" />
           <Property Name="Costo_Por_Unidad_Dolares" Type="float" Nullable="false" />
           <Property Name="Costo_Total_Dolares" Type="float" Nullable="false" />
-          <Property Name="Porcentaje_Costo" Type="float" />
+          <Property Name="Total_Costo_Dolares" Type="float" />
+          <Property Name="ProbCostoTotalCompra" Type="float" />
         </EntityType>
         <EntityType Name="Costos">
           <Key>
@@ -271,6 +272,18 @@
           <Parameter Name="costo_por_unidad_dolares" Type="float" Mode="In" />
           <Parameter Name="total_costo_dolares" Type="float" Mode="In" />
         </Function>
+        <Function Name="pa_CostoAUX_OrdenarProveedor" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id_Costeo" Type="int" Mode="In" />
+        </Function>
+        <Function Name="pa_CostoContarProveedor" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_costo" Type="int" Mode="In" />
+        </Function>
+        <Function Name="pa_CostoProbUpdate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_costo" Type="int" Mode="In" />
+          <Parameter Name="id_costo_concepto_aux" Type="int" Mode="In" />
+          <Parameter Name="nombre_proveedor" Type="varchar" Mode="In" />
+          <Parameter Name="ProbCostoTotalCompra" Type="float" Mode="In" />
+        </Function>
         <Function Name="pa_Costos_BusquedaCodigoArt" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Codigo_Articulo" Type="varchar" Mode="In" />
         </Function>
@@ -352,6 +365,11 @@
           <Parameter Name="Contrasena" Type="varchar" Mode="In" />
         </Function>
         <Function Name="pa_TipoUsuario_Select" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="pa_updatePrecioFinalLineasCosteo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_costeo" Type="int" Mode="In" />
+          <Parameter Name="nombre_provedor" Type="varchar" Mode="In" />
+          <Parameter Name="precio_final_articulos" Type="float" Mode="In" />
+        </Function>
         <Function Name="pa_Usuarios_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Nombre_Completo" Type="varchar" Mode="In" />
           <Parameter Name="Correo_Electronico" Type="varchar" Mode="In" />
@@ -503,7 +521,8 @@
           <Property Name="Unidades_Articulos" Type="Int32" Nullable="false" />
           <Property Name="Costo_Por_Unidad_Dolares" Type="Double" Nullable="false" />
           <Property Name="Costo_Total_Dolares" Type="Double" Nullable="false" />
-          <Property Name="Porcentaje_Costo" Type="Double" />
+          <Property Name="Total_Costo_Dolares" Type="Double" />
+          <Property Name="ProbCostoTotalCompra" Type="Double" />
         </EntityType>
         <EntityType Name="Costos">
           <Key>
@@ -777,6 +796,18 @@
             <Parameter Name="costo_por_unidad_dolares" Mode="In" Type="Double" />
             <Parameter Name="total_costo_dolares" Mode="In" Type="Double" />
           </FunctionImport>
+          <FunctionImport Name="pa_CostoAUX_OrdenarProveedor" ReturnType="Collection(LithioBDModel.pa_CostoAUX_OrdenarProveedor_Result)">
+            <Parameter Name="Id_Costeo" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="pa_CostoContarProveedor" ReturnType="Collection(LithioBDModel.pa_CostoContarProveedor_Result)">
+            <Parameter Name="id_costo" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="pa_CostoProbUpdate">
+            <Parameter Name="id_costo" Mode="In" Type="Int32" />
+            <Parameter Name="id_costo_concepto_aux" Mode="In" Type="Int32" />
+            <Parameter Name="nombre_proveedor" Mode="In" Type="String" />
+            <Parameter Name="ProbCostoTotalCompra" Mode="In" Type="Double" />
+          </FunctionImport>
           <FunctionImport Name="pa_Costos_BusquedaCodigoArt" ReturnType="Collection(LithioBDModel.pa_Costos_BusquedaCodigoArt_Result)">
             <Parameter Name="Codigo_Articulo" Mode="In" Type="String" />
           </FunctionImport>
@@ -858,6 +889,11 @@
             <Parameter Name="Contrasena" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="pa_TipoUsuario_Select" ReturnType="Collection(LithioBDModel.pa_TipoUsuario_Select_Result)" />
+          <FunctionImport Name="pa_updatePrecioFinalLineasCosteo">
+            <Parameter Name="id_costeo" Mode="In" Type="Int32" />
+            <Parameter Name="nombre_provedor" Mode="In" Type="String" />
+            <Parameter Name="precio_final_articulos" Mode="In" Type="Double" />
+          </FunctionImport>
           <FunctionImport Name="pa_Usuarios_Insert">
             <Parameter Name="Nombre_Completo" Mode="In" Type="String" />
             <Parameter Name="Correo_Electronico" Mode="In" Type="String" />
@@ -947,6 +983,25 @@
           <Property Type="String" Name="Nombre_Proveedor" Nullable="false" MaxLength="200" />
           <Property Type="Int32" Name="Id_Presentacion" Nullable="false" />
           <Property Type="String" Name="Nombre_Presentacion" Nullable="false" MaxLength="200" />
+        </ComplexType>
+        <ComplexType Name="pa_CostoAUX_OrdenarProveedor_Result">
+          <Property Type="Int32" Name="Id_Costo_Concepto_AUX" Nullable="false" />
+          <Property Type="Int32" Name="Id_Costo" Nullable="false" />
+          <Property Type="String" Name="Codigo_Articulo" Nullable="false" MaxLength="200" />
+          <Property Type="String" Name="Nombre_Articulo" Nullable="false" MaxLength="200" />
+          <Property Type="Int32" Name="Id_Presentacion" Nullable="false" />
+          <Property Type="String" Name="Nombre_Presentacion" Nullable="false" MaxLength="200" />
+          <Property Type="Int32" Name="Id_proveedor" Nullable="false" />
+          <Property Type="String" Name="Nombre_Proveedor" Nullable="false" MaxLength="200" />
+          <Property Type="Int32" Name="Unidades_Articulos" Nullable="false" />
+          <Property Type="Double" Name="Costo_Por_Unidad_Dolares" Nullable="false" />
+          <Property Type="Double" Name="Costo_Total_Dolares" Nullable="false" />
+          <Property Type="Double" Name="Total_Costo_Dolares" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="pa_CostoContarProveedor_Result">
+          <Property Type="String" Name="Nombre_Proveedor" Nullable="false" MaxLength="200" />
+          <Property Type="Int32" Name="Articulos" Nullable="true" />
+          <Property Type="Double" Name="CostoTotalporProveedor" Nullable="true" />
         </ComplexType>
         <ComplexType Name="pa_Costos_BusquedaCodigoArt_Result">
           <Property Type="Int32" Name="Id_Articulo" Nullable="false" />
@@ -1139,7 +1194,8 @@
                 <ScalarProperty Name="Unidades_Articulos" ColumnName="Unidades_Articulos" />
                 <ScalarProperty Name="Costo_Por_Unidad_Dolares" ColumnName="Costo_Por_Unidad_Dolares" />
                 <ScalarProperty Name="Costo_Total_Dolares" ColumnName="Costo_Total_Dolares" />
-                <ScalarProperty Name="Porcentaje_Costo" ColumnName="Porcentaje_Costo" />
+                <ScalarProperty Name="Total_Costo_Dolares" ColumnName="Total_Costo_Dolares" />
+                <ScalarProperty Name="ProbCostoTotalCompra" ColumnName="ProbCostoTotalCompra" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1282,6 +1338,34 @@
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="pa_Costo_ConceptoAux" FunctionName="LithioBDModel.Store.pa_Costo_ConceptoAux" />
+          <FunctionImportMapping FunctionImportName="pa_CostoAUX_OrdenarProveedor" FunctionName="LithioBDModel.Store.pa_CostoAUX_OrdenarProveedor">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="LithioBDModel.pa_CostoAUX_OrdenarProveedor_Result">
+                <ScalarProperty Name="Id_Costo_Concepto_AUX" ColumnName="Id_Costo_Concepto_AUX" />
+                <ScalarProperty Name="Id_Costo" ColumnName="Id_Costo" />
+                <ScalarProperty Name="Codigo_Articulo" ColumnName="Codigo_Articulo" />
+                <ScalarProperty Name="Nombre_Articulo" ColumnName="Nombre_Articulo" />
+                <ScalarProperty Name="Id_Presentacion" ColumnName="Id_Presentacion" />
+                <ScalarProperty Name="Nombre_Presentacion" ColumnName="Nombre_Presentacion" />
+                <ScalarProperty Name="Id_proveedor" ColumnName="Id_proveedor" />
+                <ScalarProperty Name="Nombre_Proveedor" ColumnName="Nombre_Proveedor" />
+                <ScalarProperty Name="Unidades_Articulos" ColumnName="Unidades_Articulos" />
+                <ScalarProperty Name="Costo_Por_Unidad_Dolares" ColumnName="Costo_Por_Unidad_Dolares" />
+                <ScalarProperty Name="Costo_Total_Dolares" ColumnName="Costo_Total_Dolares" />
+                <ScalarProperty Name="Total_Costo_Dolares" ColumnName="Total_Costo_Dolares" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="pa_CostoContarProveedor" FunctionName="LithioBDModel.Store.pa_CostoContarProveedor">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="LithioBDModel.pa_CostoContarProveedor_Result">
+                <ScalarProperty Name="Nombre_Proveedor" ColumnName="Nombre_Proveedor" />
+                <ScalarProperty Name="Articulos" ColumnName="Articulos" />
+                <ScalarProperty Name="CostoTotalporProveedor" ColumnName="CostoTotalporProveedor" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="pa_CostoProbUpdate" FunctionName="LithioBDModel.Store.pa_CostoProbUpdate" />
           <FunctionImportMapping FunctionImportName="pa_Costos_BusquedaCodigoArt" FunctionName="LithioBDModel.Store.pa_Costos_BusquedaCodigoArt">
             <ResultMapping>
               <ComplexTypeMapping TypeName="LithioBDModel.pa_Costos_BusquedaCodigoArt_Result">
@@ -1460,6 +1544,7 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="pa_updatePrecioFinalLineasCosteo" FunctionName="LithioBDModel.Store.pa_updatePrecioFinalLineasCosteo" />
           <FunctionImportMapping FunctionImportName="pa_Usuarios_Insert" FunctionName="LithioBDModel.Store.pa_Usuarios_Insert" />
           <FunctionImportMapping FunctionImportName="pa_Usuarios_Select" FunctionName="LithioBDModel.Store.pa_Usuarios_Select">
             <ResultMapping>

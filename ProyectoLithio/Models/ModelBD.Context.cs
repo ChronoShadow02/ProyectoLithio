@@ -208,6 +208,45 @@ namespace ProyectoLithio.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("pa_Costo_ConceptoAux", id_costoParameter, codigo_articuloParameter, nombre_articuloParameter, id_presentacionParameter, nombre_presentacionParameter, id_proveedorParameter, nombre_proveedorParameter, unidades_articulosParameter, costo_por_unidad_dolaresParameter, total_costo_dolaresParameter);
         }
     
+        public virtual ObjectResult<pa_CostoAUX_OrdenarProveedor_Result> pa_CostoAUX_OrdenarProveedor(Nullable<int> id_Costeo)
+        {
+            var id_CosteoParameter = id_Costeo.HasValue ?
+                new ObjectParameter("Id_Costeo", id_Costeo) :
+                new ObjectParameter("Id_Costeo", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<pa_CostoAUX_OrdenarProveedor_Result>("pa_CostoAUX_OrdenarProveedor", id_CosteoParameter);
+        }
+    
+        public virtual ObjectResult<pa_CostoContarProveedor_Result> pa_CostoContarProveedor(Nullable<int> id_costo)
+        {
+            var id_costoParameter = id_costo.HasValue ?
+                new ObjectParameter("id_costo", id_costo) :
+                new ObjectParameter("id_costo", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<pa_CostoContarProveedor_Result>("pa_CostoContarProveedor", id_costoParameter);
+        }
+    
+        public virtual int pa_CostoProbUpdate(Nullable<int> id_costo, Nullable<int> id_costo_concepto_aux, string nombre_proveedor, Nullable<double> probCostoTotalCompra)
+        {
+            var id_costoParameter = id_costo.HasValue ?
+                new ObjectParameter("id_costo", id_costo) :
+                new ObjectParameter("id_costo", typeof(int));
+    
+            var id_costo_concepto_auxParameter = id_costo_concepto_aux.HasValue ?
+                new ObjectParameter("id_costo_concepto_aux", id_costo_concepto_aux) :
+                new ObjectParameter("id_costo_concepto_aux", typeof(int));
+    
+            var nombre_proveedorParameter = nombre_proveedor != null ?
+                new ObjectParameter("nombre_proveedor", nombre_proveedor) :
+                new ObjectParameter("nombre_proveedor", typeof(string));
+    
+            var probCostoTotalCompraParameter = probCostoTotalCompra.HasValue ?
+                new ObjectParameter("ProbCostoTotalCompra", probCostoTotalCompra) :
+                new ObjectParameter("ProbCostoTotalCompra", typeof(double));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("pa_CostoProbUpdate", id_costoParameter, id_costo_concepto_auxParameter, nombre_proveedorParameter, probCostoTotalCompraParameter);
+        }
+    
         public virtual ObjectResult<pa_Costos_BusquedaCodigoArt_Result> pa_Costos_BusquedaCodigoArt(string codigo_Articulo)
         {
             var codigo_ArticuloParameter = codigo_Articulo != null ?
@@ -486,6 +525,23 @@ namespace ProyectoLithio.Models
         public virtual ObjectResult<pa_TipoUsuario_Select_Result> pa_TipoUsuario_Select()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<pa_TipoUsuario_Select_Result>("pa_TipoUsuario_Select");
+        }
+    
+        public virtual int pa_updatePrecioFinalLineasCosteo(Nullable<int> id_costeo, string nombre_provedor, Nullable<double> precio_final_articulos)
+        {
+            var id_costeoParameter = id_costeo.HasValue ?
+                new ObjectParameter("id_costeo", id_costeo) :
+                new ObjectParameter("id_costeo", typeof(int));
+    
+            var nombre_provedorParameter = nombre_provedor != null ?
+                new ObjectParameter("nombre_provedor", nombre_provedor) :
+                new ObjectParameter("nombre_provedor", typeof(string));
+    
+            var precio_final_articulosParameter = precio_final_articulos.HasValue ?
+                new ObjectParameter("precio_final_articulos", precio_final_articulos) :
+                new ObjectParameter("precio_final_articulos", typeof(double));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("pa_updatePrecioFinalLineasCosteo", id_costeoParameter, nombre_provedorParameter, precio_final_articulosParameter);
         }
     
         public virtual int pa_Usuarios_Insert(string nombre_Completo, string correo_Electronico, string contrasena_Usuario, Nullable<int> id_Tipo_Usuario, Nullable<int> id_Estado_Usuario)

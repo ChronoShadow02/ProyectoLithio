@@ -143,127 +143,133 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Articulos.cs">
-      <DependentUpon>ModelDB.tt</DependentUpon>
+      <DependentUpon>ModelBD.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Costos.cs">
-      <DependentUpon>ModelDB.tt</DependentUpon>
+      <DependentUpon>ModelBD.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Costo_Concepto.cs">
-      <DependentUpon>ModelDB.tt</DependentUpon>
+      <DependentUpon>ModelBD.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Costo_ConceptoAux.cs">
-      <DependentUpon>ModelDB.tt</DependentUpon>
+      <DependentUpon>ModelBD.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Estado_Usuario.cs">
-      <DependentUpon>ModelDB.tt</DependentUpon>
+      <DependentUpon>ModelBD.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\ModelDB.Context.cs">
+    <Compile Include="Models\ModelBD.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>ModelDB.Context.tt</DependentUpon>
+      <DependentUpon>ModelBD.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\ModelDB.cs">
+    <Compile Include="Models\ModelBD.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>ModelDB.tt</DependentUpon>
+      <DependentUpon>ModelBD.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\ModelDB.Designer.cs">
+    <Compile Include="Models\ModelBD.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>ModelDB.edmx</DependentUpon>
+      <DependentUpon>ModelBD.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\Paises.cs">
-      <DependentUpon>ModelDB.tt</DependentUpon>
+      <DependentUpon>ModelBD.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\pa_ArticulosRetornaID_Result.cs">
-      <DependentUpon>ModelDB.tt</DependentUpon>
+      <DependentUpon>ModelBD.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\pa_Articulos_ExisteArticulosCodigo_Result.cs">
-      <DependentUpon>ModelDB.tt</DependentUpon>
+      <DependentUpon>ModelBD.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\pa_Articulos_Select_Result.cs">
-      <DependentUpon>ModelDB.tt</DependentUpon>
+      <DependentUpon>ModelBD.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\pa_CostoAUX_OrdenarProveedor_Result.cs">
+      <DependentUpon>ModelBD.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\pa_CostoContarProveedor_Result.cs">
+      <DependentUpon>ModelBD.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\pa_Costos_BusquedaCodigoArt_Result.cs">
-      <DependentUpon>ModelDB.tt</DependentUpon>
+      <DependentUpon>ModelBD.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\pa_EstadoUsuario_Select_Result.cs">
-      <DependentUpon>ModelDB.tt</DependentUpon>
+      <DependentUpon>ModelBD.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\pa_PaisesRetornaID_Result.cs">
-      <DependentUpon>ModelDB.tt</DependentUpon>
+      <DependentUpon>ModelBD.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\pa_Paises_ExistePais_Result.cs">
-      <DependentUpon>ModelDB.tt</DependentUpon>
+      <DependentUpon>ModelBD.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\pa_Paises_Select_Result.cs">
-      <DependentUpon>ModelDB.tt</DependentUpon>
+      <DependentUpon>ModelBD.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\pa_PermisosRetornaID_Result.cs">
-      <DependentUpon>ModelDB.tt</DependentUpon>
+      <DependentUpon>ModelBD.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\pa_Permisos_Select_Result.cs">
-      <DependentUpon>ModelDB.tt</DependentUpon>
+      <DependentUpon>ModelBD.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\pa_PresentacionesRetornaID_Result.cs">
-      <DependentUpon>ModelDB.tt</DependentUpon>
+      <DependentUpon>ModelBD.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\pa_Presentaciones_ExistePresentacion_Result.cs">
-      <DependentUpon>ModelDB.tt</DependentUpon>
+      <DependentUpon>ModelBD.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\pa_Presentaciones_Select_Result.cs">
-      <DependentUpon>ModelDB.tt</DependentUpon>
+      <DependentUpon>ModelBD.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\pa_ProveedoresRetornaID_Result.cs">
-      <DependentUpon>ModelDB.tt</DependentUpon>
+      <DependentUpon>ModelBD.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\pa_Proveedores_ExisteProveedor_Result.cs">
-      <DependentUpon>ModelDB.tt</DependentUpon>
+      <DependentUpon>ModelBD.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\pa_Proveedores_Select_Result.cs">
-      <DependentUpon>ModelDB.tt</DependentUpon>
+      <DependentUpon>ModelBD.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\pa_RetornaArticulosAC_Result.cs">
-      <DependentUpon>ModelDB.tt</DependentUpon>
+      <DependentUpon>ModelBD.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\pa_RetornaUsuarioCorreoPwd_Select_Result.cs">
-      <DependentUpon>ModelDB.tt</DependentUpon>
+      <DependentUpon>ModelBD.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\pa_TipoUsuario_Select_Result.cs">
-      <DependentUpon>ModelDB.tt</DependentUpon>
+      <DependentUpon>ModelBD.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\pa_UsuariosRetornaID_Result.cs">
-      <DependentUpon>ModelDB.tt</DependentUpon>
+      <DependentUpon>ModelBD.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\pa_Usuarios_SelectTodo_Result.cs">
-      <DependentUpon>ModelDB.tt</DependentUpon>
+      <DependentUpon>ModelBD.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\pa_Usuarios_Select_Result.cs">
-      <DependentUpon>ModelDB.tt</DependentUpon>
+      <DependentUpon>ModelBD.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\pa_VerificarCorreoRecuperacionPass_Result.cs">
-      <DependentUpon>ModelDB.tt</DependentUpon>
+      <DependentUpon>ModelBD.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Presentaciones.cs">
-      <DependentUpon>ModelDB.tt</DependentUpon>
+      <DependentUpon>ModelBD.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Proveedores.cs">
-      <DependentUpon>ModelDB.tt</DependentUpon>
+      <DependentUpon>ModelBD.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\sp_helpdiagramdefinition_Result.cs">
-      <DependentUpon>ModelDB.tt</DependentUpon>
+      <DependentUpon>ModelBD.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\sp_helpdiagrams_Result.cs">
-      <DependentUpon>ModelDB.tt</DependentUpon>
+      <DependentUpon>ModelBD.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\sysdiagrams.cs">
-      <DependentUpon>ModelDB.tt</DependentUpon>
+      <DependentUpon>ModelBD.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Tipo_Usuario.cs">
-      <DependentUpon>ModelDB.tt</DependentUpon>
+      <DependentUpon>ModelBD.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Usuarios.cs">
-      <DependentUpon>ModelDB.tt</DependentUpon>
+      <DependentUpon>ModelBD.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ViewModel\ArticulosViewModel.cs" />
     <Compile Include="Models\ViewModel\CostosViewModel.cs" />
@@ -320,15 +326,15 @@
     <Content Include="fonts\fontawesome\fonts\themify.eot" />
     <Content Include="fonts\fontawesome\fonts\themify.ttf" />
     <Content Include="fonts\fontawesome\fonts\themify.woff" />
-    <Content Include="Models\ModelDB.Context.tt">
+    <Content Include="Models\ModelBD.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>ModelDB.edmx</DependentUpon>
-      <LastGenOutput>ModelDB.Context.cs</LastGenOutput>
+      <DependentUpon>ModelBD.edmx</DependentUpon>
+      <LastGenOutput>ModelBD.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Models\ModelDB.tt">
+    <Content Include="Models\ModelBD.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>ModelDB.edmx</DependentUpon>
-      <LastGenOutput>ModelDB.cs</LastGenOutput>
+      <DependentUpon>ModelBD.edmx</DependentUpon>
+      <LastGenOutput>ModelBD.cs</LastGenOutput>
     </Content>
     <Content Include="Scripts\additional-methods.js" />
     <Content Include="Scripts\AjaxGenerico.js" />
@@ -362,12 +368,12 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
-    <EntityDeploy Include="Models\ModelDB.edmx">
+    <EntityDeploy Include="Models\ModelBD.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>ModelDB.Designer.cs</LastGenOutput>
+      <LastGenOutput>ModelBD.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="Models\ModelDB.edmx.diagram">
-      <DependentUpon>ModelDB.edmx</DependentUpon>
+    <Content Include="Models\ModelBD.edmx.diagram">
+      <DependentUpon>ModelBD.edmx</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-3.5.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.5.1.js" />
