@@ -163,6 +163,80 @@ namespace ProyectoLithio.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<pa_ArticulosRetornaID_Result>("pa_ArticulosRetornaID", id_ArticuloParameter);
         }
     
+        public virtual int pa_CosteoMontoMaritimo(Nullable<double> montoCosteoPorArticulo, Nullable<int> id_Costo_Concepto_AUX)
+        {
+            var montoCosteoPorArticuloParameter = montoCosteoPorArticulo.HasValue ?
+                new ObjectParameter("MontoCosteoPorArticulo", montoCosteoPorArticulo) :
+                new ObjectParameter("MontoCosteoPorArticulo", typeof(double));
+    
+            var id_Costo_Concepto_AUXParameter = id_Costo_Concepto_AUX.HasValue ?
+                new ObjectParameter("Id_Costo_Concepto_AUX", id_Costo_Concepto_AUX) :
+                new ObjectParameter("Id_Costo_Concepto_AUX", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("pa_CosteoMontoMaritimo", montoCosteoPorArticuloParameter, id_Costo_Concepto_AUXParameter);
+        }
+    
+        public virtual int pa_CosteoMontoTerrestre(Nullable<double> montoCosteoPorArticuloTer, Nullable<int> id_Costo_Concepto_AUX)
+        {
+            var montoCosteoPorArticuloTerParameter = montoCosteoPorArticuloTer.HasValue ?
+                new ObjectParameter("MontoCosteoPorArticuloTer", montoCosteoPorArticuloTer) :
+                new ObjectParameter("MontoCosteoPorArticuloTer", typeof(double));
+    
+            var id_Costo_Concepto_AUXParameter = id_Costo_Concepto_AUX.HasValue ?
+                new ObjectParameter("Id_Costo_Concepto_AUX", id_Costo_Concepto_AUX) :
+                new ObjectParameter("Id_Costo_Concepto_AUX", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("pa_CosteoMontoTerrestre", montoCosteoPorArticuloTerParameter, id_Costo_Concepto_AUXParameter);
+        }
+    
+        public virtual int pa_CosteoMontoTotal(Nullable<double> total_Costeo, Nullable<int> id_Costo_Concepto_AUX)
+        {
+            var total_CosteoParameter = total_Costeo.HasValue ?
+                new ObjectParameter("Total_Costeo", total_Costeo) :
+                new ObjectParameter("Total_Costeo", typeof(double));
+    
+            var id_Costo_Concepto_AUXParameter = id_Costo_Concepto_AUX.HasValue ?
+                new ObjectParameter("Id_Costo_Concepto_AUX", id_Costo_Concepto_AUX) :
+                new ObjectParameter("Id_Costo_Concepto_AUX", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("pa_CosteoMontoTotal", total_CosteoParameter, id_Costo_Concepto_AUXParameter);
+        }
+    
+        public virtual int pa_CosteoMontoTotal_CosteoPorArticuloMar(Nullable<double> total_CosteoPorArticuloMar, Nullable<int> id_Costo_Concepto_AUX)
+        {
+            var total_CosteoPorArticuloMarParameter = total_CosteoPorArticuloMar.HasValue ?
+                new ObjectParameter("Total_CosteoPorArticuloMar", total_CosteoPorArticuloMar) :
+                new ObjectParameter("Total_CosteoPorArticuloMar", typeof(double));
+    
+            var id_Costo_Concepto_AUXParameter = id_Costo_Concepto_AUX.HasValue ?
+                new ObjectParameter("Id_Costo_Concepto_AUX", id_Costo_Concepto_AUX) :
+                new ObjectParameter("Id_Costo_Concepto_AUX", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("pa_CosteoMontoTotal_CosteoPorArticuloMar", total_CosteoPorArticuloMarParameter, id_Costo_Concepto_AUXParameter);
+        }
+    
+        public virtual int pa_CosteoMontoTotal_CosteoPorArticuloTer(Nullable<double> total_CosteoPorArticuloTer, Nullable<int> id_Costo_Concepto_AUX)
+        {
+            var total_CosteoPorArticuloTerParameter = total_CosteoPorArticuloTer.HasValue ?
+                new ObjectParameter("Total_CosteoPorArticuloTer", total_CosteoPorArticuloTer) :
+                new ObjectParameter("Total_CosteoPorArticuloTer", typeof(double));
+    
+            var id_Costo_Concepto_AUXParameter = id_Costo_Concepto_AUX.HasValue ?
+                new ObjectParameter("Id_Costo_Concepto_AUX", id_Costo_Concepto_AUX) :
+                new ObjectParameter("Id_Costo_Concepto_AUX", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("pa_CosteoMontoTotal_CosteoPorArticuloTer", total_CosteoPorArticuloTerParameter, id_Costo_Concepto_AUXParameter);
+        }
+    
+        public virtual ObjectResult<pa_CosteoRetornaID_Result> pa_CosteoRetornaID(Nullable<int> id_Costo_Concepto_AUX)
+        {
+            var id_Costo_Concepto_AUXParameter = id_Costo_Concepto_AUX.HasValue ?
+                new ObjectParameter("Id_Costo_Concepto_AUX", id_Costo_Concepto_AUX) :
+                new ObjectParameter("Id_Costo_Concepto_AUX", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<pa_CosteoRetornaID_Result>("pa_CosteoRetornaID", id_Costo_Concepto_AUXParameter);
+        }
+    
         public virtual int pa_Costo_ConceptoAux(Nullable<int> id_costo, string codigo_articulo, string nombre_articulo, Nullable<int> id_presentacion, string nombre_presentacion, Nullable<int> id_proveedor, string nombre_proveedor, Nullable<double> unidades_articulos, Nullable<double> costo_por_unidad_dolares, Nullable<double> total_costo_dolares)
         {
             var id_costoParameter = id_costo.HasValue ?
@@ -224,6 +298,37 @@ namespace ProyectoLithio.Models
                 new ObjectParameter("id_costo", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<pa_CostoContarProveedor_Result>("pa_CostoContarProveedor", id_costoParameter);
+        }
+    
+        public virtual int pa_CostoDistCostoMaritimoUpdate(Nullable<double> distCostoMaritimo, Nullable<int> id_Costo_Concepto_AUX)
+        {
+            var distCostoMaritimoParameter = distCostoMaritimo.HasValue ?
+                new ObjectParameter("DistCostoMaritimo", distCostoMaritimo) :
+                new ObjectParameter("DistCostoMaritimo", typeof(double));
+    
+            var id_Costo_Concepto_AUXParameter = id_Costo_Concepto_AUX.HasValue ?
+                new ObjectParameter("Id_Costo_Concepto_AUX", id_Costo_Concepto_AUX) :
+                new ObjectParameter("Id_Costo_Concepto_AUX", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("pa_CostoDistCostoMaritimoUpdate", distCostoMaritimoParameter, id_Costo_Concepto_AUXParameter);
+        }
+    
+        public virtual int pa_CostoDistCostoTerrestreUpdate(Nullable<double> distCostoTerrestre, Nullable<int> id_Costo_Concepto_AUX)
+        {
+            var distCostoTerrestreParameter = distCostoTerrestre.HasValue ?
+                new ObjectParameter("DistCostoTerrestre", distCostoTerrestre) :
+                new ObjectParameter("DistCostoTerrestre", typeof(double));
+    
+            var id_Costo_Concepto_AUXParameter = id_Costo_Concepto_AUX.HasValue ?
+                new ObjectParameter("Id_Costo_Concepto_AUX", id_Costo_Concepto_AUX) :
+                new ObjectParameter("Id_Costo_Concepto_AUX", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("pa_CostoDistCostoTerrestreUpdate", distCostoTerrestreParameter, id_Costo_Concepto_AUXParameter);
+        }
+    
+        public virtual ObjectResult<pa_CostoObtenerImpuestos_Result> pa_CostoObtenerImpuestos()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<pa_CostoObtenerImpuestos_Result>("pa_CostoObtenerImpuestos");
         }
     
         public virtual int pa_CostoProbUpdate(Nullable<int> id_costo, Nullable<int> id_costo_concepto_aux, string nombre_proveedor, Nullable<double> probCostoTotalCompra)

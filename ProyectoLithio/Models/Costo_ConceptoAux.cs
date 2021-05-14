@@ -27,5 +27,12 @@ namespace ProyectoLithio.Models
         public double Costo_Total_Dolares { get; set; }
         public Nullable<double> Total_Costo_Dolares { get; set; }
         public Nullable<double> ProbCostoTotalCompra { get; set; }
+        public Nullable<double> DistCostoMaritimo { get; set; }
+        public Nullable<double> DistCostoTerrestre { get; set; }
+        public Nullable<double> MontoCostoPorArticuloMar { get; set; }
+        public Nullable<double> MontoCostoPorArticuloTer { get; set; }
+        public Nullable<double> Total_CosteoPorArticuloMar { get; set; }
+        public Nullable<double> Total_CosteoPorArticuloTer { get; set; }
+        public Nullable<double> Total_CosteoTotal { get; set; }
     }
 }

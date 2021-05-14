@@ -11,7 +11,7 @@ namespace ProyectoLithio.Models
 {
     using System;
     
-    public partial class pa_CostoAUX_OrdenarProveedor_Result
+    public partial class pa_CosteoRetornaID_Result
     {
         public int Id_Costo_Concepto_AUX { get; set; }
         public int Id_Costo { get; set; }
@@ -27,6 +27,12 @@ namespace ProyectoLithio.Models
         public Nullable<double> Total_Costo_Dolares { get; set; }
         public Nullable<double> ProbCostoTotalCompra { get; set; }
         public Nullable<double> DistCostoMaritimo { get; set; }
+        public Nullable<double> MontoCostoPorArticuloMar { get; set; }
         public Nullable<double> DistCostoTerrestre { get; set; }
+        public Nullable<double> MontoCostoPorArticuloTer { get; set; }
+        public string Tiene_Costo_Maritimo { get; set; }
+        public decimal Costo_Maritimo { get; set; }
+        public string Tiene_Costo_Terrestre { get; set; }
+        public decimal Costo_Terrestre { get; set; }
     }
 }

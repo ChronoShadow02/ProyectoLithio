@@ -184,10 +184,16 @@
     <Compile Include="Models\pa_Articulos_Select_Result.cs">
       <DependentUpon>ModelBD.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\pa_CosteoRetornaID_Result.cs">
+      <DependentUpon>ModelBD.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\pa_CostoAUX_OrdenarProveedor_Result.cs">
       <DependentUpon>ModelBD.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\pa_CostoContarProveedor_Result.cs">
+      <DependentUpon>ModelBD.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\pa_CostoObtenerImpuestos_Result.cs">
       <DependentUpon>ModelBD.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\pa_Costos_BusquedaCodigoArt_Result.cs">

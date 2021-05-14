@@ -25,6 +25,7 @@ namespace ProyectoLithio.Controllers
         public ActionResult Costeo(CostosViewModel model)
         {
             int registrosAfectados = 0;
+            string mensaje = "";
             try
             {
                 using (LithioBD)
@@ -63,13 +64,13 @@ namespace ProyectoLithio.Controllers
 
                     //aca se va a realizar el orden de los articulos por proveedor
 
-                    List< pa_CostoAUX_OrdenarProveedor_Result> ordenarProveedor = this.LithioBD.pa_CostoAUX_OrdenarProveedor(oCostos.Id_Costo).ToList();
+                    List<pa_CostoAUX_OrdenarProveedor_Result> ordenarProveedor = this.LithioBD.pa_CostoAUX_OrdenarProveedor(oCostos.Id_Costo).ToList();
 
                     //contamos cuantos proveedores hay en ese costeo
 
                     List<pa_CostoContarProveedor_Result> pa_CostoContarProveedor = new List<pa_CostoContarProveedor_Result>();
 
-                    pa_CostoContarProveedor  = this.LithioBD.pa_CostoContarProveedor(oCostos.Id_Costo).ToList();
+                    pa_CostoContarProveedor = this.LithioBD.pa_CostoContarProveedor(oCostos.Id_Costo).ToList();
 
                     ///se recorre todas las lineas del costeo dependioendo de la cantidad de proveedores
                     ///para indicar el precio total de las lineas de cada proveedor
@@ -83,17 +84,79 @@ namespace ProyectoLithio.Controllers
                                 this.LithioBD.pa_updatePrecioFinalLineasCosteo(oCostos.Id_Costo, OordenarProveedor.Nombre_Proveedor, opa_CostoContarProveedor.CostoTotalporProveedor);
 
                                 //Actualiza el "procentaje de cada articulo en el costeo"
-                                this.LithioBD.pa_CostoProbUpdate(oCostos.Id_Costo,OordenarProveedor.Id_Costo_Concepto_AUX, OordenarProveedor.Nombre_Proveedor, OordenarProveedor.Costo_Total_Dolares/ opa_CostoContarProveedor.CostoTotalporProveedor);
-                            }
+                                this.LithioBD.pa_CostoProbUpdate(oCostos.Id_Costo, OordenarProveedor.Id_Costo_Concepto_AUX, OordenarProveedor.Nombre_Proveedor, OordenarProveedor.Costo_Total_Dolares / opa_CostoContarProveedor.CostoTotalporProveedor);
 
+                                //obtener los impuestos de los proveedores
+                                List<pa_CostoObtenerImpuestos_Result> obtenerImpuestos = new List<pa_CostoObtenerImpuestos_Result>();
+
+                                obtenerImpuestos = this.LithioBD.pa_CostoObtenerImpuestos().ToList();
+
+                                //HACER UN RETURN DEL ARTICULO
+                                pa_CosteoRetornaID_Result pa_CosteoRetornaID = new pa_CosteoRetornaID_Result();
+                                pa_CosteoRetornaID = this.LithioBD.pa_CosteoRetornaID(OordenarProveedor.Id_Costo_Concepto_AUX).FirstOrDefault();
+
+                                //utilizar el registro encontrado para
+                                double ProbCostoTotalCompra = Convert.ToDouble(pa_CosteoRetornaID.ProbCostoTotalCompra);
+                                double Costo_Maritimo = Convert.ToDouble(pa_CosteoRetornaID.Costo_Maritimo);
+
+                                //GUARDAR EL FLETE MARITIMO
+                                this.LithioBD.pa_CostoDistCostoMaritimoUpdate(ProbCostoTotalCompra * Costo_Maritimo,pa_CosteoRetornaID.Id_Costo_Concepto_AUX);
+
+                                double Costo_Terrestre = Convert.ToDouble(pa_CosteoRetornaID.Costo_Terrestre);
+
+                                //Guardar EL FLETE TERRESTRE
+                                this.LithioBD.pa_CostoDistCostoTerrestreUpdate(ProbCostoTotalCompra * Costo_Terrestre, pa_CosteoRetornaID.Id_Costo_Concepto_AUX);
+
+                                ///se utiliza nuevamente la variable para obtener los nuevos datos de la distribucion
+                                ///del costeo maritimo y terrestre
+
+                                pa_CosteoRetornaID = this.LithioBD.pa_CosteoRetornaID(OordenarProveedor.Id_Costo_Concepto_AUX).FirstOrDefault();
+
+                                //guardar el costeo real a sumar a cada articulo MARITIMO
+                                this.LithioBD.pa_CosteoMontoMaritimo(pa_CosteoRetornaID.DistCostoMaritimo/pa_CosteoRetornaID.Unidades_Articulos,pa_CosteoRetornaID.Id_Costo_Concepto_AUX);
+
+                                //guardar el costeo real a sumar a cada articulo TERRESTRE
+                                this.LithioBD.pa_CosteoMontoTerrestre(pa_CosteoRetornaID.DistCostoTerrestre/pa_CosteoRetornaID.Unidades_Articulos,pa_CosteoRetornaID.Id_Costo_Concepto_AUX);
+
+
+                                ///se utiliza nuevamente la variable para obtener los nuevos datos de la distribucion
+                                ///del costeo maritimo y terrestre
+
+                                pa_CosteoRetornaID = this.LithioBD.pa_CosteoRetornaID(OordenarProveedor.Id_Costo_Concepto_AUX).FirstOrDefault();
+
+                                double MontoCostoPorArticuloMar = Convert.ToDouble(pa_CosteoRetornaID.MontoCostoPorArticuloMar);
+
+                                double MontoCostoPorArticuloTer = Convert.ToDouble(pa_CosteoRetornaID.MontoCostoPorArticuloTer);
+
+                                double resultadoMontoTotalCosteoMar = MontoCostoPorArticuloMar + pa_CosteoRetornaID.Costo_Total_Dolares;
+
+                                double resultadoMontoTotalCosteoTer = MontoCostoPorArticuloTer + pa_CosteoRetornaID.Costo_Total_Dolares;
+
+                                //se guarda el costeo total del articulo MARITIMO
+                                this.LithioBD.pa_CosteoMontoTotal_CosteoPorArticuloMar(resultadoMontoTotalCosteoMar, pa_CosteoRetornaID.Id_Costo_Concepto_AUX);
+
+
+                                //se guarda el costeo total del articulo MARITIMO
+                                this.LithioBD.pa_CosteoMontoTotal_CosteoPorArticuloTer(resultadoMontoTotalCosteoTer, pa_CosteoRetornaID.Id_Costo_Concepto_AUX);
+
+
+                                //Se agrega el costo total del costeo a cada articulo con los 2  fletes
+                                this.LithioBD.pa_CosteoMontoTotal( (MontoCostoPorArticuloTer+ MontoCostoPorArticuloMar)+ pa_CosteoRetornaID.Costo_Total_Dolares, pa_CosteoRetornaID.Id_Costo_Concepto_AUX);
+                            }
                         }
                     }
                 }
+                Response.Write("<script src='https://cdn.jsdelivr.net/npm/sweetalert2@10'></script> <br>");
+
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Error" + ex.Message);
+                mensaje = "Hubo un error " + ex.Message;
+                mensaje += "No se pudo ingresar";
+                Response.Write("<script language = javascript > Swal.fire({title: 'Falló!',text:'" + mensaje + "',icon: 'error',showConfirmButton: true})</script>");
             }
+            mensaje = "Costeo Exitoso";
+            Response.Write("<script language = javascript > Swal.fire({title: 'Falló!',text:'" + mensaje + "',icon: 'error',showConfirmButton: true})</script>");
             return View();
         }
         #endregion
@@ -110,7 +173,7 @@ namespace ProyectoLithio.Controllers
             {
                 Codigo_Articulo = x.Codigo_Articulo
             }).ToList();
-            return new JsonResult { Data = ArtVM,JsonRequestBehavior = JsonRequestBehavior.AllowGet};
+            return new JsonResult { Data = ArtVM, JsonRequestBehavior = JsonRequestBehavior.AllowGet };
         }
         #endregion
 
@@ -125,7 +188,7 @@ namespace ProyectoLithio.Controllers
         {
             //variables para cada uno de los campos que van a ir en la linea
             string NombreArticulo = "";
-            string CodigoArti ="";
+            string CodigoArti = "";
             int IdPresentacion = 0;
             string NombrePresentacion = "";
             int CantidadArticulos = 0;
@@ -155,22 +218,22 @@ namespace ProyectoLithio.Controllers
                 Response.Write("<script language = javascript > Swal.fire({title: 'Falló!',text:'" + ex.Message + "',icon: 'error',showConfirmButton: true})</script>");
 
             }
-            return Json(new 
+            return Json(new
             {
-                
+
                 //Se indica los nombres a utilizar en el js
                 //Recordar que json es llave:valor
                 NombreArticulo = NombreArticulo,
                 CodigoArti = CodigoArti,
-                IdPresentacion= IdPresentacion,
+                IdPresentacion = IdPresentacion,
                 NombrePresentacion = NombrePresentacion,
                 CantidadArticulos = CantidadArticulos,
                 CostoArticulo = CostoArticulo,
                 Id_Proveedor = Id_Proveedor,
                 NombreProveedor = NombreProveedor
             });
-            
+
         }
-#endregion
+        #endregion
     }
 }
