@@ -396,6 +396,12 @@
         <Function Name="pa_ProveedoresRetornaID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Id_Proveedor" Type="int" Mode="In" />
         </Function>
+        <Function Name="pa_ReporteListaCosteo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Numero_Costeo" Type="int" Mode="In" />
+          <Parameter Name="DUA" Type="varchar" Mode="In" />
+          <Parameter Name="FechaInicial" Type="datetime" Mode="In" />
+          <Parameter Name="FechaFinal" Type="datetime" Mode="In" />
+        </Function>
         <Function Name="pa_RetornaArticulosAC" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Codigo_Articulo" Type="varchar" Mode="In" />
         </Function>
@@ -959,6 +965,12 @@
           <FunctionImport Name="pa_ProveedoresRetornaID" ReturnType="Collection(LithioBDModel.pa_ProveedoresRetornaID_Result)">
             <Parameter Name="Id_Proveedor" Mode="In" Type="Int32" />
           </FunctionImport>
+          <FunctionImport Name="pa_ReporteListaCosteo" ReturnType="Collection(LithioBDModel.pa_ReporteListaCosteo_Result)">
+            <Parameter Name="Numero_Costeo" Mode="In" Type="Int32" />
+            <Parameter Name="DUA" Mode="In" Type="String" />
+            <Parameter Name="FechaInicial" Mode="In" Type="DateTime" />
+            <Parameter Name="FechaFinal" Mode="In" Type="DateTime" />
+          </FunctionImport>
           <FunctionImport Name="pa_RetornaArticulosAC" ReturnType="Collection(LithioBDModel.pa_RetornaArticulosAC_Result)">
             <Parameter Name="Codigo_Articulo" Mode="In" Type="String" />
           </FunctionImport>
@@ -1202,6 +1214,29 @@
           <Property Type="Decimal" Name="Costo_Maritimo" Nullable="false" Precision="18" Scale="2" />
           <Property Type="String" Name="Tiene_Costo_Terrestre" Nullable="false" MaxLength="2" />
           <Property Type="Decimal" Name="Costo_Terrestre" Nullable="false" Precision="18" Scale="2" />
+        </ComplexType>
+        <ComplexType Name="pa_ReporteListaCosteo_Result">
+          <Property Type="Int32" Name="Id_Costo" Nullable="false" />
+          <Property Type="Int32" Name="Numero_Costos" Nullable="false" />
+          <Property Type="String" Name="DUA" Nullable="false" MaxLength="200" />
+          <Property Type="Decimal" Name="Tipo_De_Cambio" Nullable="false" Precision="18" Scale="2" />
+          <Property Type="String" Name="Codigo_Articulo" Nullable="false" MaxLength="200" />
+          <Property Type="String" Name="Nombre_Articulo" Nullable="false" MaxLength="200" />
+          <Property Type="String" Name="Nombre_Presentacion" Nullable="false" MaxLength="200" />
+          <Property Type="String" Name="Nombre_Proveedor" Nullable="false" MaxLength="200" />
+          <Property Type="Int32" Name="Unidades_Articulos" Nullable="false" />
+          <Property Type="Double" Name="Costo_Por_Unidad_Dolares" Nullable="false" />
+          <Property Type="Double" Name="Costo_Total_Dolares" Nullable="false" />
+          <Property Type="Double" Name="Total_Costo_Dolares" Nullable="true" />
+          <Property Type="Double" Name="ProbCostoTotalCompra" Nullable="true" />
+          <Property Type="Double" Name="DistCostoMaritimo" Nullable="true" />
+          <Property Type="Double" Name="DistCostoTerrestre" Nullable="true" />
+          <Property Type="Double" Name="MontoCostoPorArticuloMar" Nullable="true" />
+          <Property Type="Double" Name="MontoCostoPorArticuloTer" Nullable="true" />
+          <Property Type="Double" Name="Total_CosteoPorArticuloMar" Nullable="true" />
+          <Property Type="Double" Name="Total_CosteoPorArticuloTer" Nullable="true" />
+          <Property Type="Double" Name="Total_CosteoTotal" Nullable="true" />
+          <Property Type="DateTime" Name="Fecha_Creacion" Nullable="false" Precision="23" />
         </ComplexType>
         <ComplexType Name="pa_RetornaArticulosAC_Result">
           <Property Type="Int32" Name="Id_Articulo" Nullable="false" />
@@ -1679,6 +1714,33 @@
                 <ScalarProperty Name="Costo_Maritimo" ColumnName="Costo_Maritimo" />
                 <ScalarProperty Name="Tiene_Costo_Terrestre" ColumnName="Tiene_Costo_Terrestre" />
                 <ScalarProperty Name="Costo_Terrestre" ColumnName="Costo_Terrestre" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="pa_ReporteListaCosteo" FunctionName="LithioBDModel.Store.pa_ReporteListaCosteo">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="LithioBDModel.pa_ReporteListaCosteo_Result">
+                <ScalarProperty Name="Id_Costo" ColumnName="Id_Costo" />
+                <ScalarProperty Name="Numero_Costos" ColumnName="Numero_Costos" />
+                <ScalarProperty Name="DUA" ColumnName="DUA" />
+                <ScalarProperty Name="Tipo_De_Cambio" ColumnName="Tipo_De_Cambio" />
+                <ScalarProperty Name="Codigo_Articulo" ColumnName="Codigo_Articulo" />
+                <ScalarProperty Name="Nombre_Articulo" ColumnName="Nombre_Articulo" />
+                <ScalarProperty Name="Nombre_Presentacion" ColumnName="Nombre_Presentacion" />
+                <ScalarProperty Name="Nombre_Proveedor" ColumnName="Nombre_Proveedor" />
+                <ScalarProperty Name="Unidades_Articulos" ColumnName="Unidades_Articulos" />
+                <ScalarProperty Name="Costo_Por_Unidad_Dolares" ColumnName="Costo_Por_Unidad_Dolares" />
+                <ScalarProperty Name="Costo_Total_Dolares" ColumnName="Costo_Total_Dolares" />
+                <ScalarProperty Name="Total_Costo_Dolares" ColumnName="Total_Costo_Dolares" />
+                <ScalarProperty Name="ProbCostoTotalCompra" ColumnName="ProbCostoTotalCompra" />
+                <ScalarProperty Name="DistCostoMaritimo" ColumnName="DistCostoMaritimo" />
+                <ScalarProperty Name="DistCostoTerrestre" ColumnName="DistCostoTerrestre" />
+                <ScalarProperty Name="MontoCostoPorArticuloMar" ColumnName="MontoCostoPorArticuloMar" />
+                <ScalarProperty Name="MontoCostoPorArticuloTer" ColumnName="MontoCostoPorArticuloTer" />
+                <ScalarProperty Name="Total_CosteoPorArticuloMar" ColumnName="Total_CosteoPorArticuloMar" />
+                <ScalarProperty Name="Total_CosteoPorArticuloTer" ColumnName="Total_CosteoPorArticuloTer" />
+                <ScalarProperty Name="Total_CosteoTotal" ColumnName="Total_CosteoTotal" />
+                <ScalarProperty Name="Fecha_Creacion" ColumnName="Fecha_Creacion" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

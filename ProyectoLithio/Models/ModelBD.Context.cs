@@ -605,6 +605,27 @@ namespace ProyectoLithio.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<pa_ProveedoresRetornaID_Result>("pa_ProveedoresRetornaID", id_ProveedorParameter);
         }
     
+        public virtual ObjectResult<pa_ReporteListaCosteo_Result> pa_ReporteListaCosteo(Nullable<int> numero_Costeo, string dUA, Nullable<System.DateTime> fechaInicial, Nullable<System.DateTime> fechaFinal)
+        {
+            var numero_CosteoParameter = numero_Costeo.HasValue ?
+                new ObjectParameter("Numero_Costeo", numero_Costeo) :
+                new ObjectParameter("Numero_Costeo", typeof(int));
+    
+            var dUAParameter = dUA != null ?
+                new ObjectParameter("DUA", dUA) :
+                new ObjectParameter("DUA", typeof(string));
+    
+            var fechaInicialParameter = fechaInicial.HasValue ?
+                new ObjectParameter("FechaInicial", fechaInicial) :
+                new ObjectParameter("FechaInicial", typeof(System.DateTime));
+    
+            var fechaFinalParameter = fechaFinal.HasValue ?
+                new ObjectParameter("FechaFinal", fechaFinal) :
+                new ObjectParameter("FechaFinal", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<pa_ReporteListaCosteo_Result>("pa_ReporteListaCosteo", numero_CosteoParameter, dUAParameter, fechaInicialParameter, fechaFinalParameter);
+        }
+    
         public virtual ObjectResult<pa_RetornaArticulosAC_Result> pa_RetornaArticulosAC(string codigo_Articulo)
         {
             var codigo_ArticuloParameter = codigo_Articulo != null ?

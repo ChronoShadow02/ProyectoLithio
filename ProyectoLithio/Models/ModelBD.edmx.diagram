@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="8e30e22b0f214c26be17dd2970fd9e9d" Name="Diagram1">
+      <Diagram DiagramId="7e3eb5b6c7d341be96f1dd88800cc9b6" Name="Diagram1">
         <EntityTypeShape EntityType="LithioBDModel.Articulos" Width="1.5" PointX="3" PointY="1.25" IsExpanded="true" />
         <EntityTypeShape EntityType="LithioBDModel.Costo_Concepto" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
         <EntityTypeShape EntityType="LithioBDModel.Costo_ConceptoAux" Width="1.5" PointX="7.75" PointY="9.75" IsExpanded="true" />

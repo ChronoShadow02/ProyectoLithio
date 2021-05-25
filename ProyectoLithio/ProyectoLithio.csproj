@@ -167,6 +167,11 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="LithioBDDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>LithioBDDataSet.xsd</DependentUpon>
+    </Compile>
     <Compile Include="Models\Articulos.cs">
       <DependentUpon>ModelBD.tt</DependentUpon>
     </Compile>
@@ -260,6 +265,9 @@
     <Compile Include="Models\pa_Proveedores_Select_Result.cs">
       <DependentUpon>ModelBD.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\pa_ReporteListaCosteo_Result.cs">
+      <DependentUpon>ModelBD.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\pa_RetornaArticulosAC_Result.cs">
       <DependentUpon>ModelBD.tt</DependentUpon>
     </Compile>
@@ -306,7 +314,24 @@
     <Compile Include="Models\ViewModel\CostosViewModel.cs" />
     <Compile Include="Models\ViewModel\RecuperarPassViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
     <Compile Include="SqlServerTypes\Loader.cs" />
+    <Compile Include="Reportes\RptListaCosteo.aspx.cs">
+      <DependentUpon>RptListaCosteo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reportes\RptListaCosteo.aspx.designer.cs">
+      <DependentUpon>RptListaCosteo.aspx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
@@ -400,6 +425,17 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
+    <Content Include="LithioBDDataSet.xsc">
+      <DependentUpon>LithioBDDataSet.xsd</DependentUpon>
+    </Content>
+    <None Include="LithioBDDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>LithioBDDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="LithioBDDataSet.xss">
+      <DependentUpon>LithioBDDataSet.xsd</DependentUpon>
+    </Content>
     <EntityDeploy Include="Models\ModelBD.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>ModelBD.Designer.cs</LastGenOutput>
@@ -407,6 +443,10 @@
     <Content Include="Models\ModelBD.edmx.diagram">
       <DependentUpon>ModelBD.edmx</DependentUpon>
     </Content>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
     <None Include="Scripts\jquery-3.5.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.5.1.js" />
     <Content Include="Scripts\jquery-3.5.1.min.js" />
@@ -435,6 +475,7 @@
     <Content Include="Scripts\popper.min.js" />
     <Content Include="Scripts\Presentaciones\validaPresentaciones.js" />
     <Content Include="Scripts\Proveedores\validarProveedores.js" />
+    <Content Include="Scripts\Reportes\generaReportes.js" />
     <Content Include="Scripts\src\index.js" />
     <Content Include="Scripts\src\methods\defaults.js" />
     <Content Include="Scripts\src\methods\destroy.js" />
@@ -519,6 +560,7 @@
     <Content Include="SqlServerTypes\x86\SqlServerSpatial140.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Reportes\RptListaCosteo.aspx" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -567,6 +609,7 @@
     <Content Include="Views\Login\Recovery.cshtml" />
     <Content Include="Views\Usuarios\RecuperarContrasena.cshtml" />
     <Content Include="Views\Usuarios\Recovery.cshtml" />
+    <Content Include="Views\Reportes\ReporteListaCosteo.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -584,7 +627,11 @@
     <TypeScriptCompile Include="Scripts\index.d.ts" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Views\Reportes\RptListaCosteo.rdlc" />
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reportes\RptListaCosteo.rdlc" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

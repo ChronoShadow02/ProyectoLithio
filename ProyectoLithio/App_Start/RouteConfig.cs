@@ -12,12 +12,15 @@ namespace ProyectoLithio
         public static void RegisterRoutes(RouteCollection routes)
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
-
+            routes.IgnoreRoute("{WebPage}.aspx/{*pathInfo}");
+            routes.IgnoreRoute("{resource}.ashx/{*pathInfo}");
             routes.MapRoute(
-                name: "Default",
-                url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Login", action = "Index", id = UrlParameter.Optional }
+                        name: "Default",
+                        url: "{controller}/{action}/{id}",
+                        defaults: new { controller = "Login", action = "Index", id = UrlParameter.Optional }
             );
+            routes.MapPageRoute("Inicio/Bienvenida", "Inicio/Bienvenida", "~/Reportes/RptListaCosteo.aspx");
+
         }
     }
 }
