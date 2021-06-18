@@ -45,6 +45,7 @@ namespace ProyectoLithio.Controllers
                     foreach (var OC in model.Conceptos)
                     {
                         registrosAfectados = this.LithioBD.pa_Costo_ConceptoAux(oCostos.Id_Costo,
+                                                                                OC.Id_Articulo,
                                                                                 OC.Codigo_Articulo,
                                                                                 OC.Nombre_Articulo,
                                                                                 OC.IdPresentacion,
@@ -83,7 +84,7 @@ namespace ProyectoLithio.Controllers
                                 //actualiza el precio de cada articulo dependiendo de cada proveedor
                                 this.LithioBD.pa_updatePrecioFinalLineasCosteo(oCostos.Id_Costo, OordenarProveedor.Nombre_Proveedor, opa_CostoContarProveedor.CostoTotalporProveedor);
 
-                                //Actualiza el "procentaje de cada articulo en el costeo"
+                                //+Actualiza el "procentaje de cada articulo en el costeo"
                                 this.LithioBD.pa_CostoProbUpdate(oCostos.Id_Costo, OordenarProveedor.Id_Costo_Concepto_AUX, OordenarProveedor.Nombre_Proveedor, OordenarProveedor.Costo_Total_Dolares / opa_CostoContarProveedor.CostoTotalporProveedor);
 
                                 //obtener los impuestos de los proveedores
@@ -156,7 +157,7 @@ namespace ProyectoLithio.Controllers
                 Response.Write("<script language = javascript > Swal.fire({title: 'Falló!',text:'" + mensaje + "',icon: 'error',showConfirmButton: true})</script>");
             }
             mensaje = "Costeo Exitoso";
-            Response.Write("<script language = javascript > Swal.fire({title: 'Falló!',text:'" + mensaje + "',icon: 'error',showConfirmButton: true})</script>");
+            Response.Write("<script language = javascript > Swal.fire({title: 'Éxito!',text:'" + mensaje + "',icon: 'success',showConfirmButton: true})</script>");
             return View();
         }
         #endregion
@@ -188,6 +189,7 @@ namespace ProyectoLithio.Controllers
         {
             //variables para cada uno de los campos que van a ir en la linea
             string NombreArticulo = "";
+            int Id_Articulo = 0;
             string CodigoArti = "";
             int IdPresentacion = 0;
             string NombrePresentacion = "";
@@ -201,7 +203,8 @@ namespace ProyectoLithio.Controllers
 
                 modeloBusquedaCodigo = this.LithioBD.pa_Costos_BusquedaCodigoArt(Codigo_Articulo).FirstOrDefault();
 
-                //se guarda los datos que trajo el codigo de alticulo para agregarlo al 
+                //se guarda los datos que trajo el codigo de alticulo para agregarlo al json y mandarlo al frondend
+                Id_Articulo = modeloBusquedaCodigo.Id_Articulo;
                 NombreArticulo = modeloBusquedaCodigo.Nombre_Articulo;
                 CodigoArti = modeloBusquedaCodigo.Codigo_Articulo;
                 IdPresentacion = modeloBusquedaCodigo.Id_Presentacion;
@@ -223,6 +226,7 @@ namespace ProyectoLithio.Controllers
 
                 //Se indica los nombres a utilizar en el js
                 //Recordar que json es llave:valor
+                Id_Articulo= Id_Articulo,
                 NombreArticulo = NombreArticulo,
                 CodigoArti = CodigoArti,
                 IdPresentacion = IdPresentacion,

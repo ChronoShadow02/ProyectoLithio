@@ -28,11 +28,5 @@ namespace ProyectoLithio.Controllers
                 return View(pa_ReporteListas);
             }
         }
-
-        [HttpPost]
-        public ActionResult ReporteListaCosteod()
-        {
-            return View();
-        }
     }
 }

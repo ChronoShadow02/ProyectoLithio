@@ -82,7 +82,7 @@ function ProcesaAgregarConcepto(data) {
 	console.log(num);
 
 	TDbtnEliminar.innerHTML = "<button type='button' class='btn btn-danger btn-sm' onclick='BorrarLine(" + indice + ");' id='btnind" + indice + "'>Borrar</button>";
-	//TDbtnEliminar.innerHTML = "<button type='button' class='btn btn-danger btn-sm' onclick='BorrarLine(this);' id='btnind" + indice + "'>Borrar</button>";
+
 
 
 	tabla.appendChild(TR);
@@ -91,6 +91,7 @@ function ProcesaAgregarConcepto(data) {
 	//Agregar hiddens
 	let DivConceptos = document.getElementById("divConceptos");
 	let hiddenIndex = document.createElement("input");
+	let hiddenIdArticulo = document.createElement("input");
 	let hiddenCodigo = document.createElement("input");
 	let hiddenNombreArticulo = document.createElement("input");
 	let hiddenId_Proveedor = document.createElement("input");
@@ -106,6 +107,12 @@ function ProcesaAgregarConcepto(data) {
 	hiddenIndex.value = indice;
 	hiddenIndex.type = "hidden";
 	hiddenIndex.setAttribute("id", "hiddenIndex" + indice);
+
+	//agregar hidden de id articulo
+	hiddenIdArticulo.name = "conceptos[" + indice + "].Id_Articulo"
+	hiddenIdArticulo.value = data.Id_Articulo;
+	hiddenIdArticulo.type = "hidden";
+	hiddenIdArticulo.setAttribute("id", "hiddenId_Articulo" + indice);
 
 	//agregar hidden de codigo articulo
 	hiddenCodigo.name = "conceptos[" + indice + "].Codigo_Articulo";
@@ -159,89 +166,18 @@ function ProcesaAgregarConcepto(data) {
 	DivConceptos.appendChild(hiddenIndex);
 	DivConceptos.appendChild(hiddenNombreProveedor);
 	DivConceptos.appendChild(hiddenId_Proveedor);
+	DivConceptos.appendChild(hiddenIdArticulo);
 	DivConceptos.appendChild(hiddenCodigo);
 	DivConceptos.appendChild(hiddenNombreArticulo);
 	DivConceptos.appendChild(hiddenIdPresentacion);
 	DivConceptos.appendChild(hiddenNombrePresentacion);
 	DivConceptos.appendChild(hiddenCantidadArticulos);
 	DivConceptos.appendChild(hiddenCosto_Por_Unidad_Dolares);
-
+	
 
 	indice = indice + 1;
 
 }
-
-function BorrarLineaCosteo(indiceBorrar) {
-	try {
-
-		$('#TablaConceptos').on('click', 'button[class="btn btn-danger btn-sm"]', function () {
-			//remueve el tr de la tabla
-			//$("tr" + indiceBorrar).remove();
-
-			//Crear el nodo para despues eliminar los elementos del hidden
-			var NodoPadre = document.getElementById("divConceptos");
-			console.log(NodoPadre);
-
-			NodoPadre.removeChild(document.getElementById("hiddenIndex" + indiceBorrar));
-
-			NodoPadre.removeChild(document.getElementById("hiddenNombreProveedor" + indiceBorrar));
-
-			NodoPadre.removeChild(document.getElementById("hiddenId_Proveedor" + indiceBorrar));
-
-			NodoPadre.removeChild(document.getElementById("hiddenCodigo" + indiceBorrar));
-
-			NodoPadre.removeChild(document.getElementById("hiddenNombreArticulo" + indiceBorrar));
-
-		});
-	} catch (e) {
-
-		alert(e);
-	}
-}
-
-function BorrarLinea(num) {
-
-	try {
-
-		//$('#TablaConceptos').on('click', 'button[class="btn btn-danger btn-sm"]', function () {
-
-		//Crear el nodo para despues eliminar los elementos del hidden
-
-		console.log(NodoPadre);
-		//Eliminar los hidden de ese registro
-		var NodoPadre = document.getElementById("divConceptos");
-		//var hiddenIndexEliminar = document.getElementById("hiddenIndex" + num);
-		//var hiddenNombreProveedorEliminar = document.getElementById("hiddenNombreProveedor" + num);
-		//var hiddenId_ProveedorEliminar = document.getElementById("hiddenId_Proveedor" + num);
-		//var hiddenCodigoEliminar = document.getElementById("hiddenCodigo" + num);
-		//var hiddenNombreArticuloEliminar = document.getElementById("hiddenNombreArticulo" + num);
-		NodoPadre.removeChild(document.getElementById("hiddenIndex" + num));
-
-		//	var listatr = document.getElementById("tr");
-		//console.log(hiddenNombreProveedorEliminar);
-		NodoPadre.removeChild(document.getElementById("hiddenNombreProveedor" + num));
-
-
-		//console.log(hiddenId_ProveedorEliminar);
-		NodoPadre.removeChild(document.getElementById("hiddenId_Proveedor" + num));
-
-
-		//console.log(hiddenCodigoEliminar);
-		NodoPadre.removeChild(document.getElementById("hiddenCodigo" + num));
-
-
-		//console.log(hiddenNombreArticuloEliminar);
-		NodoPadre.removeChild(document.getElementById("hiddenNombreArticulo" + num));
-
-
-		//NodoPadre.removechild(listatr).item(num);
-		$(this).parents("tr").remove();
-
-	} catch (e) {
-		alert("error");;
-	}
-}
-
 
 function BorrarLine(num) {
 
@@ -259,6 +195,10 @@ function BorrarLine(num) {
 		NodoPadre.removeChild(document.getElementById("hiddenCodigo" + num));
 
 		NodoPadre.removeChild(document.getElementById("hiddenNombreArticulo" + num));
+
+
+		NodoPadre.removeChild(document.getElementById("hiddenIdArticulo" + num));
+
 	} catch (e) {
 		alert("error");
 		console.log(e);

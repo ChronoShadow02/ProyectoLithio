@@ -4,23 +4,26 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="7e3eb5b6c7d341be96f1dd88800cc9b6" Name="Diagram1">
-        <EntityTypeShape EntityType="LithioBDModel.Articulos" Width="1.5" PointX="3" PointY="1.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="LithioBDModel.Costo_Concepto" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="LithioBDModel.Costo_ConceptoAux" Width="1.5" PointX="7.75" PointY="9.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="LithioBDModel.Costos" Width="1.5" PointX="3" PointY="5.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="LithioBDModel.Estado_Usuario" Width="1.5" PointX="5.75" PointY="6.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="LithioBDModel.Paises" Width="1.5" PointX="1.5" PointY="9.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="LithioBDModel.Presentaciones" Width="1.5" PointX="0.75" PointY="2" IsExpanded="true" />
-        <EntityTypeShape EntityType="LithioBDModel.Proveedores" Width="1.5" PointX="0.75" PointY="5.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="LithioBDModel.sysdiagrams" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="LithioBDModel.Tipo_Usuario" Width="1.5" PointX="5.75" PointY="9.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="LithioBDModel.Usuarios" Width="1.5" PointX="8" PointY="6" IsExpanded="true" />
+      <Diagram DiagramId="f04236738e824661b14e8476bf66935f" Name="Diagram1">
+        <EntityTypeShape EntityType="LithioBDModel.Articulos" Width="1.5" PointX="5.25" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="LithioBDModel.Costo_Concepto" Width="1.5" PointX="10.5" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="LithioBDModel.Costo_ConceptoAux" Width="1.5" PointX="8.25" PointY="4.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="LithioBDModel.Costos" Width="1.5" PointX="8.25" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LithioBDModel.Estado_Usuario" Width="1.5" PointX="0.75" PointY="11.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="LithioBDModel.Paises" Width="1.5" PointX="0.75" PointY="6" IsExpanded="true" />
+        <EntityTypeShape EntityType="LithioBDModel.Presentaciones" Width="1.5" PointX="3" PointY="2" IsExpanded="true" />
+        <EntityTypeShape EntityType="LithioBDModel.Proveedores" Width="1.5" PointX="3" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="LithioBDModel.sysdiagrams" Width="1.5" PointX="10.75" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="LithioBDModel.Tipo_Usuario" Width="1.5" PointX="0.75" PointY="14.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="LithioBDModel.Usuarios" Width="1.5" PointX="3" PointY="10.5" IsExpanded="true" />
         <AssociationConnector Association="LithioBDModel.FK_Articulos_Presentaciones" ManuallyRouted="false" />
         <AssociationConnector Association="LithioBDModel.FK_Articulos_Proveedores" ManuallyRouted="false" />
         <AssociationConnector Association="LithioBDModel.FK_Costo_Concepto_Articulos" ManuallyRouted="false" />
         <AssociationConnector Association="LithioBDModel.FK_Costo_Concepto_Costos" ManuallyRouted="false" />
         <AssociationConnector Association="LithioBDModel.FK_Costo_Concepto_Presentaciones" ManuallyRouted="false" />
+        <AssociationConnector Association="LithioBDModel.FK_Costo_ConceptoAux_Costos" ManuallyRouted="false" />
+        <AssociationConnector Association="LithioBDModel.FK_Costo_ConceptoAux_Presentaciones" ManuallyRouted="false" />
+        <AssociationConnector Association="LithioBDModel.FK_Costo_ConceptoAux_Proveedores" ManuallyRouted="false" />
         <AssociationConnector Association="LithioBDModel.FK_Usuarios_Estado_Usuario" ManuallyRouted="false" />
         <AssociationConnector Association="LithioBDModel.FK_Proveedores_Paises" ManuallyRouted="false" />
         <AssociationConnector Association="LithioBDModel.FK_Usuarios_Tipo_Usuario" ManuallyRouted="false" />

@@ -237,11 +237,15 @@ namespace ProyectoLithio.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<pa_CosteoRetornaID_Result>("pa_CosteoRetornaID", id_Costo_Concepto_AUXParameter);
         }
     
-        public virtual int pa_Costo_ConceptoAux(Nullable<int> id_costo, string codigo_articulo, string nombre_articulo, Nullable<int> id_presentacion, string nombre_presentacion, Nullable<int> id_proveedor, string nombre_proveedor, Nullable<double> unidades_articulos, Nullable<double> costo_por_unidad_dolares, Nullable<double> total_costo_dolares)
+        public virtual int pa_Costo_ConceptoAux(Nullable<int> id_costo, Nullable<int> id_articulo, string codigo_articulo, string nombre_articulo, Nullable<int> id_presentacion, string nombre_presentacion, Nullable<int> id_proveedor, string nombre_proveedor, Nullable<double> unidades_articulos, Nullable<double> costo_por_unidad_dolares, Nullable<double> total_costo_dolares)
         {
             var id_costoParameter = id_costo.HasValue ?
                 new ObjectParameter("id_costo", id_costo) :
                 new ObjectParameter("id_costo", typeof(int));
+    
+            var id_articuloParameter = id_articulo.HasValue ?
+                new ObjectParameter("id_articulo", id_articulo) :
+                new ObjectParameter("id_articulo", typeof(int));
     
             var codigo_articuloParameter = codigo_articulo != null ?
                 new ObjectParameter("codigo_articulo", codigo_articulo) :
@@ -279,7 +283,7 @@ namespace ProyectoLithio.Models
                 new ObjectParameter("total_costo_dolares", total_costo_dolares) :
                 new ObjectParameter("total_costo_dolares", typeof(double));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("pa_Costo_ConceptoAux", id_costoParameter, codigo_articuloParameter, nombre_articuloParameter, id_presentacionParameter, nombre_presentacionParameter, id_proveedorParameter, nombre_proveedorParameter, unidades_articulosParameter, costo_por_unidad_dolaresParameter, total_costo_dolaresParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("pa_Costo_ConceptoAux", id_costoParameter, id_articuloParameter, codigo_articuloParameter, nombre_articuloParameter, id_presentacionParameter, nombre_presentacionParameter, id_proveedorParameter, nombre_proveedorParameter, unidades_articulosParameter, costo_por_unidad_dolaresParameter, total_costo_dolaresParameter);
         }
     
         public virtual ObjectResult<pa_CostoAUX_OrdenarProveedor_Result> pa_CostoAUX_OrdenarProveedor(Nullable<int> id_Costeo)

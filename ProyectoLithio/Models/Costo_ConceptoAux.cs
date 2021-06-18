@@ -16,6 +16,7 @@ namespace ProyectoLithio.Models
     {
         public int Id_Costo_Concepto_AUX { get; set; }
         public int Id_Costo { get; set; }
+        public int Id_Articulo { get; set; }
         public string Codigo_Articulo { get; set; }
         public string Nombre_Articulo { get; set; }
         public int Id_Presentacion { get; set; }
@@ -34,5 +35,9 @@ namespace ProyectoLithio.Models
         public Nullable<double> Total_CosteoPorArticuloMar { get; set; }
         public Nullable<double> Total_CosteoPorArticuloTer { get; set; }
         public Nullable<double> Total_CosteoTotal { get; set; }
+    
+        public virtual Costos Costos { get; set; }
+        public virtual Presentaciones Presentaciones { get; set; }
+        public virtual Proveedores Proveedores { get; set; }
     }
 }

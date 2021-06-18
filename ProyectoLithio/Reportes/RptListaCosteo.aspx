@@ -10,6 +10,7 @@
     <title>Listado de Costeos</title>
     <link href="../Content/bootstrap.min.css" rel="stylesheet" />
     <link href="../Content/Site.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.0/themes/smoothness/jquery-ui.css"/>
 </head>
 <body>
     <div style="margin: 10px">
@@ -34,11 +35,11 @@
                 <div class="clearfix"></div>
                 <div class="form-group col-md-3 ">
                     <asp:Label ID="lblFechaInicial" runat="server" Text="Fecha Inicio"></asp:Label>
-                    <asp:TextBox ID="txtFechaInicial" runat="server" class="form-control" TextMode="Date" ></asp:TextBox>
+                    <asp:TextBox ID="txtFechaInicial" runat="server" class="form-control" ></asp:TextBox>
                 </div>
                 <div class="form-group col-md-3 ">
                     <asp:Label ID="lblFechaFinal" runat="server" Text="Fecha Final"></asp:Label>
-                    <asp:TextBox ID="txtFechaFinal" runat="server" class="form-control" TextMode="Date"></asp:TextBox>
+                    <asp:TextBox ID="txtFechaFinal" runat="server" class="form-control"></asp:TextBox>
                 </div>
                 <div class="clearfix"></div>
                 <div class="form-group col-md-3 ">
@@ -56,4 +57,7 @@
         </form>
     </div>
 </body>
+        <script src="../Scripts/jquery-3.5.1.min.js"></script>
+        <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"></script>
+        <script src="../Scripts/Reportes/reportesUI.js"></script>
 </html>

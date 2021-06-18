@@ -23,13 +23,18 @@ namespace ProyectoLithio.Views.Reportes
 
                     List<pa_ReporteListaCosteo_Result> modeloReporte = new List<pa_ReporteListaCosteo_Result>();
 
-                    DateTime fechaInicial = Convert.ToDateTime(DateTime.Now);
-                    DateTime fechaFinal = Convert.ToDateTime(DateTime.Now);
+                    DateTime fechaInicial = Convert.ToDateTime(DateTime.Today);
 
+
+                    DateTime fechaFinal = Convert.ToDateTime(DateTime.Today);
+                    fechaFinal = fechaFinal.Date.AddHours(23);
+                    fechaFinal = fechaFinal.AddMinutes(59);
+                    fechaFinal = fechaFinal.AddSeconds(59);
                     fechaInicial = fechaInicial.Date;
                     fechaFinal = fechaFinal.Date;
-                    txtFechaInicial.Text = Convert.ToString(fechaInicial);
-                    txtFechaFinal.Text = Convert.ToString(fechaFinal);
+
+                    txtFechaInicial.Text = Convert.ToString(fechaInicial.ToShortDateString());
+                    txtFechaFinal.Text = Convert.ToString(fechaFinal.ToShortDateString());
 
                     modeloReporte = this.LithioBD.pa_ReporteListaCosteo(null,null, fechaInicial, fechaFinal).ToList();
 
@@ -63,7 +68,7 @@ namespace ProyectoLithio.Views.Reportes
 
             if (txtNumeroCosteo.Text == "")
             {
-                
+
                 numeroCosteo = null;
             }
             else
@@ -80,7 +85,8 @@ namespace ProyectoLithio.Views.Reportes
             }
             if (txtFechaInicial.Text=="")
             {
-                fechaInicial = Convert.ToDateTime(txtFechaInicial.Text);
+                fechaInicial = Convert.ToDateTime(DateTime.Today);
+                txtFechaInicial.Text = Convert.ToString(fechaInicial.ToShortDateString());
             }
             else
             {
@@ -89,14 +95,21 @@ namespace ProyectoLithio.Views.Reportes
             }
             if (txtFechaFinal.Text=="")
             {
-                 fechaFinal = Convert.ToDateTime(txtFechaFinal.Text);
+
+                fechaFinal = Convert.ToDateTime(DateTime.Today);
+                fechaFinal = fechaFinal.Date.AddHours(23);
+                fechaFinal = fechaFinal.AddMinutes(59);
+                fechaFinal = fechaFinal.AddSeconds(59);
+                txtFechaFinal.Text = Convert.ToString(fechaFinal.ToShortDateString());
             }
             else
             {
-                 fechaFinal = Convert.ToDateTime(txtFechaFinal.Text);
-                fechaFinal = fechaFinal.Date;
+                fechaFinal = Convert.ToDateTime(txtFechaFinal.Text);
+                fechaFinal = fechaFinal.Date.AddHours(23);
+                fechaFinal = fechaFinal.AddMinutes(59);
+                fechaFinal = fechaFinal.AddSeconds(59);
             }
-            
+             
 
 
 

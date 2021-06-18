@@ -17,6 +17,7 @@ namespace ProyectoLithio.Models
         public Proveedores()
         {
             this.Articulos = new HashSet<Articulos>();
+            this.Costo_ConceptoAux = new HashSet<Costo_ConceptoAux>();
         }
     
         public int Id_Proveedor { get; set; }
@@ -29,6 +30,7 @@ namespace ProyectoLithio.Models
         public decimal Costo_Terrestre { get; set; }
     
         public virtual ICollection<Articulos> Articulos { get; set; }
+        public virtual ICollection<Costo_ConceptoAux> Costo_ConceptoAux { get; set; }
         public virtual Paises Paises { get; set; }
     }
 }

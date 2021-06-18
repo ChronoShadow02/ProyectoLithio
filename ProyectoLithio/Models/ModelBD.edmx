@@ -41,6 +41,7 @@
           </Key>
           <Property Name="Id_Costo_Concepto_AUX" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Id_Costo" Type="int" Nullable="false" />
+          <Property Name="Id_Articulo" Type="int" Nullable="false" />
           <Property Name="Codigo_Articulo" Type="varchar" MaxLength="200" Nullable="false" />
           <Property Name="Nombre_Articulo" Type="varchar" MaxLength="200" Nullable="false" />
           <Property Name="Id_Presentacion" Type="int" Nullable="false" />
@@ -195,6 +196,42 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Costo_ConceptoAux_Costos">
+          <End Role="Costos" Type="Self.Costos" Multiplicity="1" />
+          <End Role="Costo_ConceptoAux" Type="Self.Costo_ConceptoAux" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Costos">
+              <PropertyRef Name="Id_Costo" />
+            </Principal>
+            <Dependent Role="Costo_ConceptoAux">
+              <PropertyRef Name="Id_Costo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Costo_ConceptoAux_Presentaciones">
+          <End Role="Presentaciones" Type="Self.Presentaciones" Multiplicity="1" />
+          <End Role="Costo_ConceptoAux" Type="Self.Costo_ConceptoAux" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Presentaciones">
+              <PropertyRef Name="Id_Presentacion" />
+            </Principal>
+            <Dependent Role="Costo_ConceptoAux">
+              <PropertyRef Name="Id_Presentacion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Costo_ConceptoAux_Proveedores">
+          <End Role="Proveedores" Type="Self.Proveedores" Multiplicity="1" />
+          <End Role="Costo_ConceptoAux" Type="Self.Costo_ConceptoAux" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Proveedores">
+              <PropertyRef Name="Id_Proveedor" />
+            </Principal>
+            <Dependent Role="Costo_ConceptoAux">
+              <PropertyRef Name="Id_proveedor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Proveedores_Paises">
           <End Role="Paises" Type="Self.Paises" Multiplicity="1" />
           <End Role="Proveedores" Type="Self.Proveedores" Multiplicity="*" />
@@ -292,6 +329,7 @@
         </Function>
         <Function Name="pa_Costo_ConceptoAux" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="id_costo" Type="int" Mode="In" />
+          <Parameter Name="id_articulo" Type="int" Mode="In" />
           <Parameter Name="codigo_articulo" Type="varchar" Mode="In" />
           <Parameter Name="nombre_articulo" Type="varchar" Mode="In" />
           <Parameter Name="id_presentacion" Type="int" Mode="In" />
@@ -497,6 +535,18 @@
             <End Role="Presentaciones" EntitySet="Presentaciones" />
             <End Role="Costo_Concepto" EntitySet="Costo_Concepto" />
           </AssociationSet>
+          <AssociationSet Name="FK_Costo_ConceptoAux_Costos" Association="Self.FK_Costo_ConceptoAux_Costos">
+            <End Role="Costos" EntitySet="Costos" />
+            <End Role="Costo_ConceptoAux" EntitySet="Costo_ConceptoAux" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Costo_ConceptoAux_Presentaciones" Association="Self.FK_Costo_ConceptoAux_Presentaciones">
+            <End Role="Presentaciones" EntitySet="Presentaciones" />
+            <End Role="Costo_ConceptoAux" EntitySet="Costo_ConceptoAux" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Costo_ConceptoAux_Proveedores" Association="Self.FK_Costo_ConceptoAux_Proveedores">
+            <End Role="Proveedores" EntitySet="Proveedores" />
+            <End Role="Costo_ConceptoAux" EntitySet="Costo_ConceptoAux" />
+          </AssociationSet>
           <AssociationSet Name="FK_Proveedores_Paises" Association="Self.FK_Proveedores_Paises">
             <End Role="Paises" EntitySet="Paises" />
             <End Role="Proveedores" EntitySet="Proveedores" />
@@ -557,6 +607,7 @@
           </Key>
           <Property Name="Id_Costo_Concepto_AUX" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Id_Costo" Type="Int32" Nullable="false" />
+          <Property Name="Id_Articulo" Type="Int32" Nullable="false" />
           <Property Name="Codigo_Articulo" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Nombre_Articulo" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Id_Presentacion" Type="Int32" Nullable="false" />
@@ -575,6 +626,9 @@
           <Property Name="Total_CosteoPorArticuloMar" Type="Double" />
           <Property Name="Total_CosteoPorArticuloTer" Type="Double" />
           <Property Name="Total_CosteoTotal" Type="Double" />
+          <NavigationProperty Name="Costos" Relationship="Self.FK_Costo_ConceptoAux_Costos" FromRole="Costo_ConceptoAux" ToRole="Costos" />
+          <NavigationProperty Name="Presentaciones" Relationship="Self.FK_Costo_ConceptoAux_Presentaciones" FromRole="Costo_ConceptoAux" ToRole="Presentaciones" />
+          <NavigationProperty Name="Proveedores" Relationship="Self.FK_Costo_ConceptoAux_Proveedores" FromRole="Costo_ConceptoAux" ToRole="Proveedores" />
         </EntityType>
         <EntityType Name="Costos">
           <Key>
@@ -586,6 +640,7 @@
           <Property Name="Tipo_De_Cambio" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="Fecha_Creacion" Type="DateTime" Nullable="false" Precision="3" />
           <NavigationProperty Name="Costo_Concepto" Relationship="Self.FK_Costo_Concepto_Costos" FromRole="Costos" ToRole="Costo_Concepto" />
+          <NavigationProperty Name="Costo_ConceptoAux" Relationship="Self.FK_Costo_ConceptoAux_Costos" FromRole="Costos" ToRole="Costo_ConceptoAux" />
         </EntityType>
         <EntityType Name="Estado_Usuario">
           <Key>
@@ -613,6 +668,7 @@
           <Property Name="Nombre_Presentacion" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="Articulos" Relationship="Self.FK_Articulos_Presentaciones" FromRole="Presentaciones" ToRole="Articulos" />
           <NavigationProperty Name="Costo_Concepto" Relationship="Self.FK_Costo_Concepto_Presentaciones" FromRole="Presentaciones" ToRole="Costo_Concepto" />
+          <NavigationProperty Name="Costo_ConceptoAux" Relationship="Self.FK_Costo_ConceptoAux_Presentaciones" FromRole="Presentaciones" ToRole="Costo_ConceptoAux" />
         </EntityType>
         <EntityType Name="Proveedores">
           <Key>
@@ -627,6 +683,7 @@
           <Property Name="Tiene_Costo_Terrestre" Type="String" MaxLength="2" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Costo_Terrestre" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
           <NavigationProperty Name="Articulos" Relationship="Self.FK_Articulos_Proveedores" FromRole="Proveedores" ToRole="Articulos" />
+          <NavigationProperty Name="Costo_ConceptoAux" Relationship="Self.FK_Costo_ConceptoAux_Proveedores" FromRole="Proveedores" ToRole="Costo_ConceptoAux" />
           <NavigationProperty Name="Paises" Relationship="Self.FK_Proveedores_Paises" FromRole="Proveedores" ToRole="Paises" />
         </EntityType>
         <EntityType Name="sysdiagrams">
@@ -721,6 +778,42 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Costo_ConceptoAux_Costos">
+          <End Role="Costos" Type="Self.Costos" Multiplicity="1" />
+          <End Role="Costo_ConceptoAux" Type="Self.Costo_ConceptoAux" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Costos">
+              <PropertyRef Name="Id_Costo" />
+            </Principal>
+            <Dependent Role="Costo_ConceptoAux">
+              <PropertyRef Name="Id_Costo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Costo_ConceptoAux_Presentaciones">
+          <End Role="Presentaciones" Type="Self.Presentaciones" Multiplicity="1" />
+          <End Role="Costo_ConceptoAux" Type="Self.Costo_ConceptoAux" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Presentaciones">
+              <PropertyRef Name="Id_Presentacion" />
+            </Principal>
+            <Dependent Role="Costo_ConceptoAux">
+              <PropertyRef Name="Id_Presentacion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Costo_ConceptoAux_Proveedores">
+          <End Role="Proveedores" Type="Self.Proveedores" Multiplicity="1" />
+          <End Role="Costo_ConceptoAux" Type="Self.Costo_ConceptoAux" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Proveedores">
+              <PropertyRef Name="Id_Proveedor" />
+            </Principal>
+            <Dependent Role="Costo_ConceptoAux">
+              <PropertyRef Name="Id_proveedor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Usuarios_Estado_Usuario">
           <End Role="Estado_Usuario" Type="Self.Estado_Usuario" Multiplicity="1" />
           <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="*" />
@@ -788,6 +881,18 @@
           <AssociationSet Name="FK_Costo_Concepto_Presentaciones" Association="Self.FK_Costo_Concepto_Presentaciones">
             <End Role="Presentaciones" EntitySet="Presentaciones" />
             <End Role="Costo_Concepto" EntitySet="Costo_Concepto" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Costo_ConceptoAux_Costos" Association="Self.FK_Costo_ConceptoAux_Costos">
+            <End Role="Costos" EntitySet="Costos" />
+            <End Role="Costo_ConceptoAux" EntitySet="Costo_ConceptoAux" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Costo_ConceptoAux_Presentaciones" Association="Self.FK_Costo_ConceptoAux_Presentaciones">
+            <End Role="Presentaciones" EntitySet="Presentaciones" />
+            <End Role="Costo_ConceptoAux" EntitySet="Costo_ConceptoAux" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Costo_ConceptoAux_Proveedores" Association="Self.FK_Costo_ConceptoAux_Proveedores">
+            <End Role="Proveedores" EntitySet="Proveedores" />
+            <End Role="Costo_ConceptoAux" EntitySet="Costo_ConceptoAux" />
           </AssociationSet>
           <AssociationSet Name="FK_Usuarios_Estado_Usuario" Association="Self.FK_Usuarios_Estado_Usuario">
             <End Role="Estado_Usuario" EntitySet="Estado_Usuario" />
@@ -861,6 +966,7 @@
           </FunctionImport>
           <FunctionImport Name="pa_Costo_ConceptoAux">
             <Parameter Name="id_costo" Mode="In" Type="Int32" />
+            <Parameter Name="id_articulo" Mode="In" Type="Int32" />
             <Parameter Name="codigo_articulo" Mode="In" Type="String" />
             <Parameter Name="nombre_articulo" Mode="In" Type="String" />
             <Parameter Name="id_presentacion" Mode="In" Type="Int32" />
@@ -1332,6 +1438,7 @@
               <MappingFragment StoreEntitySet="Costo_ConceptoAux">
                 <ScalarProperty Name="Id_Costo_Concepto_AUX" ColumnName="Id_Costo_Concepto_AUX" />
                 <ScalarProperty Name="Id_Costo" ColumnName="Id_Costo" />
+                <ScalarProperty Name="Id_Articulo" ColumnName="Id_Articulo" />
                 <ScalarProperty Name="Codigo_Articulo" ColumnName="Codigo_Articulo" />
                 <ScalarProperty Name="Nombre_Articulo" ColumnName="Nombre_Articulo" />
                 <ScalarProperty Name="Id_Presentacion" ColumnName="Id_Presentacion" />

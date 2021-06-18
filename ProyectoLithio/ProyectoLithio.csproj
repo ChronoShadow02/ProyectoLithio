@@ -475,7 +475,7 @@
     <Content Include="Scripts\popper.min.js" />
     <Content Include="Scripts\Presentaciones\validaPresentaciones.js" />
     <Content Include="Scripts\Proveedores\validarProveedores.js" />
-    <Content Include="Scripts\Reportes\generaReportes.js" />
+    <Content Include="Scripts\Reportes\reportesUI.js" />
     <Content Include="Scripts\src\index.js" />
     <Content Include="Scripts\src\methods\defaults.js" />
     <Content Include="Scripts\src\methods\destroy.js" />

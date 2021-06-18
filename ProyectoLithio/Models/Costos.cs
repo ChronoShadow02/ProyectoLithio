@@ -17,6 +17,7 @@ namespace ProyectoLithio.Models
         public Costos()
         {
             this.Costo_Concepto = new HashSet<Costo_Concepto>();
+            this.Costo_ConceptoAux = new HashSet<Costo_ConceptoAux>();
         }
     
         public int Id_Costo { get; set; }
@@ -26,5 +27,6 @@ namespace ProyectoLithio.Models
         public System.DateTime Fecha_Creacion { get; set; }
     
         public virtual ICollection<Costo_Concepto> Costo_Concepto { get; set; }
+        public virtual ICollection<Costo_ConceptoAux> Costo_ConceptoAux { get; set; }
     }
 }

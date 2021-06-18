@@ -16,7 +16,9 @@ namespace ProyectoLithio.Models.ViewModel
         public List<Concepto> Conceptos { get; set; }
     }
 
-    public class Concepto { 
+    public class Concepto {
+
+        public int Id_Articulo { get; set; }
 
         public string NombreProveedor { get; set; }
 
